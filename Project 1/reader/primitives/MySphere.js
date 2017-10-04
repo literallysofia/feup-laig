@@ -3,13 +3,13 @@
  * @constructor
  */
 
-function MySphere(scene, args) {
+function MySphere(scene, radius, stacks, slices) {
     CGFobject.call(this, scene);
 
-    this.radius=args[0];
+    this.radius=radius;
 
-    this.semiSphereFront = new MySemiSphere(this.scene, args[1],args[2]);
-    this.semiSphereBack = new MySemiSphere(this.scene, args[2], args[2]);
+    this.semiSphereFront = new MySemiSphere(this.scene, slices,stacks);
+    this.semiSphereBack = new MySemiSphere(this.scene, slices, stacks);
 
 };
 
@@ -29,4 +29,7 @@ MySphere.prototype.display = function() {
     this.semiSphereBack.display();
     this.scene.popMatrix();
 
+};
+
+MySphere.prototype.updateTexCoords = function(s,t) {
 };

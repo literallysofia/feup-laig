@@ -100,6 +100,5 @@ MyCylinder.prototype.scaleTexCoords = function (ampS, ampT) {
     this.updateTexCoordsGLBuffers();
 }
 
-MyCylinder.prototype.loadTexture = function(){
-    
-}
+MyCylinder.prototype.updateTexCoords = function(s,t) {
+};

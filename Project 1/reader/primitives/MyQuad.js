@@ -37,12 +37,41 @@ MyQuad.prototype.initBuffers = function() {
     ];
 
     this.texCoords = [
-        this.minS, this.maxT,
-        this.maxS, this.maxT,
-        this.minS, this.minT,
-        this.maxS, this.minT
+        0,1,//this.minS, this.maxT,
+        1,1,//this.maxS, this.maxT,
+        0,0,//this.minS, this.minT,
+        1,0,//this.maxS, this.minT
     ];
+
+    this.tC = this.texCoords.slice();
+
 
     this.primitiveType = this.scene.gl.TRIANGLES;
     this.initGLBuffers();
+};
+
+MyQuad.prototype.updateTexCoords = function(afS,afT) {
+/*  var minS = 0;
+  var minT = 0;
+  var maxS=(this.x2-this.x1)/afS;
+  var maxT=(this.x2-this.x1)/afT;
+
+  console.log(minS, minT, maxS, maxT);
+
+  this.texCoords = [
+      this.minS, this.maxT,
+      this.maxS, this.maxT,
+      this.minS, this.minT,
+      this.maxS, this.minT
+  ];
+
+  this.updateTexCoordsGLBuffers();*/
+
+  for (var i = 0; i < this.tC.length; i += 2) {
+			this.tC[i] = this.texCoords[i] / afS;
+			this.tC[i + 1] = this.texCoords[i+1] / afT;
+	}
+
+	this.updateTexCoordsGLBuffers();
+
 };
