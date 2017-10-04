@@ -1426,8 +1426,7 @@ MySceneGraph.prototype.displayScene = function() {
 	// remove log below to avoid performance issues
 	this.log("Graph should be rendered here...");
 
-  this.displaySceneRecursive("root", null, null);
-
+  this.displaySceneRecursive(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
 
 }
 
@@ -1435,32 +1434,19 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, material, textur
 
   var mat = material;
   var text = texture;
-
-  //procurar nodeId no conjunto de nos a ver se existe
   var currNode =  this.nodes[idNode];
 
-  //se o material desse no for null usa o definido
-  if(currNode.materialID==null)
-    this.materials[this.defaultMaterialID].apply();
+  this.scene.multMatrix(currNode.transformMatrix);
 
-  this.scene.mulMatrix(currNode.tranformMatrix);
-
-  //ciclo que percorre os nos filho nao folha
-  //pushmatrix
-  //processNode() por cada no
-  //popmatrix
-
-  for(i=0; i < currNode.children.length; i++){
-    this.pushmatrix();
-    this.displaySceneRecursive(currNode.children[i])
+  for(let i=0; i < currNode.leaves.length; i++){
+    currNode.leaves[i].primitive.display();
   }
 
-
-
-
-  // ciclo para as folhas
-  // pushmatrix
-  //leaf. display
-  //pop
+  for(let i=0; i < currNode.children.length; i++){
+    this.scene.pushMatrix();
+    this.displaySceneRecursive(currNode.children[i], mat, text);
+    //console.log(currNode.children[i]);
+    this.scene.popMatrix();
+  }
 
 }
