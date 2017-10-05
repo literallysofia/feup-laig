@@ -23,7 +23,7 @@ MyTriangle.prototype.initBuffers = function() {
     ];
 
     this.indices = [
-        0, 1, 2
+        0,1,2,
     ];
 
     this.normals = [
@@ -55,12 +55,12 @@ MyTriangle.prototype.updateTexCoords = function(afS,afT) {
   var angBeta = Math.acos((Math.pow(distA,2)-Math.pow(distB,2)+Math.pow(distC,2))/(2*distA*distC));
 
   var distD= distA*Math.sin(angBeta);
-
+  var distE= distC-distA*Math.cos(angBeta);
 
   var minS = 0;
   var minT = 0;
   var maxS=distD/afS;
-  var maxT=distC/afT;
+  var maxT=Math.max(distC, distE)/afT;
 
   console.log(minS + " " + minT + " " + maxS + " "+ maxT);
 
