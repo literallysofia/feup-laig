@@ -1433,7 +1433,7 @@ MySceneGraph.prototype.displayScene = function() {
 MySceneGraph.prototype.displaySceneRecursive = function(idNode, material, texture){
 
   var mat = material;
-  var text = texture;
+  var tex = texture;
   var currNode =  this.nodes[idNode];
 
   this.scene.multMatrix(currNode.transformMatrix);
@@ -1444,9 +1444,9 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, material, textur
 
   if(this.textures[currNode.textureID]!=null){
     if(currNode.textureID=='clear'){
-      text=null;
+      tex=null;
     }
-    else text=currNode.textureID;
+    else tex=currNode.textureID;
   }
 
   for(let i=0; i < currNode.leaves.length; i++){
@@ -1454,16 +1454,16 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, material, textur
       this.materials[mat].apply();
     }
 
-    if(this.textures[text]!=null){
-      currNode.leaves[i].primitive.updateTexCoords(this.textures[text][1],this.textures[text][2]);
-      this.textures[text][0].bind();
+    if(this.textures[tex]!=null){
+      currNode.leaves[i].primitive.updateTexCoords(this.textures[tex][1],this.textures[tex][2]);
+      this.textures[tex][0].bind();
     }
     currNode.leaves[i].primitive.display();
   }
 
   for(let i=0; i < currNode.children.length; i++){
     this.scene.pushMatrix();
-    this.displaySceneRecursive(currNode.children[i], mat, text);
+    this.displaySceneRecursive(currNode.children[i], mat, tex);
     this.scene.popMatrix();
   }
 

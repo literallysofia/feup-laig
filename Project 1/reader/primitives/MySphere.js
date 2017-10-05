@@ -32,4 +32,6 @@ MySphere.prototype.display = function() {
 };
 
 MySphere.prototype.updateTexCoords = function(s,t) {
+
+    this.updateTexCoordsGLBuffers();
 };
