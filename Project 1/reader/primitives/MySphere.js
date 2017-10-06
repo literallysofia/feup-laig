@@ -6,9 +6,9 @@
 function MySphere(scene, radius, stacks, slices) {
     CGFobject.call(this, scene);
 
-    this.radius=radius;
+    this.radius = radius;
 
-    this.semiSphereFront = new MySemiSphere(this.scene, slices,stacks);
+    this.semiSphereFront = new MySemiSphere(this.scene, slices, stacks);
     this.semiSphereBack = new MySemiSphere(this.scene, slices, stacks);
 
 };
@@ -31,7 +31,7 @@ MySphere.prototype.display = function() {
 
 };
 
-MySphere.prototype.updateTexCoords = function(s,t) {
+MySphere.prototype.updateTexCoords = function(s, t) {
 
     this.updateTexCoordsGLBuffers();
 };

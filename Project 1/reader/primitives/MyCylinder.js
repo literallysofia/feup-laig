@@ -19,7 +19,7 @@ function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices, text
 MyCylinder.prototype = Object.create(CGFobject.prototype);
 MyCylinder.prototype.constructor = MyCylinder;
 
-MyCylinder.prototype.initBuffers = function () {
+MyCylinder.prototype.initBuffers = function() {
     this.vertices = [];
     this.indices = [];
     this.normals = [];
@@ -92,7 +92,7 @@ MyCylinder.prototype.initBuffers = function () {
 };
 
 
-MyCylinder.prototype.scaleTexCoords = function (ampS, ampT) {
+MyCylinder.prototype.scaleTexCoords = function(ampS, ampT) {
     for (var i = 0; i < this.texCoords.length; i += 2) {
         this.texCoords[i] = this.originalTexCoords[i] / ampS;
         this.texCoords[i + 1] = this.originalTexCoords[i + 1] / ampT;
@@ -100,5 +100,4 @@ MyCylinder.prototype.scaleTexCoords = function (ampS, ampT) {
     this.updateTexCoordsGLBuffers();
 }
 
-MyCylinder.prototype.updateTexCoords = function(s,t) {
-};
+MyCylinder.prototype.updateTexCoords = function(s, t) {};
