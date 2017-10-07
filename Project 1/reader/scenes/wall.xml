@@ -3,6 +3,7 @@
   <!-- Initial values -->
   <INITIALS>
     <frustum near="0.1" far="500"/>
+    <translation x="-3" y="1.5" z="0" /> 
     <rotation axis="x" angle="0"/>
     <rotation axis="y" angle="0"/>
     <rotation axis="z" angle="0"/>
