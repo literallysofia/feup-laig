@@ -138,7 +138,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0" z="-10"/>
-      <SCALE sx="25" sy="5" sz="40"/>
+      <SCALE sx="25" sy="5" sz="50"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
