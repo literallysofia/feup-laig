@@ -63,6 +63,16 @@
   </TEXTURES>
 
   <MATERIALS>
+
+    <!-- Brown Material -->
+    <MATERIAL id="brownMaterial">
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.4" g="0.19" b="0.03" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
     <!-- A default material -->
     <MATERIAL id="defaultMaterial">
       <shininess value="1"/>
@@ -90,6 +100,7 @@
       <DESCENDANTS>
         <NODEREF id="floor"/>
         <NODEREF id="wall"/>
+        <NODEREF id="elevator"/>
       </DESCENDANTS>
 
     </NODE>
@@ -295,6 +306,67 @@
 
       <TRANSLATION x="170" y="15" z="-10"/>
       <SCALE sx="10" sy="10" sz="30"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The elevator -->
+    <NODE id="elevator">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="elevatorStructure"/>
+        <NODEREF id="elevatorBox"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="elevatorStructure">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="elevatorStructure1"/>
+        <NODEREF id="elevatorStructure2"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="elevatorStructure1">
+      <MATERIAL id="brownMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="77" y="0" z="10"/>
+      <SCALE sx="2" sy="50" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="elevatorStructure2">
+      <MATERIAL id="brownMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="82" y="0" z="10"/>
+      <SCALE sx="2" sy="50" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="elevatorBox">
+      <MATERIAL id="brownMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="77" y="30" z="10"/>
+      <SCALE sx="7" sy="7" sz="5"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
