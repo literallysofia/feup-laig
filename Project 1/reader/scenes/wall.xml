@@ -3,7 +3,7 @@
   <!-- Initial values -->
   <INITIALS>
     <frustum near="0.1" far="500"/>
-    <translation x="-3" y="1.5" z="0" /> 
+    <translation x="-3" y="1.5" z="0"/>
     <rotation axis="x" angle="0"/>
     <rotation axis="y" angle="0"/>
     <rotation axis="z" angle="0"/>
@@ -67,29 +67,29 @@
 
     <!-- Green Material -->
     <MATERIAL id="greenMaterial">
-        <shininess value="1" />
-        <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.33" g="0.42" b="0.18" a="1" />
-        <ambient r="0.0" g="0.0" b="0.0" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
+      <shininess value="1"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.33" g="0.42" b="0.18" a="1"/>
+      <ambient r="0.0" g="0.0" b="0.0" a="1"/>
+      <emission r="0.0" g="0.0" b="0.0" a="1"/>
     </MATERIAL>
 
     <!-- Brown Material -->
     <MATERIAL id="brownMaterial">
-        <shininess value="1" />
-        <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.4" g="0.19" b="0.03" a="1" />
-        <ambient r="0.0" g="0.0" b="0.0" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
+      <shininess value="1"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.4" g="0.19" b="0.03" a="1"/>
+      <ambient r="0.0" g="0.0" b="0.0" a="1"/>
+      <emission r="0.0" g="0.0" b="0.0" a="1"/>
     </MATERIAL>
 
     <!-- Dark Brown Material -->
     <MATERIAL id="darkBrownMaterial">
-        <shininess value="1" />
-        <specular r="0.0" g="0.0" b="0.0" a="1" />
-        <diffuse r="0.3" g="0.09" b="0.00" a="1" />
-        <ambient r="0.0" g="0.0" b="0.0" a="1" />
-        <emission r="0.0" g="0.0" b="0.0" a="1" />
+      <shininess value="1"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.3" g="0.09" b="0.00" a="1"/>
+      <ambient r="0.0" g="0.0" b="0.0" a="1"/>
+      <emission r="0.0" g="0.0" b="0.0" a="1"/>
     </MATERIAL>
 
     <!-- A default material -->
@@ -507,8 +507,6 @@
 
     </NODE>
 
-
-
     <!-- Cube -->
     <NODE id="cube">
       <MATERIAL id="null"/>
@@ -605,190 +603,190 @@
     <!-- pyramid -->
     <NODE id="piramide1">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="50" y="5.8" z="50" />
-        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+      <TRANSLATION x="50" y="2" z="50"/>
+      <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
-        <DESCENDANTS>
-       		<NODEREF id="meiaPiramide1" />
-            <NODEREF id="meiaPiramide2" />
-            <NODEREF id="basePiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide1"/>
+        <NODEREF id="meiaPiramide2"/>
+        <NODEREF id="basePiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="piramide2">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="15" y="5.8" z="70" />
-        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+      <TRANSLATION x="15" y="2" z="70"/>
+      <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
-        <DESCENDANTS>
-       		<NODEREF id="meiaPiramide1" />
-            <NODEREF id="meiaPiramide2" />
-            <NODEREF id="basePiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide1"/>
+        <NODEREF id="meiaPiramide2"/>
+        <NODEREF id="basePiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="piramide3">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="25" y="5.8" z="90" />
-        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+      <TRANSLATION x="25" y="2" z="90"/>
+      <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
-        <DESCENDANTS>
-       		<NODEREF id="meiaPiramide1" />
-            <NODEREF id="meiaPiramide2" />
-            <NODEREF id="basePiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide1"/>
+        <NODEREF id="meiaPiramide2"/>
+        <NODEREF id="basePiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="piramide4">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="40" y="5.8" z="60" />
-        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+      <TRANSLATION x="40" y="2" z="60"/>
+      <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
-        <DESCENDANTS>
-       		<NODEREF id="meiaPiramide1" />
-            <NODEREF id="meiaPiramide2" />
-            <NODEREF id="basePiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide1"/>
+        <NODEREF id="meiaPiramide2"/>
+        <NODEREF id="basePiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="piramide5">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="80" y="5.8" z="65" />
-        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+      <TRANSLATION x="80" y="2" z="65"/>
+      <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
-        <DESCENDANTS>
-          <NODEREF id="meiaPiramide1" />
-            <NODEREF id="meiaPiramide2" />
-            <NODEREF id="basePiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide1"/>
+        <NODEREF id="meiaPiramide2"/>
+        <NODEREF id="basePiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="piramide6">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="60" y="5.8" z="80" />
-        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+      <TRANSLATION x="60" y="2" z="80"/>
+      <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
-        <DESCENDANTS>
-       		<NODEREF id="meiaPiramide1" />
-            <NODEREF id="meiaPiramide2" />
-            <NODEREF id="basePiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide1"/>
+        <NODEREF id="meiaPiramide2"/>
+        <NODEREF id="basePiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="piramide7">
 
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <TRANSLATION x="100" y="5.8" z="50" />
-        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+      <TRANSLATION x="110" y="2" z="50"/>
+      <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
-        <DESCENDANTS>
-       		<NODEREF id="meiaPiramide1" />
-            <NODEREF id="meiaPiramide2" />
-            <NODEREF id="basePiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide1"/>
+        <NODEREF id="meiaPiramide2"/>
+        <NODEREF id="basePiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="basePiramide">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-       	<ROTATION axis="x" angle="90" />
-       	<TRANSLATION x="1" y="6" z="2.87" />
-       	<SCALE sx="2.8" sy="3.5" sz="1" />
+      <ROTATION axis="x" angle="90"/>
+      <TRANSLATION x="1" y="6" z="2.87"/>
+      <SCALE sx="2.8" sy="3.5" sz="1"/>
 
-        <DESCENDANTS>
-					<LEAF  type="rectangle" args="0 4 5 0" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 4 5 0"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="meiaPiramide1">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <DESCENDANTS>
-            <NODEREF id="meiaPiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="meiaPiramide2">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-		<TRANSLATION x="16" y="0" z="26"	/>
-		<ROTATION axis="y" angle="180" />
+      <TRANSLATION x="16" y="0" z="26"/>
+      <ROTATION axis="y" angle="180"/>
 
-        <DESCENDANTS>
-            <NODEREF id="meiaPiramide" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="meiaPiramide"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="meiaPiramide">
-        <MATERIAL id="null" />
-        <TEXTURE id="null" />
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
 
-        <DESCENDANTS>
-            <NODEREF id="facePiramide1" />
-            <NODEREF id="facePiramide2" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <NODEREF id="facePiramide1"/>
+        <NODEREF id="facePiramide2"/>
+      </DESCENDANTS>
 
     </NODE>
 
-   <NODE id="facePiramide1">
-        <MATERIAL id="greenMaterial" />
-        <TEXTURE id="null" />
+    <NODE id="facePiramide1">
+      <MATERIAL id="greenMaterial"/>
+      <TEXTURE id="null"/>
 
-		<TRANSLATION x="8" y="4" z="13" />
-		<ROTATION axis="x" angle="44.42" />
-       	<ROTATION axis="y" angle="-45" />
+      <TRANSLATION x="8" y="4" z="13"/>
+      <ROTATION axis="x" angle="44.42"/>
+      <ROTATION axis="y" angle="-45"/>
 
-        <DESCENDANTS>
-					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0"/>
+      </DESCENDANTS>
 
     </NODE>
 
     <NODE id="facePiramide2">
-        <MATERIAL id="greenMaterial" />
-        <TEXTURE id="null" />
+      <MATERIAL id="greenMaterial"/>
+      <TEXTURE id="null"/>
 
-       	<TRANSLATION x="10" y="4" z="15" />
-        <TRANSLATION x="-2" y="0" z="-2" />
-       	<ROTATION axis="z" angle="-44.42" />
-       	<ROTATION axis="y" angle="45" />
+      <TRANSLATION x="10" y="4" z="15"/>
+      <TRANSLATION x="-2" y="0" z="-2"/>
+      <ROTATION axis="z" angle="-44.42"/>
+      <ROTATION axis="y" angle="45"/>
 
-        <DESCENDANTS>
-					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
-        </DESCENDANTS>
+      <DESCENDANTS>
+        <LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0"/>
+      </DESCENDANTS>
 
     </NODE>
 
