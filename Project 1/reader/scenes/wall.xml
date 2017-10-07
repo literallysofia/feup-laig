@@ -127,19 +127,19 @@
     </NODE>
 
     <!-- The floor -->
-    <NODE id="floor">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
+   <NODE id="floor">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
 
-      <SCALE sx="200" sy="1" sz="100"/>
-      <TRANSLATION x="0" y="0" z="1"/>
-      <ROTATION axis="x" angle="-90"/>
+     <SCALE sx="200" sy="1" sz="100"/>
+     <TRANSLATION x="0" y="0" z="1"/>
+     <ROTATION axis="x" angle="-90"/>
 
-      <DESCENDANTS>
-        <LEAF type="rectangle" args="0 1 1 0"/>
-      </DESCENDANTS>
+     <DESCENDANTS>
+       <LEAF type="rectangle" args="0 1 1 0"/>
+     </DESCENDANTS>
 
-    </NODE>
+   </NODE>
 
     <!-- The wall -->
     <NODE id="wall">
@@ -428,11 +428,17 @@
 
       <DESCENDANTS>
         <NODEREF id="house1"/>
+        <NODEREF id="roof1"/>
         <NODEREF id="house2"/>
+        <NODEREF id="roof2"/>
         <NODEREF id="house3"/>
+        <NODEREF id="roof3"/>
         <NODEREF id="house4"/>
+        <NODEREF id="roof4"/>
         <NODEREF id="house5"/>
+        <NODEREF id="roof5"/>
         <NODEREF id="house6"/>
+        <NODEREF id="roof6"/>
       </DESCENDANTS>
 
     </NODE>
@@ -450,6 +456,19 @@
 
     </NODE>
 
+    <NODE id="roof1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="77" y="7" z="20"/>
+      <SCALE sx="4" sy="3" sz="5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="origUniPyramide"/>
+      </DESCENDANTS>
+
+    </NODE>
+
     <NODE id="house2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -459,6 +478,19 @@
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="roof2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="85" y="3" z="20"/>
+      <SCALE sx="4" sy="3" sz="5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="origUniPyramide"/>
       </DESCENDANTS>
 
     </NODE>
@@ -476,6 +508,19 @@
 
     </NODE>
 
+    <NODE id="roof3">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="70" y="8" z="30"/>
+      <SCALE sx="6" sy="3" sz="4"/>
+
+      <DESCENDANTS>
+        <NODEREF id="origUniPyramide"/>
+      </DESCENDANTS>
+
+    </NODE>
+
     <NODE id="house4">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -488,6 +533,20 @@
       </DESCENDANTS>
 
     </NODE>
+
+    <NODE id="roof4">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="80" y="4" z="27"/>
+      <SCALE sx="4" sy="3" sz="4"/>
+
+      <DESCENDANTS>
+        <NODEREF id="origUniPyramide"/>
+      </DESCENDANTS>
+
+    </NODE>
+
 
     <NODE id="house5">
       <MATERIAL id="null"/>
@@ -502,6 +561,19 @@
 
     </NODE>
 
+    <NODE id="roof5">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="90" y="7" z="35"/>
+      <SCALE sx="2" sy="3" sz="7"/>
+
+      <DESCENDANTS>
+        <NODEREF id="origUniPyramide"/>
+      </DESCENDANTS>
+
+    </NODE>
+
 
     <NODE id="house6">
       <MATERIAL id="null"/>
@@ -512,6 +584,19 @@
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="roof6">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="95" y="7" z="30"/>
+      <SCALE sx="4" sy="3" sz="5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="origUniPyramide"/>
       </DESCENDANTS>
 
     </NODE>
@@ -605,6 +690,23 @@
 
       <DESCENDANTS>
         <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- pyramid 1x1 in thr origin -->
+    <NODE id="origUniPyramide">
+
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="-0.1" y="0.45" z="-0.45"/>
+      <SCALE sx="0.075" sy="0.15" sz="0.075"/>
+
+      <DESCENDANTS>
+        <NODEREF id="halfPyramid1"/>
+        <NODEREF id="halfPyramid2"/>
+        <NODEREF id="basePyramid"/>
       </DESCENDANTS>
 
     </NODE>

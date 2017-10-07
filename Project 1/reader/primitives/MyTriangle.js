@@ -27,11 +27,21 @@ MyTriangle.prototype.initBuffers = function() {
         0, 1, 2
     ];
 
-    this.normals = [
-        0, 0, 1,
-        0, 0, 1,
-        0, 0, 1
-    ];
+    var AB = vec3.create();
+  	vec3.sub(AB, this.v2, this.v1);
+  	var AC = vec3.create();
+  	vec3.sub(AC, this.v3, this.v1);
+  	var BC = vec3.create();
+  	vec3.sub(BC, this.v3, this.v2);
+
+  	var N = vec3.create();
+  	vec3.cross(N, AB, BC);
+  	vec3.normalize(N, N);
+
+  	this.normals = [
+  		N[0], N[1], N[2],
+  		N[0], N[1], N[2],
+  		N[0], N[1], N[2],];
 
     this.texCoords = [
         0, 1, //this.minS, this.maxT,
