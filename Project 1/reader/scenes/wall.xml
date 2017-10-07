@@ -160,6 +160,12 @@
 
       <DESCENDANTS>
         <NODEREF id="piramide1"/>
+        <NODEREF id="piramide2"/>
+        <NODEREF id="piramide3"/>
+        <NODEREF id="piramide4"/>
+        <NODEREF id="piramide5"/>
+        <NODEREF id="piramide6"/>
+        <NODEREF id="piramide7"/>
       </DESCENDANTS>
 
     </NODE>
@@ -495,6 +501,102 @@
         <TEXTURE id="null" />
 
         <TRANSLATION x="50" y="5.8" z="50" />
+        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+
+        <DESCENDANTS>
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piramide2">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="15" y="5.8" z="70" />
+        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+
+        <DESCENDANTS>
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piramide3">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="25" y="5.8" z="90" />
+        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+
+        <DESCENDANTS>
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piramide4">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="40" y="5.8" z="60" />
+        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+
+        <DESCENDANTS>
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piramide5">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="80" y="5.8" z="65" />
+        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+
+        <DESCENDANTS>
+          <NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piramide6">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="60" y="5.8" z="80" />
+        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+
+        <DESCENDANTS>
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="piramide7">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="100" y="5.8" z="50" />
         <SCALE sx="0.2" sy="0.9" sz="0.2" />
 
         <DESCENDANTS>
