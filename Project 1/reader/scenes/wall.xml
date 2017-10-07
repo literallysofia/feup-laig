@@ -64,6 +64,15 @@
 
   <MATERIALS>
 
+    <!-- Green Material -->
+    <MATERIAL id="greenMaterial">
+        <shininess value="1" />
+        <specular r="0.0" g="0.0" b="0.0" a="1" />
+        <diffuse r="0.33" g="0.42" b="0.18" a="1" />
+        <ambient r="0.0" g="0.0" b="0.0" a="1" />
+        <emission r="0.0" g="0.0" b="0.0" a="1" />
+    </MATERIAL>
+
     <!-- Brown Material -->
     <MATERIAL id="brownMaterial">
         <shininess value="1" />
@@ -100,6 +109,7 @@
       <DESCENDANTS>
         <NODEREF id="floor"/>
         <NODEREF id="wall"/>
+        <NODEREF id="forest"/>
         <NODEREF id="elevator"/>
       </DESCENDANTS>
 
@@ -139,6 +149,17 @@
         <NODEREF id="bloco11"/>
         <NODEREF id="bloco12"/>
         <NODEREF id="bloco13"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The forest -->
+    <NODE id="forest">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="piramide1"/>
       </DESCENDANTS>
 
     </NODE>
@@ -464,6 +485,100 @@
       <DESCENDANTS>
         <LEAF type="rectangle" args="0 1 1 0"/>
       </DESCENDANTS>
+
+    </NODE>
+
+    <!-- pyramid -->
+    <NODE id="piramide1">
+
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <TRANSLATION x="50" y="5.8" z="50" />
+        <SCALE sx="0.2" sy="0.9" sz="0.2" />
+
+        <DESCENDANTS>
+       		<NODEREF id="meiaPiramide1" />
+            <NODEREF id="meiaPiramide2" />
+            <NODEREF id="basePiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="basePiramide">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+       	<ROTATION axis="x" angle="90" />
+       	<TRANSLATION x="1" y="6" z="2.87" />
+       	<SCALE sx="2.8" sy="3.5" sz="1" />
+
+        <DESCENDANTS>
+					<LEAF  type="rectangle" args="0 4 5 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="meiaPiramide1">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="meiaPiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="meiaPiramide2">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="16" y="0" z="26"	/>
+		<ROTATION axis="y" angle="180" />
+
+        <DESCENDANTS>
+            <NODEREF id="meiaPiramide" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="meiaPiramide">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <DESCENDANTS>
+            <NODEREF id="facePiramide1" />
+            <NODEREF id="facePiramide2" />
+        </DESCENDANTS>
+
+    </NODE>
+
+   <NODE id="facePiramide1">
+        <MATERIAL id="greenMaterial" />
+        <TEXTURE id="null" />
+
+		<TRANSLATION x="8" y="4" z="13" />
+		<ROTATION axis="x" angle="44.42" />
+       	<ROTATION axis="y" angle="-45" />
+
+        <DESCENDANTS>
+					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="facePiramide2">
+        <MATERIAL id="greenMaterial" />
+        <TEXTURE id="null" />
+
+       	<TRANSLATION x="10" y="4" z="15" />
+        <TRANSLATION x="-2" y="0" z="-2" />
+       	<ROTATION axis="z" angle="-44.42" />
+       	<ROTATION axis="y" angle="45" />
+
+        <DESCENDANTS>
+					<LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0" />
+        </DESCENDANTS>
 
     </NODE>
 
