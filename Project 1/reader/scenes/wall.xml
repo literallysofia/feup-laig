@@ -420,17 +420,11 @@
 
       <DESCENDANTS>
         <NODEREF id="house1"/>
-        <NODEREF id="roof1"/>
         <NODEREF id="house2"/>
-        <NODEREF id="roof2"/>
         <NODEREF id="house3"/>
-        <NODEREF id="roof3"/>
         <NODEREF id="house4"/>
-        <NODEREF id="roof4"/>
         <NODEREF id="house5"/>
-        <NODEREF id="roof5"/>
         <NODEREF id="house6"/>
-        <NODEREF id="roof6"/>
       </DESCENDANTS>
 
     </NODE>
@@ -448,38 +442,12 @@
 
     </NODE>
 
-    <NODE id="roof1">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <SCALE sx="2" sy="1" sz="2"/>
-      <TRANSLATION x="27" y="1.2" z="-30"/>
-
-      <DESCENDANTS>
-        <NODEREF id="piramide1"/>
-      </DESCENDANTS>
-
-    </NODE>
-
     <NODE id="house2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="85" y="0" z="20"/>
       <SCALE sx="4" sy="3" sz="5"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="roof2">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="77" y="0" z="20"/>
-      <SCALE sx="4" sy="7" sz="5"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -500,38 +468,12 @@
 
     </NODE>
 
-    <NODE id="roof3">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="77" y="0" z="20"/>
-      <SCALE sx="4" sy="7" sz="5"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
-
     <NODE id="house4">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="80" y="0" z="27"/>
       <SCALE sx="4" sy="4" sz="4"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="roof4">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="77" y="0" z="20"/>
-      <SCALE sx="4" sy="7" sz="5"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -552,37 +494,12 @@
 
     </NODE>
 
-    <NODE id="roof5">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="77" y="0" z="20"/>
-      <SCALE sx="4" sy="7" sz="5"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
 
     <NODE id="house6">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
       <TRANSLATION x="95" y="0" z="30"/>
-      <SCALE sx="4" sy="7" sz="5"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="roof6">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="77" y="0" z="20"/>
       <SCALE sx="4" sy="7" sz="5"/>
 
       <DESCENDANTS>
