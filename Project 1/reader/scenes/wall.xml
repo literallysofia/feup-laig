@@ -55,10 +55,25 @@
 
   <!-- Textures -->
   <TEXTURES>
-    <!-- Tree trunk -->
-    <TEXTURE id="trunk">
-      <file path="images/trunk-image.jpg"/>
-      <amplif_factor s="2" t="2"/>
+
+    <TEXTURE id="ice">
+        <file path="images/ice.jpg" />
+        <amplif_factor s="2" t="2" />
+    </TEXTURE>
+
+    <TEXTURE id="snow">
+        <file path="images/snow.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="wood">
+        <file path="images/wood.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="pine">
+        <file path="images/pine.jpg" />
+        <amplif_factor s="1" t="1" />
     </TEXTURE>
 
   </TEXTURES>
@@ -129,7 +144,7 @@
     <!-- The floor -->
    <NODE id="floor">
      <MATERIAL id="null"/>
-     <TEXTURE id="null"/>
+     <TEXTURE id="snow"/>
 
      <SCALE sx="200" sy="1" sz="100"/>
      <TRANSLATION x="0" y="0" z="1"/>
@@ -144,7 +159,7 @@
     <!-- The wall -->
     <NODE id="wall">
       <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="ice"/>
 
       <DESCENDANTS>
         <NODEREF id="block1"/>
@@ -167,7 +182,7 @@
     <!-- The forest -->
     <NODE id="forest">
       <MATERIAL id="greenMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="pine"/>
 
       <DESCENDANTS>
         <NODEREF id="pyramid1"/>
@@ -362,7 +377,7 @@
     <!-- The elevator -->
     <NODE id="elevator">
       <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="wood"/>
 
       <DESCENDANTS>
         <NODEREF id="elevatorStructure"/>
@@ -424,7 +439,7 @@
 
     <NODE id="town">
       <MATERIAL id="darkBrownMaterial"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="wood"/>
 
       <DESCENDANTS>
         <NODEREF id="house1"/>
