@@ -73,7 +73,7 @@
 
     <TEXTURE id="pine">
         <file path="images/pine.jpg" />
-        <amplif_factor s="1" t="1" />
+        <amplif_factor s="15" t="15" />
     </TEXTURE>
 
   </TEXTURES>
