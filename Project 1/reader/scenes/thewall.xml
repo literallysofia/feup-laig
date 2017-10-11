@@ -61,6 +61,11 @@
         <amplif_factor s="2" t="2" />
     </TEXTURE>
 
+    <TEXTURE id="snow">
+        <file path="images/dirty.jpg" />
+        <amplif_factor s="2" t="2" />
+    </TEXTURE>
+
   </TEXTURES>
 
   <MATERIALS>
@@ -114,10 +119,11 @@
     <!-- The wall -->
     <NODE id="wall">
       <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
+      <TEXTURE id="ice"/>
 
       <DESCENDANTS>
         <NODEREF id="block1"/>
+
         <NODEREF id="block2"/>
         <NODEREF id="block3"/>
         <NODEREF id="block4"/>
@@ -130,6 +136,16 @@
         <NODEREF id="block11"/>
         <NODEREF id="block12"/>
         <NODEREF id="block13"/>
+
+
+        <NODEREF id="block14"/>
+        <NODEREF id="block15"/>
+        <NODEREF id="block16"/>
+        <NODEREF id="block17"/>
+        <NODEREF id="block18"/>
+        <NODEREF id="block19"/>
+        <NODEREF id="block20"/>
+        <NODEREF id="block21"/>
       </DESCENDANTS>
 
     </NODE>
@@ -139,8 +155,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="0" y="0" z="-10"/>
-      <SCALE sx="25" sy="5" sz="50"/>
+      <TRANSLATION x="0" y="0" z="-8"/>
+      <SCALE sx="200" sy="70" sz="8"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -148,12 +164,14 @@
 
     </NODE>
 
+    <!-- Socalcos -->
+
     <NODE id="block2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="5" y="5" z="0"/>
-      <SCALE sx="20" sy="20" sz="35"/>
+      <TRANSLATION x="0" y="0" z="0"/>
+      <SCALE sx="200" sy="65" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -165,8 +183,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="10" y="25" z="-5"/>
-      <SCALE sx="25" sy="10" sz="30"/>
+      <TRANSLATION x="0" y="0" z="1"/>
+      <SCALE sx="100" sy="62" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -178,8 +196,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="25" y="0" z="-5"/>
-      <SCALE sx="40" sy="15" sz="35"/>
+      <TRANSLATION x="150" y="0" z="1"/>
+      <SCALE sx="50" sy="60" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -191,8 +209,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="25" y="15" z="-2"/>
-      <SCALE sx="40" sy="10" sz="30"/>
+      <TRANSLATION x="0" y="0" z="2"/>
+      <SCALE sx="200" sy="52" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -204,8 +222,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="35" y="25" z="0"/>
-      <SCALE sx="25" sy="20" sz="20"/>
+      <TRANSLATION x="0" y="0" z="3"/>
+      <SCALE sx="30" sy="45" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -217,8 +235,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="50" y="0" z="-10"/>
-      <SCALE sx="60" sy="50" sz="20"/>
+      <TRANSLATION x="25" y="0" z="3"/>
+      <SCALE sx="50" sy="48" sz="2"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -230,8 +248,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="100" y="0" z="-20"/>
-      <SCALE sx="20" sy="45" sz="40"/>
+      <TRANSLATION x="75" y="0" z="3"/>
+      <SCALE sx="90" sy="40" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -243,8 +261,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="120" y="0" z="0"/>
-      <SCALE sx="30" sy="30" sz="15"/>
+      <TRANSLATION x="165" y="0" z="3"/>
+      <SCALE sx="35" sy="45" sz="2"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -256,8 +274,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="140" y="0" z="-20"/>
-      <SCALE sx="30" sy="20" sz="45"/>
+      <TRANSLATION x="0" y="0" z="4"/>
+      <SCALE sx="200" sy="35" sz="2"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -269,8 +287,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="120" y="0" z="-15"/>
-      <SCALE sx="50" sy="40" sz="15"/>
+      <TRANSLATION x="0" y="0" z="6"/>
+      <SCALE sx="50" sy="27" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -282,8 +300,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="170" y="0" z="-15"/>
-      <SCALE sx="20" sy="15" sz="35"/>
+      <TRANSLATION x="50" y="0" z="6"/>
+      <SCALE sx="80" sy="30" sz="2"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -295,8 +313,114 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="170" y="15" z="-10"/>
-      <SCALE sx="10" sy="10" sz="30"/>
+      <TRANSLATION x="130" y="0" z="6"/>
+      <SCALE sx="70" sy="20" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Outros blocos -->
+
+    <NODE id="block14">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="0"/>
+      <SCALE sx="25" sy="5" sz="14"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block15">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="0"/>
+      <SCALE sx="20" sy="12" sz="10"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block16">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="3"/>
+      <SCALE sx="5" sy="30" sz="5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block17">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="175" y="0" z="0"/>
+      <SCALE sx="25" sy="5" sz="14"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block18">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="190" y="0" z="3"/>
+      <SCALE sx="10" sy="33" sz="5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block19">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="180" y="0" z="0"/>
+      <SCALE sx="20" sy="15" sz="10"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block20">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="170" y="0" z="0"/>
+      <SCALE sx="10" sy="10" sz="12"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block21">
+      <MATERIAL id="null"/>
+      <TEXTURE id="snow"/>
+
+      <TRANSLATION x="0" y="70" z="-8"/>
+      <SCALE sx="200" sy="0.5" sz="8"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
