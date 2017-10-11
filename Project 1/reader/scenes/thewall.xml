@@ -61,9 +61,14 @@
         <amplif_factor s="2" t="2" />
     </TEXTURE>
 
-    <TEXTURE id="snow">
+    <TEXTURE id="icetop">
         <file path="images/dirty.jpg" />
         <amplif_factor s="2" t="2" />
+    </TEXTURE>
+
+    <TEXTURE id="wood">
+        <file path="images/wood.jpg" />
+        <amplif_factor s="1" t="1" />
     </TEXTURE>
 
   </TEXTURES>
@@ -97,6 +102,7 @@
       <DESCENDANTS>
         <NODEREF id="floor"/>
         <NODEREF id="wall"/>
+        <NODEREF id="elevator"/>
       </DESCENDANTS>
 
     </NODE>
@@ -125,16 +131,21 @@
         <NODEREF id="block1"/>
 
         <NODEREF id="block2"/>
+        <NODEREF id="block22"/>
         <NODEREF id="block3"/>
         <NODEREF id="block4"/>
         <NODEREF id="block5"/>
+        <NODEREF id="block55"/>
         <NODEREF id="block6"/>
         <NODEREF id="block7"/>
         <NODEREF id="block8"/>
+        <NODEREF id="block88"/>
         <NODEREF id="block9"/>
         <NODEREF id="block10"/>
+        <NODEREF id="block100"/>
         <NODEREF id="block11"/>
         <NODEREF id="block12"/>
+        <NODEREF id="block122"/>
         <NODEREF id="block13"/>
 
 
@@ -171,7 +182,20 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0" z="0"/>
-      <SCALE sx="200" sy="65" sz="1"/>
+      <SCALE sx="98" sy="65" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block22">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="103" y="0" z="0"/>
+      <SCALE sx="97" sy="65" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -184,7 +208,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0" z="1"/>
-      <SCALE sx="100" sy="62" sz="1"/>
+      <SCALE sx="95" sy="62" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -210,7 +234,20 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0" z="2"/>
-      <SCALE sx="200" sy="52" sz="1"/>
+      <SCALE sx="98" sy="52" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block55">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="103" y="0" z="2"/>
+      <SCALE sx="97" sy="52" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -249,7 +286,20 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="75" y="0" z="3"/>
-      <SCALE sx="90" sy="40" sz="1"/>
+      <SCALE sx="23" sy="40" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block88">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="103" y="0" z="3"/>
+      <SCALE sx="165" sy="40" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -275,7 +325,20 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0" z="4"/>
-      <SCALE sx="200" sy="35" sz="2"/>
+      <SCALE sx="98" sy="35" sz="2"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block100">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="103" y="0" z="4"/>
+      <SCALE sx="97" sy="35" sz="2"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -301,7 +364,20 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="50" y="0" z="6"/>
-      <SCALE sx="80" sy="30" sz="2"/>
+      <SCALE sx="48" sy="30" sz="2"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="block122">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="103" y="0" z="6"/>
+      <SCALE sx="130" sy="30" sz="2"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -417,10 +493,71 @@
 
     <NODE id="block21">
       <MATERIAL id="null"/>
-      <TEXTURE id="snow"/>
+      <TEXTURE id="icetop"/>
 
       <TRANSLATION x="0" y="70" z="-8"/>
       <SCALE sx="200" sy="0.5" sz="8"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The elevator -->
+    <NODE id="elevator">
+      <MATERIAL id="null"/>
+      <TEXTURE id="wood"/>
+
+      <DESCENDANTS>
+        <NODEREF id="elevatorStructure"/>
+        <NODEREF id="elevatorBox"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="elevatorStructure">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="elevatorStructure1"/>
+        <NODEREF id="elevatorStructure2"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="elevatorStructure1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="102" y="0" z="0"/>
+      <SCALE sx="1" sy="70" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="elevatorStructure2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="98" y="0" z="0"/>
+      <SCALE sx="1" sy="70" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="elevatorBox">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="98" y="30" z="0"/>
+      <SCALE sx="5" sy="5" sz="3"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
