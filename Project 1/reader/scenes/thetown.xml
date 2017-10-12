@@ -160,17 +160,30 @@
 
      <DESCENDANTS>
        <NODEREF id="house1"/>
+       <NODEREF id="houseCube1"/>
        <NODEREF id="house2"/>
+       <NODEREF id="houseCube2"/>
        <NODEREF id="house3"/>
+       <NODEREF id="houseCube3"/>
        <NODEREF id="house4"/>
+       <NODEREF id="houseCube4"/>
        <NODEREF id="house5"/>
        <NODEREF id="house6"/>
+       <NODEREF id="houseCube5"/>
        <NODEREF id="house7"/>
+       <NODEREF id="houseCube6"/>
        <NODEREF id="house8"/>
+       <NODEREF id="houseCube7"/>
        <NODEREF id="house9"/>
+       <NODEREF id="houseCube8"/>
        <NODEREF id="house10"/>
+       <NODEREF id="houseCube9"/>
        <NODEREF id="house11"/>
+       <NODEREF id="houseCube10"/>
        <NODEREF id="house12"/>
+       <NODEREF id="house13"/>
+       <NODEREF id="house14"/>
+       <NODEREF id="house15"/>
      </DESCENDANTS>
 
    </NODE>
@@ -189,6 +202,20 @@
 
    </NODE>
 
+   <NODE id="houseCube1">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="0.625" y="0" z="1.5"/>
+     <SCALE sx="0.25" sy="0.5" sz="0.5"/>
+     <ROTATION axis="y" angle="-90"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
+     </DESCENDANTS>
+
+   </NODE>
+
    <NODE id="house2">
      <MATERIAL id="null"/>
      <TEXTURE id="null"/>
@@ -199,6 +226,20 @@
 
      <DESCENDANTS>
        <NODEREF id="defaultHouse"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="houseCube2">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="0.625" y="0" z="2"/>
+     <SCALE sx="0.25" sy="0.5" sz="0.5"/>
+     <ROTATION axis="y" angle="-90"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
      </DESCENDANTS>
 
    </NODE>
@@ -217,6 +258,20 @@
 
    </NODE>
 
+   <NODE id="houseCube3">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="0.625" y="0" z="3"/>
+     <SCALE sx="0.25" sy="0.5" sz="0.5"/>
+     <ROTATION axis="y" angle="-90"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
+     </DESCENDANTS>
+
+   </NODE>
+
    <NODE id="house4">
      <MATERIAL id="null"/>
      <TEXTURE id="null"/>
@@ -227,6 +282,19 @@
 
      <DESCENDANTS>
        <NODEREF id="defaultHouse"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="houseCube4">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="1" y="0" z="3.85"/>
+     <SCALE sx="0.5" sy="0.5" sz="0.25"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
      </DESCENDANTS>
 
    </NODE>
@@ -244,12 +312,26 @@
 
    </NODE>
 
+
    <NODE id="house6">
      <MATERIAL id="null"/>
      <TEXTURE id="null"/>
 
      <TRANSLATION x="2.25" y="0" z="3.5"/>
      <SCALE sx="1" sy="1.5" sz="1"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="houseCube5">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="3" y="0" z="3.85"/>
+     <SCALE sx="0.5" sy="0.5" sz="0.25"/>
 
      <DESCENDANTS>
        <NODEREF id="cube"/>
@@ -270,6 +352,19 @@
 
    </NODE>
 
+   <NODE id="houseCube6">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="4" y="0" z="3.85"/>
+     <SCALE sx="0.5" sy="0.5" sz="0.25"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
+     </DESCENDANTS>
+
+   </NODE>
+
    <NODE id="house8">
      <MATERIAL id="null"/>
      <TEXTURE id="null"/>
@@ -279,6 +374,19 @@
 
      <DESCENDANTS>
        <NODEREF id="defaultHouse"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="houseCube7">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="5" y="0" z="3.85"/>
+     <SCALE sx="0.5" sy="0.5" sz="0.25"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
      </DESCENDANTS>
 
    </NODE>
@@ -297,6 +405,19 @@
 
    </NODE>
 
+   <NODE id="houseCube8">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="5.625" y="0" z="3"/>
+     <SCALE sx="0.25" sy="0.5" sz="0.5"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
+     </DESCENDANTS>
+
+   </NODE>
+
    <NODE id="house10">
      <MATERIAL id="null"/>
      <TEXTURE id="null"/>
@@ -307,6 +428,19 @@
 
      <DESCENDANTS>
        <NODEREF id="defaultHouse"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="houseCube9">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="5.625" y="0" z="2"/>
+     <SCALE sx="0.25" sy="0.5" sz="0.5"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
      </DESCENDANTS>
 
    </NODE>
@@ -326,6 +460,19 @@
 
    </NODE>
 
+   <NODE id="houseCube10">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="5.625" y="0" z="1.5"/>
+     <SCALE sx="0.25" sy="0.5" sz="0.5"/>
+
+     <DESCENDANTS>
+       <NODEREF id="cube"/>
+     </DESCENDANTS>
+
+   </NODE>
+
    <NODE id="house12">
      <MATERIAL id="null"/>
      <TEXTURE id="null"/>
@@ -336,6 +483,47 @@
 
      <DESCENDANTS>
        <NODEREF id="cube"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="house13">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="5" y="0" z="0"/>
+     <SCALE sx="1.5" sy="1" sz="1"/>
+     <ROTATION axis="y" angle="-90"/>
+
+     <DESCENDANTS>
+       <NODEREF id="defaultHouse"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="house14">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="3.5" y="0" z="1.25"/>
+     <SCALE sx="0.75" sy="0.5" sz="0.5"/>
+
+     <DESCENDANTS>
+       <NODEREF id="defaultHouse"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="house15">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+    <TRANSLATION x="4.5" y="0" z="2"/>
+     <SCALE sx="1" sy="0.7" sz="0.7"/>
+     <ROTATION axis="y" angle="-90"/>
+
+     <DESCENDANTS>
+       <NODEREF id="defaultHouse"/>
      </DESCENDANTS>
 
    </NODE>
