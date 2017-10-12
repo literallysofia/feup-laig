@@ -61,11 +61,6 @@
         <amplif_factor s="2" t="2" />
     </TEXTURE>
 
-    <TEXTURE id="icetop">
-        <file path="images/dirty.jpg" />
-        <amplif_factor s="2" t="2" />
-    </TEXTURE>
-
     <TEXTURE id="wood">
         <file path="images/wood.jpg" />
         <amplif_factor s="1" t="1" />
@@ -152,7 +147,6 @@
         <NODEREF id="block18"/>
         <NODEREF id="block19"/>
         <NODEREF id="block20"/>
-        <NODEREF id="block21"/>
       </DESCENDANTS>
 
     </NODE>
@@ -162,8 +156,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="0" y="0" z="-8"/>
-      <SCALE sx="200" sy="70" sz="8"/>
+      <TRANSLATION x="0" y="0" z="-15"/>
+      <SCALE sx="200" sy="70" sz="15"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -422,19 +416,6 @@
 
     </NODE>
 
-    <NODE id="block21">
-      <MATERIAL id="null"/>
-      <TEXTURE id="icetop"/>
-
-      <TRANSLATION x="0" y="70" z="-8"/>
-      <SCALE sx="200" sy="0.5" sz="8"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
-
     <!-- The elevator -->
     <NODE id="elevator">
       <MATERIAL id="null"/>
@@ -465,7 +446,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="4" y="0" z="0"/>
-      <SCALE sx="1" sy="70.5" sz="1"/>
+      <SCALE sx="1" sy="70" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -476,7 +457,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <SCALE sx="1" sy="70.5" sz="1"/>
+      <SCALE sx="1" sy="70" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -502,10 +483,11 @@
       <MATERIAL id="null"/>
       <TEXTURE id="wood"/>
 
-      <TRANSLATION x="98" y="70.5" z="-2"/>
+      <TRANSLATION x="98" y="70" z="-2"/>
 
       <DESCENDANTS>
         <NODEREF id="step"/>
+        <NODEREF id="hall"/>
       </DESCENDANTS>
 
     </NODE>
@@ -516,6 +498,19 @@
 
       <TRANSLATION x="0" y="0" z="0"/>
       <SCALE sx="5" sy="1" sz="11"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="hall">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="-2" y="0" z="-9"/>
+      <SCALE sx="9" sy="3" sz="9"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
