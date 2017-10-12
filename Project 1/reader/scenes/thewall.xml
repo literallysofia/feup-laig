@@ -103,6 +103,7 @@
         <NODEREF id="floor"/>
         <NODEREF id="wall"/>
         <NODEREF id="elevator"/>
+        <NODEREF id="thewatch"/>
       </DESCENDANTS>
 
     </NODE>
@@ -439,8 +440,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="wood"/>
 
-      <ROTATION axis="x" angle="-12" />
-      <TRANSLATION x="98" y="0" z="14"/>
+      <TRANSLATION x="98" y="0" z="8"/>
 
       <DESCENDANTS>
         <NODEREF id="elevatorStructure"/>
@@ -465,7 +465,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="4" y="0" z="0"/>
-      <SCALE sx="1" sy="70" sz="1"/>
+      <SCALE sx="1" sy="70.5" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -476,8 +476,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="0" y="0" z="0"/>
-      <SCALE sx="1" sy="70" sz="1"/>
+      <SCALE sx="1" sy="70.5" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -491,6 +490,32 @@
 
       <TRANSLATION x="0" y="30" z="0"/>
       <SCALE sx="5" sy="5" sz="3"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- The watch -->
+    <NODE id="thewatch">
+      <MATERIAL id="null"/>
+      <TEXTURE id="wood"/>
+
+      <TRANSLATION x="98" y="70.5" z="-2"/>
+
+      <DESCENDANTS>
+        <NODEREF id="step"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="step">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="0"/>
+      <SCALE sx="5" sy="1" sz="11"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
