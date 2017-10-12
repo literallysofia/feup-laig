@@ -147,6 +147,10 @@
         <NODEREF id="block18"/>
         <NODEREF id="block19"/>
         <NODEREF id="block20"/>
+
+        <NODEREF id="ground1"/>
+        <NODEREF id="ground2"/>
+        <NODEREF id="ground3"/>
       </DESCENDANTS>
 
     </NODE>
@@ -415,6 +419,46 @@
       </DESCENDANTS>
 
     </NODE>
+
+    <NODE id="ground1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="50" y="0" z="8"/>
+      <SCALE sx="70" sy="5" sz="30"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="ground2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="70" y="0" z="8"/>
+      <SCALE sx="80" sy="3" sz="40"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="ground3">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="60" y="0" z="8"/>
+      <SCALE sx="80" sy="1" sz="60"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
 
     <!-- The elevator -->
     <NODE id="elevator">
