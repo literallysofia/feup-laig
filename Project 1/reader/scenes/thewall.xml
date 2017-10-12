@@ -439,6 +439,9 @@
       <MATERIAL id="null"/>
       <TEXTURE id="wood"/>
 
+      <ROTATION axis="x" angle="-12" />
+      <TRANSLATION x="98" y="0" z="14"/>
+
       <DESCENDANTS>
         <NODEREF id="elevatorStructure"/>
         <NODEREF id="elevatorBox"/>
@@ -461,8 +464,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <ROTATION axis="x" angle="-12" />
-      <TRANSLATION x="102" y="0" z="14"/>
+      <TRANSLATION x="4" y="0" z="0"/>
       <SCALE sx="1" sy="70" sz="1"/>
 
       <DESCENDANTS>
@@ -474,8 +476,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <ROTATION axis="x" angle="-12" />
-      <TRANSLATION x="98" y="0" z="14"/>
+      <TRANSLATION x="0" y="0" z="0"/>
       <SCALE sx="1" sy="70" sz="1"/>
 
       <DESCENDANTS>
@@ -488,8 +489,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <ROTATION axis="x" angle="-12" />
-      <TRANSLATION x="98" y="30" z="14"/>
+      <TRANSLATION x="0" y="30" z="0"/>
       <SCALE sx="5" sy="5" sz="3"/>
 
       <DESCENDANTS>
