@@ -62,12 +62,7 @@
     </TEXTURE>
 
     <TEXTURE id="wood">
-        <file path="images/wood.jpg" />
-        <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <TEXTURE id="wood2">
-        <file path="images/wood2.png" />
+        <file path="images/wood.png" />
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
@@ -478,7 +473,7 @@
     <!-- The elevator -->
     <NODE id="elevator">
       <MATERIAL id="null"/>
-      <TEXTURE id="wood2"/>
+      <TEXTURE id="wood"/>
 
       <TRANSLATION x="98" y="0" z="8"/>
 
@@ -540,7 +535,7 @@
     <!-- The watch -->
     <NODE id="thewatch">
       <MATERIAL id="null"/>
-      <TEXTURE id="wood2"/>
+      <TEXTURE id="wood"/>
 
       <TRANSLATION x="98" y="70" z="-2"/>
 
@@ -580,7 +575,7 @@
     <!-- Town -->
     <NODE id="town">
       <MATERIAL id="null"/>
-      <TEXTURE id="wood2"/>
+      <TEXTURE id="wood"/>
 
       <TRANSLATION x="85" y="5" z="8"/>
       <SCALE sx="5" sy="5" sz="5"/>
