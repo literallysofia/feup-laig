@@ -2,14 +2,14 @@
  * MyQuad
  * @constructor
  */
-function MyQuad(scene, x1, y1, x2, y2) {
+function MyQuad(scene, minX, maxY, maxX, minY) {
     CGFobject.call(this, scene);
 
 
-    this.x1 = x1; //left top
-    this.y1 = y1;
-    this.x2 = x2; //right bottom
-    this.y2 = y2;
+    this.minX = minX; //left top
+    this.maxY = maxY;
+    this.maxX= maxX; //right bottom
+    this.minY = minY;
 
     this.initBuffers();
 };
@@ -18,10 +18,10 @@ MyQuad.prototype = Object.create(CGFobject.prototype);
 MyQuad.prototype.constructor = MyQuad;
 
 MyQuad.prototype.initBuffers = function() {
-    this.vertices = [this.x1, this.y2, 0,
-        this.x2, this.y2, 0,
-        this.x1, this.y1, 0,
-        this.x2, this.y1, 0
+    this.vertices = [this.minX, this.minY, 0,
+        this.maxX, this.minY, 0,
+        this.minX, this.maxY, 0,
+        this.maxX, this.maxY, 0
     ];
 
     this.indices = [
@@ -50,8 +50,8 @@ MyQuad.prototype.initBuffers = function() {
 MyQuad.prototype.updateTexCoords = function(afS, afT) {
     var minS = 0;
     var minT = 0;
-    var maxS = (this.y1 - this.y2) / afT;
-    var maxT = (this.x2 - this.x1) / afS;
+    var maxS = (this.maxX - this.minX) / afS;
+    var maxT = (this.maxY - this.minY) / afT;
 
     this.texCoords = [
         minS, maxT,

@@ -5,9 +5,10 @@
 function MyTriangle(scene, x1, y1, z1, x2, y2, z2, x3, y3, z3) {
     CGFobject.call(this, scene);
 
-    this.v1 = [x1, y1, z1];
-    this.v2 = [x2, y2, z2];
-    this.v3 = [x3, y3, z3];
+    //vec3 https://github.com/toji/gl-matrix/blob/master/src/gl-matrix/vec3.js
+    this.v1 = vec3.fromValues(x1, y1, z1);
+    this.v2 = vec3.fromValues(x2, y2, z2);
+    this.v3 = vec3.fromValues(x3, y3, z3);
 
     this.initBuffers();
 };
@@ -27,16 +28,19 @@ MyTriangle.prototype.initBuffers = function() {
         0, 1, 2
     ];
 
-    var AB = vec3.create();
-  	vec3.sub(AB, this.v2, this.v1);
-  	var AC = vec3.create();
-  	vec3.sub(AC, this.v3, this.v1);
-  	var BC = vec3.create();
-  	vec3.sub(BC, this.v3, this.v2);
+    var V21 = vec3.create();  //vetor do ponto 1 ao ponto 2
+    var V21 =[this.v2[0]-this.v1[0],
+              this.v2[1]-this.v1[1],
+              this.v2[2]-this.v1[2]];
 
-  	var N = vec3.create();
-  	vec3.cross(N, AB, BC);
-  	vec3.normalize(N, N);
+    var V32 = vec3.create(); //vetor do ponto 2 ao ponto 3
+    var V32 =[this.v3[0]-this.v2[0],
+              this.v3[1]-this.v2[1],
+              this.v3[2]-this.v3[2]];
+
+    var N =vec3.create() //n - normal ao triangulo
+    vec3.cross(N, V21, V32);
+	  vec3.normalize(N, N);
 
   	this.normals = [
   		N[0], N[1], N[2],
