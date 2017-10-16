@@ -66,6 +66,11 @@
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
+    <TEXTURE id="pine">
+        <file path="images/pine.jpg" />
+        <amplif_factor s="15" t="15" />
+    </TEXTURE>
+
   </TEXTURES>
 
   <MATERIALS>
@@ -109,6 +114,7 @@
         <NODEREF id="elevator"/>
         <NODEREF id="thewatch"/>
         <NODEREF id="town"/>
+        <NODEREF id="forest"/>
       </DESCENDANTS>
 
     </NODE>
@@ -165,6 +171,32 @@
 
     </NODE>
 
+    <!-- The forest -->
+    <NODE id="forest">
+      <MATERIAL id="null"/>
+      <TEXTURE id="pine"/>
+
+      <DESCENDANTS>
+        <NODEREF id="pyramid1"/>
+        <NODEREF id="pyramid2"/>
+        <NODEREF id="pyramid3"/>
+        <NODEREF id="pyramid4"/>
+        <NODEREF id="pyramid5"/>
+        <NODEREF id="pyramid6"/>
+        <NODEREF id="pyramid7"/>
+        <NODEREF id="pyramid8"/>
+        <NODEREF id="pyramid9"/>
+        <NODEREF id="pyramid10"/>
+        <NODEREF id="pyramid11"/>
+        <NODEREF id="pyramid12"/>
+        <NODEREF id="pyramid13"/>
+        <NODEREF id="pyramid14"/>
+        <NODEREF id="pyramid15"/>
+        <NODEREF id="pyramid16"/>
+      </DESCENDANTS>
+
+    </NODE>
+
     <!-- The wall -->
     <NODE id="block1">
       <MATERIAL id="null"/>
@@ -199,7 +231,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="0" y="0" z="1"/>
-      <SCALE sx="95" sy="62" sz="1"/>
+      <SCALE sx="115" sy="62" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -211,8 +243,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="150" y="0" z="1"/>
-      <SCALE sx="50" sy="60" sz="1"/>
+      <TRANSLATION x="115" y="0" z="1"/>
+      <SCALE sx="85" sy="60" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -1026,6 +1058,305 @@
 
      <DESCENDANTS>
        <LEAF type="triangle" args="0 0.5 0.5 0 0 0 0 0 1 "/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <!-- Forest -->
+   <NODE id="pyramid1">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="20" y="2" z="25"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid2">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="15" y="2" z="50"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid3">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="25" y="2" z="80"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid4">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="40" y="2" z="60"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid5">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="80" y="2" z="70"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid6">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="60" y="2" z="80"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid7">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="35" y="2" z="40"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid8">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="105" y="2" z="80"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid9">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="145" y="2" z="60"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid10">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="130" y="2" z="87"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid11">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="155" y="2" z="20"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid12">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="160" y="2" z="70"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid13">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="180" y="2" z="55"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid14">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="178" y="2" z="30"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid15">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="180" y="2" z="85"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="pyramid16">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="165" y="2" z="40"/>
+     <SCALE sx="0.2" sy="0.9" sz="0.2"/>
+
+     <DESCENDANTS>
+       <NODEREF id="pyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <!-- Pyramid -->
+   <NODE id="pyramid">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <DESCENDANTS>
+       <NODEREF id="halfPyramid1"/>
+       <NODEREF id="halfPyramid2"/>
+       <NODEREF id="basePyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="basePyramid">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <ROTATION axis="x" angle="90"/>
+     <TRANSLATION x="1" y="6" z="2.87"/>
+     <SCALE sx="2.8" sy="3.5" sz="1"/>
+
+     <DESCENDANTS>
+       <LEAF type="rectangle" args="0 4 5 0"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="halfPyramid1">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <DESCENDANTS>
+       <NODEREF id="halfPyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="halfPyramid2">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="16" y="0" z="26"/>
+     <ROTATION axis="y" angle="180"/>
+
+     <DESCENDANTS>
+       <NODEREF id="halfPyramid"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="halfPyramid">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <DESCENDANTS>
+       <NODEREF id="facePyramid1"/>
+       <NODEREF id="facePyramid2"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="facePyramid1">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="8" y="4" z="13"/>
+     <ROTATION axis="x" angle="44.42"/>
+     <ROTATION axis="y" angle="-45"/>
+
+     <DESCENDANTS>
+       <LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+   <NODE id="facePyramid2">
+     <MATERIAL id="null"/>
+     <TEXTURE id="null"/>
+
+     <TRANSLATION x="10" y="4" z="15"/>
+     <TRANSLATION x="-2" y="0" z="-2"/>
+     <ROTATION axis="z" angle="-44.42"/>
+     <ROTATION axis="y" angle="45"/>
+
+     <DESCENDANTS>
+       <LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0"/>
      </DESCENDANTS>
 
    </NODE>
