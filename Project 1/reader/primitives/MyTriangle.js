@@ -59,9 +59,9 @@ MyTriangle.prototype.initBuffers = function() {
 };
 
 MyTriangle.prototype.updateTexCoords = function(afS, afT) {
-    //distB: 0-2
-    //distA: 2-1
-    //distC: 0-1
+    //distA: 2-3
+    //distB: 3-1
+    //distC: 1-2
 
     var distA = Math.sqrt(Math.pow(this.v2[0] - this.v3[0], 2) + Math.pow(this.v2[1] - this.v3[1], 2) + Math.pow(this.v2[2] - this.v3[2], 2));
     var distB = Math.sqrt(Math.pow(this.v1[0] - this.v3[0], 2) + Math.pow(this.v1[1] - this.v3[1], 2) + Math.pow(this.v1[2] - this.v3[2], 2));
@@ -70,21 +70,38 @@ MyTriangle.prototype.updateTexCoords = function(afS, afT) {
     var angBeta = Math.acos((Math.pow(distA, 2) - Math.pow(distB, 2) + Math.pow(distC, 2)) / (2 * distA * distC));
 
     var distD = distA * Math.sin(angBeta);
-    var distE = distC - distA * Math.cos(angBeta);
 
     var minS = 0;
     var minT = 0;
-    var maxT = distD / afT;
-    var maxS = distC / afS;
+    var maxS = distC/afS;
+    var maxT = distD/afT;
 
     console.log(minS + " " + minT + " " + maxS + " " + maxT);
 
     this.texCoords = [
-        minS, maxT,
-        maxS, maxT,
-        minS, minT,
-        maxS, minT
+      minS, maxT,
+      maxS, maxT,
+      minS, minT,
+      maxS, minT
     ];
+
+    /*var AB = vec3.create();
+	  vec3.sub(AB, this.v2, this.v1);
+	  var AC = vec3.create();
+	  vec3.sub(AC, this.v3, this.v1);
+	  var BC = vec3.create();
+	  vec3.sub(BC, this.v3, this.v2);
+
+    var tC = (vec3.sqrLen(AB) + vec3.sqrLen(AC) - vec3.sqrLen(BC))/ (2 * vec3.length(AB));
+	  var sC = Math.sqrt(vec3.sqrLen(AC) - tC * tC);
+
+    this.texCoords = [
+		0,0,
+		vec3.length(AB)/afS,0,
+		sC/afS, tC/afT,
+  ];*/
+
+
 
     this.updateTexCoordsGLBuffers();
 };
