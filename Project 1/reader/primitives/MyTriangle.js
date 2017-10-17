@@ -71,37 +71,11 @@ MyTriangle.prototype.updateTexCoords = function(afS, afT) {
 
     var distD = distA * Math.sin(angBeta);
 
-    var minS = 0;
-    var minT = 0;
-    var maxS = distC/afS;
-    var maxT = distD/afT;
-
-    console.log(minS + " " + minT + " " + maxS + " " + maxT);
-
     this.texCoords = [
-      minS, maxT,
-      maxS, maxT,
-      minS, minT,
-      maxS, minT
+      0, distD/afT,
+      distC/afS, distD/afT,
+      (distC-distA*Math.cos(angBeta))/afS,(distD-distA*Math.sin(angBeta))/afT
     ];
-
-    /*var AB = vec3.create();
-	  vec3.sub(AB, this.v2, this.v1);
-	  var AC = vec3.create();
-	  vec3.sub(AC, this.v3, this.v1);
-	  var BC = vec3.create();
-	  vec3.sub(BC, this.v3, this.v2);
-
-    var tC = (vec3.sqrLen(AB) + vec3.sqrLen(AC) - vec3.sqrLen(BC))/ (2 * vec3.length(AB));
-	  var sC = Math.sqrt(vec3.sqrLen(AC) - tC * tC);
-
-    this.texCoords = [
-		0,0,
-		vec3.length(AB)/afS,0,
-		sC/afS, tC/afT,
-  ];*/
-
-
 
     this.updateTexCoordsGLBuffers();
 };
