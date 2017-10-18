@@ -146,10 +146,10 @@
         <TRANSLATION x="5" y="5" z="-4" />
 
         <DESCENDANTS>
-					<LEAF type="cylinder" args="1 1 2 20 20 false" />
+					<LEAF type="cylinder" args="1 1 2 20 20 1 1" />
         </DESCENDANTS>
 
-         <!-- cylinder: top radius, bottom radius, height, sections along height, parts per section, open bool  -->
+         <!-- cylinder: top radius, bottom radius, height, sections along height, parts per section, top layer, bottom layer  -->
 
     </NODE>
 
