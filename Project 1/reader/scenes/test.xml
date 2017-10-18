@@ -1,0 +1,158 @@
+<SCENE>
+
+  <!-- Initial values -->
+  <INITIALS>
+    <frustum near="0.1" far="500"/>
+    <translation x="0" y="1.5" z="0" />
+    <rotation axis="x" angle="0"/>
+    <rotation axis="y" angle="0"/>
+    <rotation axis="z" angle="0"/>
+    <scale sx="1" sy="1" sz="1"/>
+    <reference length="5"/>
+  </INITIALS>
+
+  <!-- Illumination and clear colour -->
+  <ILLUMINATION>
+    <ambient r="0.2" g="0.2" b="0.2" a="1"/>
+    <background r="0" g="0" b="0" a="1"/>
+  </ILLUMINATION>
+
+  <!-- Lights -->
+  <LIGHTS>
+    <LIGHT id="light0">
+      <enable value="1"/>
+      <position x="0" y="50" z="10" w="1"/>
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
+      <diffuse r="1.0" g="1.0" b="1.0" a="1.0"/>
+      <specular r="1.0" g="1.0" b="1.0" a="1.0"/>
+    </LIGHT>
+
+    <LIGHT id="light1">
+      <enable value="1"/>
+      <position x="150" y="50" z="10" w="1"/>
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
+      <diffuse r="1.0" g="1.0" b="1.0" a="1.0"/>
+      <specular r="1.0" g="1.0" b="1.0" a="1.0"/>
+    </LIGHT>
+
+    <LIGHT id="light2">
+      <enable value="1"/>
+      <position x="0" y="50" z="30" w="1"/>
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
+      <diffuse r="1.0" g="1.0" b="1.0" a="1.0"/>
+      <specular r="1.0" g="1.0" b="1.0" a="1.0"/>
+    </LIGHT>
+
+    <LIGHT id="light3">
+      <enable value="1"/>
+      <position x="150" y="50" z="30" w="1"/>
+      <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
+      <diffuse r="0.6" g="0.6" b="0.6" a="1.0"/>
+      <specular r="0.6" g="0.6" b="0.6" a="1.0"/>
+    </LIGHT>
+
+  </LIGHTS>
+
+  <!-- Textures -->
+  <TEXTURES>
+
+    <TEXTURE id="ice">
+        <file path="images/ice.jpg" />
+        <amplif_factor s="2" t="2" />
+    </TEXTURE>
+
+    <TEXTURE id="snow">
+        <file path="images/snow.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="wood">
+        <file path="images/wood.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
+    <TEXTURE id="pine">
+        <file path="images/pine.jpg" />
+        <amplif_factor s="15" t="15" />
+    </TEXTURE>
+
+  </TEXTURES>
+
+  <MATERIALS>
+
+    <!-- Green Material -->
+    <MATERIAL id="greenMaterial">
+      <shininess value="1"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.33" g="0.42" b="0.18" a="1"/>
+      <ambient r="0.0" g="0.0" b="0.0" a="1"/>
+      <emission r="0.0" g="0.0" b="0.0" a="1"/>
+    </MATERIAL>
+
+    <!-- Brown Material -->
+    <MATERIAL id="brownMaterial">
+      <shininess value="1"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.4" g="0.19" b="0.03" a="1"/>
+      <ambient r="0.0" g="0.0" b="0.0" a="1"/>
+      <emission r="0.0" g="0.0" b="0.0" a="1"/>
+    </MATERIAL>
+
+    <!-- Dark Brown Material -->
+    <MATERIAL id="darkBrownMaterial">
+      <shininess value="1"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.3" g="0.09" b="0.00" a="1"/>
+      <ambient r="0.0" g="0.0" b="0.0" a="1"/>
+      <emission r="0.0" g="0.0" b="0.0" a="1"/>
+    </MATERIAL>
+
+    <!-- A default material -->
+    <MATERIAL id="defaultMaterial">
+      <shininess value="1"/>
+      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <diffuse r="0.4" g="0.4" b="0.4" a="1"/>
+      <ambient r="0.4" g="0.4" b="0.4" a="1"/>
+      <emission r="0.0" g="0.0" b="0.0" a="1"/>
+    </MATERIAL>
+
+  </MATERIALS>
+
+  <!-- The leaves -->
+  <LEAVES></LEAVES>
+
+  <!-- The nodes -->
+  <NODES>
+
+    <ROOT id="root"/>
+
+    <!-- The root node -->
+    <NODE id="root">
+      <MATERIAL id="defaultMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="tronco"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- Tree trunk -->
+    <NODE id="tronco">
+        <MATERIAL id="null" />
+        <TEXTURE id="null" />
+
+        <ROTATION axis="x" angle="90" />
+        <TRANSLATION x="5" y="5" z="-4" />
+
+        <DESCENDANTS>
+					<LEAF type="cylinder" args="1 1 2 20 20 false" />
+        </DESCENDANTS>
+
+         <!-- cylinder: top radius, bottom radius, height, sections along height, parts per section, open bool  -->
+
+    </NODE>
+
+ </NODES>
+
+</SCENE>

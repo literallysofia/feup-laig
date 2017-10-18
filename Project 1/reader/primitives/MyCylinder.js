@@ -1,17 +1,20 @@
-function MyCylinder(scene, height, bottomRadius, topRadius, stacks, slices, texture) {
+function MyCylinder(scene, radiusTop, radiusBottom, height, stacks, slices, openEnded) {
     CGFobject.call(this, scene);
-    top = typeof top !== 'undefined' ? top : false;
-    bottom = typeof bottom !== 'undefined' ? bottom : false;
-    texture = typeof texture !== 'undefined' ? texture : false;
-    this.top = top;
-    this.bottom = bottom;
-    this.texture = texture;
-    this.topRad = topRadius;
-    this.bottomRad = bottomRadius;
+    radiusTop = radiusTop !== undefined ? radiusTop : 1;
+    radiusBottom = radiusBottom !== undefined ? radiusBottom : 1;
+    height = height || 1;
+
+    stacks = Math.floor( stacks ) || 8;
+    slices = Math.floor( slices ) || 1;
+
+    openEnded = openEnded !== undefined ? openEnded : false;
+
+    this.openEnded = openEnded;
+    this.radiusTop = radiusTop;
+    this.radiusBottom = radiusBottom;
     this.height = height;
     this.slices = slices;
     this.stacks = stacks;
-    this.type = 'MyCylinder';
 
     this.initBuffers();
 };
@@ -25,15 +28,15 @@ MyCylinder.prototype.initBuffers = function() {
     this.normals = [];
     this.originalTexCoords = [];
 
-    var r = this.bottomRad;
-    var delta_r = (this.topRad - this.bottomRad) / this.stacks;
+    var r = this.radiusBottom;
+    var delta_r = (this.radiusTop - this.radiusBottom) / this.stacks;
     var delta_rad = 2 * Math.PI / this.slices;
     var delta_z = this.height / this.stacks;
-    var m = this.height / (this.bottomRad - this.topRad);
+    var m = this.height / (this.radiusBottom - this.radiusTop);
     var maxheight;
-    if (this.bottomRad > this.topRad)
-        maxheight = this.topRad * m + this.height;
-    else maxheight = this.bottomRad * m + this.height;
+    if (this.radiusBottom > this.radiusTop)
+        maxheight = this.radiusTop * m + this.height;
+    else maxheight = this.radiusBottom * m + this.height;
     var indice = 0;
 
     var acc = 0;
@@ -44,28 +47,28 @@ MyCylinder.prototype.initBuffers = function() {
                 r * Math.sin(j * delta_rad),
                 i * delta_z
             );
-            if (Math.abs(this.bottomRad - this.topRad) < 0.0001) {
+            if (Math.abs(this.radiusBottom - this.radiusTop) < 0.0001) {
                 this.normals.push(
                     Math.cos(j * delta_rad),
                     Math.sin(j * delta_rad),
                     0);
-            } else if (this.bottomRad > this.topRad) {
+            } else if (this.radiusBottom > this.radiusTop) {
                 this.normals.push(
-                    maxheight * Math.cos(j * delta_rad) / Math.sqrt(Math.pow(this.bottomRad, 2) + Math.pow(maxheight, 2)),
-                    maxheight * Math.sin(j * delta_rad) / Math.sqrt(Math.pow(this.bottomRad, 2) + Math.pow(maxheight, 2)),
-                    this.bottomRad / Math.sqrt(Math.pow(this.bottomRad, 2) + Math.pow(maxheight, 2))
+                    maxheight * Math.cos(j * delta_rad) / Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2)),
+                    maxheight * Math.sin(j * delta_rad) / Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2)),
+                    this.radiusBottom / Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2))
                 );
             } else {
                 this.normals.push(
-                    maxheight * Math.cos(j * delta_rad) / Math.sqrt(Math.pow(this.topRad, 2) + Math.pow(maxheight, 2)),
-                    maxheight * Math.sin(j * delta_rad) / Math.sqrt(Math.pow(this.topRad, 2) + Math.pow(maxheight, 2)),
-                    this.topRad / Math.sqrt(Math.pow(this.topRad, 2) + Math.pow(maxheight, 2))
+                    maxheight * Math.cos(j * delta_rad) / Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2)),
+                    maxheight * Math.sin(j * delta_rad) / Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2)),
+                    this.radiusTop / Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2))
                 );
             }
             this.originalTexCoords.push(j / this.slices, i / this.stacks);
 
         }
-        r = (i + 1) * delta_r + this.bottomRad;
+        r = (i + 1) * delta_r + this.radiusBottom;
     }
 
     for (var i = 0; i < this.stacks; i++) {
