@@ -56,24 +56,9 @@
   <!-- Textures -->
   <TEXTURES>
 
-    <TEXTURE id="ice">
-        <file path="images/ice.jpg" />
-        <amplif_factor s="2" t="2" />
-    </TEXTURE>
-
-    <TEXTURE id="snow">
-        <file path="images/snow.jpg" />
-        <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
     <TEXTURE id="wood">
-        <file path="images/wood.jpg" />
+        <file path="images/wood.png" />
         <amplif_factor s="1" t="1" />
-    </TEXTURE>
-
-    <TEXTURE id="pine">
-        <file path="images/pine.jpg" />
-        <amplif_factor s="15" t="15" />
     </TEXTURE>
 
   </TEXTURES>
@@ -140,7 +125,7 @@
     <!-- Tree trunk -->
     <NODE id="tronco">
         <MATERIAL id="null" />
-        <TEXTURE id="null" />
+        <TEXTURE id="wood" />
 
         <ROTATION axis="x" angle="90" />
         <TRANSLATION x="5" y="5" z="-4" />

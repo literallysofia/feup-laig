@@ -96,6 +96,8 @@ MyCylinder.prototype.scaletexCoords = function(ampS, ampT) {
   this.updatetexCoordsGLBuffers();
 }
 
+MyCylinder.prototype.updateTexCoords = function(s, t) {};
+
 MyCylinder.prototype.display = function() {
   CGFobject.prototype.display.call(this);
 
