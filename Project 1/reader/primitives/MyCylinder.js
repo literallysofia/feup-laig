@@ -81,22 +81,19 @@ MyCylinder.prototype.initBuffers = function() {
     }
   }
 
-  this.texCoords = this.texCoords.slice();
-
   this.primitiveType = this.scene.gl.TRIANGLES;
   this.initGLBuffers();
 };
 
-
-MyCylinder.prototype.scaletexCoords = function(ampS, ampT) {
-  for (var i = 0; i < this.texCoords.length; i += 2) {
-    this.texCoords[i] = this.originaltexCoords[i] / ampS;
-    this.texCoords[i + 1] = this.originaltexCoords[i + 1] / ampT;
+MyCylinder.prototype.updateTexCoords = function(afS, afT) {
+  for (var i = 0; i <= this.stacks; i++) {
+    for (var j = 0; j <= this.slices; j++) {
+    this.texCoords[i] = (j / this.slices) / afS;
+    this.texCoords[i + 1] = (i / this.stacks) / afT;
   }
-  this.updatetexCoordsGLBuffers();
 }
-
-MyCylinder.prototype.updateTexCoords = function(s, t) {};
+  this.updateTexCoordsGLBuffers();
+};
 
 MyCylinder.prototype.display = function() {
   CGFobject.prototype.display.call(this);
