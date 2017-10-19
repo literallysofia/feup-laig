@@ -117,12 +117,12 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="tronco"/>
+        <!-- <NODEREF id="tronco"/> -->
+        <NODEREF id="patch1"/>
       </DESCENDANTS>
 
     </NODE>
 
-    <!-- Tree trunk -->
     <NODE id="tronco">
         <MATERIAL id="null" />
         <TEXTURE id="wood" />
@@ -133,6 +133,29 @@
 
          <!-- cylinder: height, bottom radius, top radius, sections along height, parts per section, top layer, bottom layer  -->
 
+    </NODE>
+
+    <NODE id="patch1">
+      <MATERIAL id="null" />
+      <TEXTURE id="null" />
+
+      <TRANSLATION x="0" y="2.5" z="0" />
+      <DESCENDANTS>
+        <LEAF id="wave" type="patch" args="30 30" >
+          <CPLINE>
+            <CPOINT xx="-5.2" yy="-2.5" zz="0" ww="1"/>
+            <CPOINT xx="2.6" yy="1.8" zz="0" ww="1"/>
+            <CPOINT xx="-5.9" yy="-3.6" zz="0" ww="0.5"/>
+            <CPOINT xx="1.6" yy="-2.5" zz="0" ww="0.3"/>
+          </CPLINE>
+          <CPLINE>
+            <CPOINT xx="-5.2" yy="-2.5" zz="20" ww="1"/>
+            <CPOINT xx="2.6" yy="1.8" zz="20" ww="1"/>
+            <CPOINT xx="-5.9" yy="-3.6" zz="20" ww="0.5"/>
+            <CPOINT xx="1.6" yy="-2.5" zz="20" ww="0.3"/>
+          </CPLINE>
+        </LEAF>
+      </DESCENDANTS>
     </NODE>
 
  </NODES>
