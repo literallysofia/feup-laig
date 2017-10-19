@@ -128,10 +128,10 @@
         <TEXTURE id="wood" />
 
         <DESCENDANTS>
-					<LEAF type="cylinder" args="1 1 2 20 20 1 1" />
+					<LEAF type="cylinder" args="2 1 1 20 20 1 1" />
         </DESCENDANTS>
 
-         <!-- cylinder: top radius, bottom radius, height, sections along height, parts per section, top layer, bottom layer  -->
+         <!-- cylinder: height, bottom radius, top radius, sections along height, parts per section, top layer, bottom layer  -->
 
     </NODE>
 

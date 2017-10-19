@@ -1,4 +1,4 @@
-function MyCylinder(scene, radiusTop, radiusBottom, height, stacks, slices, layerTop, layerBottom) {
+function MyCylinder(scene, height, radiusBottom, radiusTop, stacks, slices, layerTop, layerBottom) {
   CGFobject.call(this, scene);
 
   this.radiusTop = radiusTop;
