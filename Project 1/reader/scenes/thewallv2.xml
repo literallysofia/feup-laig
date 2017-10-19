@@ -71,6 +71,11 @@
         <amplif_factor s="15" t="15" />
     </TEXTURE>
 
+    <TEXTURE id="iron">
+        <file path="images/iron.png" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
   </TEXTURES>
 
   <MATERIALS>
@@ -167,6 +172,8 @@
         <NODEREF id="ground1"/>
         <NODEREF id="ground2"/>
         <NODEREF id="ground3"/>
+
+        <NODEREF id="gate"/>
       </DESCENDANTS>
 
     </NODE>
@@ -467,7 +474,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="50" y="0" z="8"/>
-      <SCALE sx="70" sy="5" sz="30"/>
+      <SCALE sx="73" sy="5" sz="30"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -479,8 +486,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="70" y="0" z="8"/>
-      <SCALE sx="80" sy="3" sz="40"/>
+      <TRANSLATION x="70" y="0" z="6"/>
+      <SCALE sx="80" sy="3" sz="42"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -501,6 +508,19 @@
 
     </NODE>
 
+    <NODE id="gate">
+      <MATERIAL id="null"/>
+      <TEXTURE id="iron"/>
+
+      <TRANSLATION x="87" y="5" z="7.5"/>
+      <SCALE sx="7" sy="6" sz="0.6"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
 
     <!-- The elevator -->
     <NODE id="elevator">
@@ -512,8 +532,34 @@
       <DESCENDANTS>
         <NODEREF id="elevatorStructure"/>
         <NODEREF id="elevatorBox"/>
+        <NODEREF id="elevatorStep"/>
+        <NODEREF id="elevatorBlock"/>
       </DESCENDANTS>
 
+    </NODE>
+
+    <NODE id="elevatorStep">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="-2" y="4" z="0"/>
+      <SCALE sx="8" sy="2" sz="5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+    </NODE>
+
+    <NODE id="elevatorBlock">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="-2" y="4" z="1"/>
+      <SCALE sx="2" sy="4" sz="3"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
     </NODE>
 
     <NODE id="elevatorStructure">
@@ -609,7 +655,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="wood"/>
 
-      <TRANSLATION x="85" y="5" z="8"/>
+      <TRANSLATION x="80" y="5" z="8"/>
       <SCALE sx="5" sy="5" sz="5"/>
 
       <DESCENDANTS>
@@ -758,7 +804,7 @@
       <TEXTURE id="null"/>
 
       <TRANSLATION x="1.25" y="0" z="3.5"/>
-      <SCALE sx="1" sy="0.5" sz="1"/>
+      <SCALE sx="1.25" sy="0.5" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="defaultHouse"/>
@@ -771,8 +817,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="2.25" y="0" z="3.5"/>
-      <SCALE sx="1" sy="1.5" sz="1"/>
+      <TRANSLATION x="2.5" y="0" z="3.5"/>
+      <SCALE sx="1.50" sy="1.5" sz="1"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -781,32 +827,6 @@
     </NODE>
 
     <NODE id="houseCube5">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-     <TRANSLATION x="3" y="0" z="3.85"/>
-      <SCALE sx="0.5" sy="0.5" sz="0.25"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="house7">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-       <TRANSLATION x="3.5" y="0" z="3.75"/>
-      <SCALE sx="0.75" sy="0.8" sz="0.5"/>
-
-      <DESCENDANTS>
-        <NODEREF id="defaultHouse"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="houseCube6">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -819,7 +839,7 @@
 
     </NODE>
 
-    <NODE id="house8">
+    <NODE id="house7">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -832,7 +852,7 @@
 
     </NODE>
 
-    <NODE id="houseCube7">
+    <NODE id="houseCube6">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -845,11 +865,37 @@
 
     </NODE>
 
+    <NODE id="house8">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+       <TRANSLATION x="5.5" y="0" z="3.75"/>
+      <SCALE sx="0.75" sy="0.8" sz="0.5"/>
+
+      <DESCENDANTS>
+        <NODEREF id="defaultHouse"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="houseCube7">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+     <TRANSLATION x="6" y="0" z="3.85"/>
+      <SCALE sx="0.5" sy="0.5" sz="0.25"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
     <NODE id="house9">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="6.25" y="0" z="3.5"/>
+     <TRANSLATION x="7.25" y="0" z="3.5"/>
       <SCALE sx="0.75" sy="1" sz="1"/>
       <ROTATION axis="y" angle="-90"/>
 
@@ -863,7 +909,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="5.625" y="0" z="3"/>
+     <TRANSLATION x="6.625" y="0" z="3"/>
       <SCALE sx="0.25" sy="0.5" sz="0.5"/>
 
       <DESCENDANTS>
@@ -876,7 +922,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="6" y="0" z="2.5"/>
+     <TRANSLATION x="7" y="0" z="2.5"/>
       <SCALE sx="0.5" sy="0.5" sz="0.5"/>
       <ROTATION axis="y" angle="-90"/>
 
@@ -890,7 +936,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="5.625" y="0" z="2"/>
+     <TRANSLATION x="6.625" y="0" z="2"/>
       <SCALE sx="0.25" sy="0.5" sz="0.5"/>
 
       <DESCENDANTS>
@@ -904,7 +950,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="6" y="0" z="1.75"/>
+     <TRANSLATION x="7" y="0" z="1.75"/>
       <SCALE sx="0.5" sy="0.5" sz="0.5"/>
       <ROTATION axis="y" angle="-90"/>
 
@@ -918,7 +964,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="5.625" y="0" z="1.5"/>
+     <TRANSLATION x="6.625" y="0" z="1.5"/>
       <SCALE sx="0.25" sy="0.5" sz="0.5"/>
 
       <DESCENDANTS>
@@ -931,7 +977,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="6.25" y="0" z="0.5"/>
+     <TRANSLATION x="7.25" y="0" z="0.5"/>
       <SCALE sx="1" sy="1.5" sz="1"/>
       <ROTATION axis="y" angle="-90"/>
 
@@ -945,7 +991,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="5" y="0" z="0"/>
+     <TRANSLATION x="6.25" y="0" z="0"/>
       <SCALE sx="1.5" sy="1" sz="1"/>
       <ROTATION axis="y" angle="-90"/>
 
@@ -959,7 +1005,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="3.5" y="0" z="1.25"/>
+      <TRANSLATION x="4.5" y="0" z="1.25"/>
       <SCALE sx="0.75" sy="0.5" sz="0.5"/>
 
       <DESCENDANTS>
@@ -972,7 +1018,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-     <TRANSLATION x="4.5" y="0" z="2"/>
+     <TRANSLATION x="5.5" y="0" z="2"/>
       <SCALE sx="1" sy="0.7" sz="0.7"/>
       <ROTATION axis="y" angle="-90"/>
 
