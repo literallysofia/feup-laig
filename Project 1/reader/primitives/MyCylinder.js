@@ -85,15 +85,7 @@ MyCylinder.prototype.initBuffers = function() {
   this.initGLBuffers();
 };
 
-MyCylinder.prototype.updateTexCoords = function(afS, afT) {
-  for (var i = 0; i <= this.stacks; i++) {
-    for (var j = 0; j <= this.slices; j++) {
-    this.texCoords[i] = (j / this.slices) / afS;
-    this.texCoords[i + 1] = (i / this.stacks) / afT;
-  }
-}
-  this.updateTexCoordsGLBuffers();
-};
+
 
 MyCylinder.prototype.display = function() {
   CGFobject.prototype.display.call(this);
@@ -113,4 +105,8 @@ MyCylinder.prototype.display = function() {
     this.layer.display();
     this.scene.popMatrix();
   }
+};
+
+MyCylinder.prototype.updateTexCoords = function(afS, afT) {
+  this.updateTexCoordsGLBuffers();
 };
