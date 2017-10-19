@@ -41,6 +41,36 @@ function MySceneGraph(filename, scene) {
     this.reader.open('scenes/' + filename, this);
 }
 
+
+MySceneGraph.prototype.getKnotsVector = function(degree) { // TODO (CGF 0.19.3): add to CGFnurbsSurface
+
+	var v = new Array();
+	for (var i=0; i<=degree; i++) {
+		v.push(0);
+	}
+	for (var i=0; i<=degree; i++) {
+		v.push(1);
+	}
+	return v;
+}
+
+
+MySceneGraph.prototype.makeSurface = function (id, degree1, degree2, controlvertexes, translation) {
+
+	var knots1 = this.getKnotsVector(degree1); // to be built inside webCGF in later versions ()
+	var knots2 = this.getKnotsVector(degree2); // to be built inside webCGF in later versions
+
+	var nurbsSurface = new CGFnurbsSurface(degree1, degree2, knots1, knots2, controlvertexes); // TODO  (CGF 0.19.3): remove knots1 and knots2 from CGFnurbsSurface method call. Calculate inside method.
+	getSurfacePoint = function(u, v) {
+		return nurbsSurface.getPoint(u, v);
+	};
+
+	var obj = new CGFnurbsObject(this, getSurfacePoint, 20, 20 );
+	this.surfaces.push(obj);
+}
+
+
+
 /*
  * Callback to be executed after successful reading
  */
@@ -1278,7 +1308,31 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                     }
                 } else
                 if (descendants[j].nodeName == "LEAF") {
-                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+                    var type = this.reader.getItem(descendants[j], 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
+
+                    if (type == 'patch'){
+
+                            this.patch = [];
+                            var cplines = descendants[j].children;
+
+                            for(var n = 0 ; n < cplines.length ; n++){
+
+                                this.cpline = [];
+                                var cpoints = cplines[n].children;
+
+                                for(var d = 0 ; d < cpoints.length ; d++){
+
+                                    var x = this.reader.getFloat(cpoints[d], 'xx');
+                                    var y = this.reader.getFloat(cpoints[d], 'yy');
+                                    var z = this.reader.getFloat(cpoints[d], 'zz');
+                                    var w = this.reader.getFloat(cpoints[d], 'ww');
+
+                                    var point = [x, y, z, w];
+                                    this.cpline.push(point);
+                                }
+                                this.patch.push(this.cpline);
+                            }
+                        }
 
                     if (type != null)
                         this.log("   Leaf: " + type);
@@ -1401,5 +1455,6 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, material, textur
         this.displaySceneRecursive(currNode.children[i], mat, tex);
         this.scene.popMatrix();
     }
+
 
 }

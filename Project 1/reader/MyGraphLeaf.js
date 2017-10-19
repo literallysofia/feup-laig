@@ -8,7 +8,7 @@ function MyGraphLeaf(graph, xmlelem) {
     this.graph = graph;
     this.primitive;
 
-    var type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle']);
+    var type = this.graph.reader.getItem(xmlelem, 'type', ['rectangle', 'cylinder', 'sphere', 'triangle', 'patch']);
 
     var args = this.graph.reader.getString(xmlelem, 'args').split(' ').map(Number);
 
@@ -24,6 +24,9 @@ function MyGraphLeaf(graph, xmlelem) {
             break;
         case 'cylinder':
             this.primitive = new MyCylinder(this.graph.scene, args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+            break;
+        case 'patch':
+            this.primitive = new MyPatch(this.graph.scene);
             break;
     }
 }
