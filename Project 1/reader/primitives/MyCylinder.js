@@ -104,7 +104,7 @@ MyCylinder.prototype.display = function() {
   if (this.layerTop == 1) {
     this.scene.pushMatrix();
     this.scene.scale(this.radiusTop, this.radiusTop, 1);
-    this.scene.rotate(Math.PI, 1, 0, 0);
+    this.scene.translate(0, 0, this.height);
     this.layer.display();
     this.scene.popMatrix();
   }
@@ -112,7 +112,7 @@ MyCylinder.prototype.display = function() {
   if (this.layerBottom == 1) {
     this.scene.pushMatrix();
     this.scene.scale(this.radiusBottom, this.radiusBottom, 1);
-    this.scene.translate(0, 0, this.height);
+    this.scene.rotate(Math.PI, 1, 0, 0);
     this.layer.display();
     this.scene.popMatrix();
   }

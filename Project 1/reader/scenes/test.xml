@@ -127,9 +127,6 @@
         <MATERIAL id="null" />
         <TEXTURE id="wood" />
 
-        <ROTATION axis="x" angle="90" />
-        <TRANSLATION x="5" y="5" z="-4" />
-
         <DESCENDANTS>
 					<LEAF type="cylinder" args="1 1 2 20 20 1 1" />
         </DESCENDANTS>
