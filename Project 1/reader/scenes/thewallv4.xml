@@ -37,7 +37,7 @@
 
     <LIGHT id="light2">
       <enable value="1"/>
-      <position x="0" y="100" z="100" w="1"/>
+      <position x="-50" y="75" z="100" w="1"/>
       <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0"/>
       <specular r="1.0" g="1.0" b="1.0" a="1.0"/>
@@ -45,7 +45,7 @@
 
     <LIGHT id="light3">
       <enable value="1"/>
-      <position x="200" y="100" z="100" w="1"/>
+      <position x="250" y="75" z="100" w="1"/>
       <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
       <diffuse r="0.6" g="0.6" b="0.6" a="1.0"/>
       <specular r="0.6" g="0.6" b="0.6" a="1.0"/>
@@ -78,7 +78,7 @@
 
     <TEXTURE id="snow">
         <file path="images/snow.jpg" />
-        <amplif_factor s="200" t="200" />
+        <amplif_factor s="1" t="1" />
     </TEXTURE>
 
   </TEXTURES>
@@ -119,7 +119,6 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="floor"/>
         <NODEREF id="wall"/>
         <NODEREF id="elevator"/>
         <NODEREF id="thewatch"/>
@@ -238,7 +237,7 @@
 
     <NODE id="rightPatch">
       <MATERIAL id="null" />
-      <TEXTURE id="snow" />
+      <TEXTURE id="null" />
 
       <DESCENDANTS>
         <LEAF id="wave" type="patch" args="100 100" >
@@ -258,21 +257,6 @@
           </CPLINE>
         </LEAF>
       </DESCENDANTS>
-    </NODE>
-
-    <!-- The floor -->
-    <NODE id="floor">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <SCALE sx="200" sy="1" sz="100"/>
-      <TRANSLATION x="0" y="0" z="1"/>
-      <ROTATION axis="x" angle="-90"/>
-
-      <DESCENDANTS>
-        <LEAF type="rectangle" args="0 1 1 0"/>
-      </DESCENDANTS>
-
     </NODE>
 
     <!-- The wall -->
@@ -306,7 +290,7 @@
 
         <NODEREF id="ground1"/>
         <NODEREF id="ground2"/>
-        <NODEREF id="ground3"/>
+
 
         <NODEREF id="gate"/>
       </DESCENDANTS>
@@ -317,6 +301,8 @@
     <NODE id="forest">
       <MATERIAL id="null"/>
       <TEXTURE id="pine"/>
+
+      <TRANSLATION x="0" y="2" z="0"/>
 
       <DESCENDANTS>
         <NODEREF id="pyramid1"/>
@@ -623,19 +609,6 @@
 
       <TRANSLATION x="70" y="0" z="6"/>
       <SCALE sx="80" sy="3" sz="42"/>
-
-      <DESCENDANTS>
-        <NODEREF id="cube"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="ground3">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="60" y="0" z="8"/>
-      <SCALE sx="80" sy="1" sz="60"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
@@ -1270,7 +1243,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="15" y="2" z="50"/>
+      <TRANSLATION x="15" y="7" z="50"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1283,7 +1256,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="25" y="2" z="80"/>
+      <TRANSLATION x="25" y="10" z="80"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1296,7 +1269,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="40" y="2" z="60"/>
+      <TRANSLATION x="40" y="5" z="60"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1309,7 +1282,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="80" y="2" z="70"/>
+      <TRANSLATION x="80" y="5" z="70"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1322,7 +1295,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="60" y="2" z="80"/>
+      <TRANSLATION x="60" y="7" z="80"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1335,7 +1308,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="35" y="2" z="40"/>
+      <TRANSLATION x="35" y="3" z="40"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1348,7 +1321,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="105" y="2" z="80"/>
+      <TRANSLATION x="105" y="7" z="80"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1361,7 +1334,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="145" y="2" z="60"/>
+      <TRANSLATION x="145" y="7" z="60"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1374,7 +1347,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="130" y="2" z="87"/>
+      <TRANSLATION x="130" y="13" z="87"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1400,7 +1373,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="160" y="2" z="70"/>
+      <TRANSLATION x="160" y="10" z="70"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1413,7 +1386,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="180" y="2" z="55"/>
+      <TRANSLATION x="180" y="6" z="55"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1426,7 +1399,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="178" y="2" z="30"/>
+      <TRANSLATION x="178" y="4" z="30"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1439,7 +1412,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="180" y="2" z="85"/>
+      <TRANSLATION x="180" y="17" z="85"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
@@ -1452,7 +1425,7 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="165" y="2" z="40"/>
+      <TRANSLATION x="165" y="5" z="40"/>
       <SCALE sx="0.2" sy="0.9" sz="0.2"/>
 
       <DESCENDANTS>
