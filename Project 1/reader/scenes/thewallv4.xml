@@ -14,6 +14,7 @@
   <!-- Illumination and clear colour -->
   <ILLUMINATION>
     <ambient r="0.2" g="0.2" b="0.2" a="1"/>
+    <doubleside value="0" />
     <background r="0" g="0" b="0" a="1"/>
   </ILLUMINATION>
 
@@ -119,17 +120,33 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
+        <NODEREF id="floor"/>
         <NODEREF id="wall"/>
         <NODEREF id="elevator"/>
         <NODEREF id="thewatch"/>
         <NODEREF id="town"/>
         <NODEREF id="forest"/>
-        <NODEREF id="snow"/>
+        <NODEREF id="snowWave"/>
       </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="snow">
+    <NODE id="floor">
+     <MATERIAL id="null"/>
+     <TEXTURE id="snow"/>
+
+     <TRANSLATION x="0" y="-0.02" z="0"/>
+     <ROTATION axis="x" angle="180"/>
+     <SCALE sx="200" sy="0" sz="100"/>
+     <ROTATION axis="x" angle="-90"/>
+
+     <DESCENDANTS>
+       <LEAF type="rectangle" args="0 1 1 0"/>
+     </DESCENDANTS>
+
+   </NODE>
+
+    <NODE id="snowWave">
       <MATERIAL id="null"/>
       <TEXTURE id="snow"/>
 
@@ -258,6 +275,7 @@
         </LEAF>
       </DESCENDANTS>
     </NODE>
+
 
     <!-- The wall -->
     <NODE id="wall">

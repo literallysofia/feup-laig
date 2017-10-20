@@ -1392,12 +1392,10 @@ MySceneGraph.prototype.displayScene = function() {
 
 MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather, idTextureFather) {
 
+    var currNode = this.nodes[idNode];
+
     var idMaterial = idMaterialFather;
     var idTexture = idTextureFather;
-
-    var currMaterial = this.materials[idMaterial];
-    var currTexture = this.textures[idTexture]
-    var currNode = this.nodes[idNode];
 
     this.scene.multMatrix(currNode.transformMatrix);
 
@@ -1410,6 +1408,9 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
             idTexture = null;
         } else idTexture = currNode.textureID;
     }
+
+    var currMaterial = this.materials[idMaterial];
+    var currTexture = this.textures[idTexture]
 
     for (let i = 0; i < currNode.leaves.length; i++) {
         if (currMaterial != null) {
