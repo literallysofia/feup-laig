@@ -1390,39 +1390,42 @@ MySceneGraph.prototype.displayScene = function() {
 
 }
 
-MySceneGraph.prototype.displaySceneRecursive = function(idNode, material, texture) {
+MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather, idTextureFather) {
 
-    var mat = material;
-    var tex = texture;
+    var idMaterial = idMaterialFather;
+    var idTexture = idTextureFather;
+
+    var currMaterial = this.materials[idMaterial];
+    var currTexture = this.textures[idTexture]
     var currNode = this.nodes[idNode];
 
     this.scene.multMatrix(currNode.transformMatrix);
 
     if (this.materials[currNode.materialID] != null) {
-        mat = currNode.materialID;
+        idMaterial = currNode.materialID;
     }
 
     if (this.textures[currNode.textureID] != null) {
         if (currNode.textureID == 'clear') {
-            tex = null;
-        } else tex = currNode.textureID;
+            idTexture = null;
+        } else idTexture = currNode.textureID;
     }
 
     for (let i = 0; i < currNode.leaves.length; i++) {
-        if (this.materials[mat] != null) {
-            this.materials[mat].apply();
+        if (currMaterial != null) {
+            currMaterial.apply();
         }
 
-        if (this.textures[tex] != null) {
-            currNode.leaves[i].primitive.updateTexCoords(this.textures[tex][1], this.textures[tex][2]);
-            this.textures[tex][0].bind();
+        if (currTexture != null) {
+            currNode.leaves[i].primitive.updateTexCoords(currTexture[1], currTexture[2]);
+            currTexture[0].bind();
         }
         currNode.leaves[i].primitive.display();
     }
 
     for (let i = 0; i < currNode.children.length; i++) {
         this.scene.pushMatrix();
-        this.displaySceneRecursive(currNode.children[i], mat, tex);
+        this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
         this.scene.popMatrix();
     }
 
