@@ -127,7 +127,20 @@
         <NODEREF id="town"/>
         <NODEREF id="forest"/>
         <NODEREF id="snowWave"/>
+        <!--<NODEREF id="sphere_test"/>-->
       </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="sphere_test">
+        <MATERIAL id="null" />
+        <TEXTURE id="wood" />
+
+        <TRANSLATION x="90" y="10" z="15"/>-->
+
+        <DESCENDANTS>
+            <LEAF  type="sphere" args="2 20 20" />
+        </DESCENDANTS>
 
     </NODE>
 
