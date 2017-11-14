@@ -6,7 +6,7 @@ function MyCircle(scene, slices) {
   CGFobject.call(this, scene);
   this.slices = slices;
   this.initBuffers();
-};
+}
 
 MyCircle.prototype = Object.create(CGFobject.prototype);
 MyCircle.prototype.constructor = MyCircle;
@@ -26,7 +26,10 @@ MyCircle.prototype.initBuffers = function() {
   for (var i = 0; i <= this.slices; i++) {
     this.vertices.push(Math.cos(i * div), Math.sin(i * div), 0);
     this.normals.push(0, 0, 1);
-    this.texCoords.push(0.5 + 0.5 * Math.cos(i * div), 0.5 + 0.5 * Math.sin(i * div));
+    this.texCoords.push(
+      0.5 + 0.5 * Math.cos(i * div),
+      0.5 + 0.5 * Math.sin(i * div)
+    );
   }
 
   for (var i = 0; i < this.slices; i++) {
@@ -37,4 +40,4 @@ MyCircle.prototype.initBuffers = function() {
 
   this.primitiveType = this.scene.gl.TRIANGLES;
   this.initGLBuffers();
-}
+};
