@@ -137,6 +137,19 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
         if ((error = this.parseMaterials(nodes[index])) != null)
             return error;
     }
+    
+    //PROJECT2
+    // <ANIMATIONS>
+    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
+    return "tag <ANIMATIONS> missing";
+    else {
+        if (index != ANIMATIONS_INDEX)
+            this.onXMLMinorError("tag <ANIMATIONS> out of order");
+
+        if ((error = this.parseNodes(nodes[index])) != null)
+            return error;
+    }
+    //PROJECT2
 
     // <NODES>
     if ((index = nodeNames.indexOf("NODES")) == -1)
@@ -1107,6 +1120,66 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
     console.log("Parsed materials");
 }
 
+//PROJECT2
+/**
+ * Parses the <ANIMATIONS> node.
+ */
+MySceneGraph.prototype.parseAnimations = function(animationsNode) {
+    
+    var children = animationsNode.children;
+
+    this.animations = [];
+
+    for (var i =0; i < children.length; i++){
+         if(children[i].nodeName != "ANIMATION"){
+            this.onXMLMinorError("unknown tag name <" + children[i].nodeName + ">");
+            continue;
+         }
+
+        var animationID = this.reader.getString(children[i], 'id');
+
+        if (animationID == null)
+            return "no ID defined for animation";
+
+        if (this.animations[animationID] != null)
+            return "ID must be unique for each animations (conflict: ID = " + animationID + ")";
+
+        var animationSpeed = this.reader.getFloat(children[i], 'speed');
+
+        if (animationSpeed == null)
+            return "no speed defined for animation";
+
+        var type = this.reader.getItem(children[i], 'type', ['linear', 'circular','bezier']);
+            
+        if (animationType == null)
+            return "no type defined for animation";
+
+
+        var controlPoints=[];
+
+        if(type=='linear'){
+            controlPoints = children[i].children;
+
+            for( var j = 0; j < controlPoints.length; j++){
+                if(controlPoints[j].nodeName != 'controlpoint'){
+                    return "error parsing control points of animation with ID =" + animationID;
+                }
+            }
+            var newAnimation = new LinearAnimation(controlPoints, this.scene);
+            this.animations[animationID] = newAnimation;
+        }
+
+       
+
+
+
+
+
+
+
+    }
+
+}
 
 /**
  * Parses the <NODES> block.
