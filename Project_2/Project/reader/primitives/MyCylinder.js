@@ -16,7 +16,7 @@ function MyCylinder(scene, height, radiusBottom, radiusTop, stacks, slices, laye
   this.layer = new MyCircle(scene, this.slices);
 
   this.initBuffers();
-};
+}
 
 MyCylinder.prototype = Object.create(CGFobject.prototype);
 MyCylinder.prototype.constructor = MyCylinder;
@@ -46,25 +46,31 @@ MyCylinder.prototype.initBuffers = function() {
         i * delta_z
       );
       if (Math.abs(this.radiusBottom - this.radiusTop) < 0.0001) {
-        this.normals.push(
-          Math.cos(j * delta_rad),
-          Math.sin(j * delta_rad),
-          0);
+        this.normals.push(Math.cos(j * delta_rad), Math.sin(j * delta_rad), 0);
       } else if (this.radiusBottom > this.radiusTop) {
         this.normals.push(
-          maxheight * Math.cos(j * delta_rad) / Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2)),
-          maxheight * Math.sin(j * delta_rad) / Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2)),
-          this.radiusBottom / Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2))
+          maxheight *
+            Math.cos(j * delta_rad) /
+            Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2)),
+          maxheight *
+            Math.sin(j * delta_rad) /
+            Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2)),
+          this.radiusBottom /
+            Math.sqrt(Math.pow(this.radiusBottom, 2) + Math.pow(maxheight, 2))
         );
       } else {
         this.normals.push(
-          maxheight * Math.cos(j * delta_rad) / Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2)),
-          maxheight * Math.sin(j * delta_rad) / Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2)),
-          this.radiusTop / Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2))
+          maxheight *
+            Math.cos(j * delta_rad) /
+            Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2)),
+          maxheight *
+            Math.sin(j * delta_rad) /
+            Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2)),
+          this.radiusTop /
+            Math.sqrt(Math.pow(this.radiusTop, 2) + Math.pow(maxheight, 2))
         );
       }
       this.texCoords.push(j / this.slices, i / this.stacks);
-
     }
     r = (i + 1) * delta_r + this.radiusBottom;
   }
@@ -81,15 +87,12 @@ MyCylinder.prototype.initBuffers = function() {
         (i + 1) * (this.slices + 1) + j,
         i * (this.slices + 1) + j
       );
-
     }
   }
 
   this.primitiveType = this.scene.gl.TRIANGLES;
   this.initGLBuffers();
 };
-
-
 
 MyCylinder.prototype.display = function() {
   CGFobject.prototype.display.call(this);
