@@ -1155,27 +1155,45 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
             return "no type defined for animation";
 
 
+        var controlPointsSpecs=[];
         var controlPoints=[];
 
         if(type=='linear'){
-            controlPoints = children[i].children;
+            
+            controlPointsSpecs = children[i].children;
 
-            for( var j = 0; j < controlPoints.length; j++){
-                if(controlPoints[j].nodeName != 'controlpoint'){
-                    return "error parsing control points of animation with ID =" + animationID;
+            for( var j = 0; j < controlPointsSpecs.length; j++){
+
+                if(controlPointsSpecs[j].nodeName != 'controlpoint'){
+                    this.onXMLMinorError("unknown tag name <" + controlPointsSpecs[j].nodeName + ">");
+                    continue;
                 }
+
+                var x = this.reader.getFloat(controlPointsSpecs[j], 'xx');
+                if (x == null) {
+                    return "unable to parse x-coordinate of a control point of animation with ID =" + animationID;
+                } else if (isNaN(x))
+                    return "non-numeric value for x-coordinate of a control point of animation with ID =" + animationID;
+              
+                var y = this.reader.getFloat(controlPointsSpecs[j], 'yy');
+                if (y == null) {
+                    return "unable to parse y-coordinate of a control point of animation with ID =" + animationID;
+                } else if (isNaN(y))
+                    return "non-numeric value for y-coordinate of a control point of animation with ID =" + animationID;
+            
+                var z = this.reader.getFloat(controlPointsSpecs[j], 'zz');
+                if (z == null) {
+                    return "unable to parse z-coordinate of a control point of animation with ID =" + animationID;
+                } else if (isNaN(z))
+                    return "non-numeric value for z-coordinate of a control point of animation with ID =" + animationID;
+            
+                var cpoint = [x,y,z];
+                controlPoints.push(cpoint);
             }
-            var newAnimation = new LinearAnimation(controlPoints, this.scene);
+
+            var newAnimation = new LinearAnimation(this.scene, animationID, animationSpeed, controlPoints);
             this.animations[animationID] = newAnimation;
         }
-
-       
-
-
-
-
-
-
 
     }
 
