@@ -1,10 +1,15 @@
 ## TODO
 
 ### Animação
-- [ ] Implementação do parser.
-- [ ] Implementação das 4 classes do movimento.
-- [ ] Aplicar o movimento (a).
-- [ ] Aplicar o movimento (b).
+- [x] Implementação do parser para o movimento linear
+- [x] Implementação do parser para o movimento bezier
+- [ ] Implementação do parser para o movimento circular
+- [ ] Implementação do parser para o movimento combo
+- [ ] Implementação dos calculos na classe de movimento linear.
+- [ ] Implementação dos calculos na classe de movimento bezier.
+- [ ] Implementação dos calculos na classe de movimento circular.
+- [ ] Aplicar o movimento (a) na cena.
+- [ ] Aplicar o movimento (b) na cena.
 
 ### Modificação dinâminca de aparência com *shaders*
 - [ ] Implementação.
