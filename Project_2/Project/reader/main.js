@@ -14,7 +14,7 @@ function getUrlVars() {
 serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
              'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js', 
              './primitives/MyTriangle.js', './primitives/MyQuad.js', './primitives/MySphere.js', './primitives/MySemiSphere.js', './primitives/MyCylinder.js', './primitives/MyCircle.js', './primitives/MyPatch.js',
-             './animations/Animation.js', './animations/LinearAnimation.js', 
+             './animations/Animation.js', './animations/LinearAnimation.js', './animations/BezierAnimation.js', 
 
 main=function()
 {
@@ -34,7 +34,7 @@ main=function()
 	// or use "demo.xml" as default (assumes files in subfolder "scenes", check MySceneGraph constructor)
 
 
-	var filename=getUrlVars()['file'] || "thewallv4.xml";
+	var filename=getUrlVars()['file'] || "demo.xml";
 
 
 	// create and load graph, and associate it to scene.

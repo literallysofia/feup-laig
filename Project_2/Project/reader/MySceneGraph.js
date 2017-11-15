@@ -6,7 +6,7 @@ var ILLUMINATION_INDEX = 1;
 var LIGHTS_INDEX = 2;
 var TEXTURES_INDEX = 3;
 var MATERIALS_INDEX = 4;
-var LEAVES_INDEX = 5;
+var ANIMATIONS_INDEX = 5;
 var NODES_INDEX = 6;
 
 /**
@@ -140,13 +140,12 @@ MySceneGraph.prototype.parseLSXFile = function(rootElement) {
     
     //PROJECT2
     // <ANIMATIONS>
-    if ((index = nodeNames.indexOf("ANIMATIONS")) == -1)
-    return "tag <ANIMATIONS> missing";
-    else {
+    if ((index = nodeNames.indexOf("ANIMATIONS")) != -1)
+    {
         if (index != ANIMATIONS_INDEX)
             this.onXMLMinorError("tag <ANIMATIONS> out of order");
 
-        if ((error = this.parseNodes(nodes[index])) != null)
+        if ((error = this.parseAnimations(nodes[index])) != null)
             return error;
     }
     //PROJECT2
@@ -1118,6 +1117,7 @@ MySceneGraph.prototype.parseMaterials = function(materialsNode) {
     this.generateDefaultMaterial();
 
     console.log("Parsed materials");
+    console.log("WELELE\n");
 }
 
 //PROJECT2
@@ -1129,8 +1129,9 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
     var children = animationsNode.children;
 
     this.animations = [];
-
+    
     for (var i =0; i < children.length; i++){
+       
          if(children[i].nodeName != "ANIMATION"){
             this.onXMLMinorError("unknown tag name <" + children[i].nodeName + ">");
             continue;
@@ -1146,21 +1147,22 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 
         var animationSpeed = this.reader.getFloat(children[i], 'speed');
 
-        if (animationSpeed == null)
+        if (animationSpeed == null){
             return "no speed defined for animation";
+        } else if (isNaN(animationSpeed))
+            return "non-numeric value for speed of animation with ID = " + animationID;
 
-        var type = this.reader.getItem(children[i], 'type', ['linear', 'circular','bezier']);
+
+        var animationType = this.reader.getItem(children[i], 'type', ['linear', 'circular','bezier']);
             
         if (animationType == null)
             return "no type defined for animation";
+        
 
-
-        var controlPointsSpecs=[];
-        var controlPoints=[];
-
-        if(type=='linear'){
+        if(animationType=='linear'){
             
-            controlPointsSpecs = children[i].children;
+            var controlPoints=[];
+            var controlPointsSpecs = children[i].children;
 
             for( var j = 0; j < controlPointsSpecs.length; j++){
 
@@ -1171,33 +1173,79 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 
                 var x = this.reader.getFloat(controlPointsSpecs[j], 'xx');
                 if (x == null) {
-                    return "unable to parse x-coordinate of a control point of animation with ID =" + animationID;
+                    return "unable to parse x-coordinate of a control point of animation with ID = " + animationID;
                 } else if (isNaN(x))
-                    return "non-numeric value for x-coordinate of a control point of animation with ID =" + animationID;
+                    return "non-numeric value for x-coordinate of a control point of animation with ID = " + animationID;
               
                 var y = this.reader.getFloat(controlPointsSpecs[j], 'yy');
                 if (y == null) {
-                    return "unable to parse y-coordinate of a control point of animation with ID =" + animationID;
+                    return "unable to parse y-coordinate of a control point of animation with ID = " + animationID;
                 } else if (isNaN(y))
-                    return "non-numeric value for y-coordinate of a control point of animation with ID =" + animationID;
+                    return "non-numeric value for y-coordinate of a control point of animation with ID = " + animationID;
             
                 var z = this.reader.getFloat(controlPointsSpecs[j], 'zz');
                 if (z == null) {
-                    return "unable to parse z-coordinate of a control point of animation with ID =" + animationID;
+                    return "unable to parse z-coordinate of a control point of animation with ID = " + animationID;
                 } else if (isNaN(z))
-                    return "non-numeric value for z-coordinate of a control point of animation with ID =" + animationID;
+                    return "non-numeric value for z-coordinate of a control point of animation with ID = " + animationID;
             
                 var cpoint = [x,y,z];
                 controlPoints.push(cpoint);
             }
 
             var newAnimation = new LinearAnimation(this.scene, animationID, animationSpeed, controlPoints);
+            newAnimation.printValues();
+            this.animations[animationID] = newAnimation;
+        }
+
+
+        if(animationType=='bezier'){
+            
+            var controlPoints=[];
+            var controlPointsSpecs = children[i].children;
+
+            if(controlPointsSpecs.length != 4){
+                return "a bezier animation must have 4 control points, error in animation with ID = " + animationID;
+            }
+
+            for( var j = 0; j < controlPointsSpecs.length; j++){
+
+                if(controlPointsSpecs[j].nodeName != 'controlpoint'){
+                    this.onXMLMinorError("unknown tag name <" + controlPointsSpecs[j].nodeName + ">");
+                    continue;
+                }
+
+                var x = this.reader.getFloat(controlPointsSpecs[j], 'xx');
+                if (x == null) {
+                    return "unable to parse x-coordinate of a control point of animation with ID = " + animationID;
+                } else if (isNaN(x))
+                    return "non-numeric value for x-coordinate of a control point of animation with ID = " + animationID;
+              
+                var y = this.reader.getFloat(controlPointsSpecs[j], 'yy');
+                if (y == null) {
+                    return "unable to parse y-coordinate of a control point of animation with ID = " + animationID;
+                } else if (isNaN(y))
+                    return "non-numeric value for y-coordinate of a control point of animation with ID = " + animationID;
+            
+                var z = this.reader.getFloat(controlPointsSpecs[j], 'zz');
+                if (z == null) {
+                    return "unable to parse z-coordinate of a control point of animation with ID = " + animationID;
+                } else if (isNaN(z))
+                    return "non-numeric value for z-coordinate of a control point of animation with ID = " + animationID;
+            
+                var cpoint = [x,y,z];
+                controlPoints.push(cpoint);
+            }
+
+            var newAnimation = new BezierAnimation(this.scene, animationID, animationSpeed, controlPoints);
+            newAnimation.printValues();
             this.animations[animationID] = newAnimation;
         }
 
     }
 
 }
+//PROJECT2
 
 /**
  * Parses the <NODES> block.

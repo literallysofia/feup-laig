@@ -1,8 +1,8 @@
 /**
- * LinearAnimation
+ * BezierAnimation
  * @constructor
  */
-function LinearAnimation(scene, id, speed, cpoints) {
+function BezierAnimation(scene, id, speed, cpoints) {
   
   Animation.call();
 
@@ -11,11 +11,11 @@ function LinearAnimation(scene, id, speed, cpoints) {
   this.cpoints = cpoints;
 }
 
-LinearAnimation.prototype = Object.create(Animation.prototype);
-LinearAnimation.prototype.constructor = LinearAnimation;
+BezierAnimation.prototype = Object.create(Animation.prototype);
+BezierAnimation.prototype.constructor = BezierAnimation;
 
 //TODO: delete, é so para testes
-LinearAnimation.prototype.printValues = function() {
+BezierAnimation.prototype.printValues = function() {
 
   console.log("ID: "+ this.id + " SPEED: "+ this.speed + "\n");
   console.log("CPOINTS:\n");
