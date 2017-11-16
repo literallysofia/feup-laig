@@ -1621,8 +1621,12 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
 
     var idMaterial = idMaterialFather;
     var idTexture = idTextureFather;
-
+    
+    var finalMatrix = currNode.getFinalAnimMatrix();
+    this.scene.multMatrix(finalMatrix);        
+    
     this.scene.multMatrix(currNode.transformMatrix);
+    
 
     if (this.materials[currNode.materialID] != null) {
         idMaterial = currNode.materialID;
@@ -1637,10 +1641,7 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
     var currMaterial = this.materials[idMaterial];
     var currTexture = this.textures[idTexture]
     
-    console.log("ID NODE: " + idNode);
-    currNode.calculateFinalAnimMatrix();
-    
-
+   
     for (let i = 0; i < currNode.leaves.length; i++) {
         if (currMaterial != null) {
             currMaterial.apply();
@@ -1651,6 +1652,7 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
             currTexture[0].bind();
         }
         currNode.leaves[i].primitive.display();
+        
     }
 
     for (let i = 0; i < currNode.children.length; i++) {

@@ -2,6 +2,9 @@
  * CircularAnimation
  * @constructor
  */
+
+var DEGREE_TO_RAD = Math.PI / 180;
+
 function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, startang, rotang) {
     Animation.call();
   
@@ -11,14 +14,10 @@ function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, 
     this.centery = centery;
     this.centerz = centerz;
     this.radius = radius;
-    this.startang = startang;
-    this.rotang = rotang;
+    this.startang = startang * DEGREE_TO_RAD;
+    this.rotang = rotang * DEGREE_TO_RAD;
 
-    this.totalDistance = rotang*radius;
     this.angSpeed = speed/radius;
-    this.currAng = 0;
-    this.currDistance=0;
-    this.end = false;
   }
   
   CircularAnimation.prototype = Object.create(Animation.prototype);
@@ -35,25 +34,36 @@ function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, 
   //TODO: fix times in miliseconds, speed in seconds
   CircularAnimation.prototype.getMatrix = function(deltaTime){
     
-    /*let time = deltaTime/1000;
+    this.currAng = this.startang + (this.angSpeed*deltaTime);
 
-    if(this.currAng < this.rotang){
-      this.currAng += this.angSpeed * time;
-    }    
+    console.log("Antes currAng < this.rotang ")
+
+    console.log("STARTANG: " + this.startang);
+    console.log("ANGSPEED: " + this.angSpeed);
+    console.log("DELTATIME: " + deltaTime);
+
+    var maxAng = this.startang + this.rotang
+
+    console.log("CURRANG: " + this.currAng);
+    console.log("MAXANG: " + maxAng);
+
+    if(this.currAng < maxAng){
+      
+      console.log("Depois currAng < this.rotang ")
+
+
+      console.log("GET MATRIX ID: " + this.id);
+
+      var matrix = mat4.create();
+      mat4.identity(matrix);
     
-    var matrix = mat4.create();
+      mat4.translate(matrix, matrix, [this.centerx, this.centery, this.centerz]);
+      mat4.rotate(matrix, matrix, this.currAng, [0,1,0]);
+      mat4.translate(matrix, matrix, [this.radius,0,0]);
+  
+      return matrix;
 
-    mat4.translate(matrix, matrix, [this.centerx, this.centery, this.centerz]);
-    mat4.rotate(matrix, matrix, currAng, [0,1,0]);
-    mat4.translate(matrix, matrix, [this.radius,0,0]);
-    
-
-    return matrix;*/
-
-    var matrix = mat4.create();
-    console.log("GET MATRIX ID: " + this.id);
-    return matrix;
-
-
+    }
+    else return -1;
 
   };

@@ -136,9 +136,9 @@
         <controlpoint xx="7.8" yy="9.1" zz="10.11" />
     </ANIMATION>
 
-    <ANIMATION id="CircularTest1" speed="2" type="circular"
-        centerx="0.0" centery="0.0" centerz="0.0"
-        radius="2.5" startang="2.5" rotang="2.5" />
+    <ANIMATION id="CircularTest1" speed="0.5" type="circular"
+        centerx="2.5" centery="0.0" centerz="2.5"
+        radius="4" startang="90" rotang="270" />
 
     <ANIMATION id="ComboTest1" type="combo">
         <SPANREF id="LinearTest1" />
@@ -267,13 +267,6 @@
 
         <TRANSLATION x="0" y="10" z="0" />
         <SCALE sx="-1" sy="1" sz="1" />
-
-        <ANIMATIONREFS>
-            <ANIMATIONREF id="LinearTest1"/>
-            <ANIMATIONREF id="CircularTest1"/>
-            <ANIMATIONREF id="CircularTest1"/>
-            <ANIMATIONREF id="LinearTest1"/>
-        </ANIMATIONREFS>
         
         <DESCENDANTS>
 			<LEAF id="sphere1" type="sphere" args="2 20 20" />
@@ -300,10 +293,6 @@
     <NODE id="bancos">       
         <MATERIAL id="lightMaterial" />     
         <TEXTURE id="null" /> 
-
-        <ANIMATIONREFS>
-            <ANIMATIONREF id="BezierTest1"/>
-        </ANIMATIONREFS>      			
 
         <DESCENDANTS>
        		<NODEREF id="banco1" />          
@@ -399,7 +388,7 @@
     <!-- Generic tree -->
     <NODE id="arvore">       
         <MATERIAL id="null" />    
-        <TEXTURE id="null" />       			
+        <TEXTURE id="null" />   			
 
         <DESCENDANTS>
             <NODEREF id="troncoArvore" />
@@ -531,6 +520,10 @@
 
         <TRANSLATION x="12" y="5.8" z="4.75" />
         <SCALE sx="0.4" sy="2" sz="0.4" />
+
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="CircularTest1"/>
+        </ANIMATIONREFS>    
 
         <DESCENDANTS>
        		<NODEREF id="meiaPiramide1" /> 

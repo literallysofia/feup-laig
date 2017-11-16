@@ -35,8 +35,7 @@ XMLscene.prototype.init = function(application) {
     this.axis = new CGFaxis(this);
 
     //PROJECT2
-    //time
-    this.firstTime = 1;
+    this.isFirstTime = true;
     this.setUpdatePeriod(20);
     this.animRefsToBeUpdated=[];
     //PROJECT2
@@ -114,10 +113,18 @@ XMLscene.prototype.addAnimRefToBeUpdated = function(RefAnimation){
 
 XMLscene.prototype.update = function(currTime) {
     
-    console.log("Update");
+    if(this.isFirstTime == true){
+        this.startTime = currTime;
+        this.isFirstTime = false;
+    }
+    else{
+        this.deltaTime = (currTime - this.startTime)/1000; //in seconds
 
-    for(let i =0; i < this.animRefsToBeUpdated.length; i++){
-        this.animRefsToBeUpdated[i].updateMatrix(3); //TODO: calcular o tempo
+        console.log("Update");
+        
+            for(let i =0; i < this.animRefsToBeUpdated.length; i++){
+                this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime); //TODO: calcular o tempo
+            }
     }
 
 }

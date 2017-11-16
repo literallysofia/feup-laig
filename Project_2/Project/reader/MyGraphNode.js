@@ -49,15 +49,23 @@ MyGraphNode.prototype.printAnimationRef = function(){
     }
 }
 
-MyGraphNode.prototype.calculateFinalAnimMatrix = function(){
+MyGraphNode.prototype.getFinalAnimMatrix = function(){
 
-    if(this.animationRefs.length>0){
+    var finalMatrix = mat4.create();
+    mat4.identity(finalMatrix);
+
+    if(this.animationRefs.length > 0){
         console.log("MULT MATRIX ID NODE: "+ this.nodeID)
 
-        for(let i =0; i < this.animationRefs.length; i++){
+        for(let i = 0; i<this.animationRefs.length; i++){
+
             console.log(".NODE REF: " + this.animationRefs[i].animation.id);
+            mat4.multiply(finalMatrix, finalMatrix, this.animationRefs[i].matrix);
+           
         }
+       
     }
+    return finalMatrix;
 
 }
 

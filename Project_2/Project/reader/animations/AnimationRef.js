@@ -6,12 +6,23 @@
 function AnimationRef(animation) {
 
     this.animation = animation;
-    this.matrix;    
+    this.matrix;
+    this.isFinished = false;   
 }
 
 AnimationRef.prototype.updateMatrix = function(deltaTime){
 
-    this.matrix= this.animation.getMatrix(deltaTime);
-    console.log("UPDATE MATRIX");
+    if(this.isFinished == false){
+        console.log("UPDATE MATRIX");
+
+        this.matrix= this.animation.getMatrix(deltaTime);
+        
+            if(this.matrix == -1){
+                this.isFinished = true;
+            }
+    }
+
+    else console.log("FINISHED");
+    
 
 }
