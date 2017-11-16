@@ -147,23 +147,22 @@
 
 </MATERIALS>
 
-    <ANIMATIONS>
-        <ANIMATION id="LinearTest1" speed="2" type="linear">
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" /> 
-        </ANIMATION>
-
-        <ANIMATION id="BezierTest1" speed="2" type="bezier">
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" />
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" />
-        </ANIMATION>
-
-        <ANIMATION id="CircularTest1" speed="2" type="circular"
-        centerx="0.0" centery="0.0" centerz="0.0"
-        radius="2.5" startang="2.5" rotang="2.5" />
+<ANIMATIONS>
+    <ANIMATION id="LinearTest1" speed="2" type="linear">
+    <controlpoint xx="1.2" yy="3.4" zz="5.6" />
+    <controlpoint xx="7.8" yy="9.1" zz="10.11" /> 
     </ANIMATION>
+
+    <ANIMATION id="BezierTest1" speed="2" type="bezier">
+    <controlpoint xx="1.2" yy="3.4" zz="5.6" />
+    <controlpoint xx="7.8" yy="9.1" zz="10.11" />
+    <controlpoint xx="1.2" yy="3.4" zz="5.6" />
+    <controlpoint xx="7.8" yy="9.1" zz="10.11" />
+    </ANIMATION>
+
+    <ANIMATION id="CircularTest1" speed="2" type="circular"
+    centerx="0.0" centery="0.0" centerz="0.0"
+    radius="2.5" startang="2.5" rotang="2.5" />
 
 </ANIMATIONS>
 
