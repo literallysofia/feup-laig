@@ -19,10 +19,50 @@ function MyGraphNode(graph, nodeID) {
 
     // The texture ID.
     this.textureID = null;
+    
+    
+    //PROJECT2
+    // Animation Refs
+    this.animationRefs = [];
+    //PROJECT2
 
     this.transformMatrix = mat4.create();
     mat4.identity(this.transformMatrix);
 }
+
+//PROJECT2
+/**
+ * Adds a animation ref to this node's animation refs array.
+ */
+MyGraphNode.prototype.addAnimationRef = function(animationRefsID) {
+    this.animationRefs.push(animationRefsID);
+}
+
+
+//TODO: delete, função só para teste
+MyGraphNode.prototype.printAnimationRef = function(){
+    if(this.animationRefs.length>0){
+        console.log("NODE ID: " + this.nodeID)
+        for(let i=0; i < this.animationRefs.length; i++){
+            console.log("ANIMATION REF ID: " + this.animationRefs[i].animation.id);
+        }
+    }
+}
+
+MyGraphNode.prototype.calculateFinalAnimMatrix = function(){
+
+    if(this.animationRefs.length>0){
+        console.log("MULT MATRIX ID NODE: "+ this.nodeID)
+
+        for(let i =0; i < this.animationRefs.length; i++){
+            console.log(".NODE REF: " + this.animationRefs[i].animation.id);
+        }
+    }
+
+}
+
+//PROJECT2
+
 
 /**
  * Adds the reference (ID) of another node to this node's children array.

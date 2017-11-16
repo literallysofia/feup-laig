@@ -31,9 +31,11 @@ function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, 
     console.log("RADIUS: " + this.radius + " STARTANG: " + this.startang + " ROTANG: " + this.rotang + "\n");
   };
 
-  CircularAnimation.prototype.update = function(deltaTime){
+
+  //TODO: fix times in miliseconds, speed in seconds
+  CircularAnimation.prototype.getMatrix = function(deltaTime){
     
-    let time = deltaTime/1000;
+    /*let time = deltaTime/1000;
 
     if(this.currAng < this.rotang){
       this.currAng += this.angSpeed * time;
@@ -46,6 +48,10 @@ function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, 
     mat4.translate(matrix, matrix, [this.radius,0,0]);
     
 
+    return matrix;*/
+
+    var matrix = mat4.create();
+    console.log("GET MATRIX ID: " + this.id);
     return matrix;
 
 

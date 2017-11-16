@@ -21,3 +21,11 @@ BezierAnimation.prototype.printValues = function() {
     console.log("X: " + this.cpoints[i][0] + " Y: " + this.cpoints[i][1] + " Z: " + this.cpoints[i][2] + "\n");
   }
 };
+
+BezierAnimation.prototype.getMatrix = function(deltaTime){
+
+  var matrix = mat4.create();
+  console.log("GET MATRIX ID: " + this.id);
+  return matrix;
+
+};

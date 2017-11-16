@@ -10,6 +10,8 @@ function XMLscene(interface) {
     this.interface = interface;
 
     this.lightValues = {};
+
+ 
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -31,6 +33,13 @@ XMLscene.prototype.init = function(application) {
     this.gl.depthFunc(this.gl.LEQUAL);
     
     this.axis = new CGFaxis(this);
+
+    //PROJECT2
+    //time
+    this.firstTime = 1;
+    this.setUpdatePeriod(20);
+    this.animRefsToBeUpdated=[];
+    //PROJECT2
 }
 
 /**
@@ -93,6 +102,27 @@ XMLscene.prototype.onGraphLoaded = function()
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
 }
+
+
+//PROJECT2
+
+XMLscene.prototype.addAnimRefToBeUpdated = function(RefAnimation){
+
+    this.animRefsToBeUpdated.push(RefAnimation);
+
+}
+
+XMLscene.prototype.update = function(currTime) {
+    
+    console.log("Update");
+
+    for(let i =0; i < this.animRefsToBeUpdated.length; i++){
+        this.animRefsToBeUpdated[i].updateMatrix(3); //TODO: calcular o tempo
+    }
+
+}
+//PROJECT2
+
 
 /**
  * Displays the scene.

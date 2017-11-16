@@ -127,23 +127,7 @@
     <ANIMATION id="LinearTest1" speed="2" type="linear">
         <controlpoint xx="1.2" yy="3.4" zz="5.6" />
         <controlpoint xx="7.8" yy="9.1" zz="10.11" /> 
-        </ANIMATION>
-
-        <ANIMATION id="BezierTest1" speed="2" type="bezier">
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" />
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" />
-        </ANIMATION>
-
-        <ANIMATION id="CircularTest1" speed="2" type="circular"
-        centerx="0.0" centery="0.0" centerz="0.0"
-        radius="2.5" startang="2.5" rotang="2.5" />
-
-        <ANIMATION id="ComboTest1" type="combo">
-        <SPANREF id="LinearTest1" />
-        <SPANREF id="CircularTest1" />
-        </ANIMATION>
+    </ANIMATION>
 
     <ANIMATION id="BezierTest1" speed="2" type="bezier">
         <controlpoint xx="1.2" yy="3.4" zz="5.6" />
@@ -153,8 +137,13 @@
     </ANIMATION>
 
     <ANIMATION id="CircularTest1" speed="2" type="circular"
-    centerx="0.0" centery="0.0" centerz="0.0"
-    radius="2.5" startang="2.5" rotang="2.5" />
+        centerx="0.0" centery="0.0" centerz="0.0"
+        radius="2.5" startang="2.5" rotang="2.5" />
+
+    <ANIMATION id="ComboTest1" type="combo">
+        <SPANREF id="LinearTest1" />
+        <SPANREF id="CircularTest1" />
+    </ANIMATION>
 
 </ANIMATIONS>
 
@@ -278,9 +267,16 @@
 
         <TRANSLATION x="0" y="10" z="0" />
         <SCALE sx="-1" sy="1" sz="1" />
+
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="LinearTest1"/>
+            <ANIMATIONREF id="CircularTest1"/>
+            <ANIMATIONREF id="CircularTest1"/>
+            <ANIMATIONREF id="LinearTest1"/>
+        </ANIMATIONREFS>
         
         <DESCENDANTS>
-						<LEAF id="sphere1" type="sphere" args="2 20 20" />
+			<LEAF id="sphere1" type="sphere" args="2 20 20" />
 
         </DESCENDANTS>
 
@@ -303,7 +299,11 @@
     <!-- Street bench -->
     <NODE id="bancos">       
         <MATERIAL id="lightMaterial" />     
-        <TEXTURE id="null" />       			
+        <TEXTURE id="null" /> 
+
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="BezierTest1"/>
+        </ANIMATIONREFS>      			
 
         <DESCENDANTS>
        		<NODEREF id="banco1" />          

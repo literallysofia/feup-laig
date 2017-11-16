@@ -1327,7 +1327,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
             var specsNames = [];
-            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "DESCENDANTS"];
+            var possibleValues = ["MATERIAL", "TEXTURE", "TRANSLATION", "ROTATION", "SCALE", "ANIMATIONREFS", "DESCENDANTS"];
             for (var j = 0; j < nodeSpecs.length; j++) {
                 var name = nodeSpecs[j].nodeName;
                 specsNames.push(nodeSpecs[j].nodeName);
@@ -1434,6 +1434,49 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         break;
                 }
             }
+
+            
+            // Retrieves material ID.
+            var materialIndex = specsNames.indexOf("MATERIAL");
+            if (materialIndex == -1)
+                return "material must be defined (node ID = " + nodeID + ")";
+            var materialID = this.reader.getString(nodeSpecs[materialIndex], 'id');
+            if (materialID == null)
+                return "unable to parse material ID (node ID = " + nodeID + ")";
+            if (materialID != "null" && this.materials[materialID] == null)
+                return "ID does not correspond to a valid material (node ID = " + nodeID + ")";
+
+            this.nodes[nodeID].materialID = materialID;
+            
+            //PROJECT2
+             // Retrieves information about animations refs
+             var animationRefsIndex = specsNames.indexOf("ANIMATIONREFS");
+
+
+             if (animationRefsIndex != -1){
+
+                var animationsRefs = nodeSpecs[animationRefsIndex].children;
+    
+                for (var j = 0; j < animationsRefs.length; j++) {
+                    if (animationsRefs[j].nodeName == "ANIMATIONREF") {
+    
+                        var refAnimationId = this.reader.getString(animationsRefs[j], 'id');
+                        this.log("   AnimationRef: " + refAnimationId);
+                        if (refAnimationId == null)
+                            this.onXMLMinorError("unable to parse animation id");
+                        else if(animationsRefs[refAnimationId] == null)
+                            return "ID does not correspond to a valid animation (animation ID = " + refAnimationId + ")";
+                        else{
+                            var newRefAnimation = new AnimationRef(this.animations[refAnimationId]);
+                            this.scene.addAnimRefToBeUpdated(newRefAnimation);
+                            this.nodes[nodeID].addAnimationRef(newRefAnimation);
+                        }
+                    }
+                }
+            }
+
+            //PROJECT2
+
 
             // Retrieves information about children.
             var descendantsIndex = specsNames.indexOf("DESCENDANTS");
@@ -1593,6 +1636,10 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
 
     var currMaterial = this.materials[idMaterial];
     var currTexture = this.textures[idTexture]
+    
+    console.log("ID NODE: " + idNode);
+    currNode.calculateFinalAnimMatrix();
+    
 
     for (let i = 0; i < currNode.leaves.length; i++) {
         if (currMaterial != null) {
