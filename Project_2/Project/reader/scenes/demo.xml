@@ -59,32 +59,8 @@
 <TEXTURES>
 	<!-- Tree trunk -->
     <TEXTURE id="trunk">
-        <file path="images/trunk-image.jpg" />               
+        <file path="images/ice.jpg" />               
         <amplif_factor s="2" t="2" />                           
-    </TEXTURE>
-
-     <!-- Tree leaves -->
-    <TEXTURE id="folhas">
-        <file path="images/leaves.jpg" />                
-        <amplif_factor s="3" t="4" />                           
-    </TEXTURE>
-
-    <!-- Rocks -->
-    <TEXTURE id="rocks">
-        <file path="images/rocks.jpg" />                
-        <amplif_factor s="1" t="1" />                           
-    </TEXTURE>
-
-    <!-- Glass work -->
-    <TEXTURE id="vidral">
-        <file path="images/vidral.jpg" />               
-        <amplif_factor s="15" t="10" />                           
-    </TEXTURE>
-
-    <!-- Street bench -->
-    <TEXTURE id="banco">
-        <file path="images/bank.jpg" />                
-        <amplif_factor s="1" t="1" />                           
     </TEXTURE>
     
 </TEXTURES>
@@ -163,7 +139,11 @@
         <ANIMATION id="CircularTest1" speed="2" type="circular"
         centerx="0.0" centery="0.0" centerz="0.0"
         radius="2.5" startang="2.5" rotang="2.5" />
-    </ANIMATION>
+
+        <ANIMATION id="ComboTest1" type="combo">
+        <SPANREF id="LinearTest1" />
+        <SPANREF id="CircularTest1" />
+        </ANIMATION>
 
 </ANIMATIONS>
 
@@ -192,7 +172,7 @@
     <!-- The floor -->
     <NODE id="chao">      
         <MATERIAL id="null" />    
-        <TEXTURE id="rocks" />       			
+        <TEXTURE id="null" />       			
 
         <SCALE sx="6" sy="1" sz="5" />
         <TRANSLATION x="0" y="0" z="4" />
@@ -312,7 +292,7 @@
     <!-- Street bench -->
     <NODE id="bancos">       
         <MATERIAL id="lightMaterial" />     
-        <TEXTURE id="banco" />       			
+        <TEXTURE id="null" />       			
 
         <DESCENDANTS>
        		<NODEREF id="banco1" />          
@@ -434,7 +414,7 @@
     <!-- Tree leaves -->
      <NODE id="folhasArvore">       
         <MATERIAL id="leavesTreeMaterial" />     
-        <TEXTURE id="folhas" />       			
+        <TEXTURE id="null" />       			
 
         <DESCENDANTS>
        		<NODEREF id="faceCubo1" />
@@ -536,7 +516,7 @@
     <NODE id="piramide">       
 
         <MATERIAL id="null" />      
-        <TEXTURE id="vidral" />       			
+        <TEXTURE id="null" />       			
 
         <TRANSLATION x="12" y="5.8" z="4.75" />
         <SCALE sx="0.4" sy="2" sz="0.4" />
