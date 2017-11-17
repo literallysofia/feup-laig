@@ -3,19 +3,20 @@
 ### Animação
 - [x] Implementação do parser para o movimento linear
 - [x] Implementação do parser para o movimento bezier
-- [ ] Implementação do parser para o movimento circular
-- [ ] Implementação do parser para o movimento combo
+- [x] Implementação do parser para o movimento circular
+- [x] Implementação do parser para o movimento combo
+- [x] Estrura para movimento
 - [ ] Implementação dos calculos na classe de movimento linear.
 - [ ] Implementação dos calculos na classe de movimento bezier.
-- [ ] Implementação dos calculos na classe de movimento circular.
+- [ ] Implementação dos calculos na classe de movimento combo.
+- [x] Implementação dos calculos na classe de movimento circular.
 - [ ] Aplicar o movimento (a) na cena.
 - [ ] Aplicar o movimento (b) na cena.
 
 ### Modificação dinâminca de aparência com *shaders*
-- [ ] Implementação.
-
-### TBA
-- [ ] Implementação.
+- [ ] Parser
+- [ ] Implementação das classes necessárias
+- [ ] Interface para seleção dos nós.
 
 ### Extra
 - [ ] Alterar implementação do patch.
