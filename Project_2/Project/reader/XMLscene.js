@@ -104,11 +104,8 @@ XMLscene.prototype.onGraphLoaded = function()
 
 
 //PROJECT2
-
 XMLscene.prototype.addAnimRefToBeUpdated = function(RefAnimation){
-
     this.animRefsToBeUpdated.push(RefAnimation);
-
 }
 
 XMLscene.prototype.update = function(currTime) {
@@ -120,11 +117,9 @@ XMLscene.prototype.update = function(currTime) {
     else{
         this.deltaTime = (currTime - this.startTime)/1000; //in seconds
 
-        console.log("Update");
-        
-            for(let i =0; i < this.animRefsToBeUpdated.length; i++){
-                this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime); //TODO: calcular o tempo
-            }
+        for(let i =0; i < this.animRefsToBeUpdated.length; i++){
+            this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
+        }
     }
 
 }

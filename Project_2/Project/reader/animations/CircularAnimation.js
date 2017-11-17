@@ -17,42 +17,18 @@ function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, 
     this.startang = startang * DEGREE_TO_RAD;
     this.rotang = rotang * DEGREE_TO_RAD;
 
-    this.angSpeed = speed/radius;
+    this.angularSpeed = speed/radius;
   }
   
   CircularAnimation.prototype = Object.create(Animation.prototype);
   CircularAnimation.prototype.constructor = CircularAnimation;
-  
-  //TODO: delete, é so para testes
-  CircularAnimation.prototype.printValues = function() {
-    console.log("ID: " + this.id + " SPEED: " + this.speed + "\n");
-    console.log("CENTERX: " + this.centerx + " CENTERY: " + this.centery + " CENTERZ: " + this.centerz + "\n");
-    console.log("RADIUS: " + this.radius + " STARTANG: " + this.startang + " ROTANG: " + this.rotang + "\n");
-  };
 
-
-  //TODO: fix times in miliseconds, speed in seconds
   CircularAnimation.prototype.getMatrix = function(deltaTime){
     
-    this.currAng = this.startang + (this.angSpeed*deltaTime);
-
-    console.log("Antes currAng < this.rotang ")
-
-    console.log("STARTANG: " + this.startang);
-    console.log("ANGSPEED: " + this.angSpeed);
-    console.log("DELTATIME: " + deltaTime);
-
+    this.currAng = this.startang + (this.angularSpeed*deltaTime);
     var maxAng = this.startang + this.rotang
 
-    console.log("CURRANG: " + this.currAng);
-    console.log("MAXANG: " + maxAng);
-
     if(this.currAng < maxAng){
-      
-      console.log("Depois currAng < this.rotang ")
-
-
-      console.log("GET MATRIX ID: " + this.id);
 
       var matrix = mat4.create();
       mat4.identity(matrix);
@@ -64,6 +40,5 @@ function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, 
       return matrix;
 
     }
-    else return -1;
-
+    else return -1; //it means this animation ended
   };

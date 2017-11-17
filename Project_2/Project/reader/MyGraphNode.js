@@ -38,37 +38,22 @@ MyGraphNode.prototype.addAnimationRef = function(animationRefsID) {
     this.animationRefs.push(animationRefsID);
 }
 
-
-//TODO: delete, função só para teste
-MyGraphNode.prototype.printAnimationRef = function(){
-    if(this.animationRefs.length>0){
-        console.log("NODE ID: " + this.nodeID)
-        for(let i=0; i < this.animationRefs.length; i++){
-            console.log("ANIMATION REF ID: " + this.animationRefs[i].animation.id);
-        }
-    }
-}
-
+/**
+ * Multiplies every matrix of the animations related to this node and returns the final matrix
+ */
 MyGraphNode.prototype.getFinalAnimMatrix = function(){
 
     var finalMatrix = mat4.create();
     mat4.identity(finalMatrix);
-
     if(this.animationRefs.length > 0){
-        console.log("MULT MATRIX ID NODE: "+ this.nodeID)
-
+        //TODO: not sure se é esta a orderm
         for(let i = 0; i<this.animationRefs.length; i++){
-
-            console.log(".NODE REF: " + this.animationRefs[i].animation.id);
             mat4.multiply(finalMatrix, finalMatrix, this.animationRefs[i].matrix);
-           
         }
-       
     }
     return finalMatrix;
 
 }
-
 //PROJECT2
 
 

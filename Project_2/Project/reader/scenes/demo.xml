@@ -137,7 +137,7 @@
     </ANIMATION>
 
     <ANIMATION id="CircularTest1" speed="0.5" type="circular"
-        centerx="2.5" centery="0.0" centerz="2.5"
+        centerx="2.5" centery="2.5" centerz="2.5"
         radius="4" startang="90" rotang="270" />
 
     <ANIMATION id="ComboTest1" type="combo">

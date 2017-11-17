@@ -1150,10 +1150,8 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 
       for (var j = 0; j < comboAnimations.length; j++) {
         var comboID = this.reader.getString(comboAnimations[j], "id");
-
-        if (this.animations[comboID] != null)
-            this.animations[comboID].printValues();
       }
+
     } else {
 
         var animationSpeed = this.reader.getFloat(children[i], "speed");
@@ -1198,7 +1196,6 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
         }
 
         var newAnimation = new LinearAnimation(this.scene, animationID, animationSpeed, controlPoints);
-        //newAnimation.printValues();
         this.animations[animationID] = newAnimation;
         }
 
@@ -1240,7 +1237,6 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
         } else if (isNaN(rotang)) return "non-numeric value for rotang of animation with ID = " + animationID;
 
         var newAnimation = new CircularAnimation(this.scene, animationID, animationSpeed, centerx, centery, centerz, radius, startang, rotang);
-        //newAnimation.printValues();
         this.animations[animationID] = newAnimation;
         }
 
@@ -1281,7 +1277,6 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
         }
 
         var newAnimation = new BezierAnimation(this.scene, animationID, animationSpeed, controlPoints);
-        //newAnimation.printValues();
         this.animations[animationID] = newAnimation;
         }
     }
@@ -1468,13 +1463,12 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                             return "ID does not correspond to a valid animation (animation ID = " + refAnimationId + ")";
                         else{
                             var newRefAnimation = new AnimationRef(this.animations[refAnimationId]);
-                            this.scene.addAnimRefToBeUpdated(newRefAnimation);
-                            this.nodes[nodeID].addAnimationRef(newRefAnimation);
+                            this.scene.addAnimRefToBeUpdated(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
+                            this.nodes[nodeID].addAnimationRef(newRefAnimation); //adds newRefAnimation to the array in the node
                         }
                     }
                 }
             }
-
             //PROJECT2
 
 
@@ -1622,9 +1616,11 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
     var idMaterial = idMaterialFather;
     var idTexture = idTextureFather;
     
-    var finalMatrix = currNode.getFinalAnimMatrix();
-    this.scene.multMatrix(finalMatrix);        
-    
+    //PROJECT2
+    this.scene.multMatrix(currNode.getFinalAnimMatrix());        
+    //PROJECT2
+
+
     this.scene.multMatrix(currNode.transformMatrix);
     
 
