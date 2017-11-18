@@ -124,9 +124,9 @@
 </MATERIALS>
 
 <ANIMATIONS>
-    <ANIMATION id="LinearTest1" speed="2" type="linear">
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" /> 
+    <ANIMATION id="LinearTest1" speed="1" type="linear">
+        <controlpoint xx="-2" yy="0" zz="5" />
+        <controlpoint xx="10" yy="0" zz="10" /> 
     </ANIMATION>
 
     <ANIMATION id="BezierTest1" speed="2" type="bezier">
@@ -365,6 +365,10 @@
         <TEXTURE id="null" />       			
 
         <TRANSLATION x="-2" y="0" z="5" />
+
+        <ANIMATIONREFS>
+        <ANIMATIONREF id="LinearTest1"/>
+        </ANIMATIONREFS>
 
         <DESCENDANTS>
             <NODEREF id="arvore" />     	    
