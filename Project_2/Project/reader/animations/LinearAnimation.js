@@ -46,9 +46,14 @@ LinearAnimation.prototype.getMatrix = function(deltaTime){
     var matrix = mat4.create();
     mat4.identity(matrix);
 
-    //mat4.rotate(matrix, matrix, this.angle, [0,1,0]);
+    /*mat4.rotate(matrix, matrix, this.angle, [0,1,0]);
     mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
     mat4.translate(matrix, matrix, [this.deltaX, this.deltaY, this.deltaZ]);
+    */
+
+    mat4.translate(matrix, matrix, [this.deltaX, this.deltaY, this.deltaZ]);
+    mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
+    mat4.rotate(matrix, matrix, -this.angle, [0,1,0]);
 
     return matrix;
 

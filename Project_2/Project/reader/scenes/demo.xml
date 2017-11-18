@@ -125,8 +125,9 @@
 
 <ANIMATIONS>
     <ANIMATION id="LinearTest1" speed="1" type="linear">
-        <controlpoint xx="-2" yy="0" zz="5" />
-        <controlpoint xx="10" yy="0" zz="10" /> 
+        <controlpoint xx="3" yy="0" zz="5" /> 
+        <controlpoint xx="10" yy="4" zz="6" />
+        
     </ANIMATION>
 
     <ANIMATION id="BezierTest1" speed="2" type="bezier">
@@ -137,7 +138,7 @@
     </ANIMATION>
 
     <ANIMATION id="CircularTest1" speed="0.5" type="circular"
-        centerx="2.5" centery="2.5" centerz="2.5"
+        centerx="2" centery="2.5" centerz="2.5"
         radius="4" startang="90" rotang="270" />
 
     <ANIMATION id="ComboTest1" type="combo">
@@ -165,7 +166,105 @@
             <NODEREF id="arvores" />   
             <NODEREF id="chao" />
             <NODEREF id="bancos" />
+            <NODEREF id="testCube" />
         </DESCENDANTS>
+
+    </NODE>
+
+     <!-- Cube -->
+    <NODE id="testCube">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+    <ANIMATIONREFS>
+        <ANIMATIONREF id="LinearTest1"/>
+    </ANIMATIONREFS>
+
+      <DESCENDANTS>
+        <NODEREF id="testFaceCube1"/>
+        <NODEREF id="testFaceCube2"/>
+        <NODEREF id="testFaceCube3"/>
+        <NODEREF id="testFaceCube4"/>
+        <NODEREF id="testFaceCube5"/>
+        <NODEREF id="testFaceCube6"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="testFaceCube1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="1"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="testFaceCube2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="0"/>
+      <ROTATION axis="y" angle="-90"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="testFaceCube3">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="1" y="0" z="0"/>
+      <ROTATION axis="y" angle="180"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="testFaceCube4">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="1" y="0" z="1"/>
+      <ROTATION axis="y" angle="90"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="testFaceCube5">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="1" z="1"/>
+      <ROTATION axis="x" angle="-90"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="testFaceCube6">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="0" y="0" z="0"/>
+      <ROTATION axis="x" angle="90"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
 
     </NODE>
 
@@ -366,9 +465,9 @@
 
         <TRANSLATION x="-2" y="0" z="5" />
 
-        <ANIMATIONREFS>
+        <!--<ANIMATIONREFS>
         <ANIMATIONREF id="LinearTest1"/>
-        </ANIMATIONREFS>
+        </ANIMATIONREFS>-->
 
         <DESCENDANTS>
             <NODEREF id="arvore" />     	    
@@ -527,7 +626,7 @@
 
         <ANIMATIONREFS>
             <ANIMATIONREF id="CircularTest1"/>
-        </ANIMATIONREFS>    
+        </ANIMATIONREFS>
 
         <DESCENDANTS>
        		<NODEREF id="meiaPiramide1" /> 
