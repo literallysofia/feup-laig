@@ -12,10 +12,10 @@ function LinearAnimation(scene, id, speed, cpoints) {
   this.speed = speed;
   this.cpoints = cpoints;
   this.distancePerVector = [];
+  this.timePerVector = [];
   this.totalDistance = 0;
-  this.currentDistance = 0;
   this.Index = 0;
-  this.maxIndex = this.cpoints.length - 1;
+  this.timeCounter;
 
   this.updateVariables();
   this.updateAngle();
@@ -24,16 +24,18 @@ function LinearAnimation(scene, id, speed, cpoints) {
     var distance = Math.sqrt(Math.pow(this.cpoints[i+1][0] - this.cpoints[i][0], 2) + Math.pow(this.cpoints[i+1][1] - this.cpoints[i][1], 2) + Math.pow(this.cpoints[i+1][2] - this.cpoints[i][2], 2));  
     this.distancePerVector.push(distance);
     this.totalDistance += distance;
-    console.log("VETOR: " + i);
-    console.log("X1: " + this.cpoints[i][0] + " Y1: " + this.cpoints[i][1] + " Z1: " + this.cpoints[i][2]);
-    console.log("X2: " + this.cpoints[i+1][0] + " Y2: " + this.cpoints[i+1][1] + " Z2: " + this.cpoints[i+1][2]);
+    //console.log("VETOR: " + i);
+    //console.log("X1: " + this.cpoints[i][0] + " Y1: " + this.cpoints[i][1] + " Z1: " + this.cpoints[i][2]);
+    //console.log("X2: " + this.cpoints[i+1][0] + " Y2: " + this.cpoints[i+1][1] + " Z2: " + this.cpoints[i+1][2]);
   }
+
+  //console.log("TOTAL DISTANCE: " + this.totalDistance);
 
   for (var i = 0; i < this.distancePerVector.length; i++) {
-    console.log("DISTANCE PER VECTOR: " + this.distancePerVector[i]);
+    this.timePerVector.push(this.distancePerVector[i] / this.speed);
+    //console.log("DISTANCE PER VECTOR: " + this.distancePerVector[i]);
+    //console.log("TIME: "+i+": "+this.timePerVector[i]);
   }
-
-  console.log("TOTAL DISTANCE: " + this.totalDistance);
   
   this.updateVelocity();
 }
@@ -41,21 +43,30 @@ function LinearAnimation(scene, id, speed, cpoints) {
 LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
-LinearAnimation.prototype.getMatrix = function(deltaTime){
+LinearAnimation.prototype.getMatrix = function(deltaTime) {
 
-  var deltaX = deltaTime * this.vx;
-  var deltaY = deltaTime * this.vy;
-  var deltaZ = deltaTime * this.vz;
+  var eachTime;
+  var percentage;
 
-  console.log("DELTAX: " + deltaX + " DELTAY: " + deltaY + " DELTAZ: " + deltaZ);
+  //console.log("DELTATIME: " + deltaTime);
+  this.getTimeCounter();
+  this.checkVectors(deltaTime);
 
-  this.currentDistance = Math.sqrt(Math.pow(deltaX - this.initialX, 2) + Math.pow(deltaY - this.initialY, 2) + Math.pow(deltaZ - this.initialZ, 2));  
-  console.log("DISTANCIA ATUAL: " + this.currentDistance);
-  this.checkVectors();
+  if (this.Index == 0)
+    eachTime = 0;
+  else
+    eachTime = this.timeCounter - this.timePerVector[this.Index];
 
-  if(this.currentDistance < this.totalDistance) {
+  //console.log("MINTIME: " + minTime);
+  percentage = deltaTime - eachTime;
+  //console.log("PERCENTAGE: " + percentage);
 
-    console.log('ESTOU AQUI');
+  var deltaX = percentage * this.vx;
+  var deltaY = percentage * this.vy;
+  var deltaZ = percentage * this.vz;
+  //console.log("DELTAX: " + deltaX + " DELTAY: " + deltaY + " DELTAZ: " + deltaZ);
+
+  if(deltaTime < (this.totalDistance/this.speed)) {
 
     var matrix = mat4.create();
     mat4.identity(matrix);
@@ -86,7 +97,7 @@ LinearAnimation.prototype.updateVariables = function() {
 
 LinearAnimation.prototype.updateAngle = function() {
   this.angle = Math.atan2(this.finalZ - this.initialZ, this.finalX - this.initialX);
-  console.log("ANGLE: " + this.angle);
+  //console.log("ANGLE: " + this.angle);
 };
 
 LinearAnimation.prototype.updateVelocity = function() {
@@ -94,18 +105,26 @@ LinearAnimation.prototype.updateVelocity = function() {
     this.vx = this.speed * ((this.finalX - this.initialX) / Math.abs(this.distancePerVector[this.Index]));
     this.vy = this.speed * ((this.finalY - this.initialY) / Math.abs(this.distancePerVector[this.Index]));
     this.vz = this.speed * ((this.finalZ - this.initialZ) / Math.abs(this.distancePerVector[this.Index]));
-    console.log("VX: " + this.vx + " VY: " + this.vy + " VZ: " + this.vz);
+    //console.log("VX: " + this.vx + " VY: " + this.vy + " VZ: " + this.vz);
   }
 };
 
-LinearAnimation.prototype.checkVectors = function() {
-  if(this.currentDistance > this.distancePerVector[this.Index] && this.currentDistance < this.totalDistance && this.Index < this.maxIndex-1) {
+LinearAnimation.prototype.checkVectors = function(deltaTime) {
+  if(deltaTime >= this.timeCounter && this.Index != this.timePerVector.length - 1) {
     this.Index++;
-    console.log("QUASE A MERDAR: " + this.Index);
     this.updateVariables();
     this.updateAngle();
     this.updateVelocity();
+    this.getTimeCounter();
   }
+};
+
+LinearAnimation.prototype.getTimeCounter = function() {
+  this.timeCounter = 0;
+  for (var i = 0; i <= this.Index; i++) {
+    this.timeCounter += this.timePerVector[i];
+  }
+  //console.log("TIME COUNTER: " + this.timeCounter);
 };
 
 //TODO: delete, é so para testes

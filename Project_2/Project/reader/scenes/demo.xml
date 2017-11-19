@@ -124,10 +124,11 @@
 </MATERIALS>
 
 <ANIMATIONS>
-    <ANIMATION id="LinearTest1" speed="1" type="linear">
+    <ANIMATION id="LinearTest1" speed="2" type="linear">
         <controlpoint xx="3" yy="0" zz="5" /> 
         <controlpoint xx="10" yy="0" zz="5" />
         <controlpoint xx="10" yy="0" zz="10" />
+        <controlpoint xx="20" yy="10" zz="20" />
     </ANIMATION>
 
     <ANIMATION id="BezierTest1" speed="2" type="bezier">
