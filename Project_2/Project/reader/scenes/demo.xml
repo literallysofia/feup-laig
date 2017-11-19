@@ -145,6 +145,7 @@
     <ANIMATION id="ComboTest1" type="combo">
         <SPANREF id="LinearTest1" />
         <SPANREF id="CircularTest1" />
+        <SPANREF id="BezierTest1" />
     </ANIMATION>
 
 </ANIMATIONS>

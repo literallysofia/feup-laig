@@ -5,7 +5,7 @@
 
 var DEGREE_TO_RAD = Math.PI / 180;
 
-function CircularAnimation(scene, id, speed, centerx, centery, centerz, radius, startang, rotang) {
+function CircularAnimation(id, speed, centerx, centery, centerz, radius, startang, rotang) {
     Animation.call();
   
     this.id = id;

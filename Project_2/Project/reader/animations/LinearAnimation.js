@@ -5,7 +5,7 @@
 
 var DEGREE_TO_RAD = Math.PI / 180;
 
-function LinearAnimation(scene, id, speed, cpoints) {
+function LinearAnimation(id, speed, cpoints) {
   Animation.call();
 
   this.id = id;

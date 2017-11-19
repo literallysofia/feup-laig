@@ -1146,11 +1146,34 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
     var animationType = this.reader.getItem(children[i], "type", ["linear", "circular", "bezier", "combo"]);
 
     if (animationType == "combo") {
-      var comboAnimations = children[i].children;
+        
+        var comboAnimationsSpecs = children[i].children;
+        var comboAnimations =[];
+      
+        if (comboAnimationsSpecs.length == 0)
+            return "a combo animation must have animations";
 
-      for (var j = 0; j < comboAnimations.length; j++) {
-        var comboID = this.reader.getString(comboAnimations[j], "id");
-      }
+        for( var j=0; j < comboAnimationsSpecs.length; j++){
+
+            if(comboAnimationsSpecs[j].nodeName == "SPANREF"){
+
+                var comboAnimationId = this.reader.getString(comboAnimationsSpecs[j], 'id');
+                
+                if (comboAnimationId == null)
+                    this.onXMLMinorError("unable to parse animation id");
+                else if(this.animations[comboAnimationId] == null)
+                    return "ID does not correspond to a valid animation (animation ID = " + comboAnimationId + ")";
+                else {
+                    comboAnimations.push(this.animations[comboAnimationId]);
+                }
+                
+            }
+        }
+
+        var newAnimation = new ComboAnimation(animationID, comboAnimations);
+        this.animations[animationID] = newAnimation;
+        newAnimation.printValues();
+
 
     } else {
 
@@ -1195,7 +1218,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
             controlPoints.push(cpoint);
         }
 
-        var newAnimation = new LinearAnimation(this.scene, animationID, animationSpeed, controlPoints);
+        var newAnimation = new LinearAnimation(animationID, animationSpeed, controlPoints);
         this.animations[animationID] = newAnimation;
         }
 
@@ -1236,7 +1259,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
             return "no rotang defined for animation";
         } else if (isNaN(rotang)) return "non-numeric value for rotang of animation with ID = " + animationID;
 
-        var newAnimation = new CircularAnimation(this.scene, animationID, animationSpeed, centerx, centery, centerz, radius, startang, rotang);
+        var newAnimation = new CircularAnimation(animationID, animationSpeed, centerx, centery, centerz, radius, startang, rotang);
         this.animations[animationID] = newAnimation;
         }
 
@@ -1276,7 +1299,7 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
             controlPoints.push(cpoint);
         }
 
-        var newAnimation = new BezierAnimation(this.scene, animationID, animationSpeed, controlPoints);
+        var newAnimation = new BezierAnimation(animationID, animationSpeed, controlPoints);
         this.animations[animationID] = newAnimation;
         }
     }
@@ -1459,7 +1482,7 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         this.log("   AnimationRef: " + refAnimationId);
                         if (refAnimationId == null)
                             this.onXMLMinorError("unable to parse animation id");
-                        else if(animationsRefs[refAnimationId] == null)
+                        else if(this.animations[refAnimationId] == null)
                             return "ID does not correspond to a valid animation (animation ID = " + refAnimationId + ")";
                         else{
                             var newRefAnimation = new AnimationRef(this.animations[refAnimationId]);

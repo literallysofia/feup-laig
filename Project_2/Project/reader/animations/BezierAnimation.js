@@ -2,7 +2,7 @@
  * BezierAnimation
  * @constructor
  */
-function BezierAnimation(scene, id, speed, cpoints) {
+function BezierAnimation(id, speed, cpoints) {
   Animation.call();
 
   this.id = id;
