@@ -66,25 +66,26 @@ LinearAnimation.prototype.getMatrix = function(deltaTime) {
   var deltaZ = percentage * this.vz;
   //console.log("DELTAX: " + deltaX + " DELTAY: " + deltaY + " DELTAZ: " + deltaZ);
 
-  if(deltaTime < (this.totalDistance/this.speed)) {
+  var matrix = mat4.create();
+  mat4.identity(matrix);
 
-    var matrix = mat4.create();
-    mat4.identity(matrix);
+  /*mat4.rotate(matrix, matrix, this.angle, [0,1,0]);
+  mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
+  mat4.translate(matrix, matrix, [this.deltaX, this.deltaY, this.deltaZ]);
+  */
 
-    /*mat4.rotate(matrix, matrix, this.angle, [0,1,0]);
-    mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
-    mat4.translate(matrix, matrix, [this.deltaX, this.deltaY, this.deltaZ]);
-    */
+  mat4.translate(matrix, matrix, [deltaX, deltaY, deltaZ]);
+  mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
+  mat4.rotate(matrix, matrix, -this.angle, [0,1,0]);
 
-    mat4.translate(matrix, matrix, [deltaX, deltaY, deltaZ]);
-    mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
-    mat4.rotate(matrix, matrix, -this.angle, [0,1,0]);
-
-    return matrix;
-
-  }
-  else return -1; //it means this animation ended
+  return matrix;
 };
+
+LinearAnimation.prototype.getDuration = function(){
+  
+  return this.totalDistance/this.speed;
+
+}
 
 LinearAnimation.prototype.updateVariables = function() {
   this.initialX = this.cpoints[this.Index][0];

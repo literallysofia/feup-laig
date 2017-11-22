@@ -48,7 +48,10 @@ MyGraphNode.prototype.getFinalAnimMatrix = function(){
     if(this.animationRefs.length > 0){
         //TODO: not sure se é esta a orderm
         for(let i = 0; i<this.animationRefs.length; i++){
-            mat4.multiply(finalMatrix, finalMatrix, this.animationRefs[i].matrix);
+            ///if this.animationRefs[i].enable = true
+                console.log(this.animationRefs[i].animation.id + "");
+                mat4.multiply(finalMatrix, finalMatrix, this.animationRefs[i].matrix);
+                ///break
         }
     }
     return finalMatrix;

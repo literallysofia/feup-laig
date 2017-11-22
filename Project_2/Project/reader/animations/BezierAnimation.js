@@ -29,3 +29,9 @@ BezierAnimation.prototype.getMatrix = function(deltaTime){
   return matrix;
 
 };
+
+BezierAnimation.prototype.getDuration = function(){
+  
+     return 0;
+ 
+ };

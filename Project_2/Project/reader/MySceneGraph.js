@@ -1164,7 +1164,8 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                 else if(this.animations[comboAnimationId] == null)
                     return "ID does not correspond to a valid animation (animation ID = " + comboAnimationId + ")";
                 else {
-                    comboAnimations.push(this.animations[comboAnimationId]);
+                    var newRefAnimation = new AnimationRef(this.animations[comboAnimationId]);
+                    comboAnimations.push(newRefAnimation);
                 }
                 
             }
@@ -1172,7 +1173,6 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 
         var newAnimation = new ComboAnimation(animationID, comboAnimations);
         this.animations[animationID] = newAnimation;
-        newAnimation.printValues();
 
 
     } else {
