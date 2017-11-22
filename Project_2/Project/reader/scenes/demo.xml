@@ -143,8 +143,9 @@
         radius="4" startang="0" rotang="360" />
 
     <ANIMATION id="ComboTest1" type="combo">
-        <SPANREF id="LinearTest1" />
-        <SPANREF id="CircularTest1" />
+        <SPANREF id="LinearTest1"/>
+        <SPANREF id="CircularTest1"/>
+        <SPANREF id="LinearTest1"/>
     </ANIMATION>
 
 </ANIMATIONS>
@@ -178,9 +179,7 @@
       <TEXTURE id="null"/>
 
     <ANIMATIONREFS>
-        <ANIMATIONREF id="LinearTest1"/>
-        <ANIMATIONREF id="CircularTest1"/>
-        <ANIMATIONREF id="LinearTest1"/>
+        <ANIMATIONREF id="ComboTest1"/>
     </ANIMATIONREFS>
 
       <DESCENDANTS>

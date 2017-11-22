@@ -1485,9 +1485,17 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         else if(this.animations[refAnimationId] == null)
                             return "ID does not correspond to a valid animation (animation ID = " + refAnimationId + ")";
                         else{
-                            var newRefAnimation = new AnimationRef(this.animations[refAnimationId]);
-                            this.scene.addAnimRefToBeUpdated(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
-                            this.nodes[nodeID].addAnimationRef(newRefAnimation); //adds newRefAnimation to the array in the node
+                            if(this.animations[refAnimationId].type=="combo"){
+                                var newRefAnimation = new ComboRef(this.animations[refAnimationId]);
+                                this.scene.addAnimRefToBeUpdated(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
+                                this.nodes[nodeID].addAnimationRef(newRefAnimation); //adds newRefAnimation to the array in the node
+                            }
+                            else{
+                                var newRefAnimation = new AnimationRef(this.animations[refAnimationId]);
+                                this.scene.addAnimRefToBeUpdated(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
+                                this.nodes[nodeID].addAnimationRef(newRefAnimation); //adds newRefAnimation to the array in the node
+                            }
+                            
                         }
                     }
                 }

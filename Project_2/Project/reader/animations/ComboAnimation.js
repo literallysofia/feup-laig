@@ -9,9 +9,11 @@ function ComboAnimation(id, animationRefs) {
     Animation.call();
   
     this.id = id;
+    this.type = "combo";
+
     this.animationRefs = animationRefs;
     
-  }
+}
   
 ComboAnimation.prototype = Object.create(Animation.prototype);
 ComboAnimation.prototype.constructor = ComboAnimation;
@@ -33,15 +35,11 @@ ComboAnimation.prototype.getMatrix = function(deltaTime){
 
 ComboAnimation.prototype.getDuration = function(){
 
-    var counter =0;
+    var counter = 0;
 
     for(let i = 0; i < this.animationRefs.length; i++){
         counter = counter + this.animationRefs[i].duration;
-        console.log("COUNTER I" + this.animationRefs[i].duration);
-    }
-
-    console.log("COUNTER: " + counter);
-    
+    }    
 
     return counter;
 
