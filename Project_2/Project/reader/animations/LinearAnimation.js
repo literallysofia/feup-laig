@@ -82,11 +82,9 @@ LinearAnimation.prototype.getMatrix = function(deltaTime) {
   return matrix;
 };
 
-LinearAnimation.prototype.getDuration = function(){
-  
-  return this.totalDistance/this.speed;
-
-}
+LinearAnimation.prototype.getDuration = function() {
+  return this.totalDistance / this.speed;
+};
 
 LinearAnimation.prototype.updateVariables = function() {
   this.initialX = this.cpoints[this.Index][0];

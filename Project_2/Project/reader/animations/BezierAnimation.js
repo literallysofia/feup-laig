@@ -18,21 +18,18 @@ BezierAnimation.prototype.printValues = function() {
   console.log("ID: " + this.id + " SPEED: " + this.speed + "\n");
   console.log("CPOINTS:\n");
   for (var i = 0; i < this.cpoints.length; i++) {
-    console.log("X: " + this.cpoints[i][0] + " Y: " + this.cpoints[i][1] + " Z: " + this.cpoints[i][2] + "\n");
+    console.log(
+      "X: " + this.cpoints[i][0] + " Y: " + this.cpoints[i][1] + " Z: " + this.cpoints[i][2] + "\n");
   }
 };
 
-BezierAnimation.prototype.getMatrix = function(deltaTime){
-
+BezierAnimation.prototype.getMatrix = function(deltaTime) {
   var matrix = mat4.create();
   console.log("GET MATRIX ID: " + this.id);
   mat4.identity(matrix);
   return matrix;
-
 };
 
-BezierAnimation.prototype.getDuration = function(){
-  
-     return 0;
- 
- };
+BezierAnimation.prototype.getDuration = function() {
+  return 0;
+};

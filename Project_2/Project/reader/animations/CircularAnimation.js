@@ -24,24 +24,20 @@ function CircularAnimation(id, speed, centerx, centery, centerz, radius, startan
 CircularAnimation.prototype = Object.create(Animation.prototype);
 CircularAnimation.prototype.constructor = CircularAnimation;
 
-CircularAnimation.prototype.getMatrix = function(deltaTime){
-  
-  currAng = this.startang + (this.angularSpeed*deltaTime);
-  var maxAng = this.startang + this.rotang
+CircularAnimation.prototype.getMatrix = function(deltaTime) {
+  currAng = this.startang + this.angularSpeed * deltaTime;
+  var maxAng = this.startang + this.rotang;
 
   var matrix = mat4.create();
   mat4.identity(matrix);
-    
+
   mat4.translate(matrix, matrix, [this.centerx, this.centery, this.centerz]);
-  mat4.rotate(matrix, matrix, currAng, [0,1,0]);
-  mat4.translate(matrix, matrix, [this.radius,0,0]);
-  
+  mat4.rotate(matrix, matrix, currAng, [0, 1, 0]);
+  mat4.translate(matrix, matrix, [this.radius, 0, 0]);
+
   return matrix;
-  
 };
 
-CircularAnimation.prototype.getDuration = function(){
-
-  return this.rotang/this.angularSpeed;
-
-}
+CircularAnimation.prototype.getDuration = function() {
+  return this.rotang / this.angularSpeed;
+};

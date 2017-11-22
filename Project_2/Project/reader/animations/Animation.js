@@ -2,5 +2,4 @@
  * Animation
  * @constructor
  */
-function Animation() {
-  }
+function Animation() {}

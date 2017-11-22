@@ -16,10 +16,15 @@ AnimationRef.prototype.updateMatrix = function(deltaTime) {
     this.counter = this.counter + deltaTime;
     if (this.counter < this.duration) {
       this.matrix = this.animation.getMatrix(this.counter);
-    } else {this.enable = false;
-        this.animation.reset
+    } else {
+      this.enable = false;
+      this.reset();
     }
   }
+};
+
+AnimationRef.prototype.reset = function() {
+  if (this.animation.type == "linear") this.animation.reset();
 };
 
 AnimationRef.prototype.getMatrix = function() {
