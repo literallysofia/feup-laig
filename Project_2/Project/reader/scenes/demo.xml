@@ -163,7 +163,7 @@
         <DESCENDANTS>
 
             <NODEREF id="luzes" />    
-           <!-- <NODEREF id="piramide" />--> 
+            <NODEREF id="piramide" />
             <NODEREF id="arvores" />   
             <NODEREF id="chao" />
             <NODEREF id="bancos" />
@@ -180,6 +180,7 @@
     <ANIMATIONREFS>
         <ANIMATIONREF id="LinearTest1"/>
         <ANIMATIONREF id="CircularTest1"/>
+        <ANIMATIONREF id="LinearTest1"/>
     </ANIMATIONREFS>
 
       <DESCENDANTS>

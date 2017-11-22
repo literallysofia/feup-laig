@@ -1642,10 +1642,8 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
     //PROJECT2
     this.scene.multMatrix(currNode.getFinalAnimMatrix());        
     //PROJECT2
-
-
-    this.scene.multMatrix(currNode.transformMatrix);
     
+    this.scene.multMatrix(currNode.transformMatrix);
 
     if (this.materials[currNode.materialID] != null) {
         idMaterial = currNode.materialID;
