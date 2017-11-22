@@ -128,6 +128,15 @@ LinearAnimation.prototype.getTimeCounter = function() {
   //console.log("TIME COUNTER: " + this.timeCounter);
 };
 
+LinearAnimation.prototype.reset = function() {
+  this.Index = 0;
+  this.timeCounter = 0;
+  this.updateVariables();
+  this.updateAngle();
+  this.updateVelocity();
+  this.getTimeCounter();
+};
+
 //TODO: delete, é so para testes
 LinearAnimation.prototype.printValues = function() {
   console.log("ID: " + this.id + " SPEED: " + this.speed + "\n");
