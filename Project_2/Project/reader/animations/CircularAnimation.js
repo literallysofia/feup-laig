@@ -9,6 +9,7 @@ function CircularAnimation(id, speed, centerx, centery, centerz, radius, startan
   Animation.call();
   
   this.id = id;
+  this.type = "circular";
   this.speed = speed;
   this.centerx = centerx;
   this.centery = centery;
@@ -25,14 +26,14 @@ CircularAnimation.prototype.constructor = CircularAnimation;
 
 CircularAnimation.prototype.getMatrix = function(deltaTime){
   
-  this.currAng = this.startang + (this.angularSpeed*deltaTime);
+  currAng = this.startang + (this.angularSpeed*deltaTime);
   var maxAng = this.startang + this.rotang
 
   var matrix = mat4.create();
   mat4.identity(matrix);
     
   mat4.translate(matrix, matrix, [this.centerx, this.centery, this.centerz]);
-  mat4.rotate(matrix, matrix, this.currAng, [0,1,0]);
+  mat4.rotate(matrix, matrix, currAng, [0,1,0]);
   mat4.translate(matrix, matrix, [this.radius,0,0]);
   
   return matrix;

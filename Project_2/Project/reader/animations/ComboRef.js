@@ -1,37 +1,54 @@
 /**
- * AnimationRef
+ * ComboRef
  * @constructor
  **/
 
-function AnimationRef(animation) {
-
-    this.animation = animation;
-    this.matrix;
-    this.enable = true;
-    this.duration = this.calculateDuration();
-}
-
-AnimationRef.prototype.updateMatrix = function(deltaTime){
-
-    if(this.enable == true){
-        if (deltaTime < this.duration){
-            this.matrix= this.animation.getMatrix(deltaTime);
-        }
-        else this.enable=false;
-    }
+function ComboRef(combo) {
     
-};
+    this.combo = combo;
+    this.matrix;
+    this.enable = null;
+    this.duration = this.combo.getDuration();    
+    this.counter = 0;
 
-AnimationRef.prototype.getMatrix = function(){
-
-    return this.matrix;
+    this.currentRefIndex = 0;
+    
+    this.animationRefs = this.combo.animationRefs;
+    this.animationRefs[0].enable=true;
+    this.currentRefIndex = 0;
+}
+    
+ComboRef.prototype.getMatrix = function(){
+    
+    var matrix = mat4.create();
+    mat4.identity(matrix);
+    
+    for(let i = 0; i< this.animationRefs.length; i++){
+    
+        if(i==this.currentRefIndex){
+            if(this.animationRefs[i].enable==false){ // verifica se a animation ref atual acabou
+    
+                this.currentRefIndex = this.currentRefIndex + 1; // atualiza o index para o seguinte
+    
+                if(this.currentRefIndex != this.animationRefs.length){
+                    this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animation ref a true para poder ser atualizada
+                }     
+            }
+        }
+    
+        if(this.animationRefs[i].enable !=null){ //multiplica todas as que têm o enable a false (as anteriores) e a true (a atual)
+            mat4.multiply(matrix, matrix, this.animationRefs[i].getMatrix());
+        }
+    
+    }
+        
+    return matrix;
 }
 
-AnimationRef.prototype.calculateDuration = function(){
+ComboRef.prototype.updateMatrix = function(deltaTime){
+    
+    for(let i = 0; i< this.animationRefs.length; i++){
+        this.animationRefs[i].updateMatrix(deltaTime)
+    }
 
-    return this.animation.getDuration();    
-  
 };
-
-
-

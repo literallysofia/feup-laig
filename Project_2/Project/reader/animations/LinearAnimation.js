@@ -9,6 +9,7 @@ function LinearAnimation(id, speed, cpoints) {
   Animation.call();
 
   this.id = id;
+  this.type = "linear";
   this.speed = speed;
   this.cpoints = cpoints;
   this.distancePerVector = [];
