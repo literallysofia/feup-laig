@@ -24,6 +24,7 @@ function MyGraphNode(graph, nodeID) {
     //PROJECT2
     // Animation Refs
     this.animationRefs = [];
+    this.currentRefIndex = 0;
     //PROJECT2
 
     this.transformMatrix = mat4.create();
@@ -36,6 +37,11 @@ function MyGraphNode(graph, nodeID) {
  */
 MyGraphNode.prototype.addAnimationRef = function(animationRefsID) {
     this.animationRefs.push(animationRefsID);
+
+    if(this.animationRefs.length==1){
+        this.animationRefs[0].enable=true;
+    }
+
 }
 
 /**
@@ -45,17 +51,27 @@ MyGraphNode.prototype.getFinalAnimMatrix = function(){
 
     var finalMatrix = mat4.create();
     mat4.identity(finalMatrix);
-    if(this.animationRefs.length > 0){
-        //TODO: not sure se é esta a orderm
-        for(let i = 0; i<this.animationRefs.length; i++){
-            ///if this.animationRefs[i].enable = true
-                console.log(this.animationRefs[i].animation.id + "");
-                mat4.multiply(finalMatrix, finalMatrix, this.animationRefs[i].matrix);
-                ///break
-        }
-    }
-    return finalMatrix;
 
+    for(let i = 0; i< this.animationRefs.length; i++){
+
+        if(i==this.currentRefIndex){
+            if(this.animationRefs[i].enable==false){ // verifica se a animation ref atual acabou
+
+                this.currentRefIndex = this.currentRefIndex + 1; // atualiza o index para o seguinte
+
+                if(this.currentRefIndex != this.animationRefs.length){
+                   this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animation ref a true para poder ser atualizada
+                }     
+            }
+        }
+
+        if(this.animationRefs[i].enable !=null){ //multiplica todas as que têm o enable a false (as anteriores) e a true (a atual)
+            mat4.multiply(finalMatrix, finalMatrix, this.animationRefs[i].getMatrix());
+        }
+
+    }
+    
+    return finalMatrix;
 }
 //PROJECT2
 

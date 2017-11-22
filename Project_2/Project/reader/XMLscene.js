@@ -35,7 +35,6 @@ XMLscene.prototype.init = function(application) {
     this.axis = new CGFaxis(this);
 
     //PROJECT2
-    this.isFirstTime = true;
     this.setUpdatePeriod(20);
     this.animRefsToBeUpdated=[];
     //PROJECT2
@@ -110,16 +109,14 @@ XMLscene.prototype.addAnimRefToBeUpdated = function(RefAnimation){
 
 XMLscene.prototype.update = function(currTime) {
     
-    if(this.isFirstTime == true){
-        this.startTime = currTime;
-        this.isFirstTime = false;
-    }
-    else{
-        this.deltaTime = (currTime - this.startTime)/1000; //in seconds
+    this.lastTime = this.lastTime || 0.0;
+    this.deltaTime = currTime - this.lastTime || 0.0;
+    this.lastTime = currTime;
 
-        for(let i =0; i < this.animRefsToBeUpdated.length; i++){
-            this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
-        }
+    this.deltaTime = this.deltaTime/1000; //in seconds
+
+    for(let i =0; i < this.animRefsToBeUpdated.length; i++){
+        this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
     }
 
 }

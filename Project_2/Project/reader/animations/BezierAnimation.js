@@ -26,6 +26,7 @@ BezierAnimation.prototype.getMatrix = function(deltaTime){
 
   var matrix = mat4.create();
   console.log("GET MATRIX ID: " + this.id);
+  mat4.identity(matrix);
   return matrix;
 
 };

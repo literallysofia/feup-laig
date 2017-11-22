@@ -138,14 +138,13 @@
         <controlpoint xx="7.8" yy="9.1" zz="10.11" />
     </ANIMATION>
 
-    <ANIMATION id="CircularTest1" speed="0.5" type="circular"
+    <ANIMATION id="CircularTest1" speed="1" type="circular"
         centerx="2" centery="2.5" centerz="2.5"
-        radius="4" startang="90" rotang="270" />
+        radius="4" startang="0" rotang="360" />
 
     <ANIMATION id="ComboTest1" type="combo">
         <SPANREF id="LinearTest1" />
         <SPANREF id="CircularTest1" />
-        <SPANREF id="BezierTest1" />
     </ANIMATION>
 
 </ANIMATIONS>
@@ -164,7 +163,7 @@
         <DESCENDANTS>
 
             <NODEREF id="luzes" />    
-            <NODEREF id="piramide" /> 
+           <!-- <NODEREF id="piramide" />--> 
             <NODEREF id="arvores" />   
             <NODEREF id="chao" />
             <NODEREF id="bancos" />
@@ -180,6 +179,7 @@
 
     <ANIMATIONREFS>
         <ANIMATIONREF id="LinearTest1"/>
+        <ANIMATIONREF id="CircularTest1"/>
     </ANIMATIONREFS>
 
       <DESCENDANTS>
@@ -409,6 +409,10 @@
 
         <TRANSLATION x="7.5" y="-2" z="21" />
         
+        <ANIMATIONREFS>
+            <ANIMATIONREF id="ComboTest1"/>
+        </ANIMATIONREFS>
+
         <DESCENDANTS>
             <NODEREF id="banco" /> 
         </DESCENDANTS>

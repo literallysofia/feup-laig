@@ -24,7 +24,7 @@ CircularAnimation.prototype = Object.create(Animation.prototype);
 CircularAnimation.prototype.constructor = CircularAnimation;
 
 CircularAnimation.prototype.getMatrix = function(deltaTime){
-   
+  
   this.currAng = this.startang + (this.angularSpeed*deltaTime);
   var maxAng = this.startang + this.rotang
 
