@@ -27,6 +27,7 @@ function MyGraphNode(graph, nodeID) {
 
   this.finalMatrix = mat4.create();
   mat4.identity(this.finalMatrix);
+
   //PROJECT2
 
   this.transformMatrix = mat4.create();

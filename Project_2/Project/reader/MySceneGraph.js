@@ -22,6 +22,10 @@ function MySceneGraph(filename, scene) {
 
     this.nodes = [];
 
+    //PROJECT2
+    this.selectables=[];
+    //PROJECT2
+
     this.idRoot = null; // The id of the root element.
 
     this.axisCoords = [];
@@ -1340,6 +1344,14 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
 
             // Creates node.
             this.nodes[nodeID] = new MyGraphNode(this, nodeID);
+
+            //PROJECT2
+            var nodeSelectable = this.reader.getString(children[i], 'selectable');
+            if(nodeSelectable=="true"){
+                this.selectables.push(nodeID);
+            }
+            //PROJECT2
+
 
             // Gathers child nodes.
             var nodeSpecs = children[i].children;

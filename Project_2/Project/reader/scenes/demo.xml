@@ -174,7 +174,7 @@
     </NODE>
 
      <!-- Cube -->
-    <NODE id="testCube">
+    <NODE id="testCube" selectable="true">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -622,7 +622,7 @@
     </NODE>
 
     <!-- A pyramid -->
-    <NODE id="piramide">       
+    <NODE id="piramide" selectable="true">       
 
         <MATERIAL id="null" />      
         <TEXTURE id="null" />       			
