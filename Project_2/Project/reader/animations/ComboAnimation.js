@@ -17,17 +17,13 @@ function ComboAnimation(id, animations) {
 ComboAnimation.prototype = Object.create(Animation.prototype);
 ComboAnimation.prototype.constructor = ComboAnimation;
 
-ComboAnimation.prototype.getAnimationsRefs = function (){
-
+ComboAnimation.prototype.getAnimationsRefs = function() {
   var animationRefs = [];
 
-  for(let i = 0; i < this.animations.length; i++){
+  for (let i = 0; i < this.animations.length; i++) {
     var newRefAnimation = new AnimationRef(this.animations[i]);
     animationRefs.push(newRefAnimation);
   }
 
   return animationRefs;
-
-}
-
-
+};

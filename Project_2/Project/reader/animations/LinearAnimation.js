@@ -44,14 +44,14 @@ function LinearAnimation(id, speed, cpoints) {
 LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
-LinearAnimation.prototype.getMatrix = function(deltaTime) {
+LinearAnimation.prototype.getMatrix = function(time) {
 
   var eachTime;
   var percentage;
 
-  //console.log("DELTATIME: " + deltaTime);
+  //console.log("time: " + time);
   this.getTimeCounter();
-  this.checkVectors(deltaTime);
+  this.checkVectors(time);
 
   if (this.Index == 0)
     eachTime = 0;
@@ -59,7 +59,7 @@ LinearAnimation.prototype.getMatrix = function(deltaTime) {
     eachTime = this.timeCounter - this.timePerVector[this.Index];
 
   //console.log("MINTIME: " + minTime);
-  percentage = deltaTime - eachTime;
+  percentage = time - eachTime;
   //console.log("PERCENTAGE: " + percentage);
 
   var deltaX = percentage * this.vx;
@@ -109,8 +109,8 @@ LinearAnimation.prototype.updateVelocity = function() {
   }
 };
 
-LinearAnimation.prototype.checkVectors = function(deltaTime) {
-  if(deltaTime >= this.timeCounter && this.Index != this.timePerVector.length - 1) {
+LinearAnimation.prototype.checkVectors = function(time) {
+  if(time >= this.timeCounter && this.Index != this.timePerVector.length - 1) {
     this.Index++;
     this.updateVariables();
     this.updateAngle();

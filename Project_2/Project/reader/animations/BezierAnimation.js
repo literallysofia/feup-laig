@@ -18,9 +18,9 @@ function BezierAnimation(id, speed, cpoints) {
 BezierAnimation.prototype = Object.create(Animation.prototype);
 BezierAnimation.prototype.constructor = BezierAnimation;
 
-BezierAnimation.prototype.getMatrix = function(deltaTime) {
+BezierAnimation.prototype.getMatrix = function(time) {
   var newX, newY, newZ;
-  var percentage = deltaTime / this.totalTime;
+  var percentage = time / this.totalTime;
 
   newX =
     Math.pow(1 - percentage, 3) * this.p1x +

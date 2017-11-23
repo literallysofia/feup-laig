@@ -16,22 +16,21 @@ function ComboRef(combo) {
   this.currentRefIndex = 0;
 
   this.duration = this.getDuration();
-
 }
-    
-ComboRef.prototype.getMatrix = function() {
 
+ComboRef.prototype.getMatrix = function() {
   for (let i = 0; i < this.animationRefs.length; i++) {
     if (i == this.currentRefIndex) {
-      if (this.animationRefs[i].enable == false) {//se a animationref atual acabou
+      if (this.animationRefs[i].enable == false) {
+        //se a animationref atual acabou
 
-        if (this.currentRefIndex != this.animationRefs.length-1) { //se não é a ultima
+        if (this.currentRefIndex != this.animationRefs.length - 1) {
+          //se não é a ultima
           this.currentRefIndex = this.currentRefIndex + 1; //passa para a próxima animationref
-          this.animationRefs[this.currentRefIndex].enable = true;//coloca o enable da proxima animationref a true para poder ser atualizada
+          this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animationref a true para poder ser atualizada
         }
-      }
-      else{
-        this.matrix=this.animationRefs[i].getMatrix();  //faz a animação
+      } else {
+        this.matrix = this.animationRefs[i].getMatrix(); //faz a animação
       }
     }
   }
@@ -40,22 +39,21 @@ ComboRef.prototype.getMatrix = function() {
 };
 
 ComboRef.prototype.updateMatrix = function(deltaTime) {
-  
-  if (this.enable == true) { //se estiver ativa
+  if (this.enable == true) {
+    //se estiver ativa
     this.counter = this.counter + deltaTime;
-    if (this.counter < (this.duration+0.1)) { //verifica se nao acabou
+    if (this.counter < this.duration + 0.1) {
+      //verifica se nao acabou
       for (let i = 0; i < this.animationRefs.length; i++) {
-        this.animationRefs[i].updateMatrix(deltaTime);  //atualiza as matrizes
+        this.animationRefs[i].updateMatrix(deltaTime); //atualiza as matrizes
       }
     } else {
       this.enable = false; //animationRef acabou
-    }   
+    }
   }
-
 };
 
-
-ComboRef.prototype.getDuration = function () {
+ComboRef.prototype.getDuration = function() {
   var counter = 0;
 
   for (let i = 0; i < this.animationRefs.length; i++) {

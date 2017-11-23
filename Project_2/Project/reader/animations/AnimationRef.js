@@ -12,9 +12,9 @@ function AnimationRef(animation) {
   this.timeCounter = 0;
 }
 
-AnimationRef.prototype.updateMatrix = function(deltaTime) {
+AnimationRef.prototype.updateMatrix = function(time) {
   if (this.enable == true) { //se estiver ativa
-    this.timeCounter = this.timeCounter + deltaTime; 
+    this.timeCounter = this.timeCounter + time; 
     if (this.timeCounter < this.duration) { //verifica se nao acabou
       this.matrix = this.animation.getMatrix(this.timeCounter);  //atualiza a matriz
     } else {

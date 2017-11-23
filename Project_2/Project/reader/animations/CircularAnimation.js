@@ -24,8 +24,8 @@ function CircularAnimation(id, speed, centerx, centery, centerz, radius, startan
 CircularAnimation.prototype = Object.create(Animation.prototype);
 CircularAnimation.prototype.constructor = CircularAnimation;
 
-CircularAnimation.prototype.getMatrix = function(deltaTime) {
-  currAng = this.startang + this.angularSpeed * deltaTime;
+CircularAnimation.prototype.getMatrix = function(time) {
+  currAng = this.startang + this.angularSpeed * time;
   var maxAng = this.startang + this.rotang;
 
   var matrix = mat4.create();
