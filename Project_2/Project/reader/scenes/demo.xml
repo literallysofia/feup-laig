@@ -128,22 +128,23 @@
         <controlpoint xx="0" yy="0" zz="0" /> 
         <controlpoint xx="5" yy="0" zz="0" />
         <controlpoint xx="10" yy="0" zz="10" />
+        <controlpoint xx="15" yy="2" zz="15" />
     </ANIMATION>
 
     <ANIMATION id="BezierTest1" speed="5" type="bezier">
         <controlpoint xx="0" yy="0" zz="0" />
         <controlpoint xx="0" yy="10" zz="0" />
-        <controlpoint xx="20" yy="10" zz="0" />
-        <controlpoint xx="20" yy="0" zz="0" />
+        <controlpoint xx="20" yy="10" zz="10" />
+        <controlpoint xx="20" yy="0" zz="20" />
     </ANIMATION>
 
     <ANIMATION id="CircularTest1" speed="1" type="circular"
-        centerx="2" centery="2.5" centerz="2.5"
-        radius="4" startang="0" rotang="360" />
+        centerx="0" centery="2" centerz="0"
+        radius="2" startang="0" rotang="360" />
 
     <ANIMATION id="ComboTest1" type="combo">
-        <SPANREF id="LinearTest1"/>
         <SPANREF id="CircularTest1"/>
+        <SPANREF id="BezierTest1"/>
         <SPANREF id="LinearTest1"/>
     </ANIMATION>
 
@@ -177,10 +178,12 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
+    <TRANSLATION x="5" y="4" z="10"/>
+
     <ANIMATIONREFS>
-        <ANIMATIONREF id="BezierTest1"/>
+        <!--<ANIMATIONREF id="CircularTest1"/>-->
+        <!--<ANIMATIONREF id="BezierTest1"/>-->
         <ANIMATIONREF id="LinearTest1"/>
-        <ANIMATIONREF id="BezierTest1"/>
     </ANIMATIONREFS>
 
       <DESCENDANTS>
@@ -409,10 +412,6 @@
         <TEXTURE id="null" />       			
 
         <TRANSLATION x="7.5" y="-2" z="21" />
-        
-        <ANIMATIONREFS>
-            <ANIMATIONREF id="ComboTest1"/>
-        </ANIMATIONREFS>
 
         <DESCENDANTS>
             <NODEREF id="banco" /> 
@@ -631,9 +630,9 @@
         <TRANSLATION x="12" y="5.8" z="4.75" />
         <SCALE sx="0.4" sy="2" sz="0.4" />
 
-        <ANIMATIONREFS>
+        <!--<ANIMATIONREFS>
             <ANIMATIONREF id="CircularTest1"/>
-        </ANIMATIONREFS>
+        </ANIMATIONREFS>-->
 
         <DESCENDANTS>
        		<NODEREF id="meiaPiramide1" /> 
