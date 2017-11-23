@@ -22,7 +22,7 @@ function MyGraphNode(graph, nodeID) {
 
   //PROJECT2
   // Animation Refs
-  this.animationRefs = [];
+  this.animationRefs = []; 
   this.currentRefIndex = 0;
 
   this.finalMatrix = mat4.create();
@@ -53,14 +53,14 @@ MyGraphNode.prototype.getFinalAnimMatrix = function() {
   for (let i = 0; i < this.animationRefs.length; i++) {
     if (i == this.currentRefIndex) {
 
-      if (this.animationRefs[i].enable == false) {
-        if (this.currentRefIndex != this.animationRefs.length-1) {
-          this.currentRefIndex = this.currentRefIndex + 1;
-          this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animation ref a true para poder ser atualizada
+      if (this.animationRefs[i].enable == false) { //se a animationref atual acabou
+        if (this.currentRefIndex != this.animationRefs.length-1) { //se não é a ultima
+          this.currentRefIndex = this.currentRefIndex + 1; //passa para a próxima animationref
+          this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animationref a true para poder ser atualizada
         }
       }
       else{
-        this.finalMatrix = this.animationRefs[i].getMatrix();
+        this.finalMatrix = this.animationRefs[i].getMatrix();  //faz a animação
       }
     }
   }

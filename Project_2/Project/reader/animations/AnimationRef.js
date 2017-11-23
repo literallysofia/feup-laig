@@ -9,16 +9,16 @@ function AnimationRef(animation) {
   mat4.identity(this.matrix);
   this.enable = null;
   this.duration = this.animation.getDuration();
-  this.counter = 0;
+  this.timeCounter = 0;
 }
 
 AnimationRef.prototype.updateMatrix = function(deltaTime) {
-  if (this.enable == true) {
-    this.counter = this.counter + deltaTime;
-    if (this.counter < this.duration) {
-      this.matrix = this.animation.getMatrix(this.counter);
+  if (this.enable == true) { //se estiver ativa
+    this.timeCounter = this.timeCounter + deltaTime; 
+    if (this.timeCounter < this.duration) { //verifica se nao acabou
+      this.matrix = this.animation.getMatrix(this.timeCounter);  //atualiza a matriz
     } else {
-      this.enable = false;
+      this.enable = false; //animationRef acabou
       this.reset();
     }
   }
