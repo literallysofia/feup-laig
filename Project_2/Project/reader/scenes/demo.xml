@@ -124,18 +124,17 @@
 </MATERIALS>
 
 <ANIMATIONS>
-    <ANIMATION id="LinearTest1" speed="2" type="linear">
+    <ANIMATION id="LinearTest1" speed="3" type="linear">
         <controlpoint xx="0" yy="0" zz="0" /> 
         <controlpoint xx="5" yy="0" zz="0" />
-        <controlpoint xx="5" yy="0" zz="10" />
-        <controlpoint xx="15" yy="10" zz="15" />
+        <controlpoint xx="10" yy="0" zz="10" />
     </ANIMATION>
 
-    <ANIMATION id="BezierTest1" speed="2" type="bezier">
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" />
-        <controlpoint xx="1.2" yy="3.4" zz="5.6" />
-        <controlpoint xx="7.8" yy="9.1" zz="10.11" />
+    <ANIMATION id="BezierTest1" speed="5" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0" />
+        <controlpoint xx="0" yy="10" zz="0" />
+        <controlpoint xx="20" yy="10" zz="0" />
+        <controlpoint xx="20" yy="0" zz="0" />
     </ANIMATION>
 
     <ANIMATION id="CircularTest1" speed="1" type="circular"
@@ -179,7 +178,9 @@
       <TEXTURE id="null"/>
 
     <ANIMATIONREFS>
-        <ANIMATIONREF id="ComboTest1"/>
+        <ANIMATIONREF id="BezierTest1"/>
+        <ANIMATIONREF id="LinearTest1"/>
+        <ANIMATIONREF id="BezierTest1"/>
     </ANIMATIONREFS>
 
       <DESCENDANTS>
