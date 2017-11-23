@@ -66,6 +66,7 @@ LinearAnimation.prototype.getMatrix = function(time) {
   var deltaY = percentage * this.vy;
   var deltaZ = percentage * this.vz;
   //console.log("DELTAX: " + deltaX + " DELTAY: " + deltaY + " DELTAZ: " + deltaZ);
+  console.log("X: " + (deltaX + this.initialX)+ " Y: " + (deltaY + this.initialY) + " Z: " + (deltaZ + this.initialZ));
 
   var matrix = mat4.create();
   mat4.identity(matrix);
@@ -76,8 +77,12 @@ LinearAnimation.prototype.getMatrix = function(time) {
   */
 
   mat4.translate(matrix, matrix, [deltaX, deltaY, deltaZ]);
-  mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
-  mat4.rotate(matrix, matrix, -this.angle, [0,1,0]);
+  mat4.translate(matrix, matrix, [
+    this.initialX,
+    this.initialY,
+    this.initialZ
+  ]);
+  mat4.rotate(matrix, matrix, -this.angle, [0, 1, 0]);
 
   return matrix;
 };

@@ -134,8 +134,8 @@
     <ANIMATION id="BezierTest1" speed="5" type="bezier">
         <controlpoint xx="0" yy="0" zz="0" />
         <controlpoint xx="0" yy="10" zz="0" />
-        <controlpoint xx="20" yy="10" zz="10" />
-        <controlpoint xx="20" yy="0" zz="20" />
+        <controlpoint xx="20" yy="10" zz="0" />
+        <controlpoint xx="20" yy="0" zz="0" />
     </ANIMATION>
 
     <ANIMATION id="CircularTest1" speed="1" type="circular"
@@ -178,11 +178,11 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-    <TRANSLATION x="5" y="4" z="10"/>
+    <TRANSLATION x="15" y="4" z="10"/>
 
     <ANIMATIONREFS>
-        <!--<ANIMATIONREF id="CircularTest1"/>-->
-        <!--<ANIMATIONREF id="BezierTest1"/>-->
+        <ANIMATIONREF id="CircularTest1"/>
+        <ANIMATIONREF id="BezierTest1"/>
         <ANIMATIONREF id="LinearTest1"/>
     </ANIMATIONREFS>
 
@@ -455,7 +455,7 @@
     <!-- Trees -->
     <NODE id="arvores">       
         <MATERIAL id="null" />     
-        <TEXTURE id="clear" />       			
+        <TEXTURE id="clear" />     			
 
         <DESCENDANTS>
             <NODEREF id="arvore1" />
