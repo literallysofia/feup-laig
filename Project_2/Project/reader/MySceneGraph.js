@@ -1157,15 +1157,14 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
 
             if(comboAnimationsSpecs[j].nodeName == "SPANREF"){
 
-                var comboAnimationId = this.reader.getString(comboAnimationsSpecs[j], 'id');
+                var partComboAnimationId = this.reader.getString(comboAnimationsSpecs[j], 'id');
                 
-                if (comboAnimationId == null)
+                if (partComboAnimationId == null)
                     this.onXMLMinorError("unable to parse animation id");
-                else if(this.animations[comboAnimationId] == null)
-                    return "ID does not correspond to a valid animation (animation ID = " + comboAnimationId + ")";
+                else if(this.animations[partComboAnimationId] == null)
+                    return "ID does not correspond to a valid animation (animation ID = " + partComboAnimationId + ")";
                 else {
-                    var newRefAnimation = new AnimationRef(this.animations[comboAnimationId]);
-                    comboAnimations.push(newRefAnimation);
+                    comboAnimations.push(this.animations[partComboAnimationId]);
                 }
                 
             }

@@ -24,6 +24,9 @@ function MyGraphNode(graph, nodeID) {
   // Animation Refs
   this.animationRefs = [];
   this.currentRefIndex = 0;
+
+  this.finalMatrix = mat4.create();
+  mat4.identity(this.finalMatrix);
   //PROJECT2
 
   this.transformMatrix = mat4.create();
@@ -46,28 +49,23 @@ MyGraphNode.prototype.addAnimationRef = function(animationRefsID) {
  * Multiplies every matrix of the animations related to this node and returns the final matrix
  */
 MyGraphNode.prototype.getFinalAnimMatrix = function() {
-  var finalMatrix = mat4.create();
-  mat4.identity(finalMatrix);
 
   for (let i = 0; i < this.animationRefs.length; i++) {
     if (i == this.currentRefIndex) {
-      if (this.animationRefs[i].enable == false) {
-        // verifica se a animation ref atual acabou
-        this.currentRefIndex = this.currentRefIndex + 1; // atualiza o index para o seguinte
 
-        if (this.currentRefIndex != this.animationRefs.length) {
+      if (this.animationRefs[i].enable == false) {
+        if (this.currentRefIndex != this.animationRefs.length-1) {
+          this.currentRefIndex = this.currentRefIndex + 1;
           this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animation ref a true para poder ser atualizada
         }
       }
-    }
-
-    if (this.animationRefs[i].enable != null) {
-      //multiplica todas as que têm o enable a false (as anteriores) e a true (a atual)
-      mat4.multiply(finalMatrix, finalMatrix, this.animationRefs[i].getMatrix());
+      else{
+        this.finalMatrix = this.animationRefs[i].getMatrix();
+      }
     }
   }
 
-  return finalMatrix;
+  return this.finalMatrix;
 };
 //PROJECT2
 

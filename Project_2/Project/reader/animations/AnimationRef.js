@@ -5,7 +5,8 @@
 
 function AnimationRef(animation) {
   this.animation = animation;
-  this.matrix;
+  this.matrix = mat4.create();
+  mat4.identity(this.matrix);
   this.enable = null;
   this.duration = this.animation.getDuration();
   this.counter = 0;
