@@ -82,6 +82,11 @@
         <amplif_factor s="1" t="1" />
     </TEXTURE>
 
+    <TEXTURE id="red">
+        <file path="images/red.jpg" />
+        <amplif_factor s="1" t="1" />
+    </TEXTURE>
+
   </TEXTURES>
 
   <MATERIALS>
@@ -114,37 +119,48 @@
         <controlpoint xx="0" yy="13" zz="-1" />
     </ANIMATION>
 
-    <ANIMATION id="Linear1" speed="5" type="linear">
+    <ANIMATION id="Linear1" speed="3" type="linear">
         <controlpoint xx="0" yy="0" zz="0" /> 
-        <controlpoint xx="30" yy="0" zz="0" />
+        <controlpoint xx="10" yy="0" zz="0" />
     </ANIMATION>
 
     <ANIMATION id="Linear2" speed="3" type="linear">
         <controlpoint xx="0" yy="0" zz="0" /> 
-        <controlpoint xx="-20" yy="0" zz="0" />
+        <controlpoint xx="10" yy="0" zz="-10" />
     </ANIMATION>
 
-    <ANIMATION id="Circular1" speed="1" type="circular"
+    <ANIMATION id="Circular1" speed="3" type="circular"
         centerx="0" centery="0" centerz="0"
-        radius="2" startang="0" rotang="360" />
+        radius="4" startang="0" rotang="360" />
 
-    <ANIMATION id="Bezier1" speed="40" type="bezier">
+    <ANIMATION id="Circular2" speed="1" type="circular"
+        centerx="0" centery="0" centerz="0"
+        radius="2" startang="0" rotang="180" />
+
+    <ANIMATION id="Bezier1" speed="10" type="bezier">
         <controlpoint xx="0" yy="0" zz="0" />
-        <controlpoint xx="0" yy="50" zz="0" />
-        <controlpoint xx="90" yy="50" zz="0" />
-        <controlpoint xx="90" yy="-5" zz="0" />
+        <controlpoint xx="0" yy="10" zz="0" />
+        <controlpoint xx="17" yy="10" zz="0" />
+        <controlpoint xx="17" yy="-10" zz="-2" />
     </ANIMATION>
 
-    <ANIMATION id="Bezier2" speed="50" type="bezier">
+    <ANIMATION id="Bezier2" speed="15" type="bezier">
         <controlpoint xx="0" yy="0" zz="0" />
-        <controlpoint xx="30" yy="0" zz="0" />
-        <controlpoint xx="30" yy="70" zz="0" />
-        <controlpoint xx="97" yy="67" zz="-25" />
+        <controlpoint xx="5" yy="0" zz="0" />
+        <controlpoint xx="5" yy="10.5" zz="0" />
+        <controlpoint xx="14" yy="10.5" zz="-6" />
     </ANIMATION>
 
     <ANIMATION id="Combo1" type="combo">
         <SPANREF id="Linear1"/>
+        <SPANREF id="Circular1"/>
+        <SPANREF id="Linear2"/>
+    </ANIMATION>
+
+    <ANIMATION id="Combo2" type="combo">
+        <SPANREF id="Linear1"/>
         <SPANREF id="Bezier1"/>
+        <SPANREF id="Circular2"/>
         <SPANREF id="Bezier2"/>
     </ANIMATION>
 
@@ -171,43 +187,91 @@
         <NODEREF id="town"/>
         <NODEREF id="forest"/>
         <NODEREF id="snowWave"/>
-        <NODEREF id="spheres"/>
+        <NODEREF id="sphere"/>
+        <NODEREF id="animatedcubes"/>
       </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="spheres">
+    <!-- ANIMATED CUBES -->
+
+    <NODE id="animatedcubes">
      <MATERIAL id="null"/>
      <TEXTURE id="wood"/>
 
      <DESCENDANTS>
-        <NODEREF id="sphere1"/>
-        <NODEREF id="sphere2"/>
+        <NODEREF id="cube1"/>
+        <NODEREF id="cube2"/>
       </DESCENDANTS>
 
    </NODE>
 
-    <NODE id="sphere1" selectable="true">
+    <NODE id="cube1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="Combo1"/>
+      </ANIMATIONREFS>
+
+      <TRANSLATION x="150" y="15" z="70"/>
+      <SCALE sx="6" sy="6" sz="6"/>
+
+      <DESCENDANTS>
+        <NODEREF id="difCube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="cube2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="Combo2"/>
+      </ANIMATIONREFS>
+
+      <TRANSLATION x="0" y="6" z="25"/>
+      <SCALE sx="6" sy="6" sz="6"/>
+
+      <DESCENDANTS>
+        <NODEREF id="difCube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="difCube">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="faceDifCube"/>
+        <NODEREF id="faceCube2"/>
+        <NODEREF id="faceCube3"/>
+        <NODEREF id="faceCube4"/>
+        <NODEREF id="faceCube5"/>
+        <NODEREF id="faceCube6"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="faceDifCube">
+      <MATERIAL id="null"/>
+      <TEXTURE id="red"/>
+
+      <TRANSLATION x="0" y="0" z="1"/>
+
+      <DESCENDANTS>
+        <LEAF type="rectangle" args="0 1 1 0"/>
+      </DESCENDANTS>
+
+    </NODE> 
+
+    <NODE id="sphere" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="wood" />
 
         <TRANSLATION x="90" y="10" z="15"/>
-
-        <DESCENDANTS>
-            <LEAF  type="sphere" args="2 20 20" />
-        </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="sphere2">
-        <MATERIAL id="null" />
-        <TEXTURE id="wood" />
-
-        <ANIMATIONREFS>
-          <ANIMATIONREF id="Combo1"/>
-        </ANIMATIONREFS>
-
-        <TRANSLATION x="0" y="6" z="20"/>
 
         <DESCENDANTS>
             <LEAF  type="sphere" args="2 20 20" />
