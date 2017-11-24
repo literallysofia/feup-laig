@@ -45,15 +45,21 @@ MyInterface.prototype.addLightsGroup = function(lights) {
   }
 };
 
-/**
- * Adds a folder containing the IDs of the lights passed as parameter.
- */
+//PROJECT2
 MyInterface.prototype.addSelectablesGroup = function(selectables) {
-
-
-    var group = this.gui.addFolder("Selectable Nodes");
-    group.open();
+  var group = this.gui.addFolder("Shaders");
+  group.open();
     
-    group.add(this.scene.graph, 'nodeIDSelected', selectables).name('Node Selected');
+  group.add(this.scene.graph, 'nodeIDSelected', selectables).name('Node Selected');
 
-  };
+  group.add(this.scene, 'scaleFactor',0,10);
+
+  group.add(this.scene, 'redFactor',0,1);
+
+  group.add(this.scene, 'greenFactor',0,1);
+
+  group.add(this.scene, 'blueFactor',0,1);
+};
+
+
+//PROJECT2

@@ -1694,11 +1694,9 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
 
     for (let i = 0; i < currNode.children.length; i++) {
 
-        //console.log("nodeIDSelected: "+ this.nodeIDSelected);
-
         if(this.nodeIDSelected!=-1 && this.nodeIDSelected==currNode.nodeID){
-            this.scene.setActiveShader(this.scene.testShaders[1]);
-            //console.log("SHADER: "+ currNode.nodeID);
+            this.scene.setActiveShader(this.scene.testShader);
+           
             this.scene.pushMatrix();
             this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
             this.scene.popMatrix();

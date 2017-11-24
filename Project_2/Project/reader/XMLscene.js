@@ -12,6 +12,12 @@ function XMLscene(interface) {
     this.lightValues = {};
     this.selectableValues={};
 
+    //PROJECT2
+    this.scaleFactor=1;
+    this.redFactor=0.5;
+    this.greenFactor=0.5;
+    this.blueFactor=0.5;
+    //PROJECT2
  
 }
 
@@ -39,21 +45,11 @@ XMLscene.prototype.init = function(application) {
     this.setUpdatePeriod(20);
     this.animRefsToBeUpdated=[];
 
-
     //Shaders
-    this.testShaders=[
-        new CGFshader(this.gl, "shaders/default.vert", "shaders/default.frag"),
-		new CGFshader(this.gl, "shaders/flat.vert", "shaders/flat.frag"),
-		new CGFshader(this.gl, "shaders/uScale.vert", "shaders/uScale.frag"),
-		new CGFshader(this.gl, "shaders/varying.vert", "shaders/varying.frag"),
-		new CGFshader(this.gl, "shaders/texture1.vert", "shaders/texture1.frag"),
-		new CGFshader(this.gl, "shaders/texture2.vert", "shaders/texture2.frag"),
-		new CGFshader(this.gl, "shaders/texture3.vert", "shaders/texture3.frag"),
-		new CGFshader(this.gl, "shaders/texture3.vert", "shaders/sepia.frag"),
-		new CGFshader(this.gl, "shaders/texture3.vert", "shaders/convolution.frag")
-	];
+    this.testShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/color.frag");
     //PROJECT2
 }
+
 
 /**
  * Initializes the scene lights with the values read from the LSX file.
@@ -126,6 +122,7 @@ XMLscene.prototype.addAnimRefToBeUpdated = function(RefAnimation){
     this.animRefsToBeUpdated.push(RefAnimation);
 }
 
+
 XMLscene.prototype.update = function(currTime) {
     
     this.lastTime = this.lastTime || 0.0;
@@ -137,6 +134,16 @@ XMLscene.prototype.update = function(currTime) {
     for(let i =0; i < this.animRefsToBeUpdated.length; i++){
         this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
     }
+
+    this.timeFactor=(Math.sin(currTime/1000)+1);
+
+
+    this.testShader.setUniformsValues({timeFactor: this.timeFactor});
+    this.testShader.setUniformsValues({scaleFactor: this.scaleFactor});
+
+    this.testShader.setUniformsValues({redFactor: this.redFactor});
+    this.testShader.setUniformsValues({greenFactor: this.greenFactor});
+    this.testShader.setUniformsValues({blueFactor: this.blueFactor});
 
 }
 //PROJECT2
