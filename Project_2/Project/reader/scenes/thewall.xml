@@ -189,6 +189,61 @@
         <NODEREF id="snowWave"/>
         <NODEREF id="sphere"/>
         <NODEREF id="animatedcubes"/>
+        <NODEREF id="shadercubes"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <!-- SHADERS -->
+
+    <NODE id="shadercubes" selectable="true">
+     <MATERIAL id="null"/>
+     <TEXTURE id="wood"/>
+
+     <DESCENDANTS>
+        <NODEREF id="shader1"/>
+        <NODEREF id="shader2"/>
+        <NODEREF id="shader3"/>
+      </DESCENDANTS>
+
+   </NODE>
+
+    <NODE id="shader1" selectable="true">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="100" y="15" z="60"/>
+      <SCALE sx="6" sy="6" sz="6"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shader2" selectable="true">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="45" y="4" z="10"/>
+      <SCALE sx="6" sy="6" sz="6.5"/>
+      <ROTATION axis="y" angle="-90"/>
+
+      <DESCENDANTS>
+        <NODEREF id="defaultHouse"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="shader3" selectable="true">
+      <MATERIAL id="null"/>
+      <TEXTURE id="pine"/>
+
+      <TRANSLATION x="45" y="6" z="35"/>
+      <SCALE sx="1" sy="1.9" sz="1"/>
+
+      <DESCENDANTS>
+        <NODEREF id="pyramid"/>
       </DESCENDANTS>
 
     </NODE>
@@ -200,13 +255,13 @@
      <TEXTURE id="wood"/>
 
      <DESCENDANTS>
-        <NODEREF id="cube1"/>
-        <NODEREF id="cube2"/>
+        <NODEREF id="animation1"/>
+        <NODEREF id="animation2"/>
       </DESCENDANTS>
 
    </NODE>
 
-    <NODE id="cube1">
+    <NODE id="animation1">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -223,7 +278,7 @@
 
     </NODE>
 
-    <NODE id="cube2">
+    <NODE id="animation2">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
@@ -267,7 +322,7 @@
 
     </NODE> 
 
-    <NODE id="sphere" selectable="true">
+    <NODE id="sphere">
         <MATERIAL id="null" />
         <TEXTURE id="wood" />
 
