@@ -24,6 +24,7 @@ function MySceneGraph(filename, scene) {
 
     //PROJECT2
     this.selectables=[];
+    this.nodeIDSelected = -1;
     //PROJECT2
 
     this.idRoot = null; // The id of the root element.
@@ -1692,10 +1693,31 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
     }
 
     for (let i = 0; i < currNode.children.length; i++) {
-        this.scene.pushMatrix();
-        this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
-        this.scene.popMatrix();
+
+        //console.log("nodeIDSelected: "+ this.nodeIDSelected);
+
+        if(this.nodeIDSelected!=-1 && this.nodeIDSelected==currNode.nodeID){
+            this.scene.setActiveShader(this.scene.testShaders[1]);
+            //console.log("SHADER: "+ currNode.nodeID);
+            this.scene.pushMatrix();
+            this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
+            this.scene.popMatrix();
+
+            this.scene.setActiveShader(this.scene.defaultShader);
+
+        }
+
+        else{
+            this.scene.pushMatrix();
+            this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
+            this.scene.popMatrix();
+        }
+
+
+       
     }
+
+
 
 
 }

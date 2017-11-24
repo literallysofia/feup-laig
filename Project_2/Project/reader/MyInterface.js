@@ -51,21 +51,9 @@ MyInterface.prototype.addLightsGroup = function(lights) {
 MyInterface.prototype.addSelectablesGroup = function(selectables) {
 
 
-    this.scene.selectableValues={};
-
-    for(let i =0; i < selectables.length; i++){
-        selectableKey = selectables[i];
-        this.scene.selectableValues[selectableKey]=false;
-    }
-    
-
     var group = this.gui.addFolder("Selectable Nodes");
     group.open();
-  
-  
-    for (var key in selectables) {
-      if (selectables.hasOwnProperty(key)) {
-        group.add(this.scene.selectableValues, selectables[key]);
-      }
-    }
+    
+    group.add(this.scene.graph, 'nodeIDSelected', selectables).name('Node Selected');
+
   };

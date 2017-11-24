@@ -27,9 +27,9 @@ struct materialProperties {
     float shininess;                // Default: 0 (possible values [0, 128])
 };
 
-uniform mat4 uMVMatrix;
-uniform mat4 uPMatrix;
-uniform mat4 uNMatrix;
+uniform mat4 uMVMatrix; //Model-View matrix
+uniform mat4 uPMatrix; //Projection matrix
+uniform mat4 uNMatrix; //Normal transformation matrix
 
 uniform bool uLightEnabled;	// not being used
 uniform bool uLightModelTwoSided;	// not being used
