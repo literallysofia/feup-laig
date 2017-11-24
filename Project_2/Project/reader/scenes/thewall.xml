@@ -187,7 +187,7 @@
 
    </NODE>
 
-    <NODE id="sphere1">
+    <NODE id="sphere1" selectable="true">
         <MATERIAL id="null" />
         <TEXTURE id="wood" />
 

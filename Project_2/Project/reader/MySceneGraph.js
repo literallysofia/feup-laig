@@ -1346,8 +1346,8 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             this.nodes[nodeID] = new MyGraphNode(this, nodeID);
 
             //PROJECT2
-            var nodeSelectable = this.reader.getString(children[i], 'selectable');
-            if(nodeSelectable=="true"){
+            var nodeSelectable = this.reader.getBoolean(children[i], 'selectable', false);
+            if(nodeSelectable==true){
                 this.selectables.push(nodeID);
             }
             //PROJECT2

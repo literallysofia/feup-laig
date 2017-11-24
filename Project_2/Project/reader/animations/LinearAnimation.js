@@ -66,7 +66,7 @@ LinearAnimation.prototype.getMatrix = function(time) {
   var deltaY = percentage * this.vy;
   var deltaZ = percentage * this.vz;
   //console.log("DELTAX: " + deltaX + " DELTAY: " + deltaY + " DELTAZ: " + deltaZ);
-  console.log("X: " + (deltaX + this.initialX)+ " Y: " + (deltaY + this.initialY) + " Z: " + (deltaZ + this.initialZ));
+  //console.log("X: " + (deltaX + this.initialX)+ " Y: " + (deltaY + this.initialY) + " Z: " + (deltaZ + this.initialZ));
 
   var matrix = mat4.create();
   mat4.identity(matrix);
