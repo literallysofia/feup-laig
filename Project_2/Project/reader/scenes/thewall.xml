@@ -106,6 +106,50 @@
 
   </MATERIALS>
 
+  <ANIMATIONS>
+
+    <ANIMATION id="LinearElevator" speed="2" type="linear">
+        <controlpoint xx="0" yy="0" zz="0" /> 
+        <controlpoint xx="0" yy="13" zz="0" />
+        <controlpoint xx="0" yy="13" zz="-1" />
+    </ANIMATION>
+
+    <ANIMATION id="Linear1" speed="5" type="linear">
+        <controlpoint xx="0" yy="0" zz="0" /> 
+        <controlpoint xx="30" yy="0" zz="0" />
+    </ANIMATION>
+
+    <ANIMATION id="Linear2" speed="3" type="linear">
+        <controlpoint xx="0" yy="0" zz="0" /> 
+        <controlpoint xx="-20" yy="0" zz="0" />
+    </ANIMATION>
+
+    <ANIMATION id="Circular1" speed="1" type="circular"
+        centerx="0" centery="0" centerz="0"
+        radius="2" startang="0" rotang="360" />
+
+    <ANIMATION id="Bezier1" speed="40" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0" />
+        <controlpoint xx="0" yy="50" zz="0" />
+        <controlpoint xx="90" yy="50" zz="0" />
+        <controlpoint xx="90" yy="-5" zz="0" />
+    </ANIMATION>
+
+    <ANIMATION id="Bezier2" speed="50" type="bezier">
+        <controlpoint xx="0" yy="0" zz="0" />
+        <controlpoint xx="30" yy="0" zz="0" />
+        <controlpoint xx="30" yy="70" zz="0" />
+        <controlpoint xx="97" yy="67" zz="-25" />
+    </ANIMATION>
+
+    <ANIMATION id="Combo1" type="combo">
+        <SPANREF id="Linear1"/>
+        <SPANREF id="Bezier1"/>
+        <SPANREF id="Bezier2"/>
+    </ANIMATION>
+
+  </ANIMATIONS>
+
   <!-- The leaves -->
   <LEAVES></LEAVES>
 
@@ -127,16 +171,43 @@
         <NODEREF id="town"/>
         <NODEREF id="forest"/>
         <NODEREF id="snowWave"/>
-        <NODEREF id="sphere_test"/>
+        <NODEREF id="spheres"/>
       </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="sphere_test">
+    <NODE id="spheres">
+     <MATERIAL id="null"/>
+     <TEXTURE id="wood"/>
+
+     <DESCENDANTS>
+        <NODEREF id="sphere1"/>
+        <NODEREF id="sphere2"/>
+      </DESCENDANTS>
+
+   </NODE>
+
+    <NODE id="sphere1">
         <MATERIAL id="null" />
         <TEXTURE id="wood" />
 
-        <TRANSLATION x="90" y="10" z="15"/>-->
+        <TRANSLATION x="90" y="10" z="15"/>
+
+        <DESCENDANTS>
+            <LEAF  type="sphere" args="2 20 20" />
+        </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="sphere2">
+        <MATERIAL id="null" />
+        <TEXTURE id="wood" />
+
+        <ANIMATIONREFS>
+          <ANIMATIONREF id="Combo1"/>
+        </ANIMATIONREFS>
+
+        <TRANSLATION x="0" y="6" z="20"/>
 
         <DESCENDANTS>
             <LEAF  type="sphere" args="2 20 20" />
@@ -739,7 +810,11 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="0" y="30" z="0"/>
+      <ANIMATIONREFS>
+        <ANIMATIONREF id="LinearElevator"/>
+       </ANIMATIONREFS>
+
+      <TRANSLATION x="0" y="6" z="0"/>
       <SCALE sx="5" sy="5" sz="3"/>
 
       <DESCENDANTS>
