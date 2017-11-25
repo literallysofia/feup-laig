@@ -136,11 +136,12 @@ XMLscene.prototype.update = function(currTime) {
     }
 
     this.timeFactor=(Math.sin(currTime/1000)+1);
-
+    this.saturationTimeFactor=1/(Math.sin(currTime/1000)+1);
 
     this.testShader.setUniformsValues({timeFactor: this.timeFactor});
+    this.testShader.setUniformsValues({saturationTimeFactor: this.saturationTimeFactor});
     this.testShader.setUniformsValues({scaleFactor: this.scaleFactor});
-
+   
     this.testShader.setUniformsValues({redFactor: this.redFactor});
     this.testShader.setUniformsValues({greenFactor: this.greenFactor});
     this.testShader.setUniformsValues({blueFactor: this.blueFactor});
