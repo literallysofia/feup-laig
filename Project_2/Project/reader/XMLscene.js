@@ -135,9 +135,12 @@ XMLscene.prototype.update = function(currTime) {
         this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
     }
 
-    this.timeFactor=(Math.sin(currTime/1000)+1);
+    this.timeFactor=Math.abs(Math.sin(currTime/1000));
+    this.compTimeFactor=1-this.timeFactor;
+
 
     this.testShader.setUniformsValues({timeFactor: this.timeFactor});
+    this.testShader.setUniformsValues({compTimeFactor: this.compTimeFactor});
 
     this.testShader.setUniformsValues({scaleFactor: this.scaleFactor});
     this.testShader.setUniformsValues({redFactor: this.redFactor});
