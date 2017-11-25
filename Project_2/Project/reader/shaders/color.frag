@@ -7,9 +7,16 @@ uniform float greenFactor;
 uniform float blueFactor;
 uniform float timeFactor;
 
-uniform float saturationTimeFactor;
+varying vec2 vTextureCoord;
+uniform sampler2D uSampler;
 
 
 void main() {
-		gl_FragColor =  vec4(redFactor,greenFactor,blueFactor, saturationTimeFactor);
+
+	vec4 texture = texture2D(uSampler, vTextureCoord);
+	vec4 color = vec4(redFactor,greenFactor,blueFactor, 1.0);
+
+	vec4 finalColor=mix(texture, color, timeFactor*0.5);
+
+	gl_FragColor=finalColor;
 }
