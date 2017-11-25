@@ -265,12 +265,12 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
+      <TRANSLATION x="150" y="15" z="70"/>
+      <SCALE sx="6" sy="6" sz="6"/>
+
       <ANIMATIONREFS>
         <ANIMATIONREF id="Combo1"/>
       </ANIMATIONREFS>
-
-      <TRANSLATION x="150" y="15" z="70"/>
-      <SCALE sx="6" sy="6" sz="6"/>
 
       <DESCENDANTS>
         <NODEREF id="difCube"/>
@@ -282,12 +282,12 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
+      <TRANSLATION x="0" y="6" z="25"/>
+      <SCALE sx="6" sy="6" sz="6"/>
+     
       <ANIMATIONREFS>
         <ANIMATIONREF id="Combo2"/>
       </ANIMATIONREFS>
-
-      <TRANSLATION x="0" y="6" z="25"/>
-      <SCALE sx="6" sy="6" sz="6"/>
 
       <DESCENDANTS>
         <NODEREF id="difCube"/>
@@ -298,6 +298,8 @@
     <NODE id="difCube">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
+
+      <TRANSLATION x="-0.5" y="-0.5" z="-0.5"/>
 
       <DESCENDANTS>
         <NODEREF id="faceDifCube"/>
@@ -928,13 +930,13 @@
     <NODE id="elevatorBox">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
+      
+      <TRANSLATION x="0" y="6" z="0"/>
+      <SCALE sx="5" sy="5" sz="3"/>
 
       <ANIMATIONREFS>
         <ANIMATIONREF id="LinearElevator"/>
        </ANIMATIONREFS>
-
-      <TRANSLATION x="0" y="6" z="0"/>
-      <SCALE sx="5" sy="5" sz="3"/>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
