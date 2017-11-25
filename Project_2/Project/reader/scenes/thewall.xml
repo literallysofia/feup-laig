@@ -116,7 +116,6 @@
     <ANIMATION id="LinearElevator" speed="2" type="linear">
         <controlpoint xx="0" yy="0" zz="0" /> 
         <controlpoint xx="0" yy="13" zz="0" />
-        <controlpoint xx="0" yy="13" zz="-1" />
     </ANIMATION>
 
     <ANIMATION id="Linear1" speed="3" type="linear">
@@ -931,12 +930,8 @@
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
       
-      <TRANSLATION x="0" y="6" z="0"/>
+      <TRANSLATION x="0" y="20" z="0"/>
       <SCALE sx="5" sy="5" sz="3"/>
-
-      <ANIMATIONREFS>
-        <ANIMATIONREF id="LinearElevator"/>
-       </ANIMATIONREFS>
 
       <DESCENDANTS>
         <NODEREF id="cube"/>

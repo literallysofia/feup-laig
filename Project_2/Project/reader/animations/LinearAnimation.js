@@ -3,8 +3,6 @@
  * @constructor
  */
 
-var DEGREE_TO_RAD = Math.PI / 180;
-
 function LinearAnimation(id, speed, cpoints) {
   Animation.call();
 
@@ -12,30 +10,25 @@ function LinearAnimation(id, speed, cpoints) {
   this.type = "linear";
   this.speed = speed;
   this.cpoints = cpoints;
-  this.distancePerVector = [];
-  this.timePerVector = [];
-  this.totalDistance = 0;
-  this.Index = 0;
-  this.timeCounter;
+  this.distancePerVector = []; //cada index corresponde à distância de cada segmento de reta.
+  this.timePerVector = []; //cada index corresponde ao tempo de cada segmento de reta.
+  this.totalDistance = 0; //distância total da animação, ou seja, soma de todos os valores de distancePerVector.
+  this.Index = 0; //corresponde ao segmento de reta que está de momento a realizar.
+  this.timeCounter; //contador de tempo dos segmentos de reta, de forma a poder comparar com o tempo recebido no sistema.
 
   this.updateVariables();
   this.updateAngle();
 
+  //calcula a distância de cada segmento de reta e a distância total.
   for (var i = 0; i < this.cpoints.length - 1; i++) {
     var distance = Math.sqrt(Math.pow(this.cpoints[i+1][0] - this.cpoints[i][0], 2) + Math.pow(this.cpoints[i+1][1] - this.cpoints[i][1], 2) + Math.pow(this.cpoints[i+1][2] - this.cpoints[i][2], 2));  
     this.distancePerVector.push(distance);
     this.totalDistance += distance;
-    //console.log("VETOR: " + i);
-    //console.log("X1: " + this.cpoints[i][0] + " Y1: " + this.cpoints[i][1] + " Z1: " + this.cpoints[i][2]);
-    //console.log("X2: " + this.cpoints[i+1][0] + " Y2: " + this.cpoints[i+1][1] + " Z2: " + this.cpoints[i+1][2]);
   }
 
-  //console.log("TOTAL DISTANCE: " + this.totalDistance);
-
+  //calcula o tempo de cada segmento de reta.
   for (var i = 0; i < this.distancePerVector.length; i++) {
     this.timePerVector.push(this.distancePerVector[i] / this.speed);
-    //console.log("DISTANCE PER VECTOR: " + this.distancePerVector[i]);
-    //console.log("TIME: "+i+": "+this.timePerVector[i]);
   }
   
   this.updateVelocity();
@@ -44,37 +37,31 @@ function LinearAnimation(id, speed, cpoints) {
 LinearAnimation.prototype = Object.create(Animation.prototype);
 LinearAnimation.prototype.constructor = LinearAnimation;
 
+/*
+ * função que retorna a matriz do objeto, fundamental para a animação.
+ */
 LinearAnimation.prototype.getMatrix = function(time) {
 
-  var eachTime;
-  var percentage;
+  var eachTime; //somatório do tempo percorrido pelos segmentos de reta anteriores, de forma a poder isolar cada segmento como um caso independente.
+  var percentage; //percentagem de movimento.
 
-  //console.log("time: " + time);
-  this.getTimeCounter();
-  this.checkVectors(time);
+  this.getTimeCounter(); //obtem o contador de tempo
+  this.checkVectors(time); //verifica que segmento de reta deve analisar
 
   if (this.Index == 0)
     eachTime = 0;
   else
     eachTime = this.timeCounter - this.timePerVector[this.Index];
 
-  //console.log("MINTIME: " + minTime);
   percentage = time - eachTime;
-  //console.log("PERCENTAGE: " + percentage);
 
+  //calculo da quantidade de movimento
   var deltaX = percentage * this.vx;
   var deltaY = percentage * this.vy;
   var deltaZ = percentage * this.vz;
-  //console.log("DELTAX: " + deltaX + " DELTAY: " + deltaY + " DELTAZ: " + deltaZ);
-  //console.log("X: " + (deltaX + this.initialX)+ " Y: " + (deltaY + this.initialY) + " Z: " + (deltaZ + this.initialZ));
 
   var matrix = mat4.create();
   mat4.identity(matrix);
-
-  /*mat4.rotate(matrix, matrix, this.angle, [0,1,0]);
-  mat4.translate(matrix, matrix, [this.initialX, this.initialY, this.initialZ]);
-  mat4.translate(matrix, matrix, [this.deltaX, this.deltaY, this.deltaZ]);
-  */
 
   mat4.translate(matrix, matrix, [deltaX, deltaY, deltaZ]);
   mat4.translate(matrix, matrix, [
@@ -82,15 +69,21 @@ LinearAnimation.prototype.getMatrix = function(time) {
     this.initialY,
     this.initialZ
   ]);
-  mat4.rotate(matrix, matrix, Math.PI/2-this.angle, [0, 1, 0]);
+  mat4.rotate(matrix, matrix, Math.PI / 2 - this.angle, [0, 1, 0]);
 
   return matrix;
 };
 
+/*
+ * função que retorna o tempo total da animação.
+ */
 LinearAnimation.prototype.getDuration = function() {
   return this.totalDistance / this.speed;
 };
 
+/*
+ * função que atribui valores ao ponto inicial e final do segmento de reta que está a tratar.
+ */
 LinearAnimation.prototype.updateVariables = function() {
   this.initialX = this.cpoints[this.Index][0];
   this.initialY = this.cpoints[this.Index][1];
@@ -100,20 +93,27 @@ LinearAnimation.prototype.updateVariables = function() {
   this.finalZ = this.cpoints[this.Index + 1][2];
 };
 
+/*
+ * função que atualiza, ou extrai, o angulo com base no ponto inicial e final atual.
+ */
 LinearAnimation.prototype.updateAngle = function() {
   this.angle = Math.atan2(this.finalZ - this.initialZ, this.finalX - this.initialX);
-  //console.log("ANGLE: " + this.angle);
 };
 
+/*
+ * função que atualiza, ou extrai, as 3 componentes da velocidade com base no ponto inicial e final atual, e a distância desse mesmo segmento de reta.
+ */
 LinearAnimation.prototype.updateVelocity = function() {
   for (var i = 0; i < this.distancePerVector.length; i++) {
     this.vx = this.speed * ((this.finalX - this.initialX) / Math.abs(this.distancePerVector[this.Index]));
     this.vy = this.speed * ((this.finalY - this.initialY) / Math.abs(this.distancePerVector[this.Index]));
     this.vz = this.speed * ((this.finalZ - this.initialZ) / Math.abs(this.distancePerVector[this.Index]));
-    //console.log("VX: " + this.vx + " VY: " + this.vy + " VZ: " + this.vz);
   }
 };
 
+/*
+ * função que verifica se o objeto já acabou de percorrer o segmento de reta atual, passando para o seguinte, caso exista, e atualiza todas as variáveis.
+ */
 LinearAnimation.prototype.checkVectors = function(time) {
   if(time >= this.timeCounter && this.Index != this.timePerVector.length - 1) {
     this.Index++;
@@ -124,14 +124,20 @@ LinearAnimation.prototype.checkVectors = function(time) {
   }
 };
 
+/*
+ * função que calcula o tempo total dos segmentos de reta já percorridos, contanto com o atual.
+ */
 LinearAnimation.prototype.getTimeCounter = function() {
   this.timeCounter = 0;
   for (var i = 0; i <= this.Index; i++) {
     this.timeCounter += this.timePerVector[i];
   }
-  //console.log("TIME COUNTER: " + this.timeCounter);
 };
 
+
+/*
+ * funcão que limpa todas as variáveis da animação, assim que esta acaba.
+ */
 LinearAnimation.prototype.reset = function() {
   this.Index = 0;
   this.timeCounter = 0;
@@ -140,13 +146,3 @@ LinearAnimation.prototype.reset = function() {
   this.updateVelocity();
   this.getTimeCounter();
 };
-
-//TODO: delete, é so para testes
-LinearAnimation.prototype.printValues = function() {
-  console.log("ID: " + this.id + " SPEED: " + this.speed + "\n");
-  console.log("CPOINTS:\n");
-  for (var i = 0; i < this.cpoints.length; i++) {
-    console.log("X: " + this.cpoints[i][0] + " Y: " + this.cpoints[i][1] + " Z: " + this.cpoints[i][2] + "\n");
-  }
-};
-  

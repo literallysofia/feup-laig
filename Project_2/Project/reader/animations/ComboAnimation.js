@@ -3,14 +3,11 @@
  * @constructor
  */
 
-var DEGREE_TO_RAD = Math.PI / 180;
-
 function ComboAnimation(id, animations) {
   Animation.call();
 
   this.id = id;
   this.type = "combo";
-
   this.animations = animations;
 }
 

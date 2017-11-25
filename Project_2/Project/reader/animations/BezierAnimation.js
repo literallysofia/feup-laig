@@ -11,17 +11,21 @@ function BezierAnimation(id, speed, cpoints) {
 
   this.setPoints();
   this.setDistance();
-  this.totalTime = this.distance / this.speed;
+  this.totalTime = this.distance / this.speed; //tempo total da animação.
   this.angle = 0;
 }
 
 BezierAnimation.prototype = Object.create(Animation.prototype);
 BezierAnimation.prototype.constructor = BezierAnimation;
 
+/*
+ * função que retorna a matriz do objeto, fundamental para a animação.
+ */
 BezierAnimation.prototype.getMatrix = function(time) {
-  var newX, newY, newZ;
-  var percentage = time / this.totalTime;
+  var newX, newY, newZ; //nova posição do objeto
+  var percentage = time / this.totalTime; //percentagem de movimento.
 
+  //calculo das novas coordenadas
   newX =
     Math.pow(1 - percentage, 3) * this.p1x +
     3 * percentage * Math.pow(1 - percentage, 2) * this.p2x +
@@ -45,6 +49,7 @@ BezierAnimation.prototype.getMatrix = function(time) {
   b = this.y - newY;
   c = this.z - newZ;
 
+  //calculo do ângulo
   this.angle = Math.atan2(newZ - this.z, newX - this.x);
 
   this.x = newX;
@@ -55,15 +60,21 @@ BezierAnimation.prototype.getMatrix = function(time) {
   mat4.identity(matrix);
 
   mat4.translate(matrix, matrix, [this.x, this.y, this.z]);
-  mat4.rotate(matrix, matrix, Math.PI/2-this.angle, [0, 1, 0]);
+  mat4.rotate(matrix, matrix, Math.PI / 2 - this.angle, [0, 1, 0]);
 
   return matrix;
 };
 
+/*
+ * funcão que retorna o tempo total da animação.
+ */
 BezierAnimation.prototype.getDuration = function() {
   return this.totalTime;
 };
 
+/*
+ * obtém os pontos da curva de bezier e inicializa o ponto inicial do objeto.
+ */
 BezierAnimation.prototype.setPoints = function() {
   this.p1x = this.cpoints[0][0];
   this.p1y = this.cpoints[0][1];
@@ -86,11 +97,17 @@ BezierAnimation.prototype.setPoints = function() {
   this.z = this.p1z;
 };
 
+/*
+ * funcão que limpa e inicializa todas as variáveis da animação, assim que esta acaba.
+ */
 BezierAnimation.prototype.reset = function() {
   this.setPoints();
   this.angle = 0;
 };
 
+/*
+ * funcão que obtém a distância total da curva de bezier.
+ */
 BezierAnimation.prototype.setDistance = function() {
   var l1 = vec3.fromValues(this.p1x, this.p1y, this.p1z);
 
@@ -128,21 +145,4 @@ BezierAnimation.prototype.setDistance = function() {
     vec3.distance(l3, r2) +
     vec3.distance(r2, r3) +
     vec3.distance(r3, r4);
-};
-
-//TODO: delete, é so para testes
-BezierAnimation.prototype.printValues = function() {
-  console.log("ID: " + this.id + " SPEED: " + this.speed + "\n");
-  console.log("CPOINTS:\n");
-  for (var i = 0; i < this.cpoints.length; i++) {
-    console.log(
-      "X: " +
-        this.cpoints[i][0] +
-        " Y: " +
-        this.cpoints[i][1] +
-        " Z: " +
-        this.cpoints[i][2] +
-        "\n"
-    );
-  }
 };

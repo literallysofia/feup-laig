@@ -13,10 +13,13 @@ function AnimationRef(animation) {
 }
 
 AnimationRef.prototype.updateMatrix = function(time) {
-  if (this.enable == true) { //se estiver ativa
-    this.timeCounter = this.timeCounter + time; 
+  if (this.enable == true) {
+
+    //se estiver ativa
+    this.timeCounter = this.timeCounter + time;
+
     if (this.timeCounter < this.duration) { //verifica se nao acabou
-      this.matrix = this.animation.getMatrix(this.timeCounter);  //atualiza a matriz
+      this.matrix = this.animation.getMatrix(this.timeCounter); //atualiza a matriz
     } else {
       this.enable = false; //animationRef acabou
       this.reset();

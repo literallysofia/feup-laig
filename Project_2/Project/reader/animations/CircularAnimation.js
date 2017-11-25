@@ -7,7 +7,7 @@ var DEGREE_TO_RAD = Math.PI / 180;
 
 function CircularAnimation(id, speed, centerx, centery, centerz, radius, startang, rotang) {
   Animation.call();
-  
+
   this.id = id;
   this.type = "circular";
   this.speed = speed;
@@ -19,12 +19,10 @@ function CircularAnimation(id, speed, centerx, centery, centerz, radius, startan
   this.startang = startang * DEGREE_TO_RAD;
   this.rotang = rotang * DEGREE_TO_RAD;
 
-  if(this.rotang>0)
-    this.angularSpeed = speed/radius;
-  else this.angularSpeed = -speed/radius;
-
+  if (this.rotang > 0) this.angularSpeed = speed / radius;
+  else this.angularSpeed = -speed / radius;
 }
-  
+
 CircularAnimation.prototype = Object.create(Animation.prototype);
 CircularAnimation.prototype.constructor = CircularAnimation;
 
@@ -37,9 +35,8 @@ CircularAnimation.prototype.getMatrix = function(time) {
   mat4.translate(matrix, matrix, [this.centerx, this.centery, this.centerz]);
   mat4.rotate(matrix, matrix, currAng, [0, 1, 0]);
   mat4.translate(matrix, matrix, [this.radius, 0, 0]);
-  
-  if(this.rotang>0)
-    mat4.rotate(matrix, matrix, Math.PI, [0, 1, 0]);
+
+  if (this.rotang > 0) mat4.rotate(matrix, matrix, Math.PI, [0, 1, 0]);
 
   return matrix;
 };
