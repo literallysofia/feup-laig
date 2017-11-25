@@ -1692,30 +1692,17 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
         
     }
 
-    for (let i = 0; i < currNode.children.length; i++) {
-
-        if(this.nodeIDSelected!=-1 && this.nodeIDSelected==currNode.nodeID){
-            this.scene.setActiveShader(this.scene.testShader);
-           
-            this.scene.pushMatrix();
-            this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
-            this.scene.popMatrix();
-
-            this.scene.setActiveShader(this.scene.defaultShader);
-
-        }
-
-        else{
-            this.scene.pushMatrix();
-            this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
-            this.scene.popMatrix();
-        }
-
-
-       
+    if(this.nodeIDSelected!=-1 && this.nodeIDSelected==currNode.nodeID){
+        this.scene.setActiveShader(this.scene.testShader);
     }
 
+    for (let i = 0; i < currNode.children.length; i++) {
+        this.scene.pushMatrix();
+        this.displaySceneRecursive(currNode.children[i], idMaterial, idTexture);
+        this.scene.popMatrix();
+    }
 
-
-
+    if (this.nodeIDSelected != -1 && this.nodeIDSelected == currNode.nodeID) {
+        this.scene.setActiveShader(this.scene.defaultShader);
+    }
 }
