@@ -21,10 +21,11 @@ function MySceneGraph(filename, scene) {
     scene.graph = this;
 
     this.nodes = [];
+    this.animRefsToBeUpdated=[];
 
     //PROJECT2
-    this.selectables=[];
-    this.nodeIDSelected = -1;
+    this.selectables=[]; //vetor do id dos nós que vão aparecer na interface
+    this.nodeIDSelected = -1; //id do nó selecionado na interface
     //PROJECT2
 
     this.idRoot = null; // The id of the root element.
@@ -1168,6 +1169,8 @@ MySceneGraph.prototype.parseAnimations = function(animationsNode) {
                     this.onXMLMinorError("unable to parse animation id");
                 else if(this.animations[partComboAnimationId] == null)
                     return "ID does not correspond to a valid animation (animation ID = " + partComboAnimationId + ")";
+                else if(this.animations[partComboAnimationId].type=="combo")
+                    return "A combo animation cannot contain a combo animation";
                 else {
                     comboAnimations.push(this.animations[partComboAnimationId]);
                 }
@@ -1499,12 +1502,12 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
                         else{
                             if(this.animations[refAnimationId].type=="combo"){
                                 var newRefAnimation = new ComboRef(this.animations[refAnimationId]);
-                                this.scene.addAnimRefToBeUpdated(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
+                                this.animRefsToBeUpdated.push(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
                                 this.nodes[nodeID].addAnimationRef(newRefAnimation); //adds newRefAnimation to the array in the node
                             }
                             else{
                                 var newRefAnimation = new AnimationRef(this.animations[refAnimationId]);
-                                this.scene.addAnimRefToBeUpdated(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
+                                this.animRefsToBeUpdated.push(newRefAnimation); //adds newRefAnimation to the array of animations refs to be updated in each update
                                 this.nodes[nodeID].addAnimationRef(newRefAnimation); //adds newRefAnimation to the array in the node
                             }
                             
@@ -1662,7 +1665,7 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
     this.scene.multMatrix(currNode.transformMatrix);
 
     //PROJECT2
-    this.scene.multMatrix(currNode.getFinalAnimMatrix());        
+    this.scene.multMatrix(currNode.getFinalAnimMatrix()); //matriz de animação    
     //PROJECT2
     
     if (this.materials[currNode.materialID] != null) {

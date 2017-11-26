@@ -23,11 +23,10 @@ function MyGraphNode(graph, nodeID) {
   //PROJECT2
   // Animation Refs
   this.animationRefs = []; 
-  this.currentRefIndex = 0;
+  this.currentRefIndex = 0; //animation ref atual
 
-  this.finalMatrix = mat4.create();
+  this.finalMatrix = mat4.create(); //matriz das animações
   mat4.identity(this.finalMatrix);
-
   //PROJECT2
 
   this.transformMatrix = mat4.create();
@@ -36,10 +35,10 @@ function MyGraphNode(graph, nodeID) {
 
 //PROJECT2
 /**
- * Adds a animation ref to this node's animation refs array.
+ * Adiciona uma animation ref ao vetor de animation refs e ativa a primeira animation ref
  */
-MyGraphNode.prototype.addAnimationRef = function(animationRefsID) {
-  this.animationRefs.push(animationRefsID);
+MyGraphNode.prototype.addAnimationRef = function(animationRef) {
+  this.animationRefs.push(animationRef);
 
   if (this.animationRefs.length == 1) {
     this.animationRefs[0].enable = true;
@@ -47,21 +46,21 @@ MyGraphNode.prototype.addAnimationRef = function(animationRefsID) {
 };
 
 /**
- * Multiplies every matrix of the animations related to this node and returns the final matrix
+ * Retorna a matriz da animation ref atual e ativa
  */
 MyGraphNode.prototype.getFinalAnimMatrix = function() {
 
   for (let i = 0; i < this.animationRefs.length; i++) {
-    if (i == this.currentRefIndex) {
 
-      if (this.animationRefs[i].enable == false) { //se a animationref atual acabou
+    if (i == this.currentRefIndex) { //se é a animation ref atual
+      if (this.animationRefs[i].enable == false) { //se ela nao estiver ativa
         if (this.currentRefIndex != this.animationRefs.length-1) { //se não é a ultima
           this.currentRefIndex = this.currentRefIndex + 1; //passa para a próxima animationref
           this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animationref a true para poder ser atualizada
         }
       }
-      else{
-        this.finalMatrix = this.animationRefs[i].getMatrix();  //faz a animação
+      else{//se estiver ativa
+        this.finalMatrix = this.animationRefs[i].getMatrix(); //vai buscar a sua matriz
       }
     }
   }

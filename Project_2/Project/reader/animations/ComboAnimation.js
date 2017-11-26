@@ -14,6 +14,9 @@ function ComboAnimation(id, animations) {
 ComboAnimation.prototype = Object.create(Animation.prototype);
 ComboAnimation.prototype.constructor = ComboAnimation;
 
+/*
+* Faz uma animation ref para cada animação do vetor
+*/
 ComboAnimation.prototype.getAnimationsRefs = function() {
   var animationRefs = [];
 

@@ -13,6 +13,7 @@ function XMLscene(interface) {
     this.selectableValues={};
 
     //PROJECT2
+    //valores iniciais da interface
     this.scaleFactor=1;
     this.redFactor=0.5;
     this.greenFactor=0.5;
@@ -43,9 +44,8 @@ XMLscene.prototype.init = function(application) {
 
     //PROJECT2
     this.setUpdatePeriod(20);
-    this.animRefsToBeUpdated=[];
 
-    //Shaders
+    //Shader
     this.testShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/color.frag");
     //PROJECT2
 }
@@ -118,11 +118,6 @@ XMLscene.prototype.onGraphLoaded = function()
 
 
 //PROJECT2
-XMLscene.prototype.addAnimRefToBeUpdated = function(RefAnimation){
-    this.animRefsToBeUpdated.push(RefAnimation);
-}
-
-
 XMLscene.prototype.update = function(currTime) {
     
     this.lastTime = this.lastTime || 0.0;
@@ -131,8 +126,8 @@ XMLscene.prototype.update = function(currTime) {
 
     this.deltaTime = this.deltaTime/1000; //in seconds
 
-    for(let i =0; i < this.animRefsToBeUpdated.length; i++){
-        this.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
+    for(let i =0; i < this.graph.animRefsToBeUpdated.length; i++){
+        this.graph.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
     }
 
     this.timeFactor=Math.abs(Math.sin(currTime/1000));

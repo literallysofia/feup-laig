@@ -5,47 +5,49 @@
 
 function ComboRef(combo) {
   this.animation = combo;
+
   this.matrix = mat4.create();
   mat4.identity(this.matrix);
+
   this.enable = null;
-  this.counter = 0;
+  this.timeCounter = 0;
 
-  this.currentRefIndex = 0;
-  this.animationRefs = this.animation.getAnimationsRefs();
-  this.animationRefs[0].enable = true;
-  this.currentRefIndex = 0;
+  this.animationRefs = this.animation.getAnimationsRefs(); //animation refs das animação no vetor da animação combo
+  this.animationRefs[0].enable = true; //primeira animation ref é ativa
+  this.currentRefIndex = 0; //index da animation ref atual
 
-  this.duration = this.getDuration();
+  this.duration = this.getDuration(); //duração total de combo
 }
 
+/**
+ * Retorna a matriz da animation ref atual e ativa
+ */
 ComboRef.prototype.getMatrix = function() {
-  for (let i = 0; i < this.animationRefs.length; i++) {
-    if (i == this.currentRefIndex) {
-      if (this.animationRefs[i].enable == false) {
-        //se a animationref atual acabou
 
-        if (this.currentRefIndex != this.animationRefs.length - 1) {
-          //se não é a ultima
+  for (let i = 0; i < this.animationRefs.length; i++) {
+    if (i == this.currentRefIndex) { //se é a animation ref atual
+      if (this.animationRefs[i].enable == false) { //se ela já nao estiver ativa
+
+        if (this.currentRefIndex != this.animationRefs.length - 1) { //se ela não é a ultima do vetor
           this.currentRefIndex = this.currentRefIndex + 1; //passa para a próxima animationref
           this.animationRefs[this.currentRefIndex].enable = true; //coloca o enable da proxima animationref a true para poder ser atualizada
         }
-      } else {
-        this.matrix = this.animationRefs[i].getMatrix(); //faz a animação
+      } else { //se estiver ativa
+        this.matrix = this.animationRefs[i].getMatrix(); //vai buscar a sua matriz
       }
     }
   }
 
-  return this.matrix;
+  return this.matrix; //retorna a matriz
 };
 
 ComboRef.prototype.updateMatrix = function(deltaTime) {
-  if (this.enable == true) {
-    //se estiver ativa
-    this.counter = this.counter + deltaTime;
-    if (this.counter < this.duration + 0.1) {
-      //verifica se nao acabou
+
+  if (this.enable == true) {//se estiver ativa
+    this.timeCounter = this.timeCounter + deltaTime; //atualiza o time counter
+    if (this.timeCounter < this.duration + 0.1) { //verifica se nao acabou
       for (let i = 0; i < this.animationRefs.length; i++) {
-        this.animationRefs[i].updateMatrix(deltaTime); //atualiza as matrizes
+        this.animationRefs[i].updateMatrix(deltaTime); //atualiza as matrizes das animations refs
       }
     } else {
       this.enable = false; //animationRef acabou
@@ -53,6 +55,9 @@ ComboRef.prototype.updateMatrix = function(deltaTime) {
   }
 };
 
+/*
+* Soma as durações de todas as animações associadas
+*/
 ComboRef.prototype.getDuration = function() {
   var counter = 0;
 
