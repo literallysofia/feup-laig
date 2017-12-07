@@ -179,14 +179,14 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="floor"/>
+        <!--<NODEREF id="floor"/>
         <NODEREF id="wall"/>
         <NODEREF id="elevator"/>
         <NODEREF id="thewatch"/>
         <NODEREF id="town"/>
         <NODEREF id="forest"/>
         <NODEREF id="snowWave"/>
-        <NODEREF id="sphere"/>
+        <NODEREF id="sphere"/>-->
         <NODEREF id="animatedcubes"/>
         <NODEREF id="shadercubes"/>
       </DESCENDANTS>

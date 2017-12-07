@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html><head>
+    <!-- saved from url=(0086)https://moodle1516.up.pt/pluginfile.php/50975/mod_resource/content/13/EnunciadoT3.html -->
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="generator" content="HTML Tidy for HTML5 (experimental) for Windows https://github.com/w3c/tidy-html5/tree/c63cc39">
+    <!-- saved from url=(0060)http://paginas.fe.up.pt/~aas/pub/Aulas/Temp/EnunciadoT3.html -->
+    <title>LAIG 2016/17, Enunciado T3</title>
+  <style></style><style id="zoomLevel-styles"></style></head>
+  <body style="background-color: white; color: rgb(0, 0, 0); font-size: 16px !important; line-height: 19.4333px !important;" alink="#EE0000" vlink="#551A8B" link="#0000EE">
+  <div style="text-align: center; background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">
+    <big style="font-size: 19.2px !important; line-height: 22.9667px !important;">
+      <big style="font-weight: bold; font-size: 23.0333px !important; line-height: 28.2667px !important;">
+        <big style="font-size: 27.6333px !important; line-height: 32.6833px !important;">Laboratório de Aplicações com Interface Gráfica</big>
+      </big>
+    </big>
+    <br>
+  </div>
+  <div style="text-align: center; background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">
+    <big style="font-size: 19.2px !important; line-height: 22.9667px !important;">
+      <big style="font-weight: bold; font-size: 23.0333px !important; line-height: 28.2667px !important;">Aulas Práticas</big>
+    </big>
+    <br>
+    <br>
+    <span style="font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">MIEIC – 2017/2018</span>
+    <br>
+    <br>
+    <big style="font-size: 19.2px !important; line-height: 22.9667px !important;">
+      <big style="font-size: 23.0333px !important; line-height: 28.2667px !important;">
+        <span style="font-weight: bold; font-size: 23.0333px !important; line-height: 28.2667px !important;">Trabalho 3 – Interface 3D de um jogo</span>
+      </big>
+    </big>
+    <br>
+  </div>
+  <br>O presente documento enuncia os aspetos gerais a desenvolver nas 
+interfaces gráficas para os jogos propostos na disciplina
+  de Programação em Lógica. A interface gráfica para o jogo escolhido 
+por cada grupo será desenvolvida durante as aulas práticas da
+  unidade curricular Laboratório de Aplicações com Interface Gráfica, 
+utilizando a linguagem JavaScript e com recurso à tecnologia
+  WebGL.
+  <br>
+  <br>
+  <span style="font-weight: bold; text-decoration: underline; font-size: 16px !important; line-height: 19.4333px !important;">Notas</span>:
+  <br>
+  <ul style="background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Um grupo cujos elementos tenham mais do que um trabalho de PLOG, deve escolher um deles, idealmente aquele que estiver
+    melhor acabado.</li>
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Um grupo que não possua um trabalho de PLOG funcional poderá, mediante 
+    <span style="text-decoration: underline; font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">autorização do docente</span>, desenvolver um trabalho em WebGL
+    equivalente, adicionado de:</li>
+    <li style="list-style: outside none none; display: inline; font-size: 16px !important; line-height: 19.4333px !important;">
+      <ul style="font-size: 16px !important; line-height: 19.4333px !important;">
+        <li style="font-size: 16px !important; line-height: 19.4333px !important;">verificação das principais regras do jogo em cada jogada;
+        <br></li>
+        <li style="font-size: 16px !important; line-height: 19.4333px !important;">funcionalidades extra (a discutir com o docente).</li>
+      </ul>
+    </li>
+  </ul>
+  <h1 style="background-color: white; font-size: 32px !important; line-height: 37.9833px !important;">1. &nbsp;Criação da Cena de Jogo</h1>A generalidade dos jogos propostos tem por base um
+  tabuleiro de jogo. Desenvolva um tabuleiro adequado ao jogo escolhido.
+  <br>
+  <br>Em alguns casos existem peças que podem ser retiradas ou inseridas durante o decorrer do jogo. As peças NÃO devem
+  simplesmente aparecer ou desaparecer. Considere um tabuleiro (estrutura) auxiliar para suporte dessas peças, de/para onde as
+  peças se movem.
+  <br>
+  <br>Nos casos em que o jogo não se baseia num tabuleiro, desenvolva a estrutura necessária para a sua representação.
+  <br>
+  <h1 style="background-color: white; font-size: 32px !important; line-height: 37.9833px !important;">2.&nbsp;&nbsp;Modelação e movimento das peças de jogo</h1>Modele as peças necessárias ao
+  jogo, somente com os pormenores julgados necessários. No caso do jogo de xadrez, por hipótese, não seria exigida uma modelação
+  das peças próxima da real, podendo ser reduzida para peças de formato simplificado, com aplicação de texturas adequadas.
+  <br>
+  <br>O movimento das peças deve ser feito do seguinte modo (a adaptar em casos de jogos com mecânicas substancialmente
+  diferentes):
+  <br>
+  <dl style="background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">
+    <dd style="font-size: 16px !important; line-height: 19.4333px !important;">
+    <span style="font-weight: bold; text-decoration: underline; font-size: 16px !important; line-height: 19.4333px !important;">Humano</span>: com um 
+    <span style="font-style: italic; font-size: 16px !important; line-height: 19.4333px !important;">click</span> do rato seleciona a peça a mover;&nbsp;com um novo 
+    <i style="font-size: 16px !important; line-height: 19.4333px !important;">click</i> numa casa do tabuleiro, designa a posição de destino; a peça deve mover-se segundo uma animação, possivelmente em
+    arco, de forma a não atravessar outras peças.</dd>
+    <dd style="font-size: 16px !important; line-height: 19.4333px !important;">
+    <span style="font-weight: bold; text-decoration: underline; font-size: 16px !important; line-height: 19.4333px !important;">Computador</span>: deve ser efetuada a trajetória (animação) entre
+    as posições origem e destino.</dd>
+  </dl>
+  <h1 style="background-color: white; font-size: 32px !important; line-height: 37.9833px !important;">3. &nbsp;Visualização</h1>
+  <h2 style="background-color: white; font-size: 24px !important; line-height: 29.15px !important;">3.1 &nbsp; &nbsp; &nbsp;Iluminação</h2>Adicione as fontes de luz adequadas para iluminar a
+  cena, de forma a dar um aspeto realista à mesma.
+  <br>
+  <h2 style="background-color: white; font-size: 24px !important; line-height: 29.15px !important;">3.2 &nbsp; &nbsp; &nbsp;Ambientes de jogo</h2>Implemente um conjunto de ambientes
+  pré-definidos, permitindo que o utilizador possa escolher um de entre vários temas. A diferentes ambientes devem corresponder
+  diferentes geometrias, podendo ser usado o parser de LSX e diferentes ficheiros LSX para esse efeito.
+  <br>
+  <h1 style="background-color: white; font-size: 32px !important; line-height: 37.9833px !important;">4. &nbsp;Funcionalidades genéricas do jogo</h1>Construa uma interface utilizando as opções
+  de GUI da WebCGF, ou criando objetos seleccionáveis, e que contemple (pelo menos) as seguintes opções:
+  <br>
+  <ul style="background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Nível de dificuldade.</li>
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Tipo de jogo (Humano/Máquina, H/H, M/M).</li>
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">
+    <span style="font-style: italic; font-size: 16px !important; line-height: 19.4333px !important;">Undo</span>, i.e. possibilidade de anular a última ou últimas jogadas.</li>
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">
+    <b style="font-size: 16px !important; line-height: 19.4333px !important;">Rodar</b> a câmara entre pontos de vista pré-definidos (no mínimo dois) - 
+    <b style="font-size: 16px !important; line-height: 19.4333px !important;">NOTA:</b> a transição entre pontos de vista deve ser 
+    <b style="font-size: 16px !important; line-height: 19.4333px !important;">animada</b>, e não apenas a troca instantânea de ponto de vista.</li>
+  </ul>
+  <h1 style="background-color: white; font-size: 32px !important; line-height: 37.9833px !important;">5. &nbsp;Outras funcionalidades</h1>
+  <h2 style="background-color: white; font-size: 24px !important; line-height: 29.15px !important;">5.1 &nbsp; &nbsp; &nbsp;Marcador</h2>Acrescente
+ à cena um marcador para registar os
+  resultados do jogo. Mesmo que as regras do jogo original não 
+contemplem uma pontuação, há sempre algo que pode ser contabilizado,
+  como por exemplo número de peças ganhas, ou simplesmente número de 
+jogos ganhos. O marcador também pode incluir o relógio que
+  conta o tempo (ver 5.3).
+  <br>
+  <h2 style="background-color: white; font-size: 24px !important; line-height: 29.15px !important;">5.2 &nbsp; &nbsp; &nbsp;Filme do jogo</h2>Guarde a sequência de jogadas efetuadas de forma a
+  poder reproduzi-las através de uma animação sem interação (repetição de um conjunto de jogadas).
+  <br>
+  <h2 style="background-color: white; font-size: 24px !important; line-height: 29.15px !important;">5.3 &nbsp; &nbsp; &nbsp;Medição do tempo de jogo</h2>Acrescente
+ a facilidade de definir e
+  controlar o tempo máximo para efetuar uma jogada. Esse tempo deve ser 
+visível para os jogadores, e quando terminar o jogador deve
+  perder a vez ou perder o jogo (dependendo do tipo de jogo).
+  <br>
+  <br>
+  <hr style="width: 100%; height: 2px; background-color: white; font-size: 16px !important;">
+  <br>
+  <h1 style="background-color: white; font-size: 32px !important; line-height: 37.9833px !important;">Notas sobre a avaliação do trabalho</h1>A classificação máxima a atribuir a cada alínea
+  corresponde a um desenvolvimento ótimo da mesma, no absoluto cumprimento com todas as funcionalidades enunciadas. Sem perda da
+  criatividade desejada num trabalho deste tipo, 
+  <span style="font-weight: bold; text-decoration: underline; font-size: 16px !important; line-height: 19.4333px !important;">não serão contabilizados</span>, para efeitos de avaliação,
+  quaisquer desenvolvimentos além dos que são pedidos, como forma de compensar outros componentes em falta.
+  <br>
+  <ol style="background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">
+    <li style="font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">Criação da cena de jogo (4.5 valores)
+    <ul style="font-weight: normal; font-size: 16px !important; line-height: 19.4333px !important;">
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Tabuleiro</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Aspeto geral</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Jogabilidade, interação, criatividade</li>
+    </ul></li>
+    <li style="font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">Peças (4.5 valores)
+    <ul style="font-weight: normal; font-size: 16px !important; line-height: 19.4333px !important;">
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Modelação</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Movimento e animação por imagens chave.</li>
+    </ul></li>
+    <li style="font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">Visualização (3 valores)
+    <ul style="font-weight: normal; font-size: 16px !important; line-height: 19.4333px !important;">
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Iluminação</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Ambientes de jogo</li>
+    </ul></li>
+    <li style="font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">Funcionalidades genéricas do jogo (2.5 valores)
+    <ul style="font-weight: normal; font-size: 16px !important; line-height: 19.4333px !important;">
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Nível de dificuldade</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Tipo de jogo</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Undo</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Rotação da câmara entre pontos de vista pré-definidos</li>
+    </ul></li>
+    <li style="font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">Outras Funcionalidades (1.5 valores)
+    <ul style="font-weight: normal; font-size: 16px !important; line-height: 19.4333px !important;">
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Marcador</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Filme do jogo</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Medição do tempo de jogo</li>
+    </ul></li>
+    <li style="font-weight: bold; font-size: 16px !important; line-height: 19.4333px !important;">Software (4 valores)
+    <ul style="font-weight: normal; font-size: 16px !important; line-height: 19.4333px !important;">
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Estrutura e parametrização</li>
+      <li style="font-size: 16px !important; line-height: 19.4333px !important;">Interligação com Programação em Lógica</li>
+    </ul></li>
+  </ol>
+  <br>De acordo com a formulação constante na ficha de disciplina, a avaliação deste trabalho conta para a classificação final
+  com um peso de:
+  <br>
+  <br>
+  <div style="margin-left: 40px; background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">80% * 40% = 32%
+  <br></div>
+  <br>
+  <hr style="width: 100%; height: 2px; background-color: white; font-size: 16px !important;">
+  <h1 style="background-color: white; font-size: 32px !important; line-height: 37.9833px !important;">Planeamento do Trabalho</h1>Planeamento semanal:
+  <ul style="background-color: white; font-size: 16px !important; line-height: 19.4333px !important;">
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Semana 1 (início em 27/11/2017): pontos 1, 2</li>
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Semana 2 (início em 04/12/2017): ponto 3, 4</li>
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Semana 3 (início em 11/12/2017): ponto 5</li>
+    <li style="font-size: 16px !important; line-height: 19.4333px !important;">Sessões a calendarizar (início em 02/01/2018); avaliação de grupo.</li>
+  </ul>
+  <br>
+  <h3 style="background-color: white; font-size: 18.7167px !important; line-height: 22.0833px !important;">Entrega</h3>Via eletrónica (oportunamente serão dadas instruções)
+  <br>Data limite: 29/12/2017
+  <br>
+
+</body></html>
