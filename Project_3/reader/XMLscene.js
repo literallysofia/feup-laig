@@ -49,19 +49,16 @@ XMLscene.prototype.init = function(application) {
     this.testShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/color.frag");
     //PROJECT2
 
-
-
     //PROJECT3
-    this.objects= [
-		new CGFplane(this),
-		new CGFplane(this),
-		new CGFplane(this),
-		new CGFplane(this)
-	];
+    this.transparencyShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/transparency.frag");
 
-	this.setPickEnabled(true);
+    this.objects=[];
+    for(let i =0; i < 11*11; i++){
+        this.objects.push(new CGFplane(this));
+    }
 
-
+    this.setPickEnabled(true);
+    
     makeRequest("handshake");
     //PROJECT3
 }
@@ -225,12 +222,17 @@ XMLscene.prototype.display = function() {
     //PROJECT3
     // draw objects
 	for (i =0; i<this.objects.length; i++) {
+
+        let column= Math.ceil((i+1)/11);
+        let row= (i+1)-(11*(column-1));
+
 		this.pushMatrix();
-	
-		this.translate(i*2, 0, 0);
+        this.translate(row, 0.51+0.2, column);
+        this.scale(0.7,1,0.7);
 		this.registerForPick(i+1, this.objects[i]);
-		
-		this.objects[i].display();
+		this.setActiveShader(this.transparencyShader);
+        this.objects[i].display();
+        this.setActiveShader(this.defaultShader);
 		this.popMatrix();
     }
     //PROJECT3
@@ -247,14 +249,22 @@ XMLscene.prototype.display = function() {
 
 XMLscene.prototype.logPicking = function ()
 {
+
+    let column= Math.ceil((i+1)/11);
+    let row= (i+1)-(11*(column-1));
+
+
+
 	if (this.pickMode == false) {
 		if (this.pickResults != null && this.pickResults.length > 0) {
 			for (var i=0; i< this.pickResults.length; i++) {
 				var obj = this.pickResults[i][0];
 				if (obj)
 				{
-					var customId = this.pickResults[i][1];				
-					console.log("Picked object: " + obj + ", with pick id " + customId);
+                    var customId = this.pickResults[i][1];
+                    let column = Math.ceil(customId/11);
+                    let row = customId - (11*(column-1));				
+					console.log("Picked object with row "+ row + " and column " + column);
 				}
 			}
 			this.pickResults.splice(0,this.pickResults.length);
