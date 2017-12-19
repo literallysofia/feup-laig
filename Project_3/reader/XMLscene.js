@@ -52,7 +52,18 @@ XMLscene.prototype.init = function(application) {
 
 
     //PROJECT3
+    this.objects= [
+		new CGFplane(this),
+		new CGFplane(this),
+		new CGFplane(this),
+		new CGFplane(this)
+	];
+
+	this.setPickEnabled(true);
+
+
     makeRequest("handshake");
+    //PROJECT3
 }
 
 
@@ -155,6 +166,13 @@ XMLscene.prototype.update = function(currTime) {
  * Displays the scene.
  */
 XMLscene.prototype.display = function() {
+
+    //PROJECT3
+    this.logPicking();
+    this.clearPickRegistration();
+    //PROJECT3
+
+
     // ---- BEGIN Background, camera and axis setup
     
     // Clear image and depth buffer everytime we update the scene
@@ -202,7 +220,20 @@ XMLscene.prototype.display = function() {
 	{
 		// Draw axis
 		this.axis.display();
-	}
+    }
+    
+    //PROJECT3
+    // draw objects
+	for (i =0; i<this.objects.length; i++) {
+		this.pushMatrix();
+	
+		this.translate(i*2, 0, 0);
+		this.registerForPick(i+1, this.objects[i]);
+		
+		this.objects[i].display();
+		this.popMatrix();
+    }
+    //PROJECT3
     
 
     this.popMatrix();
@@ -210,6 +241,27 @@ XMLscene.prototype.display = function() {
     // ---- END Background, camera and axis setup
     
 }
+
+//PROJECT3
+
+
+XMLscene.prototype.logPicking = function ()
+{
+	if (this.pickMode == false) {
+		if (this.pickResults != null && this.pickResults.length > 0) {
+			for (var i=0; i< this.pickResults.length; i++) {
+				var obj = this.pickResults[i][0];
+				if (obj)
+				{
+					var customId = this.pickResults[i][1];				
+					console.log("Picked object: " + obj + ", with pick id " + customId);
+				}
+			}
+			this.pickResults.splice(0,this.pickResults.length);
+		}		
+	}
+}
+
 
 /**
  * PROLOG SERVER
@@ -238,3 +290,5 @@ function handleReply(data){
     //document.querySelector("#query_result").innerHTML=data.target.response;
     console.log(data.target.response);
 }
+
+//PROJECT3
