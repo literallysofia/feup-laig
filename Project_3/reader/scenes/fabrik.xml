@@ -69,19 +69,28 @@
     <!-- A default material -->
     <MATERIAL id="defaultMaterial">
       <shininess value="1"/>
-      <specular r="0.0" g="0.0" b="0.0" a="1"/>
+      <specular r="0" g="0" b="0" a="1"/>
       <diffuse r="0.4" g="0.4" b="0.4" a="1"/>
       <ambient r="0.4" g="0.4" b="0.4" a="1"/>
       <emission r="0.2" g="0.2" b="0.2" a="1"/>
     </MATERIAL>
 
-    <!-- Dark Brown Material -->
-    <MATERIAL id="darkBrownMaterial">
+    <!-- Black Material -->
+    <MATERIAL id="blackMaterial">
       <shininess value="1"/>
-      <specular r="0.0" g="0.0" b="0.0" a="1"/>
-      <diffuse r="0.3" g="0.09" b="0.00" a="1"/>
-      <ambient r="0.0" g="0.0" b="0.0" a="1"/>
-      <emission r="0.0" g="0.0" b="0.0" a="1"/>
+      <specular r="0" g="0" b="0" a="1"/>
+      <diffuse r="0.1" g="0.1" b="0.1" a="1"/>
+      <ambient r="0" g="0" b="0" a="1"/>
+      <emission r="0" g="0" b="0" a="1"/>
+    </MATERIAL>
+
+    <!-- White Material -->
+    <MATERIAL id="whiteMaterial">
+      <shininess value="1"/>
+      <specular r="0" g="0" b="0" a="1"/>
+      <diffuse r="0.4" g="0.4" b="0.4" a="1"/>
+      <ambient r="0.1" g="0.1" b="0.1" a="1"/>
+      <emission r="0.2" g="0.2" b="0.2" a="1"/>
     </MATERIAL>
 
   </MATERIALS>
@@ -109,31 +118,59 @@
       <TEXTURE id="null"/>
 
       <DESCENDANTS>
-        <NODEREF id="board"/>
+        <NODEREF id="game"/>
       </DESCENDANTS>
 
     </NODE>
 
-    <!-- Board -->
+    <!-- Game -->
+    <NODE id="game">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="board"/>
+        <NODEREF id="whitePiece"/>
+        <NODEREF id="blackPiece"/>
+      </DESCENDANTS>
+
+    </NODE>
+
     <NODE id="board">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
 
+      <TRANSLATION x="0" y="0" z="0"/>
+      <SCALE sx="12" sy="0.5" sz="12"/>
+
       <DESCENDANTS>
-        <NODEREF id="ground1"/>
+        <NODEREF id="cube"/>
       </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="ground1">
-      <MATERIAL id="null"/>
+    <NODE id="whitePiece">
+      <MATERIAL id="whiteMaterial"/>
       <TEXTURE id="null"/>
 
-      <TRANSLATION x="0" y="0" z="0"/>
-      <SCALE sx="11" sy="1" sz="11"/>
+      <TRANSLATION x="1" y="0.5" z="1"/>
+      <ROTATION axis="x" angle="-90"/>
 
       <DESCENDANTS>
-        <NODEREF id="cube"/>
+        <LEAF type="cylinder" args="0.2 0.35 0.35 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+        <NODE id="blackPiece">
+      <MATERIAL id="blackMaterial"/>
+      <TEXTURE id="null"/>
+
+      <TRANSLATION x="2" y="0.5" z="2"/>
+      <ROTATION axis="x" angle="-90"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.2 0.35 0.35 20 20 1 1"/>
       </DESCENDANTS>
 
     </NODE>
