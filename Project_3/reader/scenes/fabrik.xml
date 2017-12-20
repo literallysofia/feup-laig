@@ -22,7 +22,7 @@
   <LIGHTS>
     <LIGHT id="light0">
       <enable value="1"/>
-      <position x="0" y="100" z="0" w="1"/>
+      <position x="0" y="30" z="0" w="1"/>
       <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0"/>
       <specular r="1.0" g="1.0" b="1.0" a="1.0"/>
@@ -30,7 +30,7 @@
 
     <LIGHT id="light1">
       <enable value="1"/>
-      <position x="100" y="100" z="0" w="1"/>
+      <position x="100" y="30" z="0" w="1"/>
       <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0"/>
       <specular r="1.0" g="1.0" b="1.0" a="1.0"/>
@@ -38,7 +38,7 @@
 
     <LIGHT id="light2">
       <enable value="1"/>
-      <position x="100" y="100" z="0" w="1"/>
+      <position x="100" y="30" z="0" w="1"/>
       <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
       <diffuse r="1.0" g="1.0" b="1.0" a="1.0"/>
       <specular r="1.0" g="1.0" b="1.0" a="1.0"/>
@@ -46,7 +46,7 @@
 
     <LIGHT id="light3">
       <enable value="1"/>
-      <position x="100" y="100" z="100" w="1"/>
+      <position x="100" y="30" z="100" w="1"/>
       <ambient r="0.2" g="0.2" b="0.2" a="1.0"/>
       <diffuse r="0.6" g="0.6" b="0.6" a="1.0"/>
       <specular r="0.6" g="0.6" b="0.6" a="1.0"/>
@@ -84,6 +84,21 @@
 
     <TEXTURE id="vase">
       <file path="images/vase.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="box">
+      <file path="images/box.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="pieces1">
+      <file path="images/box1.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="pieces2">
+      <file path="images/box2.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
@@ -212,10 +227,9 @@
         <NODEREF id="floor" />
         <NODEREF id="walls" />
         <NODEREF id="furniture" />
-        <NODEREF id="window1" />
-        <NODEREF id="window2" />
-        <NODEREF id="rugPlayer1" />
-        <NODEREF id="rugPlayer2" />
+        <NODEREF id="windows" />
+        <NODEREF id="rugs" />
+        <NODEREF id="boxes" />
       </DESCENDANTS>
 
     </NODE>
@@ -229,6 +243,41 @@
         <NODEREF id="wall2" />
         <NODEREF id="wall3" />
         <NODEREF id="wall4" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="windows">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="window1" />
+        <NODEREF id="window2" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="rugs">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="rugPlayer1" />
+        <NODEREF id="rugPlayer2" />
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="boxes">
+      <MATERIAL id="null"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <NODEREF id="box1" />
+        <NODEREF id="pieces1" />
+        <NODEREF id="box2" />
+        <NODEREF id="pieces2" />
       </DESCENDANTS>
 
     </NODE>
@@ -357,6 +406,60 @@
 
     </NODE>
 
+    <NODE id="box1">
+      <MATERIAL id="null"/>
+      <TEXTURE id="box"/>
+
+      <TRANSLATION x="4" y="0" z="12"/>
+      <SCALE sx="3" sy="2" sz="6"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pieces1">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="pieces1" />       			
+
+        <TRANSLATION x="4.25" y="2.1" z="17.75" />
+        <SCALE sx="2.5" sy="0" sz="5.5" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+					<LEAF type="rectangle" args="0 1 1 0" />        
+				</DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="box2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="box"/>
+
+      <TRANSLATION x="23" y="0" z="12"/>
+      <SCALE sx="3" sy="2" sz="6"/>
+
+      <DESCENDANTS>
+        <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="pieces2">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="pieces2" />       			
+
+        <TRANSLATION x="23.25" y="2.1" z="17.75" />
+        <SCALE sx="2.5" sy="0" sz="5.5" />
+        <ROTATION axis="x" angle="-90" />
+
+        <DESCENDANTS>
+					<LEAF type="rectangle" args="0 1 1 0" />        
+				</DESCENDANTS>
+
+    </NODE>
+
     <NODE id="furniture">
       <MATERIAL id="null"/>
       <TEXTURE id="null"/>
@@ -390,96 +493,6 @@
 
       <DESCENDANTS>
         <LEAF type="cylinder" args="3 1.2 1.2 20 20 1 1"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <!-- Pyramid -->
-    <NODE id="pyramid">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <DESCENDANTS>
-        <NODEREF id="halfPyramid1"/>
-        <NODEREF id="halfPyramid2"/>
-        <NODEREF id="basePyramid"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="basePyramid">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <ROTATION axis="x" angle="90"/>
-      <TRANSLATION x="1" y="6" z="2.87"/>
-      <SCALE sx="2.8" sy="3.5" sz="1"/>
-
-      <DESCENDANTS>
-        <LEAF type="rectangle" args="0 4 5 0"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="halfPyramid1">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <DESCENDANTS>
-        <NODEREF id="halfPyramid"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="halfPyramid2">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="16" y="0" z="26"/>
-      <ROTATION axis="y" angle="180"/>
-
-      <DESCENDANTS>
-        <NODEREF id="halfPyramid"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="halfPyramid">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <DESCENDANTS>
-        <NODEREF id="facePyramid1"/>
-        <NODEREF id="facePyramid2"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="facePyramid1">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="8" y="4" z="13"/>
-      <ROTATION axis="x" angle="44.42"/>
-      <ROTATION axis="y" angle="-45"/>
-
-      <DESCENDANTS>
-        <LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="facePyramid2">
-      <MATERIAL id="null"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="10" y="4" z="15"/>
-      <TRANSLATION x="-2" y="0" z="-2"/>
-      <ROTATION axis="z" angle="-44.42"/>
-      <ROTATION axis="y" angle="45"/>
-
-      <DESCENDANTS>
-        <LEAF id="triangle1" type="triangle" args="2 0 12 12 0 2 0 0 0"/>
       </DESCENDANTS>
 
     </NODE>
