@@ -218,6 +218,8 @@ XMLscene.prototype.display = function() {
 		// Draw axis
 		this.axis.display();
     }
+
+    this.setActiveShader(this.transparencyShader);
     
     //PROJECT3
     // draw objects
@@ -230,11 +232,13 @@ XMLscene.prototype.display = function() {
         this.translate(row + 9, 0.51+0.2, column + 9);
         this.scale(0.7,1,0.7);
 		this.registerForPick(i+1, this.objects[i]);
-		this.setActiveShader(this.transparencyShader);
+		
         this.objects[i].display();
-        this.setActiveShader(this.defaultShader);
+
 		this.popMatrix();
     }
+
+    this.setActiveShader(this.defaultShader);
     //PROJECT3
     
 
