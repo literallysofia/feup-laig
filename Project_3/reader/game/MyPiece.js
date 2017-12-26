@@ -17,13 +17,13 @@ MyPiece.prototype.constructor = MyPiece;
 
 MyPiece.prototype.setNodeID = function() {
   switch (this.type) {
-    case 1:
+    case '1':
       this.nodeID = "blackPiece";
       break;
-    case 2:
+    case '2':
       this.nodeID = "whitePiece";
       break;
-    case 3:
+    case '3':
       this.nodeID = "redPiece";
       break;
     default:

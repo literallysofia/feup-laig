@@ -137,7 +137,7 @@ Fabrik.prototype.parseBoardToJS = function(stringBoard)
     for (var i = 0; i < numbersBoard.length; i++) {
         var line = [];
         for (var j = 0; j <  numbersBoard[i].length; j++) {
-          line.push(new MyPiece(this.scene, i, j, numbersBoard[i][j]));
+          line.push(new MyPiece(this.scene, j, i, numbersBoard[i][j]));
         }
         board.push(line);
       }
