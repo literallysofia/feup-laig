@@ -1,5 +1,3 @@
-
-
 function Client(port) {
     this.defaultPort = 8081;
     this.port = port || this.defaultPort;

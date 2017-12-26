@@ -25,6 +25,13 @@ function XMLscene(interface) {
 XMLscene.prototype = Object.create(CGFscene.prototype);
 XMLscene.prototype.constructor = XMLscene;
 
+XMLscene.gameMode = {
+    PLAYER_VS_PLAYER: 0,
+    PLAYER_VS_BOT: 1,
+    BOT_VS_BOT: 2,
+    MOVIE: 3
+};
+
 /**
  * Initializes the scene, setting some WebGL defaults, initializing the camera and the axis.
  */
@@ -52,7 +59,9 @@ XMLscene.prototype.init = function(application) {
     //PROJECT3
     this.client = new Client();
     this.client.getPrologRequest("handshake");
+    //this.game = new Fabrik(this, XMLscene.gameMode.PLAYER_VS_PLAYER)
 
+    //Picking
     this.transparencyShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/transparency.frag");
 
     this.objects=[];
