@@ -1,3 +1,19 @@
+boardToNumbers([],[]).
+boardToNumbers([MatrixHead|MatrixTail], [NewMatrixHead|NewMatrixTail]):-
+        lineToNumbers(MatrixHead, NewMatrixHead),
+        boardToNumbers(MatrixTail, NewMatrixTail).
+
+lineToNumbers([],[]).
+lineToNumbers([Head|Tail], [NewHead|NewTail]):-
+        number(Head,NewHead),
+        lineToNumbers(Tail, NewTail).
+
+number('empty', 0).
+number('black', 1).
+number('white', 2).
+number('red', 3).
+
+
 replaceInList([_H|T], 0, Value, [Value|T]).
 replaceInList([H|T], Index, Value, [H|TNew]) :-
         Index > 0,

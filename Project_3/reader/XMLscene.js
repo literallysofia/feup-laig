@@ -59,7 +59,7 @@ XMLscene.prototype.init = function(application) {
     //PROJECT3
     this.client = new Client();
     this.client.getPrologRequest("handshake");
-    //this.game = new Fabrik(this, XMLscene.gameMode.PLAYER_VS_PLAYER)
+    this.game = new Fabrik(this, XMLscene.gameMode.PLAYER_VS_PLAYER)
 
     //Picking
     this.transparencyShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/transparency.frag");
@@ -277,7 +277,7 @@ XMLscene.prototype.logPicking = function ()
 				{
                     var customId = this.pickResults[i][1];
                     let column = Math.ceil(customId/11);
-                    let row = customId - (11*(column-1));				
+                    let row = customId - (11*(column-1));			
 					console.log("Picked object with row "+ row + " and column " + column);
 				}
 			}
