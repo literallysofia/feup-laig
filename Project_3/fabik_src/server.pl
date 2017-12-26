@@ -116,6 +116,12 @@ parse_input(initial_board,Board):-
 	initialBoard(BoardTemp),
 	boardToNumbers(BoardTemp, Board).
 
+parse_input(add_worker(Board, Row, Column), NewBoard) :-
+	RowIndex is Row -1,
+	ColumnIndex is Column -1,
+	checkMove(Board, red, NewBoardTemp, empty, ColumnIndex, RowIndex, Error),
+	boardToNumbers(NewBoardTemp, NewBoard).
+
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).
-	
+
