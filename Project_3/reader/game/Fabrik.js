@@ -5,6 +5,7 @@ function Fabrik(scene, gameMode) {
     
     this.board = [];
     this.getInitialBoard();
+    //this.testBoard();
     this.pawns = [];
 
     this.player = 1; //TODO: mudar para a nossa versão
@@ -38,8 +39,7 @@ Fabrik.prototype.getInitialBoard = function()
     this.scene.client.getPrologRequest('initial_board', function(data) {
 
         this_game.board= this_game.parseBoardToJS(data.target.response);
-        
-        console.log(this_game.board);
+
 
         this_game.currentState = this_game.state.SELECTING_WORKER_FIRST_POSITION;
         console.log("CURRENT STATE: selecting_worker_first_position");
@@ -49,6 +49,18 @@ Fabrik.prototype.getInitialBoard = function()
         console.log("CONNECTION ERROR");
     });
 }
+
+/*
+Fabrik.prototype.testBoard = function() {
+  for (var i = 0; i < 11; i++) {
+    var line = [];
+    for (var j = 0; j < 11; j++) {
+      line.push(new MyPiece(this.scene, i, j, 1));
+    }
+    this.board.push(line);
+  }
+};*/
+
 
 Fabrik.prototype.pickingHandler=function(row, column) {
 
@@ -106,21 +118,32 @@ Fabrik.prototype.selectingWorkerFirstPosition=function(row, column){
 
 Fabrik.prototype.parseBoardToJS = function(stringBoard)
 {
-    var board = [];
+    var numbersBoard = [];
     var i=0;
     for(let rows =0 ; rows < 11; rows++){
-        var line = [];
+        var numbersLine = [];
         var column=0;
         while(column!=11){
             if(stringBoard[i]!='[' && stringBoard[i]!=',' && stringBoard[i] != ']'){
-                line.push(stringBoard[i]);
+                numbersLine.push(stringBoard[i]);
                 column++;
             }
             i++;
         }
-        board.push(line);
+        numbersBoard.push(numbersLine);
     }
+
+    var board=[];
+    for (var i = 0; i < numbersBoard.length; i++) {
+        var line = [];
+        for (var j = 0; j <  numbersBoard[i].length; j++) {
+          line.push(new MyPiece(this.scene, i, j, numbersBoard[i][j]));
+        }
+        board.push(line);
+      }
+
     return board;
+
 }
 
 Fabrik.prototype.parseBoardToPROLOG = function(){
@@ -136,7 +159,7 @@ Fabrik.prototype.parseBoardToPROLOG = function(){
             var elem;
 
 
-            switch(this.board[i][j]){
+            switch(this.board[i][j].type){
                 case '0':
                     elem='empty';
                     break;

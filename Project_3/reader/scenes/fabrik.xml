@@ -133,6 +133,15 @@
       <emission r="0.2" g="0.2" b="0.2" a="1"/>
     </MATERIAL>
 
+    <!-- Red Material -->
+    <MATERIAL id="redMaterial">
+      <shininess value="1"/>
+      <specular r="0" g="0" b="0" a="1"/>
+      <diffuse r="1" g="0" b="0" a="1"/>
+      <ambient r="0.1" g="0.1" b="0.1" a="1"/>
+      <emission r="0.2" g="0.2" b="0.2" a="1"/>
+    </MATERIAL>
+
   </MATERIALS>
 
   <ANIMATIONS>
@@ -149,6 +158,36 @@
 
   <!-- The nodes -->
   <NODES>
+
+    <NODE id="whitePiece">
+      <MATERIAL id="whiteMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.2 0.35 0.35 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="blackPiece">
+      <MATERIAL id="blackMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.2 0.35 0.35 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="redPiece">
+      <MATERIAL id="redMaterial"/>
+      <TEXTURE id="null"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="0.2 0.35 0.35 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
 
     <ROOT id="root"/>
 
@@ -173,8 +212,6 @@
 
       <DESCENDANTS>
         <NODEREF id="board"/>
-        <NODEREF id="whitePiece"/>
-        <NODEREF id="blackPiece"/>
       </DESCENDANTS>
 
     </NODE>
@@ -188,32 +225,6 @@
 
       <DESCENDANTS>
         <NODEREF id="cubeBoard"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="whitePiece">
-      <MATERIAL id="whiteMaterial"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="1" y="0.5" z="1"/>
-      <ROTATION axis="x" angle="-90"/>
-
-      <DESCENDANTS>
-        <LEAF type="cylinder" args="0.2 0.35 0.35 20 20 1 1"/>
-      </DESCENDANTS>
-
-    </NODE>
-
-    <NODE id="blackPiece">
-      <MATERIAL id="blackMaterial"/>
-      <TEXTURE id="null"/>
-
-      <TRANSLATION x="2" y="0.5" z="2"/>
-      <ROTATION axis="x" angle="-90"/>
-
-      <DESCENDANTS>
-        <LEAF type="cylinder" args="0.2 0.35 0.35 20 20 1 1"/>
       </DESCENDANTS>
 
     </NODE>
