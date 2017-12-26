@@ -14,7 +14,8 @@ function getUrlVars() {
 serialInclude(['../lib/CGF.js', 'XMLscene.js', 'MySceneGraph.js',
              'MyGraphNode.js', 'MyGraphLeaf.js', 'MyInterface.js', 
              './primitives/MyTriangle.js', './primitives/MyQuad.js', './primitives/MySphere.js', './primitives/MySemiSphere.js', './primitives/MyCylinder.js', './primitives/MyCircle.js', './primitives/MyPatch.js',
-             './animations/Animation.js', './animations/AnimationRef.js', './animations/ComboRef.js', './animations/LinearAnimation.js', './animations/CircularAnimation.js', './animations/BezierAnimation.js', './animations/ComboAnimation.js', 
+             './animations/Animation.js', './animations/AnimationRef.js', './animations/ComboRef.js', './animations/LinearAnimation.js', './animations/CircularAnimation.js', './animations/BezierAnimation.js', './animations/ComboAnimation.js',
+             './game/Client.js', 
 
 main=function()
 {
