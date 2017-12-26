@@ -1649,7 +1649,7 @@ MySceneGraph.generateRandomString = function(length) {
 MySceneGraph.prototype.displayScene = function() {
     // entry point for graph rendering
     // remove log below to avoid performance issues
-    this.log("Graph should be rendered here...");
+    //this.log("Graph should be rendered here...");
 
     this.displaySceneRecursive(this.idRoot, this.nodes[this.idRoot].materialID, this.nodes[this.idRoot].textureID);
 

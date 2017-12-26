@@ -1,52 +1,73 @@
 function Fabrik(scene, gameMode) {
+    
     this.scene = scene;
     this.gameMode = gameMode;
 
     
     this.board = [];
     this.getInitialBoard();
-    //this.testBoard();
-    this.pawns = [];
 
-    this.player = 1;
+    this.player = 1; //1 - black, 2 - white
 
-    this.state = { //TODO: ordenar melhor
+    this.state = { 
+        WAITING_FOR_START: 0,
         ADDING_FIRST_WORKER:1,
         ADDING_SECOND_WORKER:2,
         ADDING_PLAYER: 3,
-        END_GAME:5,
-        WINNER:6,
-        CONNECTION_ERROR: 7,
-        WAITING_FOR_START:8
+        CONNECTION_ERROR: 10,
     };
 
     this.currentState = this.state.WAITING_FOR_START;
-    console.log("CURRENT STATE: waiting_for_start");
-
-
-    if (this.gameMode != XMLscene.gameMode.MOVIE) { //TODO: mudar os modos de jogo para Fabrik.js
-        this.scene.movieArray = [];
-    } 
 };
 
 Fabrik.prototype.constructor = Fabrik;
 
-Fabrik.prototype.getInitialBoard = function()
-{
-    var this_game = this;
 
-    this.scene.client.getPrologRequest('initial_board', function(data) {
+Fabrik.prototype.nextPlayer= function(){
 
-        this_game.board= this_game.parseBoardToJS(data.target.response);
-        this_game.currentState = this_game.state.ADDING_FIRST_WORKER;
-        console.log("CURRENT STATE: selecting_worker_first_position");
+    switch (this.player) {
+        case 1:
+            this.player=2;
+            console.log(" > FABRIK: White player's turn")
+            break;
+        case 2:
+            this.player=1;
+            console.log(" > FABRIK: Black player's turn")
+            break;
+        default:
+            break;
+    }
         
-    }, function(data) {
-        //this.currentState = this_t.state.CONNECTION_ERROR;
-        console.log("CONNECTION ERROR");
-    });
 }
 
+Fabrik.prototype.getCurrPlayerColor = function(){
+    
+    if(this.player==1)
+        return "black";
+    else if(this.player==2)
+        return "white";
+
+}
+
+Fabrik.prototype.nextState = function(){
+    switch (this.currentState) {
+        case this.state.WAITING_FOR_START:
+            this.currentState=this.state.ADDING_FIRST_WORKER;
+            console.log(" > FABRIK: Add the first worker");
+            break;
+        case this.state.ADDING_FIRST_WORKER:
+            this.currentState=this.state.ADDING_SECOND_WORKER;
+            console.log(" > FABRIK: Add the second worker");
+            break;
+        case this.state.ADDING_SECOND_WORKER:
+            this.currentState=this.state.ADDING_PLAYER;
+            console.log(" > FABRIK: Black player's turn")
+            break;
+        default:
+            break;
+    }
+
+}
 
 Fabrik.prototype.pickingHandler=function(row, column) {
 
@@ -60,18 +81,24 @@ Fabrik.prototype.pickingHandler=function(row, column) {
         case this.state.ADDING_PLAYER:
             this.addPlayer(row,column);
             break;
-        /*case this.state.SELECTING_WORKER:
-            this.selectingWorker(obj);
-            break;
-        case this.state. SELECTING_WORKER_NEXT_POSITION:
-            this.selectingWorkerNewPosition(obj);
-            break;
-        case this.state.SELECTING_SECOND_WALL_POSITION:
-            this.selectingSecondWallPosition(obj);
-            break;*/
         default:
-            console.log('default');
+            break;
     }
+}
+
+
+Fabrik.prototype.getInitialBoard = function()
+{
+    var this_game = this;
+
+    this.scene.client.getPrologRequest('initial_board', function(data) {
+
+        this_game.board= this_game.parseBoardToJS(data.target.response);
+        this_game.nextState();
+        
+    }, function(data) {
+        console.log("CONNECTION ERROR");
+    });
 }
 
 
@@ -80,26 +107,20 @@ Fabrik.prototype.addWorker=function(row, column){
     var this_game = this;
 
     let boardString = this.parseBoardToPROLOG();
-
     var command = "add_worker(" +boardString+ "," + row + "," + column +")" ;
 
     this.scene.client.getPrologRequest(command, function(data) {
 
         if(data.target.response!="[]"){
             this_game.board= this_game.parseBoardToJS(data.target.response);
-
-            if(this_game.currentState == this_game.state.ADDING_FIRST_WORKER)
-                this_game.currentState = this_game.state.ADDING_SECOND_WORKER;
-            else if(this_game.currentState == this_game.state.ADDING_SECOND_WORKER)
-                this_game.currentState = this_game.state.ADDING_PLAYER;
+            this_game.nextState();
         }
         else{ //TODO: ir buscar a mensagem de erro a prolog
-            console.log("ERROR: POSITION NOT VALID");
+            console.log(" > FABRIK: ERROR - Position not valid, please try again");
         }
         
         
     }, function(data) {
-        //this.currentState = this_t.state.CONNECTION_ERROR;
         console.log("CONNECTION ERROR");
     });
 }
@@ -110,40 +131,21 @@ Fabrik.prototype.addPlayer=function(row, column){
     var this_game = this;
 
     let boardString = this.parseBoardToPROLOG();
-
-    var color;
-
-    if(this.player==1)
-        color="black";
-    else if(this.player==2)
-        color="white";
-
-    console.log("PLAYER: " + this.player + "    COLOR: " + color);
-
+    var color = this.getCurrPlayerColor();
     var command = "add_player(" +boardString+ "," + row + "," + column + ","+ color +")" ;
 
     this.scene.client.getPrologRequest(command, function(data) {
 
         if(data.target.response!="[]"){
             this_game.board= this_game.parseBoardToJS(data.target.response);
-            
-            if(this_game.player==1){
-                this_game.player=2;
-                console.log("PLAYER WHITE: " + this_game.player);
-            }
-            else if(this_game.player==2){
-                this_game.player=1;
-                console.log("PLAYER BLACK: " + this_game.player);
-            }
-                
+            this_game.nextPlayer();
         }
         else{ //TODO: ir buscar a mensagem de erro a prolog
-            console.log("ERROR: POSITION NOT VALID");
+            console.log(" > FABRIK: ERROR - Position not valid, please try again");
         }
         
         
     }, function(data) {
-        //this.currentState = this_t.state.CONNECTION_ERROR;
         console.log("CONNECTION ERROR");
     });
 }

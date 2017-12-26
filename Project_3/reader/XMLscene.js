@@ -278,7 +278,7 @@ XMLscene.prototype.logPicking = function ()
                     var customId = this.pickResults[i][1];
                     let row = Math.ceil(customId/11);
                     let column = customId - (11*(row-1));			
-                    console.log("Picked object with row "+ row + " and column " + column);
+                    //console.log("Picked object with row "+ row + " and column " + column);
                     this.game.pickingHandler(row, column);
 				}
 			}
