@@ -5,6 +5,7 @@ function Fabrik(scene, gameMode) {
     
     this.board = [];
     this.getInitialBoard();
+    //this.testBoard();
     this.pawns = [];
 
     this.player = 1; //TODO: mudar para a nossa versão
@@ -70,6 +71,17 @@ Fabrik.prototype.parseBoard = function(stringBoard)
 
     return board;
 }
+
+Fabrik.prototype.testBoard = function() {
+  for (var i = 0; i < 11; i++) {
+    var line = [];
+    for (var j = 0; j < 11; j++) {
+      line.push(new MyPiece(this.scene, i, j, 1));
+    }
+    this.board.push(line);
+  }
+};
+
 /*
 Fabrik.prototype.pickingHandler=function(row, column) {
 
