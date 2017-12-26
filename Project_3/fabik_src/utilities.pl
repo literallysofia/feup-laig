@@ -8,10 +8,10 @@ lineToNumbers([Head|Tail], [NewHead|NewTail]):-
         number(Head,NewHead),
         lineToNumbers(Tail, NewTail).
 
-number('empty', 0).
-number('black', 1).
-number('white', 2).
-number('red', 3).
+number(empty, 0).
+number(black, 1).
+number(white, 2).
+number(red, 3).
 
 
 replaceInList([_H|T], 0, Value, [Value|T]).

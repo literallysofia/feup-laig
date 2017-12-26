@@ -8,13 +8,12 @@ function Fabrik(scene, gameMode) {
     //this.testBoard();
     this.pawns = [];
 
-    this.player = 1; //TODO: mudar para a nossa versão
+    this.player = 1;
 
     this.state = { //TODO: ordenar melhor
-        SELECTING_WORKER_FIRST_POSITION:1,
-        SELECTING_WORKER: 2,
-        SELECTING_WORKER_NEXT_POSITION: 3,
-        SELECTING_PLAYER_POSITION:4,
+        ADDING_FIRST_WORKER:1,
+        ADDING_SECOND_WORKER:2,
+        ADDING_PLAYER: 3,
         END_GAME:5,
         WINNER:6,
         CONNECTION_ERROR: 7,
@@ -39,9 +38,7 @@ Fabrik.prototype.getInitialBoard = function()
     this.scene.client.getPrologRequest('initial_board', function(data) {
 
         this_game.board= this_game.parseBoardToJS(data.target.response);
-
-
-        this_game.currentState = this_game.state.SELECTING_WORKER_FIRST_POSITION;
+        this_game.currentState = this_game.state.ADDING_FIRST_WORKER;
         console.log("CURRENT STATE: selecting_worker_first_position");
         
     }, function(data) {
@@ -50,28 +47,20 @@ Fabrik.prototype.getInitialBoard = function()
     });
 }
 
-/*
-Fabrik.prototype.testBoard = function() {
-  for (var i = 0; i < 11; i++) {
-    var line = [];
-    for (var j = 0; j < 11; j++) {
-      line.push(new MyPiece(this.scene, i, j, 1));
-    }
-    this.board.push(line);
-  }
-};*/
-
 
 Fabrik.prototype.pickingHandler=function(row, column) {
 
     switch (this.currentState) {
-        case this.state.SELECTING_WORKER_FIRST_POSITION:
-            this.selectingWorkerFirstPosition(row, column);
+        case this.state.ADDING_FIRST_WORKER:
+            this.addWorker(row, column);
             break;
-       /* case this.state.SELECTING_PLAYER_POSITION:
-            this.selectingPlayerPosition(obj);
+        case this.state.ADDING_SECOND_WORKER:
+            this.addWorker(row, column);
             break;
-        case this.state.SELECTING_WORKER:
+        case this.state.ADDING_PLAYER:
+            this.addPlayer(row,column);
+            break;
+        /*case this.state.SELECTING_WORKER:
             this.selectingWorker(obj);
             break;
         case this.state. SELECTING_WORKER_NEXT_POSITION:
@@ -86,23 +75,26 @@ Fabrik.prototype.pickingHandler=function(row, column) {
 }
 
 
-Fabrik.prototype.selectingWorkerFirstPosition=function(row, column){
+Fabrik.prototype.addWorker=function(row, column){
 
     var this_game = this;
 
     let boardString = this.parseBoardToPROLOG();
 
     var command = "add_worker(" +boardString+ "," + row + "," + column +")" ;
-    
-    console.log(command);
 
     this.scene.client.getPrologRequest(command, function(data) {
 
-        console.log(data.target.response);
-
         if(data.target.response!="[]"){
             this_game.board= this_game.parseBoardToJS(data.target.response);
-            console.log(this_game.board);
+
+            if(this_game.currentState == this_game.state.ADDING_FIRST_WORKER)
+                this_game.currentState = this_game.state.ADDING_SECOND_WORKER;
+            else if(this_game.currentState == this_game.state.ADDING_SECOND_WORKER)
+                this_game.currentState = this_game.state.ADDING_PLAYER;
+        }
+        else{ //TODO: ir buscar a mensagem de erro a prolog
+            console.log("ERROR: POSITION NOT VALID");
         }
         
         
@@ -111,6 +103,51 @@ Fabrik.prototype.selectingWorkerFirstPosition=function(row, column){
         console.log("CONNECTION ERROR");
     });
 }
+
+
+Fabrik.prototype.addPlayer=function(row, column){
+
+    var this_game = this;
+
+    let boardString = this.parseBoardToPROLOG();
+
+    var color;
+
+    if(this.player==1)
+        color="black";
+    else if(this.player==2)
+        color="white";
+
+    console.log("PLAYER: " + this.player + "    COLOR: " + color);
+
+    var command = "add_player(" +boardString+ "," + row + "," + column + ","+ color +")" ;
+
+    this.scene.client.getPrologRequest(command, function(data) {
+
+        if(data.target.response!="[]"){
+            this_game.board= this_game.parseBoardToJS(data.target.response);
+            
+            if(this_game.player==1){
+                this_game.player=2;
+                console.log("PLAYER WHITE: " + this_game.player);
+            }
+            else if(this_game.player==2){
+                this_game.player=1;
+                console.log("PLAYER BLACK: " + this_game.player);
+            }
+                
+        }
+        else{ //TODO: ir buscar a mensagem de erro a prolog
+            console.log("ERROR: POSITION NOT VALID");
+        }
+        
+        
+    }, function(data) {
+        //this.currentState = this_t.state.CONNECTION_ERROR;
+        console.log("CONNECTION ERROR");
+    });
+}
+
 
 /*
 * PARSER DO BOARD
