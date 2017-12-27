@@ -34,7 +34,7 @@ MyPiece.prototype.setNodeID = function() {
 MyPiece.prototype.setTransformMatrix = function() {
   this.transformMatrix = mat4.create();
   mat4.identity(this.transformMatrix);
-  mat4.translate(this.transformMatrix, this.transformMatrix, [10 + this.x, 0.5, 10 + this.z]);
+  mat4.translate(this.transformMatrix, this.transformMatrix, [15 + this.x, 4.8+0.5, 15 + this.z]);
   mat4.rotate(this.transformMatrix, this.transformMatrix, Math.PI * -90 / 180, [1, 0, 0]);
 };
 

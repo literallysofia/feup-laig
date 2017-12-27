@@ -241,7 +241,7 @@ XMLscene.prototype.display = function() {
         let row= (i+1)-(11*(column-1));
 
 		this.pushMatrix();
-        this.translate(row + 9, 0.51+0.2, column + 9);
+        this.translate(row + 14, 0.51+4.8, column + 14);
         this.scale(0.7,1,0.7);
 		this.registerForPick(i+1, this.objects[i]);
 		
