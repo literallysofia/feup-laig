@@ -63,14 +63,17 @@ Fabrik.prototype.nextState = function(moveWorker){
     switch (this.currentState) {
         case this.state.WAITING_FOR_START:
             this.currentState=this.state.ADDING_FIRST_WORKER;
+            this.nextPlayer();
             console.log(" > FABRIK: Choose a cell to add the first worker");
             break;
         case this.state.ADDING_FIRST_WORKER:
             this.currentState=this.state.ADDING_SECOND_WORKER;
+            this.nextPlayer();
             console.log(" > FABRIK: Choose a cell to add the second worker");
             break;
         case this.state.ADDING_SECOND_WORKER:
             this.currentState=this.state.CHOOSING_MOVE_WORKER;
+            this.nextPlayer();
             console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
             break;
         case this.state.CHOOSING_MOVE_WORKER:
@@ -88,6 +91,7 @@ Fabrik.prototype.nextState = function(moveWorker){
             break;
         case this.state.ADDING_PLAYER:
             this.currentState=this.state.CHOOSING_MOVE_WORKER;
+            this.nextPlayer();
             console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
             break;
         default:
@@ -127,7 +131,6 @@ Fabrik.prototype.getInitialBoard = function()
     this.scene.client.getPrologRequest('initial_board', function(data) {
 
         this_game.board= this_game.parseBoardToJS(data.target.response);
-        this_game.nextPlayer();
         this_game.nextState();
         
     }, function(data) {
@@ -147,7 +150,6 @@ Fabrik.prototype.addWorker=function(row, column){
 
         if(data.target.response!="[]"){
             this_game.board= this_game.parseBoardToJS(data.target.response);
-            this_game.nextPlayer();
             this_game.nextState();
         }
         else{ //TODO: ir buscar a mensagem de erro a prolog
@@ -168,6 +170,8 @@ Fabrik.prototype.isWorkerCell=function(row, column){
     var command = "is_worker_cell(" +boardString+ "," + row + "," + column +")" ;
 
     this.scene.client.getPrologRequest(command, function(data) {
+
+        console.log(data.target.response);
 
         if(data.target.response=='1'){
             this_game.savedRow = row;
@@ -226,7 +230,6 @@ Fabrik.prototype.addPlayer=function(row, column){
 
         if(data.target.response!="[]"){
             this_game.board= this_game.parseBoardToJS(data.target.response);
-            this_game.nextPlayer();
             this_game.nextState();
         }
         else{ //TODO: ir buscar a mensagem de erro a prolog
