@@ -171,8 +171,6 @@ Fabrik.prototype.isWorkerCell=function(row, column){
 
     this.scene.client.getPrologRequest(command, function(data) {
 
-        console.log(data.target.response);
-
         if(data.target.response=='1'){
             this_game.savedRow = row;
             this_game.savedColumn = column;
