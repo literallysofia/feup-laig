@@ -241,7 +241,7 @@ XMLscene.prototype.display = function() {
         let row= (i+1)-(11*(column-1));
 
 		this.pushMatrix();
-        this.translate(row + 14, 0.51+4.8, column + 14);
+        this.translate(row + 14, 0.50+4.8+0.2, column + 14);
         this.scale(0.7,1,0.7);
 		this.registerForPick(i+1, this.objects[i]);
 		
@@ -280,7 +280,7 @@ XMLscene.prototype.logPicking = function ()
                     var customId = this.pickResults[i][1];
                     let row = Math.ceil(customId/11);
                     let column = customId - (11*(row-1));			
-                    //console.log("Picked object with row "+ row + " and column " + column);
+                    console.log("Picked object with row "+ row + " and column " + column);
                     this.game.pickingHandler(row, column);
 				}
 			}

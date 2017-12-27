@@ -128,6 +128,21 @@ parse_input(add_player(Board, Row, Column, Player), NewBoard) :-
 	checkMove(Board, Player, NewBoardTemp, empty, ColumnIndex, RowIndex, Error),
 	boardToNumbers(NewBoardTemp, NewBoard).
 
+parse_input(is_worker_cell(Board, Row, Column), Bool) :-
+	RowIndex is Row -1,
+	ColumnIndex is Column -1,
+	isWorkerCell(Board, RowIndex, ColumnIndex, Bool).
+
+
+parse_input(move_worker(Board, Row, Column, NewRow, NewColumn), NewBoard):-
+	RowIndex is Row -1,
+	ColumnIndex is Column -1,
+	NewRowIndex is NewRow -1,
+	NewColumnIndex is NewColumn -1,
+	checkMove(Board, empty, TempBoard, red, ColumnIndex, RowIndex, Error1),
+	checkMove(TempBoard, red, NewBoardTemp, empty, NewColumnIndex, NewRowIndex, Error2),
+	boardToNumbers(NewBoardTemp, NewBoard).
+
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).
 

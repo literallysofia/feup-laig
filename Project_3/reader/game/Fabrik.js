@@ -7,15 +7,20 @@ function Fabrik(scene, gameMode) {
     this.board = [];
     this.getInitialBoard();
 
-    this.player = 1; //1 - black, 2 - white
+    this.player = 0; //0 - none, 1 - black, 2 - white
 
     this.state = { 
         WAITING_FOR_START: 0,
         ADDING_FIRST_WORKER:1,
         ADDING_SECOND_WORKER:2,
-        ADDING_PLAYER: 3,
+        CHOOSING_MOVE_WORKER: 3,
+        CHOOSING_WORKER_NEW_CELL: 4,
+        ADDING_PLAYER: 5,
         CONNECTION_ERROR: 10,
     };
+
+    this.savedRow;
+    this.savedColumn;
 
     this.currentState = this.state.WAITING_FOR_START;
 };
@@ -26,13 +31,17 @@ Fabrik.prototype.constructor = Fabrik;
 Fabrik.prototype.nextPlayer= function(){
 
     switch (this.player) {
+        case 0:
+            this.player=1;
+            console.log(" > FABRIK: BLACK PLAYER'S TURN")
+            break;
         case 1:
             this.player=2;
-            console.log(" > FABRIK: White player's turn")
+            console.log(" > FABRIK: WHITE PLAYER'S TURN")
             break;
         case 2:
             this.player=1;
-            console.log(" > FABRIK: Black player's turn")
+            console.log(" > FABRIK: BLACK PLAYER'S TURN")
             break;
         default:
             break;
@@ -49,19 +58,37 @@ Fabrik.prototype.getCurrPlayerColor = function(){
 
 }
 
-Fabrik.prototype.nextState = function(){
+Fabrik.prototype.nextState = function(moveWorker){
+
     switch (this.currentState) {
         case this.state.WAITING_FOR_START:
             this.currentState=this.state.ADDING_FIRST_WORKER;
-            console.log(" > FABRIK: Add the first worker");
+            console.log(" > FABRIK: Choose a cell to add the first worker");
             break;
         case this.state.ADDING_FIRST_WORKER:
             this.currentState=this.state.ADDING_SECOND_WORKER;
-            console.log(" > FABRIK: Add the second worker");
+            console.log(" > FABRIK: Choose a cell to add the second worker");
             break;
         case this.state.ADDING_SECOND_WORKER:
+            this.currentState=this.state.CHOOSING_MOVE_WORKER;
+            console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
+            break;
+        case this.state.CHOOSING_MOVE_WORKER:
+            if(moveWorker){
+                this.currentState=this.state.CHOOSING_WORKER_NEW_CELL;
+                console.log(" > FABRIK: Choose the new position for the worker you want to move");
+            }
+            else{
+                this.currentState=this.state.ADDING_PLAYER;
+            }
+            break;
+        case this.state.CHOOSING_WORKER_NEW_CELL:
             this.currentState=this.state.ADDING_PLAYER;
-            console.log(" > FABRIK: Black player's turn")
+            console.log(" > FABRIK: Choose a cell for one of your pieces")
+            break;
+        case this.state.ADDING_PLAYER:
+            this.currentState=this.state.CHOOSING_MOVE_WORKER;
+            console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
             break;
         default:
             break;
@@ -77,6 +104,12 @@ Fabrik.prototype.pickingHandler=function(row, column) {
             break;
         case this.state.ADDING_SECOND_WORKER:
             this.addWorker(row, column);
+            break;
+        case this.state.CHOOSING_MOVE_WORKER:
+            this.isWorkerCell(row,column);
+            break;
+        case this.state.CHOOSING_WORKER_NEW_CELL:
+            this.moveWorker(row,column);
             break;
         case this.state.ADDING_PLAYER:
             this.addPlayer(row,column);
@@ -94,6 +127,7 @@ Fabrik.prototype.getInitialBoard = function()
     this.scene.client.getPrologRequest('initial_board', function(data) {
 
         this_game.board= this_game.parseBoardToJS(data.target.response);
+        this_game.nextPlayer();
         this_game.nextState();
         
     }, function(data) {
@@ -113,6 +147,7 @@ Fabrik.prototype.addWorker=function(row, column){
 
         if(data.target.response!="[]"){
             this_game.board= this_game.parseBoardToJS(data.target.response);
+            this_game.nextPlayer();
             this_game.nextState();
         }
         else{ //TODO: ir buscar a mensagem de erro a prolog
@@ -124,6 +159,59 @@ Fabrik.prototype.addWorker=function(row, column){
         console.log("CONNECTION ERROR");
     });
 }
+
+Fabrik.prototype.isWorkerCell=function(row, column){
+    
+    var this_game = this;
+
+    let boardString = this.parseBoardToPROLOG();
+    var command = "is_worker_cell(" +boardString+ "," + row + "," + column +")" ;
+
+    this.scene.client.getPrologRequest(command, function(data) {
+
+        if(data.target.response=='1'){
+            this_game.savedRow = row;
+            this_game.savedColumn = column;
+
+            this_game.nextState(1);
+        }
+        else{
+
+            this_game.nextState(0);
+            this_game.pickingHandler(row,column);
+        }
+        
+        
+    }, function(data) {
+        console.log("CONNECTION ERROR");
+    });
+
+}
+
+Fabrik.prototype.moveWorker=function(row, column){
+
+    var this_game = this;
+
+    let boardString = this.parseBoardToPROLOG();
+   
+    var command = "move_worker(" +boardString+ "," + this.savedRow + "," + this.savedColumn + ","+ row +"," + column +")" ;
+
+    this.scene.client.getPrologRequest(command, function(data) {
+
+        if(data.target.response!="[]"){
+            this_game.board= this_game.parseBoardToJS(data.target.response);
+            this_game.nextState();
+        }
+        else{ //TODO: ir buscar a mensagem de erro a prolog
+            console.log(" > FABRIK: ERROR - Position not valid, please try again");
+        }
+        
+        
+    }, function(data) {
+        console.log("CONNECTION ERROR");
+    });
+}
+
 
 
 Fabrik.prototype.addPlayer=function(row, column){
@@ -139,6 +227,7 @@ Fabrik.prototype.addPlayer=function(row, column){
         if(data.target.response!="[]"){
             this_game.board= this_game.parseBoardToJS(data.target.response);
             this_game.nextPlayer();
+            this_game.nextState();
         }
         else{ //TODO: ir buscar a mensagem de erro a prolog
             console.log(" > FABRIK: ERROR - Position not valid, please try again");

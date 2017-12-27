@@ -132,6 +132,11 @@ isEmptyCell(Board, Row, Column, Res) :-
     Res is 1);
     Res is 0).
 
+isWorkerCell(Board, Row, Column, Res) :-
+    ((getValueFromMatrix(Board, Row, Column, Value), Value == red, !, 
+    Res is 1);
+    Res is 0).
+
 /*Vai buscar as posições dos workers com a ajuda do predicado getWorkersPos e 
 verifica se a célula (Row, Column) está na linha de visão de pelo menos um dos
 workers.*/

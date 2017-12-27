@@ -417,7 +417,7 @@
         <TEXTURE id="pieces1" />       			
 
         <TRANSLATION x="10.25" y="6.4" z="22.75" />
-        <SCALE sx="2.5" sy="0" sz="5.5" />
+        <SCALE sx="2.5" sy="1" sz="5.5" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
@@ -444,7 +444,7 @@
         <TEXTURE id="pieces2" />       			
 
         <TRANSLATION x="27.25" y="6.4" z="22.75" />
-        <SCALE sx="2.5" sy="0" sz="5.5" />
+        <SCALE sx="2.5" sy="1" sz="5.5" />
         <ROTATION axis="x" angle="-90" />
 
         <DESCENDANTS>
