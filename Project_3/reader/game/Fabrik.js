@@ -11,6 +11,8 @@ function Fabrik(scene, gameMode) {
     this.getInitialBoard();
 
     this.player = 0; //0 - none, 1 - black, 2 - white
+    this.playerBlack = new Player(this.scene, 1);
+    this.playerWhite = new Player(this.scene, 2);
 
     this.state = { 
         WAITING_FOR_START: 0,
@@ -30,19 +32,39 @@ function Fabrik(scene, gameMode) {
 
 Fabrik.prototype.constructor = Fabrik;
 
+Fabrik.prototype.setCamera = function() {
+  if (this.scene.camRotation) {
+    this.scene.camera.fov = 0.2;
+    if (this.player == 0 || this.player == 2) {
+      this.scene.camera.position = this.playerBlack.position;
+      this.scene.camera.target = this.playerBlack.target;
+    } else {
+      this.scene.camera.position = this.playerWhite.position;
+      this.scene.camera.target = this.playerWhite.target;
+    }
+  } else {
+    this.scene.camera.fov = 0.4;
+    this.scene.camera.position = vec3.fromValues(15, 15, 15);
+    this.scene.camera.target = vec3.fromValues(0, 0, 0);
+  }
+};
+
 
 Fabrik.prototype.nextPlayer = function() {
   switch (this.player) {
     case 0:
       this.player = 1;
+      this.setCamera();
       console.log(" > FABRIK: BLACK PLAYER'S TURN");
       break;
     case 1:
       this.player = 2;
+      this.setCamera();
       console.log(" > FABRIK: WHITE PLAYER'S TURN");
       break;
     case 2:
       this.player = 1;
+      this.setCamera();
       console.log(" > FABRIK: BLACK PLAYER'S TURN");
       break;
     default:

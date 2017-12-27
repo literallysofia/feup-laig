@@ -31,15 +31,7 @@ function MySceneGraph(filename, scene) {
     //PROJECT3
     this.scene1=[];
     this.scene2=[];
-    this.defaultScene = true;
-
-    this.setScene1 = function() {
-      this.defaultScene = true;
-    };
-
-    this.setScene2 = function() {
-      this.defaultScene = false;
-    };
+    this.currentScene = "Japan";
     //PROJECT3
 
     this.idRoot = null; // The id of the root element.
@@ -1724,7 +1716,7 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
 
     var currNode = this.nodes[idNode];
 
-    if (this.defaultScene == true) {
+    if (this.currentScene == "Japan") {
       for (var i = 0; i < this.scene2.length; i++) {
         if (this.scene2[i] == currNode.nodeID) return;
       }

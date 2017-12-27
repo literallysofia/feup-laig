@@ -135,8 +135,8 @@ XMLscene.prototype.onGraphLoaded = function()
     this.interface.addLightsGroup(this.graph.lights);
 
     this.camRotation = false;
-    this.interface.addSceneGroup();
-    this.interface.addCameraOption();
+    this.interface.addScenePicker();
+    this.interface.addCameraOption(this.game);
     this.interface.addOptionsGroup();
     this.interface.addGameModeGroup();
 }
@@ -144,30 +144,27 @@ XMLscene.prototype.onGraphLoaded = function()
 
 //PROJECT2
 XMLscene.prototype.update = function(currTime) {
-    
-    this.lastTime = this.lastTime || 0.0;
-    this.deltaTime = currTime - this.lastTime || 0.0;
-    this.lastTime = currTime;
+  this.lastTime = this.lastTime || 0.0;
+  this.deltaTime = currTime - this.lastTime || 0.0;
+  this.lastTime = currTime;
 
-    this.deltaTime = this.deltaTime/1000; //in seconds
+  this.deltaTime = this.deltaTime / 1000; //in seconds
 
-    for(let i =0; i < this.graph.animRefsToBeUpdated.length; i++){
-        this.graph.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
-    }
+  for (let i = 0; i < this.graph.animRefsToBeUpdated.length; i++) {
+    this.graph.animRefsToBeUpdated[i].updateMatrix(this.deltaTime);
+  }
 
-    this.timeFactor=Math.abs(Math.sin(currTime/1000));
-    this.compTimeFactor=1-this.timeFactor;
+  this.timeFactor = Math.abs(Math.sin(currTime / 1000));
+  this.compTimeFactor = 1 - this.timeFactor;
 
+  this.testShader.setUniformsValues({ timeFactor: this.timeFactor });
+  this.testShader.setUniformsValues({ compTimeFactor: this.compTimeFactor });
 
-    this.testShader.setUniformsValues({timeFactor: this.timeFactor});
-    this.testShader.setUniformsValues({compTimeFactor: this.compTimeFactor});
-
-    this.testShader.setUniformsValues({scaleFactor: this.scaleFactor});
-    this.testShader.setUniformsValues({redFactor: this.redFactor});
-    this.testShader.setUniformsValues({greenFactor: this.greenFactor});
-    this.testShader.setUniformsValues({blueFactor: this.blueFactor});
-
-}
+  this.testShader.setUniformsValues({ scaleFactor: this.scaleFactor });
+  this.testShader.setUniformsValues({ redFactor: this.redFactor });
+  this.testShader.setUniformsValues({ greenFactor: this.greenFactor });
+  this.testShader.setUniformsValues({ blueFactor: this.blueFactor });
+};
 //PROJECT2
 
 
@@ -180,7 +177,6 @@ XMLscene.prototype.display = function() {
     this.logPicking();
     this.clearPickRegistration();
     //PROJECT3
-
 
     // ---- BEGIN Background, camera and axis setup
     
@@ -261,33 +257,24 @@ XMLscene.prototype.display = function() {
 }
 
 //PROJECT3
+XMLscene.prototype.logPicking = function() {
+  let column = Math.ceil((i + 1) / 11);
+  let row = i + 1 - 11 * (column - 1);
 
-
-XMLscene.prototype.logPicking = function ()
-{
-
-    let column= Math.ceil((i+1)/11);
-    let row= (i+1)-(11*(column-1));
-
-
-
-	if (this.pickMode == false) {
-		if (this.pickResults != null && this.pickResults.length > 0) {
-			for (var i=0; i< this.pickResults.length; i++) {
-				var obj = this.pickResults[i][0];
-				if (obj)
-				{
-                    var customId = this.pickResults[i][1];
-                    let row = Math.ceil(customId/11);
-                    let column = customId - (11*(row-1));			
-                    //console.log("Picked object with row "+ row + " and column " + column);
-                    this.game.pickingHandler(row, column);
-				}
-			}
-			this.pickResults.splice(0,this.pickResults.length);
-		}		
-	}
-}
-
-
+  if (this.pickMode == false) {
+    if (this.pickResults != null && this.pickResults.length > 0) {
+      for (var i = 0; i < this.pickResults.length; i++) {
+        var obj = this.pickResults[i][0];
+        if (obj) {
+          var customId = this.pickResults[i][1];
+          let row = Math.ceil(customId / 11);
+          let column = customId - 11 * (row - 1);
+          //console.log("Picked object with row "+ row + " and column " + column);
+          this.game.pickingHandler(row, column);
+        }
+      }
+      this.pickResults.splice(0, this.pickResults.length);
+    }
+  }
+};
 //PROJECT3

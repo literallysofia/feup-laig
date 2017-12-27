@@ -44,31 +44,16 @@ MyInterface.prototype.addLightsGroup = function(lights) {
   }
 };
 
-MyInterface.prototype.addSceneGroup = function() {
-  var group = this.gui.addFolder("Scene");
-
-  /*let menu = {
-    startGame: this.scene.startGame.bind(this.scene)
-  };
-
-  let continueGame = {
-    continueGame: this.scene.continueGame.bind(this.scene)
-  };
-
-  let undo = {
-    undo: this.scene.undo.bind(this.scene)
-  };
-
-  let turnOffPrologServer = {
-    turnOffPrologServer: this.scene.turnOffPrologServer.bind(this.scene)
-  };*/
-
-  group.add(this.scene.graph, "setScene1").name("Japan");
-  group.add(this.scene.graph, "setScene2").name("New York");
+MyInterface.prototype.addScenePicker = function() {
+  this.gui.add(this.scene.graph, "currentScene", [ "Japan", "New York"] ).name("Scene");
 };
 
-MyInterface.prototype.addCameraOption = function() {
-  this.gui.add(this.scene, "camRotation").name("Camera Rotation");
+MyInterface.prototype.addCameraOption = function(game) {
+  var controller = this.gui.add(this.scene, "camRotation").name("Camera Rotation");
+
+  controller.onChange(function() {
+    game.setCamera();
+  });
 };
 
 MyInterface.prototype.addOptionsGroup = function() {
