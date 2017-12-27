@@ -64,7 +64,7 @@ MyInterface.prototype.addSceneGroup = function() {
   };*/
 
   group.add(this.scene.graph, "setScene1").name("Japan");
-  //group.add(this.scene, "setScene2").name("New York");
+  group.add(this.scene.graph, "setScene2").name("New York");
 };
 
 MyInterface.prototype.addCameraOption = function() {

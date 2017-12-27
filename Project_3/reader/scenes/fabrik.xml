@@ -72,8 +72,13 @@
       <amplif_factor s="0.2" t="0.2"/>
     </TEXTURE>
 
-    <TEXTURE id="view">
+    <TEXTURE id="japan">
       <file path="images/view.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="newyork">
+      <file path="images/view2.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
@@ -94,6 +99,11 @@
 
     <TEXTURE id="puff">
       <file path="images/puff.jpg"/>
+      <amplif_factor s="1" t="1"/>
+    </TEXTURE>
+
+    <TEXTURE id="seat">
+      <file path="images/seat.jpg"/>
       <amplif_factor s="1" t="1"/>
     </TEXTURE>
 
@@ -246,6 +256,8 @@
       <DESCENDANTS>
         <NODEREF id="window1" />
         <NODEREF id="window2" />
+        <NODEREF id="window3" />
+        <NODEREF id="window4" />
       </DESCENDANTS>
 
     </NODE>
@@ -331,9 +343,9 @@
 
     </NODE>
 
-    <NODE id="window1">      
+    <NODE id="window1" scene="1">      
         <MATERIAL id="null" />    
-        <TEXTURE id="view" />
+        <TEXTURE id="japan" />
 
         <TRANSLATION x="0.1" y="4" z="30.5" />
         <SCALE sx="0" sy="14" sz="20" />
@@ -345,9 +357,37 @@
 
     </NODE>
 
-    <NODE id="window2">      
+    <NODE id="window2" scene="1">      
         <MATERIAL id="null" />    
-        <TEXTURE id="view" />
+        <TEXTURE id="japan" />
+
+        <TRANSLATION x="39.9" y="5" z="10" />
+        <SCALE sx="0" sy="14" sz="20" />
+        <ROTATION axis="y" angle="-90" /> 			
+        
+        <DESCENDANTS>
+					<LEAF type="rectangle" args="0 1 1 0" />        
+				</DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="window3" scene="2">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="newyork" />
+
+        <TRANSLATION x="0.1" y="4" z="30.5" />
+        <SCALE sx="0" sy="14" sz="20" />
+        <ROTATION axis="y" angle="90" />    			
+        
+        <DESCENDANTS>
+					<LEAF type="rectangle" args="0 1 1 0" />        
+				</DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="window4" scene="2">      
+        <MATERIAL id="null" />    
+        <TEXTURE id="newyork" />
 
         <TRANSLATION x="39.9" y="5" z="10" />
         <SCALE sx="0" sy="14" sz="20" />
@@ -423,11 +463,13 @@
         <NODEREF id="table" />
         <NODEREF id="puff1" />
         <NODEREF id="puff2" />
+        <NODEREF id="seat1" />
+        <NODEREF id="seat2" />
       </DESCENDANTS>
 
     </NODE>
 
-    <NODE id="puff1">
+    <NODE id="puff1" scene="1">
       <MATERIAL id="null"/>
       <TEXTURE id="puff"/>
 
@@ -440,7 +482,7 @@
 
     </NODE>
 
-    <NODE id="puff2">
+    <NODE id="puff2" scene="1">
       <MATERIAL id="null"/>
       <TEXTURE id="puff"/>
 
@@ -449,6 +491,32 @@
 
       <DESCENDANTS>
         <NODEREF id="cube"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="seat1" scene="2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="seat"/>
+
+      <TRANSLATION x="10.5" y="0" z="24"/>
+      <ROTATION axis="x" angle="-90"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="3 3 3 20 20 1 1"/>
+      </DESCENDANTS>
+
+    </NODE>
+
+    <NODE id="seat2" scene="2">
+      <MATERIAL id="null"/>
+      <TEXTURE id="seat"/>
+
+      <TRANSLATION x="10.5" y="0" z="-4"/>
+      <ROTATION axis="x" angle="-90"/>
+
+      <DESCENDANTS>
+        <LEAF type="cylinder" args="3 3 3 20 20 1 1"/>
       </DESCENDANTS>
 
     </NODE>

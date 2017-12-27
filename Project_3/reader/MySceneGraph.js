@@ -28,6 +28,20 @@ function MySceneGraph(filename, scene) {
     this.nodeIDSelected = -1; //id do nó selecionado na interface
     //PROJECT2
 
+    //PROJECT3
+    this.scene1=[];
+    this.scene2=[];
+    this.defaultScene = true;
+
+    this.setScene1 = function() {
+      this.defaultScene = true;
+    };
+
+    this.setScene2 = function() {
+      this.defaultScene = false;
+    };
+    //PROJECT3
+
     this.idRoot = null; // The id of the root element.
 
     this.axisCoords = [];
@@ -1356,6 +1370,15 @@ MySceneGraph.prototype.parseNodes = function(nodesNode) {
             }
             //PROJECT2
 
+            //PROJECT3
+            var nodeSceneString = this.reader.getString(children[i], 'scene', 0);
+            if(nodeSceneString == 1) {
+                this.scene1.push(nodeID);
+            } else if(nodeSceneString == 2) {
+                this.scene2.push(nodeID);
+            }
+            //PROJECT3
+
 
             // Gathers child nodes.
             var nodeSpecs = children[i].children;
@@ -1700,6 +1723,16 @@ MySceneGraph.prototype.pieceDisplay = function(idNode) {
 MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather, idTextureFather) {
 
     var currNode = this.nodes[idNode];
+
+    if (this.defaultScene == true) {
+      for (var i = 0; i < this.scene2.length; i++) {
+        if (this.scene2[i] == currNode.nodeID) return;
+      }
+    } else {
+      for (var i = 0; i < this.scene1.length; i++) {
+        if (this.scene1[i] == currNode.nodeID) return;
+      }
+    }
 
     var idMaterial = idMaterialFather;
     var idTexture = idTextureFather;
