@@ -19,6 +19,8 @@ function Fabrik(scene, gameMode) {
         CHOOSING_MOVE_WORKER: 3,
         CHOOSING_WORKER_NEW_CELL: 4,
         ADDING_PLAYER: 5,
+        WON_GAME:6,
+        DRAW_GAME:7,
         CONNECTION_ERROR: 10,
     };
 
@@ -55,9 +57,9 @@ Fabrik.prototype.getCurrPlayerColor = function() {
   else if (this.player == 2) return "white";
 };
 
-Fabrik.prototype.nextState = function(moveWorker) {
+Fabrik.prototype.nextState = function(aux) {
   switch (this.currentState) {
-    case this.state.WAITING_FOR_START:
+    case this.state.WAITING_FOR_START: 
       this.currentState = this.state.ADDING_FIRST_WORKER;
       this.nextPlayer();
       console.log(" > FABRIK: Choose a cell to add the first worker");
@@ -70,16 +72,12 @@ Fabrik.prototype.nextState = function(moveWorker) {
     case this.state.ADDING_SECOND_WORKER:
       this.currentState = this.state.CHOOSING_MOVE_WORKER;
       this.nextPlayer();
-      console.log(
-        " > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces"
-      );
+      console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
       break;
     case this.state.CHOOSING_MOVE_WORKER:
-      if (moveWorker) {
+      if (aux) {
         this.currentState = this.state.CHOOSING_WORKER_NEW_CELL;
-        console.log(
-          " > FABRIK: Choose the new position for the worker you want to move"
-        );
+        console.log(" > FABRIK: Choose the new position for the worker you want to move");
       } else {
         this.currentState = this.state.ADDING_PLAYER;
       }
@@ -89,11 +87,19 @@ Fabrik.prototype.nextState = function(moveWorker) {
       console.log(" > FABRIK: Choose a cell for one of your pieces");
       break;
     case this.state.ADDING_PLAYER:
-      this.currentState = this.state.CHOOSING_MOVE_WORKER;
-      this.nextPlayer();
-      console.log(
-        " > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces"
-      );
+      if(aux == "1"){
+        this.currentState = this.state.WON_GAME;
+        console.log(" > FABRIK: You won!");
+      }
+      else if(aux == "2"){
+        this.currentState = this.state.DRAW_GAME;
+        console.log(" > FABRIK: Woops, no more space left! It is a draw!");
+      }
+      else{
+        this.currentState = this.state.CHOOSING_MOVE_WORKER;
+        this.nextPlayer();
+        console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
+      }
       break;
     default:
       break;
@@ -222,7 +228,7 @@ Fabrik.prototype.addPlayer = function(row, column) {
     function(data) {
       if (data.target.response[0] == "[") {
         this_game.board = this_game.parseBoardToJS(data.target.response);
-        this_game.nextState();
+        this_game.checkGameState();
       } else {
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
@@ -232,6 +238,26 @@ Fabrik.prototype.addPlayer = function(row, column) {
     }
   );
 };
+
+Fabrik.prototype.checkGameState=function(){
+
+    var this_game = this;
+
+    let boardString = this.parseBoardToPROLOG();
+    var color = this.getCurrPlayerColor();
+    var command = "check_state(" + color + "," +boardString+ ")" ;
+
+
+    this.scene.client.getPrologRequest(command, function(data) {
+
+        this_game.nextState(data.target.response);
+        
+    }, function(data) {
+        console.log("CONNECTION ERROR");
+    });
+   
+}
+
 
 
 /*

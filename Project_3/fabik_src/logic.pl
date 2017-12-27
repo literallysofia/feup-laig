@@ -8,6 +8,18 @@ checkGameState(Player, Board) :-
             (checkFullBoard(Board), write('Woops, no more space left! It is a draw!'));
             (checkValidSpots(Board, 0, 0, Result), Result =:= 0, write('Woops, no more space left! It is a draw!'))
       ).
+/*Adapted for LAIG*/
+/*State: 0 - nothing happened, 1 - player won, 2 - draw*/
+checkGameState(Player, Board, State) :-
+      ((
+            (checkVictory(Player, 'Row', Board), State=1);
+            (checkVictory(Player, 'Column', Board), State=1);
+            (checkVictory(Player, 'DiagonalDown', Board), State=1);
+            (checkVictory(Player, 'DiagonalUp', Board), State=1);
+            (checkFullBoard(Board), State=2);
+            (checkValidSpots(Board, 0, 0, Result), Result =:= 0, State=2)
+      ); 
+      (State = 0)).
 
 /*Verifica se existe o padrão de 5 X's seguidos numa linha do tabuleiro.*/
 checkVictory(X, 'Row', Board) :-
@@ -184,7 +196,7 @@ checkMove(Board, Player, NewBoard, Expected, ColumnIndex, RowIndex):-
             (write('INVALID MOVE: That cell is not empty, please try again!\n\n'),
             askCoords(Board, Player, NewBoard, Expected))))).
 
-
+/*Adapted for LAIG*/
 checkMove(Board, Player, NewBoard, Expected, ColumnIndex, RowIndex, ERROR):-
       (((Player == empty, Expected == red),
             ((getValueFromMatrix(Board, RowIndex, ColumnIndex, Expected),
