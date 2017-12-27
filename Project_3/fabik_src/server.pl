@@ -116,17 +116,21 @@ parse_input(initial_board,Board):-
 	initialBoard(BoardTemp),
 	boardToNumbers(BoardTemp, Board).
 
-parse_input(add_worker(Board, Row, Column), NewBoard) :-
+parse_input(add_worker(Board, Row, Column), Response) :-
 	RowIndex is Row -1,
 	ColumnIndex is Column -1,
 	checkMove(Board, red, NewBoardTemp, empty, ColumnIndex, RowIndex, Error),
-	boardToNumbers(NewBoardTemp, NewBoard).
+	boardToNumbers(NewBoardTemp, NewBoard),
+	((list_empty(NewBoard), Response = Error);
+	(Response = NewBoard)), !.
 
-parse_input(add_player(Board, Row, Column, Player), NewBoard) :-
+parse_input(add_player(Board, Row, Column, Player), Response) :-
 	RowIndex is Row -1,
 	ColumnIndex is Column -1,
 	checkMove(Board, Player, NewBoardTemp, empty, ColumnIndex, RowIndex, Error),
-	boardToNumbers(NewBoardTemp, NewBoard).
+	boardToNumbers(NewBoardTemp, NewBoard),
+	((list_empty(NewBoard), Response = Error);
+	(Response = NewBoard)), !.
 
 parse_input(is_worker_cell(Board, Row, Column), Bool) :-
 	RowIndex is Row -1,
@@ -134,14 +138,16 @@ parse_input(is_worker_cell(Board, Row, Column), Bool) :-
 	isWorkerCell(Board, RowIndex, ColumnIndex, Bool).
 
 
-parse_input(move_worker(Board, Row, Column, NewRow, NewColumn), NewBoard):-
+parse_input(move_worker(Board, Row, Column, NewRow, NewColumn), Response):-
 	RowIndex is Row -1,
 	ColumnIndex is Column -1,
 	NewRowIndex is NewRow -1,
 	NewColumnIndex is NewColumn -1,
-	checkMove(Board, empty, TempBoard, red, ColumnIndex, RowIndex, Error1),
-	checkMove(TempBoard, red, NewBoardTemp, empty, NewColumnIndex, NewRowIndex, Error2),
-	boardToNumbers(NewBoardTemp, NewBoard).
+	checkMove(Board, empty, TempBoard, red, ColumnIndex, RowIndex, _),
+	checkMove(TempBoard, red, NewBoardTemp, empty, NewColumnIndex, NewRowIndex, Error),
+	boardToNumbers(NewBoardTemp, NewBoard),
+	((list_empty(NewBoard), Response = Error);
+	(Response = NewBoard)), !.
 
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).

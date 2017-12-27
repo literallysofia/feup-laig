@@ -189,21 +189,21 @@ checkMove(Board, Player, NewBoard, Expected, ColumnIndex, RowIndex, ERROR):-
       (((Player == empty, Expected == red),
             ((getValueFromMatrix(Board, RowIndex, ColumnIndex, Expected),
                   replaceInMatrix(Board, RowIndex, ColumnIndex, Player, NewBoard));
-                  (ERROR = 'INVALID MOVE: There is no worker in that cell, please try again!')));
+                  (ERROR = 'There is no worker in that cell, please try again!')));
       ((Player == red, Expected == empty),
             ((getValueFromMatrix(Board, RowIndex, ColumnIndex, Expected),
                   replaceInMatrix(Board, RowIndex, ColumnIndex, Player, NewBoard));
-                  (ERROR = 'INVALID MOVE: That cell is not empty, please try again!')));
+                  (ERROR = 'That cell is not empty, please try again!')));
       ((Player == empty),
             ((getValueFromMatrix(Board, RowIndex, ColumnIndex, Expected),
                   replaceInMatrix(Board, RowIndex, ColumnIndex, Player, NewBoard));
-                  (ERROR = 'INVALID MOVE: That cell is not empty, please try again!')));
+                  (ERROR = 'That cell is not empty, please try again!')));
       ((Player == white; Player == black),
             ((getValueFromMatrix(Board, RowIndex, ColumnIndex, Expected),
                    ((isValidPosLines(Board, RowIndex, ColumnIndex, ResIsValidPosLines), ResIsValidPosLines =:= 1),
                         replaceInMatrix(Board, RowIndex, ColumnIndex, Player, NewBoard);
-                        (ERROR = 'INVALID MOVE: That cell is not within the workers lines of sight, please try again!')));
-            (ERROR='INVALID MOVE: That cell is not empty, please try again!')))).
+                        (ERROR = 'That cell is not within the workers lines of sight, please try again!')));
+            (ERROR='That cell is not empty, please try again!')))).
 
 /*Predicado que pede e analisa cada jogada.*/
 askCoords(Board, Player, NewBoard, Expected) :-

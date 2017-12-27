@@ -14,6 +14,9 @@ number(white, 2).
 number(red, 3).
 
 
+list_empty([]).
+
+
 replaceInList([_H|T], 0, Value, [Value|T]).
 replaceInList([H|T], Index, Value, [H|TNew]) :-
         Index > 0,

@@ -148,12 +148,12 @@ Fabrik.prototype.addWorker=function(row, column){
 
     this.scene.client.getPrologRequest(command, function(data) {
 
-        if(data.target.response!="[]"){
+        if(data.target.response[0]=='['){
             this_game.board= this_game.parseBoardToJS(data.target.response);
             this_game.nextState();
         }
-        else{ //TODO: ir buscar a mensagem de erro a prolog
-            console.log(" > FABRIK: ERROR - Position not valid, please try again");
+        else{
+            console.log(" > FABRIK: ERROR - " + data.target.response);
         }
         
         
@@ -200,12 +200,12 @@ Fabrik.prototype.moveWorker=function(row, column){
 
     this.scene.client.getPrologRequest(command, function(data) {
 
-        if(data.target.response!="[]"){
+        if(data.target.response[0]=='['){
             this_game.board= this_game.parseBoardToJS(data.target.response);
             this_game.nextState();
         }
-        else{ //TODO: ir buscar a mensagem de erro a prolog
-            console.log(" > FABRIK: ERROR - Position not valid, please try again");
+        else{
+            console.log(" > FABRIK: ERROR - " + data.target.response);
         }
         
         
@@ -226,14 +226,13 @@ Fabrik.prototype.addPlayer=function(row, column){
 
     this.scene.client.getPrologRequest(command, function(data) {
 
-        if(data.target.response!="[]"){
+        if(data.target.response[0]=='['){
             this_game.board= this_game.parseBoardToJS(data.target.response);
             this_game.nextState();
         }
-        else{ //TODO: ir buscar a mensagem de erro a prolog
-            console.log(" > FABRIK: ERROR - Position not valid, please try again");
-        }
-        
+        else{
+            console.log(" > FABRIK: ERROR - " + data.target.response);
+        }        
         
     }, function(data) {
         console.log("CONNECTION ERROR");
