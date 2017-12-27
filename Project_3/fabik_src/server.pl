@@ -149,6 +149,11 @@ parse_input(move_worker(Board, Row, Column, NewRow, NewColumn), Response):-
 	((list_empty(NewBoard), Response = Error);
 	(Response = NewBoard)), !.
 
+/*State: 0 - nothing happened, 1 - player won, 2 - draw*/
+parse_input(check_state(Player,Board), State) :-
+	checkGameState(Player, Board, State).
+
+
 test(_,[],N) :- N =< 0.
 test(A,[A|Bs],N) :- N1 is N-1, test(A,Bs,N1).
 
