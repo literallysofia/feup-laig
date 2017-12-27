@@ -59,7 +59,7 @@ XMLscene.prototype.init = function(application) {
     //PROJECT3
     this.client = new Client();
     this.client.getPrologRequest("handshake");
-    this.game = new Fabrik(this, XMLscene.gameMode.PLAYER_VS_PLAYER)
+    this.game = new Fabrik(this, XMLscene.gameMode.PLAYER_VS_PLAYER);
 
     //Picking
     this.transparencyShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/transparency.frag");
@@ -70,6 +70,24 @@ XMLscene.prototype.init = function(application) {
     }
 
     this.setPickEnabled(true);
+
+
+    this.setPlayerVsPlayer = function() {
+        this.game = new Fabrik(this, XMLscene.gameMode.PLAYER_VS_PLAYER);
+    };
+
+    this.setPlayerVsBot = function() {
+        //this.game = new Fabrik(this, XMLscene.gameMode.PLAYER_VS_PLAYER)
+    };
+
+    this.setBotVsBot = function() {
+    };
+
+    this.setMovie = function() {
+        
+    };
+
+
     //PROJECT3
 }
 

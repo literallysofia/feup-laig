@@ -3,6 +3,8 @@
  * @constructor
  */
 function Fabrik(scene, gameMode) {
+
+    console.log(" > FABRIK: NEW GAME");
     
     this.scene = scene;
     this.gameMode = gameMode;

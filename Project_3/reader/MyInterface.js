@@ -99,7 +99,7 @@ MyInterface.prototype.addOptionsGroup = function() {
 
 MyInterface.prototype.addGameModeGroup = function() {
   var group = this.gui.addFolder("Game Mode");
-  group.open();
+  //group.open();
 
   /*let playerVsPlayer = {
 				setPlayerVsPlayer: this.scene.setPlayerVsPlayer.bind(this.scene)
@@ -117,8 +117,8 @@ MyInterface.prototype.addGameModeGroup = function() {
         setMovie: this.scene.setMovie.bind(this.scene)
     };*/
 
-  /*group.add(this.scene, "setPlayerVsPlayer").name("Player vs Player");
+  group.add(this.scene, "setPlayerVsPlayer").name("Player vs Player");
   group.add(this.scene, "setPlayerVsBot").name("Player vs Bot");
   group.add(this.scene, "setBotVsBot").name("Bot vs Bot");
-  group.add(this.scene, "setMovie").name("Watch Movie");*/
+  group.add(this.scene, "setMovie").name("Watch Movie");
 };
