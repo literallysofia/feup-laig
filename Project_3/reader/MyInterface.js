@@ -49,7 +49,7 @@ MyInterface.prototype.addScenePicker = function() {
 };
 
 MyInterface.prototype.addCameraOption = function(game) {
-  var controller = this.gui.add(this.scene, "camRotation").name("Camera Rotation");
+  var controller = this.gui.add(this.scene, "rotationCamera").name("Camera Rotation");
 
   controller.onChange(function() {
     game.setCamera();

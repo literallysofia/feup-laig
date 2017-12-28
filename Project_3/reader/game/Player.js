@@ -16,13 +16,11 @@ Player.prototype.setInformation = function() {
   switch (this.playerID) {
     case 1:
       this.color = "black";
-      this.position = vec3.fromValues(3, 15, 20);
-      this.target = vec3.fromValues(3, 0, 0);
+      this.position = vec3.fromValues(3, 15, 8);
       break;
     case 2:
       this.color = "white";
-      this.position = vec3.fromValues(3, 15, -14);
-      this.target = vec3.fromValues(3, 0, 6);
+      this.position = vec3.fromValues(3, 15, -2);
       break;
     default:
       this.color = null;
