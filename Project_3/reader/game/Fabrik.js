@@ -287,6 +287,7 @@ Fabrik.prototype.addWorker = function(row, column) {
         if(data.target.response.length == 265){
           this_game.board = this_game.parseBoardToJS(data.target.response);
           this_game.moves.push(new Move("add", "red", [row,column], null, this_game.currentState, this_game.player));         
+          this_game.board[row - 1][column - 1].setAnimation(0, 0, this_game.player);
           this_game.nextState();
         }
         else console.log(" > FABRIK: CONNECTION ERROR");
@@ -339,6 +340,7 @@ Fabrik.prototype.moveWorker = function(row, column) {
       if (data.target.response[0] == "[") {
         if(data.target.response.length == 265) {
           this_game.board = this_game.parseBoardToJS(data.target.response);
+          this_game.board[row - 1][column - 1].setAnimation(this_game.workerSavedColumn, this_game.workerSavedRow);
           this_game.nextState();
         }
         else console.log(" > FABRIK: CONNECTION ERROR");
@@ -366,7 +368,7 @@ Fabrik.prototype.addPlayer = function(row, column) {
         if(data.target.response.length == 265) {
           this_game.board = this_game.parseBoardToJS(data.target.response);
           this_game.moves.push(new Move("add",  this_game.getCurrPlayerColor(), [row,column], null, this_game.previousState, this_game.player));
-          this_game.board[row - 1][column - 1].setAnimation(0, 0, 0, column, 5.3, row);
+          this_game.board[row - 1][column - 1].setAnimation();
           this_game.checkGameState();
         }
         else console.log(" > FABRIK: CONNECTION ERROR");
