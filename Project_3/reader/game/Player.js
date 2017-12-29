@@ -26,3 +26,7 @@ Player.prototype.setInformation = function() {
       break;
   }
 };
+
+Player.prototype.incrementScore = function() {
+  this.score++;
+};
