@@ -49,7 +49,7 @@ function Fabrik(scene, gameMode) {
 
     this.scene.camera = this.defaultCamera;
 
-    this.scene.information = "Choose a Game Mode and press Start Game to play Fabrik";
+    this.scene.information = "Choose a Game Mode and press Start Game to play Fabrik.";
 };
 
 Fabrik.prototype.getGameMode = function(gameMode) {
@@ -77,40 +77,35 @@ Fabrik.prototype.constructor = Fabrik;
 * UNDO
 */
 Fabrik.prototype.undo = function() {
-
-  if(this.gameMode == this.mode.PLAYER_VS_PLAYER){
-    
-    if(this.moves.length > 0){
-
+  if (this.gameMode == this.mode.PLAYER_VS_PLAYER) {
+    if (this.moves.length > 0) {
       console.log(" > FABRIK: Undoing move");
-  
+
       var moveToUndo = this.moves[this.moves.length - 1];
 
-      if(moveToUndo.type=="add"){
-        let rowIndex = moveToUndo.newCell[0]-1;
-        let columnIndex = moveToUndo.newCell[1]-1;
-  
-        this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
+      if (moveToUndo.type == "add") {
+        let rowIndex = moveToUndo.newCell[0] - 1;
+        let columnIndex = moveToUndo.newCell[1] - 1;
 
-      } else if(moveToUndo.type == "move"){
-        let rowIndex = moveToUndo.newCell[0]-1;
-        let columnIndex = moveToUndo.newCell[1]-1;
-        var oldRowIndex = moveToUndo.cell[0]-1;
-        var oldColumnIndex = moveToUndo.cell[1]-1;
-  
         this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
-        this.board[oldRowIndex][oldColumnIndex] = new MyPiece(this.scene, oldColumnIndex, oldRowIndex, "3");
+      } else if (moveToUndo.type == "move") {
+        let rowIndex = moveToUndo.newCell[0] - 1;
+        let columnIndex = moveToUndo.newCell[1] - 1;
+        var oldRowIndex = moveToUndo.cell[0] - 1;
+        var oldColumnIndex = moveToUndo.cell[1] - 1;
+
+        this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
+        this.board[oldRowIndex][oldColumnIndex] = new MyPiece(this.scene, oldColumnIndex,oldRowIndex, "3");
       }
 
       this.currentState = moveToUndo.state;
       this.player = moveToUndo.player;
 
-      console.log(" > FABRIK: " + this.getCurrPlayerColor().toUpperCase() +" PLAYER'S TURN");
+      console.log(" > FABRIK: " + this.getCurrPlayerColor().toUpperCase() + " PLAYER'S TURN");
       this.moves.splice(this.moves.length - 1);
-
     }
   }
-}
+};
 
 /*
 * CAMERA

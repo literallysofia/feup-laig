@@ -130,8 +130,8 @@ XMLscene.prototype.onGraphLoaded = function()
     this.rotationCamera = false;
     this.interface.addScenePicker();
     this.interface.addGameModePicker();
-    this.interface.addOptionsGroup();
     this.interface.addCameraOption(this.game);
+    this.interface.addOptionsGroup();
 }
 
 

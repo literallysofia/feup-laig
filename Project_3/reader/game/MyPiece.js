@@ -6,7 +6,7 @@ function MyPiece(scene, x, z, type) {
   CGFobject.call(this, scene);
   this.x = x;
   this.z = z;
-  this.type = type; //0 empty, 1 black, 2 white, 3 red
+  this.type = type;
   this.setNodeID();
   this.setTransformMatrix();
   this.animationRef = null;
