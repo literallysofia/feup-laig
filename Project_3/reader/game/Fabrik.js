@@ -161,7 +161,6 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
   switch (this.currentState) {
     case this.state.WAITING_FOR_START: 
       this.currentState = this.state.ADDING_FIRST_WORKER;
-      this.nextPlayer();
       this.scene.information = "Choose a cell to add the first worker.";
       if(this.gameMode == this.mode.BOT_VS_BOT) this.BOTaddWorker();
       break;
@@ -451,21 +450,6 @@ Fabrik.prototype.BOTchooseMoveWorker = function() {
   }
 };
 
-Fabrik.prototype.BOTgetWorker = function() {
-  var this_game = this;
-
-  var command = "choose_move_worker_bot";
-
-  this.scene.client.getPrologRequest(
-    command,
-    function(data) {
-      if (data.target.response == "0") nextState(1);
-    },
-    function(data) {
-      console.log("CONNECTION ERROR");
-    }
-  );
-};
 
 Fabrik.prototype.BOTaddPlayer = function() {
   var this_game = this;
