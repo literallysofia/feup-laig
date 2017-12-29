@@ -186,10 +186,13 @@ XMLscene.prototype.display = function() {
     this.clearPickRegistration();
 
     if (typeof this.game != "undefined") {
-      document.getElementById("player").innerText = "Turn: Player " + this.game.player;
-
-      if (this.game.player == 1) document.getElementById("score").innerText = "Score:  " + this.game.playerBlack.score;
-      else if (this.game.player == 2) document.getElementById("score").innerText = "Score:  " + this.game.playerWhite.score;
+      if (this.game.player == 1) {
+        document.getElementById("player").innerText = "Player: Black";
+        document.getElementById("score").innerText = "Score:  " + this.game.playerBlack.score;
+      } else if (this.game.player == 2) {
+        document.getElementById("player").innerText = "Player: White";
+        document.getElementById("score").innerText = "Score:  " + this.game.playerWhite.score;
+      }
 
       document.getElementById("time").innerText = "Time: 00:00";
       document.getElementById("information").innerText = this.information;

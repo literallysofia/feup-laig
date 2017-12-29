@@ -102,6 +102,7 @@ Fabrik.prototype.undo = function() {
 
       console.log(" > FABRIK: " + this.getCurrPlayerColor().toUpperCase() + " PLAYER'S TURN");
       this.moves.splice(this.moves.length - 1);
+      this.rotateCamera();
     }
   }
 };
