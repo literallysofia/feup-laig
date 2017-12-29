@@ -2,7 +2,7 @@
  * Fabrik
  * @constructor
  */
-function Fabrik(scene, gameMode) {
+function Fabrik(scene) {
 
     console.log(" > FABRIK: NEW GAME");
     
@@ -11,7 +11,6 @@ function Fabrik(scene, gameMode) {
     this.rotationCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 0, 0), vec3.fromValues(3, 0, 3));
     
     this.board = [];
-    if(gameMode != null) this.getInitialBoard();
     this.moves = [];
 
     this.player = 1; // 1 - black, 2 - white
@@ -41,8 +40,6 @@ function Fabrik(scene, gameMode) {
 
     this.currentState = this.state.WAITING_FOR_START;
     this.previousState = this.state.WAITING_FOR_START;
-    this.getGameMode(gameMode); 
-
 
     this.workerSavedRow;
     this.workerSavedColumn;
@@ -52,7 +49,10 @@ function Fabrik(scene, gameMode) {
     this.scene.information = "Choose a Game Mode and press Start Game to play Fabrik";
 };
 
-Fabrik.prototype.getGameMode = function(gameMode) {
+
+Fabrik.prototype.constructor = Fabrik;
+
+Fabrik.prototype.start = function(gameMode) {
 
   switch (gameMode) {
     case "Player vs Player":
@@ -68,10 +68,9 @@ Fabrik.prototype.getGameMode = function(gameMode) {
       break;
   }
 
+  this.getInitialBoard();
+
 };
-
-Fabrik.prototype.constructor = Fabrik;
-
 
 /*
 * UNDO
@@ -235,7 +234,6 @@ Fabrik.prototype.updateScore = function() {
 
 Fabrik.prototype.pickingHandler = function(row, column) {
   if(this.gameMode == this.mode.PLAYER_VS_PLAYER || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 1)){
-    console.log("CELL HANDLER");
     this.cellHandler(row, column);
   }
   
