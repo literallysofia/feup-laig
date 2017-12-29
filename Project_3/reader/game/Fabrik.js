@@ -209,6 +209,7 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
       break;
     case this.state.WON_GAME:
       this.scene.information = "You won!";
+      this.updateScore();
       break;
     case this.state.DRAW_GAME:
       this.scene.information = "Woops, no more space left! It is a draw!";
@@ -217,6 +218,20 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
       break;
   }
 };
+
+Fabrik.prototype.updateScore = function() {
+  switch (this.player) {
+    case 1:
+      this.playerBlack.incrementScore();
+      break;
+    case 2:
+      this.playerWhite.incrementScore();
+      break;
+    default:
+      break;
+  }
+};
+
 
 Fabrik.prototype.pickingHandler = function(row, column) {
   if(this.gameMode == this.mode.PLAYER_VS_PLAYER || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 1)){
