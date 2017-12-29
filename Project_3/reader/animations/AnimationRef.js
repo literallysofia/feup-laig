@@ -28,6 +28,8 @@ AnimationRef.prototype.updateMatrix = function(deltaTime) {
     } else {
       this.enable = false; //animationRef acabou
       this.reset();
+
+      if (this.animation.id == "piece") this.matrix = this.animation.lastPosition();
     }
   }
 };

@@ -236,6 +236,7 @@ Fabrik.prototype.moveWorker = function(row, column) {
       if (data.target.response[0] == "[") {
         this_game.board = this_game.parseBoardToJS(data.target.response);
         this_game.nextState();
+        //this_game.board[row - 1][column - 1].setAnimation(0, 0, 0, column, 5.3, row);
       } else {
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
@@ -259,6 +260,7 @@ Fabrik.prototype.addPlayer = function(row, column) {
       if (data.target.response[0] == "[") {
         this_game.board = this_game.parseBoardToJS(data.target.response);
         this_game.checkGameState();
+        this_game.board[row - 1][column - 1].setAnimation(0, 0, 0, column, 5.3, row);
       } else {
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }

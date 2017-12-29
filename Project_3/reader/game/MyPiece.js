@@ -9,7 +9,7 @@ function MyPiece(scene, x, z, type) {
   this.type = type; //0 empty, 1 black, 2 white, 3 red
   this.setNodeID();
   this.setTransformMatrix();
-  this.setAnimationMatrix();
+  this.animationRef = null;
 }
 
 MyPiece.prototype = Object.create(CGFobject.prototype);
@@ -28,16 +28,44 @@ MyPiece.prototype.setNodeID = function() {
       break;
     default:
       this.nodeID = null;
+      break;
   }
 };
 
 MyPiece.prototype.setTransformMatrix = function() {
   this.transformMatrix = mat4.create();
   mat4.identity(this.transformMatrix);
-  mat4.translate(this.transformMatrix, this.transformMatrix, [15 + this.x, 4.8+0.5, 15 + this.z]);
+  mat4.translate(this.transformMatrix, this.transformMatrix, [15 + this.x, 5.3, 15 + this.z]);
   mat4.rotate(this.transformMatrix, this.transformMatrix, Math.PI * -90 / 180, [1, 0, 0]);
 };
 
-MyPiece.prototype.setAnimationMatrix = function() {
-  this.animationMatrix;
+
+MyPiece.prototype.setAnimation = function(initialX, initialY, initialZ, finalX, finalY, finalZ) {
+  switch (this.type) {
+    case "1":
+      var initialPoint = [28.5 - (15 + this.x), -(20 - (15 + this.z)), 0];
+      var midPoint1 = [27.5 - (15 + this.x), -(20 - (15 + this.z)), 2];
+      var midPoint2 = [26.5 - (15 + this.x), -(20 - (15 + this.z)), 4]; //[x,-z,y]
+      break;
+    case "2":
+      var initialPoint = [11.5 - (15 + this.x), -(20 - (15 + this.z)), 0];
+      var midPoint1 = [12.5 - (15 + this.x), -(20 - (15 + this.z)), 2];
+      var midPoint2 = [13.5 - (15 + this.x), -(20 - (15 + this.z)), 4];
+      break;
+    case "3":
+      var initialPoint = [initialX, initialY, initialZ];
+      var midPoint1 = [12.5 - (15 + this.x), -(20 - (15 + this.z)), 2];
+      var midPoint2 = [13.5 - (15 + this.x), -(20 - (15 + this.z)), 4];
+      break;
+    default:
+      break;
+  }
+
+  var finalPoint = [0, 0, 0];
+
+  var controlPoints = [initialPoint, midPoint1, midPoint2, finalPoint];
+
+  this.animation = new BezierAnimation("piece", 8, controlPoints);
+  this.animationRef = new AnimationRef(this.animation);
+  this.animationRef.enable = true;
 };

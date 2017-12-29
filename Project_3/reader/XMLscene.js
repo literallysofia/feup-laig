@@ -176,10 +176,15 @@ XMLscene.prototype.update = function(currTime) {
   this.testShader.setUniformsValues({ greenFactor: this.greenFactor });
   this.testShader.setUniformsValues({ blueFactor: this.blueFactor });
 
+  for (var i = 0; i < this.game.board.length; i++) {
+    for (var j = 0; j < this.game.board[i].length; j++) {
+      if (this.game.board[i][j].animationRef != null) this.game.board[i][j].animationRef.updateMatrix(this.deltaTime);
+    }
+  }
+
   if (this.cameraRotationActive) {
     var currAng = Math.PI * this.deltaTime;
     this.cameraRotationAngle -= currAng;
-    console.log("CAM:" + this.cameraRotationAngle);
     if (this.cameraRotationAngle < 0) {
       this.cameraRotationActive = false;
       this.game.setCamera();

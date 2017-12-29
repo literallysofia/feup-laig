@@ -151,9 +151,18 @@
 
   <ANIMATIONS>
 
-    <ANIMATION id="Linear1" speed="3" type="linear">
-        <controlpoint xx="0" yy="0" zz="0" /> 
-        <controlpoint xx="10" yy="0" zz="0" />
+    <ANIMATION id="BezierWhitePiece" speed="6" type="bezier">
+        <controlpoint xx="11.5" yy="5.5" zz="20" />
+        <controlpoint xx="12.5" yy="6.5" zz="20" />
+        <controlpoint xx="13.5" yy="8" zz="20" />
+        <controlpoint xx="20" yy="5.3" zz="20" /> <!-- x e z destino -->
+    </ANIMATION>
+
+    <ANIMATION id="BezierBlackPiece" speed="6" type="bezier">
+        <controlpoint xx="28.5" yy="5.5" zz="20" />
+        <controlpoint xx="27.5" yy="6.5" zz="20" />
+        <controlpoint xx="26.5" yy="8" zz="20" />
+        <controlpoint xx="20" yy="5.3" zz="20" /> <!-- x e z destino -->
     </ANIMATION>
 
   </ANIMATIONS>

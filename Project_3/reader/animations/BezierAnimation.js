@@ -60,7 +60,7 @@ BezierAnimation.prototype.getMatrix = function(time) {
   mat4.identity(matrix);
 
   mat4.translate(matrix, matrix, [this.x, this.y, this.z]);
-  mat4.rotate(matrix, matrix, Math.PI / 2 - this.angle, [0, 1, 0]);
+  //mat4.rotate(matrix, matrix, Math.PI / 2 - this.angle, [0, 1, 0]);
 
   return matrix;
 };
@@ -95,6 +95,16 @@ BezierAnimation.prototype.setPoints = function() {
   this.x = this.p1x;
   this.y = this.p1y;
   this.z = this.p1z;
+};
+
+/*
+ * funcão dá set à ultima posicao
+ */
+BezierAnimation.prototype.lastPosition = function() {
+  var matrix = mat4.create();
+  mat4.identity(matrix);
+  mat4.translate(matrix, matrix, [this.p4x, this.p4y, this.p4z]);
+  return matrix;
 };
 
 /*
