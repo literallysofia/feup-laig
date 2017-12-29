@@ -1728,6 +1728,8 @@ MySceneGraph.prototype.displaySceneRecursive = function(idNode, idMaterialFather
 
     var idMaterial = idMaterialFather;
     var idTexture = idTextureFather;
+
+    
     
     this.scene.multMatrix(currNode.transformMatrix);
 
