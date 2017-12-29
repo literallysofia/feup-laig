@@ -100,7 +100,7 @@ print_header_line(_).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%                                       Commands                                                  %%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+:- consult('fabrik.pl').
 :- consult('menus.pl').
 :- consult('display.pl').
 :- consult('logic.pl').
@@ -115,6 +115,10 @@ parse_input(quit, goodbye).
 parse_input(initial_board,Board):-
 	initialBoard(BoardTemp),
 	boardToNumbers(BoardTemp, Board).
+
+/*State: 0 - nothing happened, 1 - player won, 2 - draw*/
+parse_input(check_state(Player,Board), State) :-
+	checkGameState(Player, Board, State).
 
 parse_input(add_worker(Board, Row, Column), Response) :-
 	RowIndex is Row -1,
@@ -137,7 +141,6 @@ parse_input(is_worker_cell(Board, Row, Column), Bool) :-
 	ColumnIndex is Column -1,
 	isWorkerCell(Board, RowIndex, ColumnIndex, Bool).
 
-
 parse_input(move_worker(Board, Row, Column, NewRow, NewColumn), Response):-
 	RowIndex is Row -1,
 	ColumnIndex is Column -1,
@@ -149,9 +152,21 @@ parse_input(move_worker(Board, Row, Column, NewRow, NewColumn), Response):-
 	((list_empty(NewBoard), Response = Error);
 	(Response = NewBoard)), !.
 
-/*State: 0 - nothing happened, 1 - player won, 2 - draw*/
-parse_input(check_state(Player,Board), State) :-
-	checkGameState(Player, Board, State).
+parse_input(add_worker_bot(Board), [WorkerRow, WorkerColumn]):-
+ 	generateWorkerMove(Board, WorkerRowIndex, WorkerColumnIndex),
+	WorkerRow is WorkerRowIndex + 1,
+	WorkerColumn is WorkerColumnIndex + 1.
+
+      
+parse_input(add_player_bot(Board), [Row, Column]):-
+	generatePlayerMove(Board, RowIndex, ColumnIndex),
+	Row is RowIndex + 1,
+	Column is ColumnIndex + 1.
+
+parse_input(get_worker_bot(Board), [WorkerRow, WorkerColumn]):-
+	chooseWorker(Board, WorkerRowIndex, WorkerColumnIndex),
+	WorkerRow is WorkerRowIndex + 1,
+	WorkerColumn is WorkerColumnIndex + 1.
 
 
 test(_,[],N) :- N =< 0.
