@@ -20,7 +20,6 @@ Player.prototype.setInformation = function() {
       this.position = vec3.fromValues(3, 15, -2);
       break;
     default:
-      this.color = null;
       break;
   }
 };
