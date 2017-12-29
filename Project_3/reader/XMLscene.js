@@ -22,6 +22,8 @@ function XMLscene(interface) {
 
     this.information;
     this.error = "";
+
+    this.gameMode = "";
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -56,7 +58,7 @@ XMLscene.prototype.init = function(application) {
 
     //PROJECT3
     this.client = new Client();
-    this.game = new Fabrik(this, "PLAYER_VS_PLAYER");
+    this.game = new Fabrik(this, null);
 
     //Picking
     this.transparencyShader=new CGFshader(this.gl, "shaders/scale.vert", "shaders/transparency.frag");
@@ -65,25 +67,6 @@ XMLscene.prototype.init = function(application) {
     for(let i =0; i < 11*11; i++){
         this.objects.push(new CGFplane(this));
     }
-
-    this.setPickEnabled(true);
-
-
-    this.setPlayerVsPlayer = function() {
-        this.game = new Fabrik(this, "PLAYER_VS_PLAYER");
-    };
-
-    this.setPlayerVsBot = function() {
-        this.game = new Fabrik(this,  "PLAYER_VS_BOT");
-    };
-
-    this.setBotVsBot = function() {
-        this.game = new Fabrik(this,  "BOT_VS_BOT");
-    };
-
-    this.setMovie = function() {
-        
-    };
 
 
     //PROJECT3
@@ -145,9 +128,9 @@ XMLscene.prototype.onGraphLoaded = function()
 
     this.rotationCamera = false;
     this.interface.addScenePicker();
-    this.interface.addCameraOption(this.game);
+    this.interface.addGameModePicker();
     this.interface.addOptionsGroup();
-    this.interface.addGameModeGroup();
+    this.interface.addCameraOption(this.game);
 }
 
 
@@ -306,5 +289,12 @@ XMLscene.prototype.logPicking = function() {
       this.pickResults.splice(0, this.pickResults.length);
     }
   }
+};
+
+
+XMLscene.prototype.startGame = function() {
+
+    this.setPickEnabled(true);
+    this.game = new Fabrik(this, this.gameMode);
 };
 //PROJECT3

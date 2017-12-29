@@ -12,9 +12,6 @@ function MyPiece(scene, x, z, type) {
   this.animationRef = null;
 }
 
-MyPiece.prototype = Object.create(CGFobject.prototype);
-MyPiece.prototype.constructor = MyPiece;
-
 MyPiece.prototype.setNodeID = function() {
   switch (this.type) {
     case '1':

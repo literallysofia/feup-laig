@@ -11,7 +11,7 @@ function Fabrik(scene, gameMode) {
     this.rotationCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 0, 0), vec3.fromValues(3, 0, 3));
     
     this.board = [];
-    this.getInitialBoard();
+    if(gameMode != null) this.getInitialBoard();
     this.moves = [];
 
     this.player = 1; // 1 - black, 2 - white
@@ -48,18 +48,18 @@ function Fabrik(scene, gameMode) {
     this.workerSavedColumn;
 
     this.scene.camera = this.defaultCamera;
+
+    this.scene.information = "Choose a Game Mode and press Start Game to play Fabrik";
 };
 
 Fabrik.prototype.getGameMode = function(gameMode) {
   switch (gameMode) {
-    case "PLAYER_VS_PLAYER":
+    case "Player vs Player":
       return this.mode.PLAYER_VS_PLAYER;
-    case "PLAYER_VS_BOT":
+    case "Player vs Bot":
       return this.mode.PLAYER_VS_BOT;
-    case "BOT_VS_BOT":
+    case "Bot vs Bot":
       return this.mode.BOT_VS_BOT;
-    case "MOVIE":
-      return this.mode.MOVIE;
     default:
       break;
   }
@@ -67,24 +67,41 @@ Fabrik.prototype.getGameMode = function(gameMode) {
 
 Fabrik.prototype.constructor = Fabrik;
 
+
+/*
+* UNDO
+*/
 Fabrik.prototype.undo = function() {
 
-  if(this.moves.length > 0){
-    console.log(" > FABRIK: Undoing move");
+  if(this.gameMode == this.mode.PLAYER_VS_PLAYER){
+    if(this.moves.length > 0){
 
-    var moveToUndo = this.moves[this.moves.length - 1];
+      console.log(" > FABRIK: Undoing move");
   
-    var rowIndex = moveToUndo.newCell[0]-1;
-    var columnIndex = moveToUndo.newCell[1]-1;
+      var moveToUndo = this.moves[this.moves.length - 1];
+
+      if(moveToUndo.type=="add"){
+        let rowIndex = moveToUndo.newCell[0]-1;
+        let columnIndex = moveToUndo.newCell[1]-1;
   
-    if(moveToUndo.type == "add"){
-      this.board[rowIndex][columnIndex] = new MyPiece(this.scene, rowIndex, columnIndex, 0);
-      this.currentState = moveToUndo.previousState;
+        this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
+
+      } else if(moveToUndo.type == "move"){
+        let rowIndex = moveToUndo.newCell[0]-1;
+        let columnIndex = moveToUndo.newCell[1]-1;
+        var oldRowIndex = moveToUndo.cell[0]-1;
+        var oldColumnIndex = moveToUndo.cell[1]-1;
+  
+        this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
+        this.board[oldRowIndex][oldColumnIndex] = new MyPiece(this.scene, oldColumnIndex, oldRowIndex, "3");
+      }
+
+      this.currentState = moveToUndo.state;
       this.player = moveToUndo.player;
 
       console.log(" > FABRIK: " + this.getCurrPlayerColor().toUpperCase() +" PLAYER'S TURN");
-
       this.moves.splice(this.moves.length - 1);
+
     }
   }
 }
@@ -148,7 +165,6 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
   switch (this.currentState) {
     case this.state.WAITING_FOR_START: 
       this.currentState = this.state.ADDING_FIRST_WORKER;
-      this.nextPlayer();
       this.scene.information = "Choose a cell to add the first worker.";
       if(this.gameMode == this.mode.BOT_VS_BOT) this.BOTaddWorker();
       break;
@@ -349,6 +365,7 @@ Fabrik.prototype.moveWorker = function(row, column) {
       if (data.target.response[0] == "[") {
         if(data.target.response.length == 265) {
           this_game.board = this_game.parseBoardToJS(data.target.response);
+          this_game.moves.push(new Move("move",  "red", [row,column], [this_game.workerSavedRow, this_game.workerSavedColumn], this_game.state.CHOOSING_MOVE_WORKER, this_game.player));
           this_game.board[row - 1][column - 1].setAnimation(this_game.workerSavedColumn, this_game.workerSavedRow);
           this_game.nextState();
         }
@@ -451,21 +468,6 @@ Fabrik.prototype.BOTchooseMoveWorker = function() {
   }
 };
 
-Fabrik.prototype.BOTgetWorker = function() {
-  var this_game = this;
-
-  var command = "choose_move_worker_bot";
-
-  this.scene.client.getPrologRequest(
-    command,
-    function(data) {
-      if (data.target.response == "0") nextState(1);
-    },
-    function(data) {
-      console.log("CONNECTION ERROR");
-    }
-  );
-};
 
 Fabrik.prototype.BOTaddPlayer = function() {
   var this_game = this;
