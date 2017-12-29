@@ -19,7 +19,9 @@ function XMLscene(interface) {
     this.greenFactor=0.5;
     this.blueFactor=0.5;
     //PROJECT2
- 
+
+    this.information;
+    this.error = "";
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -198,9 +200,19 @@ XMLscene.prototype.display = function() {
     //PROJECT3
     this.logPicking();
     this.clearPickRegistration();
-    //PROJECT3
 
-    // ---- BEGIN Background, camera and axis setup
+    if (typeof this.game != "undefined") {
+      document.getElementById("player").innerText = "Turn: Player " + this.game.player;
+
+      if (this.game.player == 1) document.getElementById("score").innerText = "Score:  " + this.game.playerBlack.score;
+      else if (this.game.player == 2) document.getElementById("score").innerText = "Score:  " + this.game.playerWhite.score;
+
+      document.getElementById("time").innerText = "Time: 00:00";
+      document.getElementById("information").innerText = this.information;
+
+      document.getElementById("error").innerText = this.error;
+    }
+    //PROJECT3
     
     // Clear image and depth buffer everytime we update the scene
     this.gl.viewport(0, 0, this.gl.canvas.width, this.gl.canvas.height);
@@ -270,12 +282,8 @@ XMLscene.prototype.display = function() {
 
     this.setActiveShader(this.defaultShader);
     //PROJECT3
-    
 
-    this.popMatrix();
-    
-    // ---- END Background, camera and axis setup
-    
+    this.popMatrix(); 
 }
 
 //PROJECT3

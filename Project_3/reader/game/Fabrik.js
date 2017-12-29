@@ -7,7 +7,6 @@ function Fabrik(scene, gameMode) {
     console.log(" > FABRIK: NEW GAME");
     
     this.scene = scene;
-
     this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     this.rotationCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 0, 0), vec3.fromValues(3, 0, 3));
     
@@ -60,7 +59,7 @@ Fabrik.prototype.getGameMode = function(gameMode) {
     default:
       break;
   }
-}
+};
 
 Fabrik.prototype.constructor = Fabrik;
 
@@ -101,17 +100,14 @@ Fabrik.prototype.nextPlayer = function() {
   switch (this.player) {
     case 0:
       this.player = 1;
-      console.log(" > FABRIK: BLACK PLAYER'S TURN");
       break;
     case 1:
       this.player = 2;
       this.rotateCamera();
-      console.log(" > FABRIK: WHITE PLAYER'S TURN");
       break;
     case 2:
       this.player = 1;
       this.rotateCamera();
-      console.log(" > FABRIK: BLACK PLAYER'S TURN");
       break;
     default:
       break;
@@ -124,26 +120,26 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
     case this.state.WAITING_FOR_START: 
       this.currentState = this.state.ADDING_FIRST_WORKER;
       this.nextPlayer();
-      console.log(" > FABRIK: Choose a cell to add the first worker");
+      this.scene.information = "Choose a cell to add the first worker.";
       if(this.gameMode == this.mode.BOT_VS_BOT) this.BOTaddWorker();
       break;
     case this.state.ADDING_FIRST_WORKER:
       this.currentState = this.state.ADDING_SECOND_WORKER;
       this.nextPlayer();
-      console.log(" > FABRIK: Choose a cell to add the second worker");
+      this.scene.information = "Choose a cell to add the second worker.";
       if(this.gameMode == this.mode.BOT_VS_BOT || this.gameMode == this.mode.PLAYER_VS_BOT) this.BOTaddWorker();
       break;
     case this.state.ADDING_SECOND_WORKER:
       this.currentState = this.state.CHOOSING_MOVE_WORKER;
       this.nextPlayer();
-      console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
+      this.scene.information = "If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces.";
       if(this.gameMode == this.mode.BOT_VS_BOT) this.BOTchooseMoveWorker();
       break;
     case this.state.CHOOSING_MOVE_WORKER:
       if (toMoveWorker) {
         this.currentState = this.state.CHOOSING_WORKER_NEW_CELL;
         if(this.gameMode == this.mode.BOT_VS_BOT || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 2)) this.BOTaddWorker();
-        console.log(" > FABRIK: Choose the new position for the worker you want to move");
+        this.scene.information = "Choose the new position for the worker you want to move.";
       } else {
         this.currentState = this.state.ADDING_PLAYER;
         if(this.gameMode == this.mode.BOT_VS_BOT || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 2)) this.BOTaddPlayer();
@@ -151,27 +147,28 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
       break;
     case this.state.CHOOSING_WORKER_NEW_CELL:
       this.currentState = this.state.ADDING_PLAYER;
-      console.log(" > FABRIK: Choose a cell for one of your pieces");
+      this.scene.information = "Choose a cell for one of your pieces.";
       if(this.gameMode == this.mode.BOT_VS_BOT || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 2)) this.BOTaddPlayer();
       break;
     case this.state.ADDING_PLAYER:
       this.currentState = this.state.CHOOSING_MOVE_WORKER;
       this.nextPlayer();
-      console.log(" > FABRIK: If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces");
+      this.scene.information = "If you want to move a worker choose a cell with a worker, otherwise choose a cell to put one of your pieces.";
       if(this.gameMode == this.mode.BOT_VS_BOT || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 2))this.BOTchooseMoveWorker();
       break;
     case this.state.WON_GAME:
-      console.log(" > FABRIK: You won!");
+      this.scene.information = "You won!";
       break;
     case this.state.DRAW_GAME:
-      console.log(" > FABRIK: Woops, no more space left! It is a draw!");
+      this.scene.information = "Woops, no more space left! It is a draw!";
       break;
     default:
       break;
   }
-}
+};
 
 Fabrik.prototype.pickingHandler = function(row, column) {
+  this.scene.error = "";
   switch (this.currentState) {
     case this.state.ADDING_FIRST_WORKER:
       this.addWorker(row, column);
@@ -193,31 +190,29 @@ Fabrik.prototype.pickingHandler = function(row, column) {
   }
 };
 
-Fabrik.prototype.checkGameState=function(){
-
+Fabrik.prototype.checkGameState = function() {
   var this_game = this;
 
   let boardString = this.parseBoardToPROLOG();
   var color = this.getCurrPlayerColor();
-  var command = "check_state(" + color + "," +boardString+ ")" ;
+  var command = "check_state(" + color + "," + boardString + ")";
 
-
-  this.scene.client.getPrologRequest(command, function(data) {
-
-      if(data.target.response=="1"){
+  this.scene.client.getPrologRequest(
+    command,
+    function(data) {
+      if (data.target.response == "1") {
         this_game.currentState = this_game.state.WON_GAME;
-      }
-      else if(data.target.response=="2"){
+      } else if (data.target.response == "2") {
         this_game.currentState = this_game.state.DRAW_GAME;
       }
-      
-      this_game.nextState();
 
-  }, function(data) {
+      this_game.nextState();
+    },
+    function(data) {
       console.log("CONNECTION ERROR");
-  });
- 
-}
+    }
+  );
+};
 
 
 Fabrik.prototype.getInitialBoard = function() {
@@ -242,6 +237,7 @@ Fabrik.prototype.getInitialBoard = function() {
 /*
 * PLAYER
 */
+
 Fabrik.prototype.addWorker = function(row, column) {
   var this_game = this;
 
@@ -259,6 +255,7 @@ Fabrik.prototype.addWorker = function(row, column) {
         }
         else console.log("CONNECTION ERROR");
       } else {
+        this_game.scene.error = "ERROR: " + data.target.response;
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
     },
@@ -312,6 +309,7 @@ Fabrik.prototype.moveWorker = function(row, column) {
         }
         else console.log("CONNECTION ERROR");
       } else {
+        this_game.scene.error = "ERROR: " + data.target.response;
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
     },
@@ -339,6 +337,7 @@ Fabrik.prototype.addPlayer = function(row, column) {
         }
         else console.log("CONNECTION ERROR");
       } else {
+        this_game.scene.error = "ERROR: " + data.target.response;
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
     },
@@ -357,8 +356,8 @@ Fabrik.prototype.BOTaddWorker = function() {
 
   let boardString = this.parseBoardToPROLOG();
 
-  var cell=[];
-  
+  var cell = [];
+
   var command = "add_worker_bot(" + boardString + ")";
 
   var flag = false;
@@ -366,105 +365,81 @@ Fabrik.prototype.BOTaddWorker = function() {
   this.scene.client.getPrologRequest(
     command,
     function(data) {
-
       cell = this_game.parseCellToJS(data.target.response);
-      this_game.pickingHandler(cell[0],  cell[1]);
-      
+      this_game.pickingHandler(cell[0], cell[1]);
     },
     function(data) {
       console.log("CONNECTION ERROR");
     }
   );
-
-}
+};
 
 Fabrik.prototype.BOTchooseMoveWorker = function() {
   var this_game = this;
-  
-  var command = "choose_move_worker_bot";
 
+  var command = "choose_move_worker_bot";
 
   var toMove = Math.round(Math.random());
 
-  if(toMove){
+  if (toMove) {
     var this_game = this;
     let boardString = this.parseBoardToPROLOG();
-    var cell=[];
+    var cell = [];
     var command = "get_worker_bot(" + boardString + ")";
-    
+
     this.scene.client.getPrologRequest(
       command,
       function(data) {
-  
         cell = this_game.parseCellToJS(data.target.response);
         this_game.workerSavedRow = cell[0];
         this_game.workerSavedColumn = cell[1];
 
         this_game.nextState(1);
-        
       },
       function(data) {
         console.log("CONNECTION ERROR");
       }
     );
-  }
-  else{
+  } else {
     this_game.nextState(0);
   }
-
-}
-
+};
 
 Fabrik.prototype.BOTgetWorker = function() {
   var this_game = this;
-  
+
   var command = "choose_move_worker_bot";
 
   this.scene.client.getPrologRequest(
     command,
     function(data) {
-      if(data.target.response == "0")
-      
-
-      nextState (1);
-        
+      if (data.target.response == "0") nextState(1);
     },
     function(data) {
       console.log("CONNECTION ERROR");
     }
   );
-
-}
-
+};
 
 Fabrik.prototype.BOTaddPlayer = function() {
-
   var this_game = this;
-
   let boardString = this.parseBoardToPROLOG();
 
-  var cell=[];
-  
+  var cell = [];
   var command = "add_player_bot(" + boardString + ")";
-
   var flag = false;
 
   this.scene.client.getPrologRequest(
     command,
     function(data) {
-
       cell = this_game.parseCellToJS(data.target.response);
-      this_game.pickingHandler(cell[0],  cell[1]);
-      
+      this_game.pickingHandler(cell[0], cell[1]);
     },
     function(data) {
       console.log("CONNECTION ERROR");
     }
   );
-
 };
-
-
 
 /*
 * PARSER
@@ -500,40 +475,34 @@ Fabrik.prototype.parseBoardToJS = function(stringBoard) {
 };
 
 Fabrik.prototype.parseCellToJS = function(stringList) {
-
   let rowString, columnString;
 
-  if(stringList[2]!=","){
+  if (stringList[2] != ",") {
     rowString = stringList[1] + stringList[2];
 
-    if(stringList[5]!="]"){
-      columnString = stringList[4] + stringList [5];
-    } else{
-      columnString = stringList [4];
+    if (stringList[5] != "]") {
+      columnString = stringList[4] + stringList[5];
+    } else {
+      columnString = stringList[4];
     }
-
-  } else{
+  } else {
     rowString = stringList[1];
 
-    if(stringList[4]!="]"){
-      columnString = stringList[3] + stringList [4];
-    } else{
-      columnString = stringList [3];
+    if (stringList[4] != "]") {
+      columnString = stringList[3] + stringList[4];
+    } else {
+      columnString = stringList[3];
     }
   }
-  
+
   row = parseInt(rowString);
   column = parseInt(columnString);
 
   return [row, column];
-
-}
-
-
+};
 
 Fabrik.prototype.parseBoardToPROLOG = function() {
   var boardString = "";
-
   boardString = boardString + "[";
 
   for (let i = 0; i < this.board.length; i++) {
