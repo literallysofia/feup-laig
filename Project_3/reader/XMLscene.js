@@ -175,7 +175,7 @@ XMLscene.prototype.update = function(currTime) {
   if (this.cameraRotationActive) {
     var currAng = Math.PI * this.deltaTime;
     this.cameraRotationAngle -= currAng;
-    console.log("CAM:" + this.cameraRotationAngle);
+    //console.log("CAM:" + this.cameraRotationAngle);
     if (this.cameraRotationAngle < 0) {
       this.cameraRotationActive = false;
       this.game.setCamera();
