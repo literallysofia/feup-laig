@@ -153,12 +153,14 @@ parse_input(move_worker(Board, Row, Column, NewRow, NewColumn), Response):-
 	(Response = NewBoard)), !.
 
 parse_input(add_worker_bot(Board), [WorkerRow, WorkerColumn]):-
+	sleep(1),
  	generateWorkerMove(Board, WorkerRowIndex, WorkerColumnIndex),
 	WorkerRow is WorkerRowIndex + 1,
 	WorkerColumn is WorkerColumnIndex + 1.
 
       
 parse_input(add_player_bot(Board), [Row, Column]):-
+	sleep(1),
 	generatePlayerMove(Board, RowIndex, ColumnIndex),
 	Row is RowIndex + 1,
 	Column is ColumnIndex + 1.
