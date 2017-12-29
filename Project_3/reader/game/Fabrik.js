@@ -79,16 +79,20 @@ Fabrik.prototype.undo = function() {
       console.log(" > FABRIK: Undoing move");
   
       var moveToUndo = this.moves[this.moves.length - 1];
-    
-      var rowIndex = moveToUndo.newCell[0]-1;
-      var columnIndex = moveToUndo.newCell[1]-1;
+
+      if(moveToUndo.type=="add"){
+        let rowIndex = moveToUndo.newCell[0]-1;
+        let columnIndex = moveToUndo.newCell[1]-1;
   
-      this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
-  
-      if(moveToUndo.type == "move"){
+        this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
+
+      } else if(moveToUndo.type == "move"){
+        let rowIndex = moveToUndo.newCell[0]-1;
+        let columnIndex = moveToUndo.newCell[1]-1;
         var oldRowIndex = moveToUndo.cell[0]-1;
         var oldColumnIndex = moveToUndo.cell[1]-1;
-
+  
+        this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
         this.board[oldRowIndex][oldColumnIndex] = new MyPiece(this.scene, oldColumnIndex, oldRowIndex, "3");
       }
 
