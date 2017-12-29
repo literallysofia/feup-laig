@@ -41,8 +41,9 @@ function Fabrik(scene, gameMode) {
     this.gameMode = this.getGameMode(gameMode); 
 
 
-    this.savedRow;
-    this.savedColumn;
+    this.workerSavedRow;
+    this.workerSavedColumn;
+
     this.scene.camera = this.defaultCamera;
 };
 
@@ -63,6 +64,9 @@ Fabrik.prototype.getGameMode = function(gameMode) {
 
 Fabrik.prototype.constructor = Fabrik;
 
+/*
+* CAMERA
+*/
 Fabrik.prototype.setCamera = function() {
   if (this.scene.rotationCamera) {
     if (this.player == 0 || this.player == 1) {
@@ -274,8 +278,8 @@ Fabrik.prototype.isWorkerCell = function(row, column) {
     command,
     function(data) {
       if (data.target.response == "1") {
-        this_game.savedRow = row;
-        this_game.savedColumn = column;
+        this_game.workerSavedRow = row;
+        this_game.workerSavedColumn = column;
 
         this_game.nextState(1);
       } else {
@@ -294,7 +298,7 @@ Fabrik.prototype.moveWorker = function(row, column) {
 
   let boardString = this.parseBoardToPROLOG();
 
-  var command = "move_worker(" + boardString + "," + this.savedRow + "," + this.savedColumn + "," + row + "," + column + ")";
+  var command = "move_worker(" + boardString + "," + this.workerSavedRow + "," + this.workerSavedColumn + "," + row + "," + column + ")";
 
   this.scene.client.getPrologRequest(
     command,
@@ -391,8 +395,8 @@ Fabrik.prototype.BOTchooseMoveWorker = function() {
       function(data) {
   
         cell = this_game.parseCellToJS(data.target.response);
-        this_game.savedRow = cell[0];
-        this_game.savedColumn = cell[1];
+        this_game.workerSavedRow = cell[0];
+        this_game.workerSavedColumn = cell[1];
 
         this_game.nextState(1);
         
