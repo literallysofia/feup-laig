@@ -188,6 +188,7 @@ XMLscene.prototype.update = function(currTime) {
       this.game.setCamera();
     } else this.camera.orbit(vec3.fromValues(0, 1, 0), currAng);
   }
+    
 };
 //PROJECT2
 
@@ -197,7 +198,6 @@ XMLscene.prototype.update = function(currTime) {
  */
 XMLscene.prototype.display = function() {
 
-    //PROJECT3
     this.logPicking();
     this.clearPickRegistration();
 
@@ -226,6 +226,8 @@ XMLscene.prototype.display = function() {
     this.applyViewMatrix();
 
     this.pushMatrix();
+
+    //PROJECT3
     
     if (this.graph.loadedOk) 
     {        
@@ -265,18 +267,16 @@ XMLscene.prototype.display = function() {
     
     //PROJECT3
     // draw objects
-	for (i =0; i<this.objects.length; i++) {
+	for (let j =0; j<this.objects.length; j++) {
 
-        let column= Math.ceil((i+1)/11);
-        let row= (i+1)-(11*(column-1));
+        let column= Math.ceil((j+1)/11);
+        let row= (j+1)-(11*(column-1));
 
-		this.pushMatrix();
+        this.pushMatrix();
         this.translate(row + 14, 0.50+4.8+0.2, column + 14);
         this.scale(0.7,1,0.7);
-		this.registerForPick(i+1, this.objects[i]);
-		
-        this.objects[i].display();
-
+        this.registerForPick(j+1, this.objects[j]);
+        this.objects[j].display();
 		this.popMatrix();
     }
 
@@ -284,7 +284,7 @@ XMLscene.prototype.display = function() {
     //PROJECT3
 
     this.popMatrix(); 
-}
+};
 
 //PROJECT3
 XMLscene.prototype.logPicking = function() {
@@ -299,7 +299,7 @@ XMLscene.prototype.logPicking = function() {
           var customId = this.pickResults[i][1];
           let row = Math.ceil(customId / 11);
           let column = customId - 11 * (row - 1);
-          //console.log("Picked object with row "+ row + " and column " + column);
+          //console.log("FABRIK: Picked object with id " + customId + ", row "+ row + " and column " + column);
           this.game.pickingHandler(row, column);
         }
       }
