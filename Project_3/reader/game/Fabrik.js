@@ -11,7 +11,7 @@ function Fabrik(scene, gameMode) {
     this.rotationCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 0, 0), vec3.fromValues(3, 0, 3));
     
     this.board = [];
-    this.getInitialBoard();
+    if(gameMode != null) this.getInitialBoard();
     this.moves = [];
 
     this.player = 1; // 1 - black, 2 - white
@@ -48,18 +48,18 @@ function Fabrik(scene, gameMode) {
     this.workerSavedColumn;
 
     this.scene.camera = this.defaultCamera;
+
+    this.scene.information = "Choose a Game Mode and press Start Game to play Fabrik";
 };
 
 Fabrik.prototype.getGameMode = function(gameMode) {
   switch (gameMode) {
-    case "PLAYER_VS_PLAYER":
+    case "Player vs Player":
       return this.mode.PLAYER_VS_PLAYER;
-    case "PLAYER_VS_BOT":
+    case "Player vs Bot":
       return this.mode.PLAYER_VS_BOT;
-    case "BOT_VS_BOT":
+    case "Bot vs Bot":
       return this.mode.BOT_VS_BOT;
-    case "MOVIE":
-      return this.mode.MOVIE;
     default:
       break;
   }
