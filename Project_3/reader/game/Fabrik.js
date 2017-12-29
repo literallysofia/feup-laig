@@ -41,7 +41,7 @@ function Fabrik(scene, gameMode) {
 
     this.currentState = this.state.WAITING_FOR_START;
     this.previousState = this.state.WAITING_FOR_START;
-    this.gameMode = this.getGameMode(gameMode); 
+    this.getGameMode(gameMode); 
 
 
     this.workerSavedRow;
@@ -53,16 +53,21 @@ function Fabrik(scene, gameMode) {
 };
 
 Fabrik.prototype.getGameMode = function(gameMode) {
+
   switch (gameMode) {
     case "Player vs Player":
-      return this.mode.PLAYER_VS_PLAYER;
+      this.gameMode = this.mode.PLAYER_VS_PLAYER;
+      break;
     case "Player vs Bot":
-      return this.mode.PLAYER_VS_BOT;
+      this.gameMode = this.mode.PLAYER_VS_BOT;
+      break;
     case "Bot vs Bot":
-      return this.mode.BOT_VS_BOT;
+      this.gameMode = this.mode.BOT_VS_BOT;
+      break;
     default:
       break;
   }
+
 };
 
 Fabrik.prototype.constructor = Fabrik;
@@ -74,6 +79,7 @@ Fabrik.prototype.constructor = Fabrik;
 Fabrik.prototype.undo = function() {
 
   if(this.gameMode == this.mode.PLAYER_VS_PLAYER){
+    
     if(this.moves.length > 0){
 
       console.log(" > FABRIK: Undoing move");
@@ -212,8 +218,15 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
   }
 };
 
-
 Fabrik.prototype.pickingHandler = function(row, column) {
+  if(this.gameMode == this.mode.PLAYER_VS_PLAYER || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 1)){
+    console.log("CELL HANDLER");
+    this.cellHandler(row, column);
+  }
+  
+};
+
+Fabrik.prototype.cellHandler = function(row, column) {
   this.scene.error = "";
   switch (this.currentState) {
     case this.state.ADDING_FIRST_WORKER:
@@ -329,7 +342,7 @@ Fabrik.prototype.isWorkerCell = function(row, column) {
         this_game.nextState(1);
       } else {
         this_game.nextState(0);
-        this_game.pickingHandler(row, column);
+        this_game.cellHandler(row, column);
       }
     },
     function(data) {
@@ -415,7 +428,7 @@ Fabrik.prototype.BOTaddWorker = function() {
     command,
     function(data) {
       cell = this_game.parseCellToJS(data.target.response);
-      this_game.pickingHandler(cell[0], cell[1]);
+      this_game.cellHandler(cell[0], cell[1]);
     },
     function(data) {
       console.log(" > FABRIK: CONNECTION ERROR");
@@ -467,7 +480,7 @@ Fabrik.prototype.BOTaddPlayer = function() {
     command,
     function(data) {
       cell = this_game.parseCellToJS(data.target.response);
-      this_game.pickingHandler(cell[0], cell[1]);
+      this_game.cellHandler(cell[0], cell[1]);
     },
     function(data) {
       console.log(" > FABRIK: CONNECTION ERROR");

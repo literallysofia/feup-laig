@@ -23,7 +23,7 @@ function XMLscene(interface) {
     this.information;
     this.error = "";
 
-    this.gameMode = "";
+    this.gameMode = "Player vs Player";
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -68,6 +68,7 @@ XMLscene.prototype.init = function(application) {
         this.objects.push(new CGFplane(this));
     }
 
+    this.setPickEnabled(true);
 
     //PROJECT3
 }
@@ -282,7 +283,7 @@ XMLscene.prototype.logPicking = function() {
           var customId = this.pickResults[i][1];
           let row = Math.ceil(customId / 11);
           let column = customId - 11 * (row - 1);
-          //console.log("FABRIK: Picked object with id " + customId + ", row "+ row + " and column " + column);
+          console.log("FABRIK: Picked object with id " + customId + ", row "+ row + " and column " + column);
           this.game.pickingHandler(row, column);
         }
       }
@@ -293,8 +294,12 @@ XMLscene.prototype.logPicking = function() {
 
 
 XMLscene.prototype.startGame = function() {
+    
+    this.game = new Fabrik(this, this.gameMode);    
+};
 
-    this.setPickEnabled(true);
-    this.game = new Fabrik(this, this.gameMode);
+XMLscene.prototype.undo = function() {
+    
+    this.game.undo();  
 };
 //PROJECT3
