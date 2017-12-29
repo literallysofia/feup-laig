@@ -68,24 +68,37 @@ Fabrik.prototype.getGameMode = function(gameMode) {
 
 Fabrik.prototype.constructor = Fabrik;
 
+
+/*
+* UNDO
+*/
 Fabrik.prototype.undo = function() {
 
-  if(this.moves.length > 0){
-    console.log(" > FABRIK: Undoing move");
+  if(this.gameMode == this.mode.PLAYER_VS_PLAYER){
+    if(this.moves.length > 0){
 
-    var moveToUndo = this.moves[this.moves.length - 1];
+      console.log(" > FABRIK: Undoing move");
   
-    var rowIndex = moveToUndo.newCell[0]-1;
-    var columnIndex = moveToUndo.newCell[1]-1;
+      var moveToUndo = this.moves[this.moves.length - 1];
+    
+      var rowIndex = moveToUndo.newCell[0]-1;
+      var columnIndex = moveToUndo.newCell[1]-1;
   
-    if(moveToUndo.type == "add"){
-      this.board[rowIndex][columnIndex] = new MyPiece(this.scene, rowIndex, columnIndex, 0);
-      this.currentState = moveToUndo.previousState;
+      this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, "0");
+  
+      if(moveToUndo.type == "move"){
+        var oldRowIndex = moveToUndo.cell[0]-1;
+        var oldColumnIndex = moveToUndo.cell[1]-1;
+
+        this.board[oldRowIndex][oldColumnIndex] = new MyPiece(this.scene, oldColumnIndex, oldRowIndex, "3");
+      }
+
+      this.currentState = moveToUndo.state;
       this.player = moveToUndo.player;
 
       console.log(" > FABRIK: " + this.getCurrPlayerColor().toUpperCase() +" PLAYER'S TURN");
-
       this.moves.splice(this.moves.length - 1);
+
     }
   }
 }
@@ -126,10 +139,6 @@ Fabrik.prototype.getCurrPlayerColor = function() {
 Fabrik.prototype.nextPlayer = function() {
   this.previousPlayer = this.player;
   switch (this.player) {
-    /*case 0:
-      this.player = 1;
-      console.log(" > FABRIK: BLACK PLAYER'S TURN");
-      break;*/
     case 1:
       this.player = 2;
       this.rotateCamera();
@@ -340,6 +349,7 @@ Fabrik.prototype.moveWorker = function(row, column) {
       if (data.target.response[0] == "[") {
         if(data.target.response.length == 265) {
           this_game.board = this_game.parseBoardToJS(data.target.response);
+          this_game.moves.push(new Move("move",  "red", [row,column], [this_game.workerSavedRow, this_game.workerSavedColumn], this_game.state.CHOOSING_MOVE_WORKER, this_game.player));
           this_game.board[row - 1][column - 1].setAnimation(this_game.workerSavedColumn, this_game.workerSavedRow);
           this_game.nextState();
         }

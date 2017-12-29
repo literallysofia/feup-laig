@@ -9,9 +9,6 @@ function Player(scene, playerID) {
   this.score = 0;
 }
 
-Player.prototype = Object.create(CGFobject.prototype);
-Player.prototype.constructor = Player;
-
 Player.prototype.setInformation = function() {
   switch (this.playerID) {
     case 1:
