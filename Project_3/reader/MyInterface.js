@@ -77,9 +77,9 @@ MyInterface.prototype.addOptionsGroup = function() {
   };*/
 
   /*group.add(this.scene, "startGame").name("Start Game");
-  group.add(this.scene, "continueGame").name("Continue Game");
-  group.add(this.scene, "undo").name("Undo");
-  group.add(this.scene, "turnOffPrologServer").name("Quit Server");*/
+  group.add(this.scene, "continueGame").name("Continue Game");*/
+  group.add(this.scene.game, "undo").name("Undo");
+  /*group.add(this.scene, "turnOffPrologServer").name("Quit Server");*/
 };
 
 MyInterface.prototype.addGameModeGroup = function() {

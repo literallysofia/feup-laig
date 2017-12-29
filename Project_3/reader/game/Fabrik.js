@@ -13,8 +13,11 @@ function Fabrik(scene, gameMode) {
     
     this.board = [];
     this.getInitialBoard();
+    this.moves = [];
 
-    this.player = 0; //0 - none, 1 - black, 2 - white
+    this.player = 1; // 1 - black, 2 - white
+    this.previousPlayer = 1;
+
     this.playerBlack = new Player(this.scene, 1);
     this.playerWhite = new Player(this.scene, 2);
 
@@ -38,6 +41,7 @@ function Fabrik(scene, gameMode) {
     };
 
     this.currentState = this.state.WAITING_FOR_START;
+    this.previousState = this.state.WAITING_FOR_START;
     this.gameMode = this.getGameMode(gameMode); 
 
 
@@ -63,6 +67,28 @@ Fabrik.prototype.getGameMode = function(gameMode) {
 }
 
 Fabrik.prototype.constructor = Fabrik;
+
+Fabrik.prototype.undo = function() {
+
+  if(this.moves.length > 0){
+    console.log(" > FABRIK: Undoing move");
+
+    var moveToUndo = this.moves[this.moves.length - 1];
+  
+    var rowIndex = moveToUndo.newCell[0]-1;
+    var columnIndex = moveToUndo.newCell[1]-1;
+  
+    if(moveToUndo.type == "add"){
+      this.board[rowIndex][columnIndex] = new MyPiece(this.scene, rowIndex, columnIndex, 0);
+      this.currentState = moveToUndo.previousState;
+      this.player = moveToUndo.player;
+
+      console.log(" > FABRIK: " + this.getCurrPlayerColor().toUpperCase() +" PLAYER'S TURN");
+
+      this.moves.splice(this.moves.length - 1);
+    }
+  }
+}
 
 /*
 * CAMERA
@@ -98,11 +124,12 @@ Fabrik.prototype.getCurrPlayerColor = function() {
 * STATES AND MODES
 */
 Fabrik.prototype.nextPlayer = function() {
+  this.previousPlayer = this.player;
   switch (this.player) {
-    case 0:
+    /*case 0:
       this.player = 1;
       console.log(" > FABRIK: BLACK PLAYER'S TURN");
-      break;
+      break;*/
     case 1:
       this.player = 2;
       this.rotateCamera();
@@ -120,10 +147,14 @@ Fabrik.prototype.nextPlayer = function() {
 
 Fabrik.prototype.nextState= function(toMoveWorker) {
 
+  if(this.previousState == this.state.WAITING_FOR_START) 
+    this.previousState = this.state.ADDING_FIRST_WORKER;
+  else this.previousState = this.currentState;
+
+
   switch (this.currentState) {
     case this.state.WAITING_FOR_START: 
       this.currentState = this.state.ADDING_FIRST_WORKER;
-      this.nextPlayer();
       console.log(" > FABRIK: Choose a cell to add the first worker");
       if(this.gameMode == this.mode.BOT_VS_BOT) this.BOTaddWorker();
       break;
@@ -144,7 +175,7 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
         this.currentState = this.state.CHOOSING_WORKER_NEW_CELL;
         if(this.gameMode == this.mode.BOT_VS_BOT || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 2)) this.BOTaddWorker();
         console.log(" > FABRIK: Choose the new position for the worker you want to move");
-      } else {
+      } else if(!toMoveWorker){
         this.currentState = this.state.ADDING_PLAYER;
         if(this.gameMode == this.mode.BOT_VS_BOT || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 2)) this.BOTaddPlayer();
       }
@@ -170,6 +201,7 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
       break;
   }
 }
+
 
 Fabrik.prototype.pickingHandler = function(row, column) {
   switch (this.currentState) {
@@ -214,7 +246,7 @@ Fabrik.prototype.checkGameState=function(){
       this_game.nextState();
 
   }, function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
   });
  
 }
@@ -230,11 +262,11 @@ Fabrik.prototype.getInitialBoard = function() {
         this_game.board = this_game.parseBoardToJS(data.target.response);
         this_game.nextState();
       }
-      else console.log("CONNECTION ERROR");
+      else console.log(" > FABRIK: CONNECTION ERROR");
       
     },
     function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
     }
   );
 };
@@ -254,15 +286,16 @@ Fabrik.prototype.addWorker = function(row, column) {
       if (data.target.response[0] == "[") {
         if(data.target.response.length == 265){
           this_game.board = this_game.parseBoardToJS(data.target.response);
+          this_game.moves.push(new Move("add", "red", [row,column], null, this_game.currentState, this_game.player));         
           this_game.nextState();
         }
-        else console.log("CONNECTION ERROR");
+        else console.log(" > FABRIK: CONNECTION ERROR");
       } else {
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
     },
     function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
     }
   );
 };
@@ -288,7 +321,7 @@ Fabrik.prototype.isWorkerCell = function(row, column) {
       }
     },
     function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
     }
   );
 };
@@ -308,13 +341,13 @@ Fabrik.prototype.moveWorker = function(row, column) {
           this_game.board = this_game.parseBoardToJS(data.target.response);
           this_game.nextState();
         }
-        else console.log("CONNECTION ERROR");
+        else console.log(" > FABRIK: CONNECTION ERROR");
       } else {
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
     },
     function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
     }
   );
 };
@@ -332,16 +365,17 @@ Fabrik.prototype.addPlayer = function(row, column) {
       if (data.target.response[0] == "[") {
         if(data.target.response.length == 265) {
           this_game.board = this_game.parseBoardToJS(data.target.response);
-          this_game.checkGameState();
+          this_game.moves.push(new Move("add",  this_game.getCurrPlayerColor(), [row,column], null, this_game.previousState, this_game.player));
           this_game.board[row - 1][column - 1].setAnimation(0, 0, 0, column, 5.3, row);
+          this_game.checkGameState();
         }
-        else console.log("CONNECTION ERROR");
+        else console.log(" > FABRIK: CONNECTION ERROR");
       } else {
         console.log(" > FABRIK: ERROR - " + data.target.response);
       }
     },
     function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
     }
   );
 };
@@ -370,7 +404,7 @@ Fabrik.prototype.BOTaddWorker = function() {
       
     },
     function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
     }
   );
 
@@ -402,7 +436,7 @@ Fabrik.prototype.BOTchooseMoveWorker = function() {
         
       },
       function(data) {
-        console.log("CONNECTION ERROR");
+        console.log(" > FABRIK: CONNECTION ERROR");
       }
     );
   }
@@ -411,29 +445,6 @@ Fabrik.prototype.BOTchooseMoveWorker = function() {
   }
 
 }
-
-
-Fabrik.prototype.BOTgetWorker = function() {
-  var this_game = this;
-  
-  var command = "choose_move_worker_bot";
-
-  this.scene.client.getPrologRequest(
-    command,
-    function(data) {
-      if(data.target.response == "0")
-      
-
-      nextState (1);
-        
-    },
-    function(data) {
-      console.log("CONNECTION ERROR");
-    }
-  );
-
-}
-
 
 Fabrik.prototype.BOTaddPlayer = function() {
 
@@ -456,7 +467,7 @@ Fabrik.prototype.BOTaddPlayer = function() {
       
     },
     function(data) {
-      console.log("CONNECTION ERROR");
+      console.log(" > FABRIK: CONNECTION ERROR");
     }
   );
 
