@@ -31,8 +31,10 @@ XMLscene.prototype.constructor = XMLscene;
  */
 XMLscene.prototype.init = function(application) {
     CGFscene.prototype.init.call(this, application);
-    
-    this.initCameras();
+
+    //PROJECT3
+    this.cameraRotationAngle;
+    this.cameraRotationActive = false;
 
     this.enableTextures(true);
     
@@ -52,7 +54,6 @@ XMLscene.prototype.init = function(application) {
 
     //PROJECT3
     this.client = new Client();
-    this.client.getPrologRequest("handshake");
     this.game = new Fabrik(this, "PLAYER_VS_PLAYER");
 
     //Picking
@@ -121,13 +122,6 @@ XMLscene.prototype.initLights = function() {
     
 }
 
-/**
- * Initializes the scene cameras.
- */
-XMLscene.prototype.initCameras = function() {
-    this.camera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
-}
-
 /* Handler called when the graph is finally loaded. 
  * As loading is asynchronous, this may be called already after the application has started the run loop
  */
@@ -147,7 +141,7 @@ XMLscene.prototype.onGraphLoaded = function()
     // Adds lights group.
     this.interface.addLightsGroup(this.graph.lights);
 
-    this.camRotation = false;
+    this.rotationCamera = false;
     this.interface.addScenePicker();
     this.interface.addCameraOption(this.game);
     this.interface.addOptionsGroup();
@@ -177,6 +171,16 @@ XMLscene.prototype.update = function(currTime) {
   this.testShader.setUniformsValues({ redFactor: this.redFactor });
   this.testShader.setUniformsValues({ greenFactor: this.greenFactor });
   this.testShader.setUniformsValues({ blueFactor: this.blueFactor });
+
+  if (this.cameraRotationActive) {
+    var currAng = Math.PI * this.deltaTime;
+    this.cameraRotationAngle -= currAng;
+    console.log("CAM:" + this.cameraRotationAngle);
+    if (this.cameraRotationAngle < 0) {
+      this.cameraRotationActive = false;
+      this.game.setCamera();
+    } else this.camera.orbit(vec3.fromValues(0, 1, 0), currAng);
+  }
 };
 //PROJECT2
 

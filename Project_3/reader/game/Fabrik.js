@@ -6,7 +6,11 @@ function Fabrik(scene, gameMode) {
 
     console.log(" > FABRIK: NEW GAME");
     
-    this.scene = scene;    
+    this.scene = scene;
+
+    this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
+    this.rotationCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 0, 0), vec3.fromValues(3, 0, 3));
+    
     this.board = [];
     this.getInitialBoard();
 
@@ -37,8 +41,9 @@ function Fabrik(scene, gameMode) {
     this.gameMode = this.getGameMode(gameMode); 
 
 
-    this.savedRow;//TODO:mudar
+    this.savedRow;
     this.savedColumn;
+    this.scene.camera = this.defaultCamera;
 };
 
 Fabrik.prototype.getGameMode = function(gameMode) {
@@ -59,19 +64,23 @@ Fabrik.prototype.getGameMode = function(gameMode) {
 Fabrik.prototype.constructor = Fabrik;
 
 Fabrik.prototype.setCamera = function() {
-  if (this.scene.camRotation) {
-    this.scene.camera.fov = 0.2;
-    if (this.player == 0 || this.player == 2) {
-      this.scene.camera.position = this.playerBlack.position;
-      this.scene.camera.target = this.playerBlack.target;
+  if (this.scene.rotationCamera) {
+    if (this.player == 0 || this.player == 1) {
+      this.rotationCamera.setPosition(this.playerBlack.position);
     } else {
-      this.scene.camera.position = this.playerWhite.position;
-      this.scene.camera.target = this.playerWhite.target;
+      this.rotationCamera.setPosition(this.playerWhite.position);
     }
+    this.rotationCamera.zoom(4);
+    this.scene.camera = this.rotationCamera;
   } else {
-    this.scene.camera.fov = 0.4;
-    this.scene.camera.position = vec3.fromValues(15, 15, 15);
-    this.scene.camera.target = vec3.fromValues(0, 0, 0);
+    this.scene.camera = this.defaultCamera;
+  }
+};
+
+Fabrik.prototype.rotateCamera = function() {
+  if (this.scene.rotationCamera) {
+    this.scene.cameraRotationAngle = Math.PI;
+    this.scene.cameraRotationActive = true;
   }
 };
 
@@ -88,17 +97,16 @@ Fabrik.prototype.nextPlayer = function() {
   switch (this.player) {
     case 0:
       this.player = 1;
-      this.setCamera();
       console.log(" > FABRIK: BLACK PLAYER'S TURN");
       break;
     case 1:
       this.player = 2;
-      this.setCamera();
+      this.rotateCamera();
       console.log(" > FABRIK: WHITE PLAYER'S TURN");
       break;
     case 2:
       this.player = 1;
-      this.setCamera();
+      this.rotateCamera();
       console.log(" > FABRIK: BLACK PLAYER'S TURN");
       break;
     default:
