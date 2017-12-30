@@ -32,9 +32,6 @@ MyInterface.prototype.init = function(application) {
 MyInterface.prototype.addLightsGroup = function(lights) {
   var group = this.gui.addFolder("Lights");
 
-  // add two check boxes to the group. The identifiers must be members variables of the scene initialized in scene.init as boolean
-  // e.g. this.option1=true; this.option2=false;
-
   var i = 0;
   for (var key in lights) {
     if (lights.hasOwnProperty(key)) {
@@ -48,20 +45,17 @@ MyInterface.prototype.addScenePicker = function() {
   this.gui.add(this.scene.graph, "currentScene", [ "Japan", "New York"] ).name("Scene");
 };
 
-MyInterface.prototype.addCameraOption = function(game) {
-  var controller = this.gui.add(this.scene, "rotationCamera").name("Camera Rotation");
+MyInterface.prototype.addSettingsGroup = function(game) {
+  var group = this.gui.addFolder("Settings");
+  group.open();
+
+  group.add(this.scene, "gameMode", [ "Player vs Player", "Player vs Bot", "Bot vs Bot" ] ).name("Game Mode");
+  group.add(this.scene, "gameLevel", [ "Easy", "Hard"] ).name("Game Level");
+  var controller = group.add(this.scene, "rotationCamera").name("Camera Rotation");
 
   controller.onChange(function() {
     game.setCamera();
   });
-};
-
-MyInterface.prototype.addGameModePicker = function() {
-  this.gui.add(this.scene, "gameMode", [ "Player vs Player", "Player vs Bot", "Bot vs Bot" ] ).name("Game Mode");
-};
-
-MyInterface.prototype.addGameLevelPicker = function() {
-  this.gui.add(this.scene, "gameLevel", [ "Easy", "Hard"] ).name("Game Level");
 };
 
 MyInterface.prototype.addOptionsGroup = function() {
