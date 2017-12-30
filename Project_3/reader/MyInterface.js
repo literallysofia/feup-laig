@@ -60,6 +60,10 @@ MyInterface.prototype.addGameModePicker = function() {
   this.gui.add(this.scene, "gameMode", [ "Player vs Player", "Player vs Bot", "Bot vs Bot" ] ).name("Game Mode");
 };
 
+MyInterface.prototype.addGameLevelPicker = function() {
+  this.gui.add(this.scene, "gameLevel", [ "Easy", "Hard"] ).name("Game Level");
+};
+
 MyInterface.prototype.addOptionsGroup = function() {
   var group = this.gui.addFolder("Options");
   group.open();

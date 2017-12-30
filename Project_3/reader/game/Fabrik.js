@@ -50,7 +50,7 @@ function Fabrik(scene) {
 
 Fabrik.prototype.constructor = Fabrik;
 
-Fabrik.prototype.start = function(gameMode) {
+Fabrik.prototype.start = function(gameMode, gameLevel) {
 
   if(this.currentState == this.state.WAITING_FOR_START){
 
@@ -63,6 +63,17 @@ Fabrik.prototype.start = function(gameMode) {
         break;
       case "Bot vs Bot":
         this.gameMode = this.mode.BOT_VS_BOT;
+        break;
+      default:
+        break;
+    }
+
+    switch (gameLevel) {
+      case "Easy":
+        this.gameLevel = 0;
+        break;
+      case "Hard":
+        this.gameLevel = 1;
         break;
       default:
         break;

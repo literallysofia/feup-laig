@@ -24,6 +24,8 @@ function XMLscene(interface) {
     this.error = "";
 
     this.gameMode = "Player vs Player";
+    this.gameLevel = "Easy";
+    
 }
 
 XMLscene.prototype = Object.create(CGFscene.prototype);
@@ -130,6 +132,7 @@ XMLscene.prototype.onGraphLoaded = function()
     this.rotationCamera = false;
     this.interface.addScenePicker();
     this.interface.addGameModePicker();
+    this.interface.addGameLevelPicker();
     this.interface.addCameraOption(this.game);
     this.interface.addOptionsGroup();
 }
@@ -296,7 +299,7 @@ XMLscene.prototype.logPicking = function() {
 };
 
 XMLscene.prototype.startGame = function() {
-    this.game.start(this.gameMode);  
+    this.game.start(this.gameMode, this.gameLevel);  
 };
 
 XMLscene.prototype.quitGame = function() {
