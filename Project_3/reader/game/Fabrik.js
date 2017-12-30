@@ -63,19 +63,40 @@ Fabrik.prototype.start = function(gameMode) {
 
   this.setVariables();
   this.getInitialBoard();
+  this.playerBlack.startCounter();
 };
-
 
 Fabrik.prototype.setVariables = function() {
   this.moves = [];
-
   this.player = 1;
   this.previousPlayer = 1;
 };
 
 /*
+* TIME
+*/
+
+Fabrik.prototype.setPlayerTimes = function() {
+  switch (this.player) {
+    case 1:
+      this.playerWhite.stopCounter();
+      this.playerBlack.clearTime();
+      this.playerBlack.startCounter();
+      break;
+    case 2:
+      this.playerBlack.stopCounter();
+      this.playerWhite.clearTime();
+      this.playerWhite.startCounter();
+      break;
+    default:
+      break;
+  }
+};
+
+/*
 * UNDO
 */
+
 Fabrik.prototype.undo = function() {
   if (this.gameMode == this.mode.PLAYER_VS_PLAYER) {
     if (this.moves.length > 0) {
@@ -104,6 +125,7 @@ Fabrik.prototype.undo = function() {
       console.log(" > FABRIK: " + this.getCurrPlayerColor().toUpperCase() + " PLAYER'S TURN");
       this.moves.splice(this.moves.length - 1);
       this.rotateCamera();
+      this.setPlayerTimes();
     }
   }
 };
@@ -147,10 +169,12 @@ Fabrik.prototype.nextPlayer = function() {
     case 1:
       this.player = 2;
       this.rotateCamera();
+      this.setPlayerTimes();
       break;
     case 2:
       this.player = 1;
       this.rotateCamera();
+      this.setPlayerTimes();
       break;
     default:
       break;

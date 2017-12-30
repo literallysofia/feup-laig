@@ -189,11 +189,11 @@ XMLscene.prototype.display = function() {
       if (this.game.player == 1) {
         document.getElementById("player").innerText = "Player: Black\n";
         document.getElementById("score").innerText = "Score:  " + this.game.playerBlack.score;
-        document.getElementById("time").innerText = "\n\nTime: 00:00\n\n";
+        document.getElementById("time").innerText = "\n\nTime: " + this.game.playerBlack.minutes + ":" + this.game.playerBlack.seconds + "\n\n";
       } else if (this.game.player == 2) {
         document.getElementById("player").innerText = "Player: White\n";
         document.getElementById("score").innerText = "Score:  " + this.game.playerWhite.score;
-        document.getElementById("time").innerText = "\n\nTime: 00:00\n\n";
+        document.getElementById("time").innerText = "\n\nTime: " + this.game.playerWhite.minutes + ":" + this.game.playerWhite.seconds + "\n\n";
       }
 
       document.getElementById("information").innerText = this.information;
