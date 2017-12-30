@@ -175,6 +175,8 @@ XMLscene.prototype.update = function(currTime) {
       this.game.setCamera();
     } else this.camera.orbit(vec3.fromValues(0, 1, 0), currAng);
   }
+
+  this.game.checkLevelTime();
     
 };
 //PROJECT2

@@ -105,21 +105,66 @@ Fabrik.prototype.setVariables = function() {
 */
 
 Fabrik.prototype.setPlayerTimes = function() {
+
   switch (this.player) {
     case 1:
       this.playerWhite.stopCounter();
       this.playerBlack.clearTime();
-      this.playerBlack.startCounter();
+      if(this.gameLevel == 1 && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER){
+        this.playerBlack.startDecCounter();
+      }
+      else{
+        this.playerBlack.startCounter();
+      }
       break;
     case 2:
       this.playerBlack.stopCounter();
       this.playerWhite.clearTime();
-      this.playerWhite.startCounter();
+      if(this.gameLevel == 1 && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER){
+        this.playerWhite.startDecCounter();
+      }
+      else{
+        this.playerWhite.startCounter();
+      }
       break;
     default:
       break;
   }
 };
+
+Fabrik.prototype.getPlayerDecTime = function() {
+  switch (this.player) {
+    case 1:
+      this.playersTime = this.playerBlack.totalSeconds;
+      break;
+    case 2:
+      this.playersTime = this.playerWhite.totalSeconds;
+      break;
+    default:
+      break;
+  }
+};
+
+Fabrik.prototype.checkLevelTime = function() {
+
+  if(this.gameLevel == 1){
+
+    if(this.currentState != this.state.WAITING_FOR_START && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER){
+      if(this.gameMode == this.mode.PLAYER_VS_PLAYER || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 1)){
+        
+        this.getPlayerDecTime()
+        
+        if(this.playersTime <= 0){
+          this.nextState();
+        }
+
+      }
+    }
+
+  }
+
+};
+
 
 /*
 * UNDO

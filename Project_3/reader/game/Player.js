@@ -7,6 +7,7 @@ function Player(scene, playerID) {
   this.playerID = playerID;
   this.setInformation();
   this.score = 0;
+
   this.seconds = "00";
   this.minutes = "00";
 }
@@ -35,9 +36,16 @@ Player.prototype.startCounter = function() {
   this.cicle = setInterval(function(){this.totalSeconds++; this.setTime();}.bind(this), 1000);
 };
 
+Player.prototype.startDecCounter = function() {
+  this.totalSeconds = 11;
+  this.cicle = setInterval(function(){this.totalSeconds--; this.setTime();}.bind(this), 1000);
+};
+
+
 Player.prototype.stopCounter = function() {
   clearInterval(this.cicle);
 };
+
 
 Player.prototype.setTime = function() {
   this.seconds = this.convert(this.totalSeconds % 60);
