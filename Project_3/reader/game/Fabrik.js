@@ -33,8 +33,7 @@ function Fabrik(scene) {
     };
 
     this.board = [];
-    this.currentState = this.state.WAITING_FOR_START;
-    this.previousState = this.state.WAITING_FOR_START;
+
     this.workerSavedRow;
     this.workerSavedColumn;
     this.scene.camera = this.defaultCamera;
@@ -70,6 +69,9 @@ Fabrik.prototype.setVariables = function() {
   this.moves = [];
   this.player = 1;
   this.previousPlayer = 1;
+
+  this.currentState = this.state.WAITING_FOR_START;
+  this.previousState = this.state.WAITING_FOR_START;
 };
 
 /*
