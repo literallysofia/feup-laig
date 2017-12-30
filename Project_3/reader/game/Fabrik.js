@@ -34,6 +34,8 @@ function Fabrik(scene) {
 
     this.board = [];
 
+    this.player = 0;
+
     this.workerSavedRow;
     this.workerSavedColumn;
     this.scene.camera = this.defaultCamera;
