@@ -60,54 +60,11 @@ MyInterface.prototype.addGameModePicker = function() {
   this.gui.add(this.scene, "gameMode", [ "Player vs Player", "Player vs Bot", "Bot vs Bot" ] ).name("Game Mode");
 };
 
-/*MyInterface.prototype.addGameModeGroup = function() {
-  var group = this.gui.addFolder("Game Mode");
-  //group.open();
-
-  /*let playerVsPlayer = {
-				setPlayerVsPlayer: this.scene.setPlayerVsPlayer.bind(this.scene)
-		};
-
-		let playerVsBot = {
-				setPlayerVsBot: this.scene.setPlayerVsBot.bind(this.scene)
-		};
-
-		let botVsBot = {
-				setBotVsBot: this.scene.setBotVsBot.bind(this.scene)
-		};
-
-    let setMovie = {
-        setMovie: this.scene.setMovie.bind(this.scene)
-    };*/
-
-  /*group.add(this.scene, "setPlayerVsPlayer").name("Player vs Player");
-  group.add(this.scene, "setPlayerVsBot").name("Player vs Bot");
-  group.add(this.scene, "setBotVsBot").name("Bot vs Bot");
-  group.add(this.scene, "setMovie").name("Watch Movie");
-};*/
-
 MyInterface.prototype.addOptionsGroup = function() {
   var group = this.gui.addFolder("Options");
   group.open();
 
-  /*let menu = {
-    startGame: this.scene.startGame.bind(this.scene)
-  };
-
-  let continueGame = {
-    continueGame: this.scene.continueGame.bind(this.scene)
-  };
-
-  let undo = {
-    undo: this.scene.undo.bind(this.scene)
-  };
-
-  let turnOffPrologServer = {
-    turnOffPrologServer: this.scene.turnOffPrologServer.bind(this.scene)
-  };*/
-
   group.add(this.scene, "startGame").name("Start Game");
-  /*group.add(this.scene, "continueGame").name("Continue Game");*/
   group.add(this.scene, "undo").name("Undo");
-  /*group.add(this.scene, "turnOffPrologServer").name("Quit Server");*/
+  /*group.add(this.scene, "turnOffPrologServer").name("Quit Game");*/
 };

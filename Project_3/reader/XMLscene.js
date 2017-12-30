@@ -187,17 +187,17 @@ XMLscene.prototype.display = function() {
 
     if (typeof this.game != "undefined") {
       if (this.game.player == 1) {
-        document.getElementById("player").innerText = "Player: Black";
+        document.getElementById("player").innerText = "Player: Black\n";
         document.getElementById("score").innerText = "Score:  " + this.game.playerBlack.score;
+        document.getElementById("time").innerText = "\n\nTime: 00:00\n\n";
       } else if (this.game.player == 2) {
-        document.getElementById("player").innerText = "Player: White";
+        document.getElementById("player").innerText = "Player: White\n";
         document.getElementById("score").innerText = "Score:  " + this.game.playerWhite.score;
+        document.getElementById("time").innerText = "\n\nTime: 00:00\n\n";
       }
 
-      document.getElementById("time").innerText = "Time: 00:00";
       document.getElementById("information").innerText = this.information;
-
-      document.getElementById("error").innerText = this.error;
+      document.getElementById("error").innerText = "\n\n" + this.error;
     }
     //PROJECT3
     
@@ -295,14 +295,11 @@ XMLscene.prototype.logPicking = function() {
   }
 };
 
-
 XMLscene.prototype.startGame = function() {
-    
-    this.game.start(this.gameMode);    
+  this.game.start(this.gameMode);
 };
 
 XMLscene.prototype.undo = function() {
-    
-    this.game.undo();  
+  this.game.undo();
 };
 //PROJECT3

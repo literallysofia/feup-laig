@@ -9,12 +9,6 @@ function Fabrik(scene) {
     this.scene = scene;
     this.defaultCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(15, 15, 15), vec3.fromValues(0, 0, 0));
     this.rotationCamera = new CGFcamera(0.4, 0.1, 500, vec3.fromValues(0, 0, 0), vec3.fromValues(3, 0, 3));
-    
-    this.board = [];
-    this.moves = [];
-
-    this.player = 1; // 1 - black, 2 - white
-    this.previousPlayer = 1;
 
     this.playerBlack = new Player(this.scene, 1);
     this.playerWhite = new Player(this.scene, 2);
@@ -38,12 +32,11 @@ function Fabrik(scene) {
       MOVIE: 3
     };
 
+    this.board = [];
     this.currentState = this.state.WAITING_FOR_START;
     this.previousState = this.state.WAITING_FOR_START;
-
     this.workerSavedRow;
     this.workerSavedColumn;
-
     this.scene.camera = this.defaultCamera;
 
     this.scene.information = "Choose a Game Mode and press Start Game to play Fabrik.";
@@ -68,8 +61,16 @@ Fabrik.prototype.start = function(gameMode) {
       break;
   }
 
+  this.setVariables();
   this.getInitialBoard();
+};
 
+
+Fabrik.prototype.setVariables = function() {
+  this.moves = [];
+
+  this.player = 1;
+  this.previousPlayer = 1;
 };
 
 /*
@@ -205,9 +206,13 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
     case this.state.WON_GAME:
       this.scene.information = "You won!";
       this.updateScore();
+      this.currentState = this.state.WAITING_FOR_START;
+      this.previousState = this.state.WON_GAME;
       break;
     case this.state.DRAW_GAME:
       this.scene.information = "Woops, no more space left! It is a draw!";
+      this.currentState = this.state.WAITING_FOR_START;
+      this.previousState = this.state.DRAW_GAME;
       break;
     default:
       break;
