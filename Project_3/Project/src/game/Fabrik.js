@@ -30,8 +30,7 @@ function Fabrik(scene) {
     this.mode = { 
       PLAYER_VS_PLAYER: 0,
       PLAYER_VS_BOT: 1,
-      BOT_VS_BOT: 2,
-      MOVIE: 3
+      BOT_VS_BOT: 2
     };
 
     this.board = [];
@@ -295,7 +294,7 @@ Fabrik.prototype.movie = function() {
       setTimeout(function(){ this.makeMovieMove(this.moves[i]);}.bind(this), 2000*i);
     }
 
-    setTimeout(function(){ this.currentState = this.state.WAITING_FOR_START;}.bind(this), 2000*(this.moves.length-1));
+    setTimeout(function(){ this.currentState = this.state.WAITING_FOR_START;}.bind(this), 2000*this.moves.length);
   }
 
 };
