@@ -296,7 +296,7 @@ XMLscene.prototype.logPicking = function() {
 };
 
 XMLscene.prototype.startGame = function() {
-  this.game.start(this.gameMode);
+    this.game.start(this.gameMode);  
 };
 
 XMLscene.prototype.quitGame = function() {

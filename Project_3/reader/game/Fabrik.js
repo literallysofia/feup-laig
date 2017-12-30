@@ -37,6 +37,9 @@ function Fabrik(scene) {
 
     this.player = 0;
 
+    this.currentState = this.state.WAITING_FOR_START;
+    this.previousState = this.state.WAITING_FOR_START;
+
     this.workerSavedRow;
     this.workerSavedColumn;
     this.scene.camera = this.defaultCamera;
@@ -49,23 +52,27 @@ Fabrik.prototype.constructor = Fabrik;
 
 Fabrik.prototype.start = function(gameMode) {
 
-  switch (gameMode) {
-    case "Player vs Player":
-      this.gameMode = this.mode.PLAYER_VS_PLAYER;
-      break;
-    case "Player vs Bot":
-      this.gameMode = this.mode.PLAYER_VS_BOT;
-      break;
-    case "Bot vs Bot":
-      this.gameMode = this.mode.BOT_VS_BOT;
-      break;
-    default:
-      break;
+  if(this.currentState == this.state.WAITING_FOR_START){
+
+    switch (gameMode) {
+      case "Player vs Player":
+        this.gameMode = this.mode.PLAYER_VS_PLAYER;
+        break;
+      case "Player vs Bot":
+        this.gameMode = this.mode.PLAYER_VS_BOT;
+        break;
+      case "Bot vs Bot":
+        this.gameMode = this.mode.BOT_VS_BOT;
+        break;
+      default:
+        break;
+    }
+
+    this.setVariables();
+    this.getInitialBoard();
+    this.playerBlack.startCounter();
   }
 
-  this.setVariables();
-  this.getInitialBoard();
-  this.playerBlack.startCounter();
 };
 
 Fabrik.prototype.quit = function() {
@@ -76,12 +83,10 @@ Fabrik.prototype.quit = function() {
 };
 
 Fabrik.prototype.setVariables = function() {
+
   this.moves = [];
   this.player = 1;
   this.previousPlayer = 1;
-
-  this.currentState = this.state.WAITING_FOR_START;
-  this.previousState = this.state.WAITING_FOR_START;
 };
 
 /*
