@@ -33,19 +33,29 @@ Player.prototype.incrementScore = function() {
 
 Player.prototype.startCounter = function() {
   this.totalSeconds = 0;
-  this.cicle = setInterval(function(){this.totalSeconds++; this.setTime();}.bind(this), 1000);
+  this.cicle = setInterval(
+    function() {
+      this.totalSeconds++;
+      this.setTime();
+    }.bind(this),
+    1000
+  );
 };
 
 Player.prototype.startDecCounter = function() {
   this.totalSeconds = 11;
-  this.cicle = setInterval(function(){this.totalSeconds--; this.setTime();}.bind(this), 1000);
+  this.cicle = setInterval(
+    function() {
+      this.totalSeconds--;
+      this.setTime();
+    }.bind(this),
+    1000
+  );
 };
-
 
 Player.prototype.stopCounter = function() {
   clearInterval(this.cicle);
 };
-
 
 Player.prototype.setTime = function() {
   this.seconds = this.convert(this.totalSeconds % 60);
