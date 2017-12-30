@@ -34,6 +34,7 @@ function Fabrik(scene) {
     };
 
     this.board = [];
+    this.moves = [];
 
     this.player = 0;
 
@@ -98,6 +99,57 @@ Fabrik.prototype.setVariables = function() {
   this.moves = [];
   this.player = 1;
   this.previousPlayer = 1;
+};
+
+Fabrik.prototype.makeMovieMove = function(move) {
+  
+  var playerNumber;
+
+  switch (move.color){
+    case "black":
+      playerNumber = "1";
+      break;
+    case "white":
+      playerNumber = "2";
+      break;
+    case "red":
+      playerNumber = "3";
+      break;
+  }
+
+  if (move.type == "add") {
+    let rowIndex = move.newCell[0] - 1;
+    let columnIndex = move.newCell[1] - 1;
+
+    this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, playerNumber);
+    
+    this.board[rowIndex][columnIndex].setAnimation(0, 0, move.player);
+
+  } else if (move.type == "move") {
+    let rowIndex = move.newCell[0] - 1;
+    let columnIndex = move.newCell[1] - 1;
+    var oldRowIndex = move.cell[0] - 1;
+    var oldColumnIndex = move.cell[1] - 1;
+
+    this.board[rowIndex][columnIndex] = new MyPiece(this.scene, columnIndex, rowIndex, playerNumber);
+    this.board[oldRowIndex][oldColumnIndex] = new MyPiece(this.scene, oldColumnIndex,oldRowIndex, "0");
+
+    this.board[rowIndex][columnIndex].setAnimation(oldColumnIndex, oldRowIndex);
+  }
+}
+  
+
+Fabrik.prototype.movie = function() {
+
+  if(this.currentState == this.state.WAITING_FOR_START && this.moves.length > 0){
+    
+    this.cleanBoard();
+
+    for(let i = 0; i < this.moves.length; i++){
+      setTimeout(function(){ this.makeMovieMove(this.moves[i]);}.bind(this), 2000*i);
+    }
+  }
+
 };
 
 /*
@@ -606,6 +658,7 @@ Fabrik.prototype.BOTaddPlayer = function() {
 * PARSER
 */
 
+
 Fabrik.prototype.parseBoardToJS = function(stringBoard) {
 
   var numbersBoard = [];
@@ -634,6 +687,21 @@ Fabrik.prototype.parseBoardToJS = function(stringBoard) {
 
   return board;
 };
+
+Fabrik.prototype.cleanBoard = function() {
+
+  var board = [];
+  for (var i = 0; i < 11; i++) {
+    var line = [];
+    for (var j = 0; j < 11; j++) {
+      line.push(new MyPiece(this.scene, j, i, "0"));
+    }
+    board.push(line);
+  }
+
+  this.board = board;
+
+}
 
 Fabrik.prototype.parseCellToJS = function(stringList) {
   let rowString, columnString;
@@ -701,3 +769,12 @@ Fabrik.prototype.parseBoardToPROLOG = function() {
 
   return boardString;
 };
+
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}

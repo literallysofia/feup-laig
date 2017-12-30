@@ -311,4 +311,8 @@ XMLscene.prototype.quitGame = function() {
 XMLscene.prototype.undo = function() {
   this.game.undo();
 };
+
+XMLscene.prototype.movie = function() {
+    this.game.movie();
+};
 //PROJECT3
