@@ -1,0 +1,5 @@
+/**
+ * Animation
+ * @constructor
+ */
+function Animation() {}
