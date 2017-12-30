@@ -299,6 +299,10 @@ XMLscene.prototype.startGame = function() {
   this.game.start(this.gameMode);
 };
 
+XMLscene.prototype.quitGame = function() {
+    this.game.quit();
+  };
+
 XMLscene.prototype.undo = function() {
   this.game.undo();
 };

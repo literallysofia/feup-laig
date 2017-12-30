@@ -66,5 +66,5 @@ MyInterface.prototype.addOptionsGroup = function() {
 
   group.add(this.scene, "startGame").name("Start Game");
   group.add(this.scene, "undo").name("Undo");
-  /*group.add(this.scene, "turnOffPrologServer").name("Quit Game");*/
+  group.add(this.scene, "quitGame").name("Quit Game");
 };

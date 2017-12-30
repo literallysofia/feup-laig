@@ -22,6 +22,7 @@ function Fabrik(scene) {
         ADDING_PLAYER: 5,
         WON_GAME:6,
         DRAW_GAME:7,
+        QUIT_GAME: 8,
         CONNECTION_ERROR: 10,
     };
 
@@ -65,6 +66,13 @@ Fabrik.prototype.start = function(gameMode) {
   this.setVariables();
   this.getInitialBoard();
   this.playerBlack.startCounter();
+};
+
+Fabrik.prototype.quit = function() {
+  if(this.currentState != this.state.WAITING_FOR_START){
+    this.currentState = this.state.QUIT_GAME;
+    this.nextState();
+  }
 };
 
 Fabrik.prototype.setVariables = function() {
@@ -191,7 +199,6 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
     this.previousState = this.state.ADDING_FIRST_WORKER;
   else this.previousState = this.currentState;
 
-
   switch (this.currentState) {
     case this.state.WAITING_FOR_START: 
       this.currentState = this.state.ADDING_FIRST_WORKER;
@@ -242,6 +249,10 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
       this.currentState = this.state.WAITING_FOR_START;
       this.previousState = this.state.DRAW_GAME;
       break;
+    case this.state.QUIT_GAME:
+      this.nextPlayer();
+      this.currentState = this.state.WON_GAME;
+      this.nextState();
     default:
       break;
   }
