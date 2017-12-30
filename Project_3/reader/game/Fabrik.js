@@ -105,31 +105,29 @@ Fabrik.prototype.setVariables = function() {
 */
 
 Fabrik.prototype.setPlayerTimes = function() {
-
   switch (this.player) {
     case 1:
       this.playerWhite.stopCounter();
       this.playerBlack.clearTime();
-      if(this.gameLevel == 1 && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER){
-        this.playerBlack.startDecCounter();
-      }
-      else{
-        this.playerBlack.startCounter();
-      }
+      if (this.gameLevel == 1 && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER) this.playerBlack.startDecCounter();
+      else this.playerBlack.startCounter();
       break;
     case 2:
       this.playerBlack.stopCounter();
       this.playerWhite.clearTime();
-      if(this.gameLevel == 1 && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER){
-        this.playerWhite.startDecCounter();
-      }
-      else{
-        this.playerWhite.startCounter();
-      }
+      if (this.gameLevel == 1 && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER) this.playerWhite.startDecCounter();
+      else this.playerWhite.startCounter();
       break;
     default:
       break;
   }
+};
+
+Fabrik.prototype.freezePlayerTimes = function() {
+  this.playerWhite.stopCounter();
+  this.playerBlack.clearTime();
+  this.playerBlack.stopCounter();
+  this.playerWhite.clearTime();
 };
 
 Fabrik.prototype.getPlayerDecTime = function() {
@@ -146,23 +144,14 @@ Fabrik.prototype.getPlayerDecTime = function() {
 };
 
 Fabrik.prototype.checkLevelTime = function() {
-
-  if(this.gameLevel == 1){
-
-    if(this.currentState != this.state.WAITING_FOR_START && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER){
-      if(this.gameMode == this.mode.PLAYER_VS_PLAYER || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 1)){
-        
-        this.getPlayerDecTime()
-        
-        if(this.playersTime <= 0){
-          this.nextState();
-        }
-
+  if (this.gameLevel == 1) {
+    if (this.currentState != this.state.WAITING_FOR_START && this.currentState != this.state.ADDING_FIRST_WORKER && this.currentState != this.state.ADDING_SECOND_WORKER) {
+      if (this.gameMode == this.mode.PLAYER_VS_PLAYER || (this.gameMode == this.mode.PLAYER_VS_BOT && this.player == 1)) {
+        this.getPlayerDecTime();
+        if (this.playersTime <= 0) this.nextState();
       }
     }
-
   }
-
 };
 
 
@@ -302,11 +291,13 @@ Fabrik.prototype.nextState= function(toMoveWorker) {
     case this.state.WON_GAME:
       this.scene.information = "You won!";
       this.updateScore();
+      this.freezePlayerTimes();
       this.currentState = this.state.WAITING_FOR_START;
       this.previousState = this.state.WON_GAME;
       break;
     case this.state.DRAW_GAME:
       this.scene.information = "Woops, no more space left! It is a draw!";
+      this.freezePlayerTimes();
       this.currentState = this.state.WAITING_FOR_START;
       this.previousState = this.state.DRAW_GAME;
       break;
